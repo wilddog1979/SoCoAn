@@ -1,5 +1,36 @@
 <project name="SoCoAn">
+	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+		<classpath>
+		<fileset dir="lib/JAXB" includes="jaxb-*.jar" />
+		</classpath>
+	</taskdef>
+	
+	<path id="src.path">
+		<pathelement location="src" />
+		<pathelement location="gensrc" />
+	</path>
+	
+	<target name="clean">
+		<delete includeemptydirs="true">
+		<fileset dir="bin">
+		    <include name="**/*"/>
+		</fileset>
+		<fileset dir="gensrc">
+			<include name="**/*"/>
+		</fileset>
+	</delete>
+	</target>
+	
 	<target name="gensrc">
-		
+		<xjc schema="resources/config.xsd" destdir="gensrc" removeOldOutput="yes" package="org.eaSTars.socoan.config"/>
+	</target>
+	
+	<target name="compile">
+		<javac destdir="bin" debug="on" includeantruntime="false">
+			<src refid="src.path" />
+		</javac>
+	</target>
+	
+	<target name="all" depends="clean,gensrc,compile">
 	</target>
 </project>

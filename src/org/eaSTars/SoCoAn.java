@@ -19,6 +19,6 @@ public class SoCoAn {
 	}
 
 	private SoCoAn(Configuration configuration) {
-		
+		System.out.println(configuration.getConfig().getProjectPath());
 	}
 }
