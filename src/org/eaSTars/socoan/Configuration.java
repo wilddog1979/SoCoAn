@@ -9,11 +9,11 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.eaSTars.socoan.config.ObjectFactory;
-import org.eaSTars.socoan.config.SoCoAnConfigType;
+import org.eaSTars.socoan.config.SoCoAnConfig;
 
 public class Configuration {
 
-	private SoCoAnConfigType config = new SoCoAnConfigType();
+	private SoCoAnConfig config = new SoCoAnConfig();
 	
 	public boolean processArguments(String[] args) {
 		boolean result = true;
@@ -42,7 +42,7 @@ public class Configuration {
 			JAXBContext context = JAXBContext.newInstance(ObjectFactory.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			@SuppressWarnings("unchecked")
-			JAXBElement<SoCoAnConfigType> doc = (JAXBElement<SoCoAnConfigType>) unmarshaller.unmarshal(file);
+			JAXBElement<SoCoAnConfig> doc = (JAXBElement<SoCoAnConfig>) unmarshaller.unmarshal(file);
 			config = doc.getValue();
 			
 			result = true;
@@ -57,7 +57,7 @@ public class Configuration {
 		boolean result = false;
 		
 		try {
-			JAXBContext context = JAXBContext.newInstance(SoCoAnConfigType.class);
+			JAXBContext context = JAXBContext.newInstance(SoCoAnConfig.class);
 			Marshaller marshaller = context.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			marshaller.marshal(new ObjectFactory().createSoCoAnConfig(config), file);
@@ -70,7 +70,7 @@ public class Configuration {
 		return result;
 	}
 	
-	public SoCoAnConfigType getConfig() {
+	public SoCoAnConfig getConfig() {
 		return config;
 	}
 }

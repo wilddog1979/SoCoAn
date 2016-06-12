@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Language xmlns="http://eaSTars.com/SoCoAn/lang">
+	<Literal NodeID="literal_001" literal="somevalue1"/>
+	
+	<Literal NodeID="literal_002" literal="somevalue2"/>
+	
+	<Literal NodeID="literal_003" literal="somevalue3">
+		<NextNode ref="literal_001"/>
+		<NextNode ref="literal_002"/>
+	</Literal>
+	
+	<Literal NodeID="literal_004"/>
+	
+	<ComplexNode NodeID="Complex_001">
+		<StartNode ref="literal_001"/>
+		<StartNode ref="literal_003"/>
+		<EndNode ref="literal_001"/>
+		<EndNode ref="literal_002"/>
+		
+		<NextNode ref="literal_004"/>
+	</ComplexNode>
+	
+	<Literal NodeID="literal_005">
+		<NextNode ref="Complex_001"/>
+	</Literal>
+</Language>

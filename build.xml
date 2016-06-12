@@ -8,6 +8,7 @@
 	<path id="src.path">
 		<pathelement location="src" />
 		<pathelement location="gensrc" />
+		<pathelement location="testsrc" />
 	</path>
 	
 	<target name="clean">
@@ -26,7 +27,7 @@
 	</target>
 	
 	<target name="compile">
-		<javac destdir="bin" debug="on" includeantruntime="false">
+		<javac destdir="bin" debug="true" includeantruntime="false">
 			<src refid="src.path" />
 		</javac>
 	</target>
