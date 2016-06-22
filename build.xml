@@ -11,15 +11,21 @@
 		<pathelement location="testsrc" />
 	</path>
 	
+	<path id="class.path">
+		<fileset dir="lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	
 	<target name="clean">
 		<delete includeemptydirs="true">
-		<fileset dir="bin">
-		    <include name="**/*"/>
-		</fileset>
-		<fileset dir="gensrc">
-			<include name="**/*"/>
-		</fileset>
-	</delete>
+			<fileset dir="bin">
+				<include name="**/*"/>
+			</fileset>
+			<fileset dir="gensrc">
+				<include name="**/*"/>
+			</fileset>
+		</delete>
 	</target>
 	
 	<target name="gensrc">
@@ -27,7 +33,7 @@
 	</target>
 	
 	<target name="compile">
-		<javac destdir="bin" debug="true" includeantruntime="false">
+		<javac destdir="bin" debug="true" includeantruntime="false" classpathref="class.path">
 			<src refid="src.path" />
 		</javac>
 	</target>

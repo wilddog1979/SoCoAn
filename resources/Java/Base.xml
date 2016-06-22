@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Language xmlns="http://eaSTars.com/SoCoAn/lang2">
+	
+	<LiteralType id="linecomment_start" literal="//"/>
+	
+	<TerminatedType id="linecomment_content">
+		<Terminator>\n</Terminator>
+	</TerminatedType>
+	
+	<LiteralType id="blockcomment_start" literal="/*"/>
+	
+	<TerminatedType id="blockcomment_content">
+		<Terminator>*/</Terminator>
+	</TerminatedType>
+	
+	<CommentType>
+		<StartNode id="node_1" type="linecomment_start">
+			<NextNode ref="node_2"/>
+		</StartNode>
+		<Node id="node_2" type="linecomment_content"/>
+		<StartNode id="node_3" type="blockcomment_start">
+			<NextNode ref="node_4"/>
+		</StartNode>
+		<Node id="node_4" type="blockcomment_content"/>
+	</CommentType>
+	
+</Language>

@@ -7,9 +7,9 @@ import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.Stack;
 
 import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.lang.LanguageContext;
 import org.eaSTars.socoan.lang.LanguageFragment;
 import org.eaSTars.socoan.lang.base.Literal;
 import org.eaSTars.socoan.lang.base.LiteralFragment;
@@ -19,7 +19,7 @@ public class LiteralTest {
 
 	@Test
 	public void testLiteralRecognizeCompleteBuffer() {
-		Stack<LanguageFragment> context = new Stack<LanguageFragment>();
+		LanguageContext context = new LanguageContext(null);
 		
 		Literal literal = new Literal();
 		literal.setLiteral("test");
@@ -38,7 +38,8 @@ public class LiteralTest {
 		LanguageFragment fragment = context.pop();
 		assertTrue("Context buffer should contain an instance of LiteralFragment", fragment instanceof LiteralFragment);
 		LiteralFragment literalFragment = (LiteralFragment) fragment;
-		assertEquals("LiteralFragment should contain the matched sample", "test", literalFragment.getLiteral());
+		assertEquals("LiteralFragment should contain the matched sample", "test", literalFragment.getFragment());
+		assertTrue("Content of LiteralFragment should be null", literalFragment.getContent() == null);
 		
 		try {
 			assertEquals("InputStream should be empty", 0, sis.available());
@@ -49,7 +50,7 @@ public class LiteralTest {
 
 	@Test
 	public void testLiteralRecognizeWithLeftover() {
-		Stack<LanguageFragment> context = new Stack<LanguageFragment>();
+		LanguageContext context = new LanguageContext(null);
 		
 		Literal literal = new Literal();
 		literal.setLiteral("test");
@@ -68,7 +69,8 @@ public class LiteralTest {
 		LanguageFragment fragment = context.pop();
 		assertTrue("Context buffer should contain an instance of LiteralFragment", fragment instanceof LiteralFragment);
 		LiteralFragment literalFragment = (LiteralFragment) fragment;
-		assertEquals("LiteralFragment should contain the matched sample", "test", literalFragment.getLiteral());
+		assertEquals("LiteralFragment should contain the matched sample", "test", literalFragment.getFragment());
+		assertTrue("Content of LiteralFragment should be null", literalFragment.getContent() == null);
 		
 		try {
 			assertEquals("InputStream should comtain leftover data", 6, sis.available());
@@ -79,7 +81,7 @@ public class LiteralTest {
 	
 	@Test
 	public void testLiteralNotRecognized() {
-		Stack<LanguageFragment> context = new Stack<LanguageFragment>();
+		LanguageContext context = new LanguageContext(null);
 		
 		Literal literal = new Literal();
 		literal.setLiteral("test");

@@ -53,7 +53,7 @@ public class SoCoAn {
 			JAXBElement<Language> doc = (JAXBElement<Language>) unmarshaller.unmarshal(new File("resources/JavaLang.xml"));
 			Language language = doc.getValue();
 			
-			System.out.println(language);
+			System.out.println(language.getNodeTypes().size());
 			
 		} catch (JAXBException e) {
 			e.printStackTrace();

@@ -6,7 +6,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-		LiteralTest.class
+		LiteralTest.class,
+		TerminatedNodeTest.class
 	})
 public class LangBaseTests {
 

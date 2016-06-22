@@ -4,22 +4,23 @@ import org.eaSTars.socoan.lang.LanguageFragment;
 
 public class LiteralFragment implements LanguageFragment {
 
-	private String literal;
+	private String fragment;
+	private String content;
 
-	public LiteralFragment(String literal) {
-		this.literal = literal;
-	}
-	
-	public String getLiteral() {
-		return literal;
-	}
-
-	public void setLiteral(String literal) {
-		this.literal = literal;
-	}
-	
 	@Override
+	public String getFragment() {
+		return fragment;
+	}
+
+	public void setFragment(String literal) {
+		this.fragment = literal;
+	}
+	
 	public String getContent() {
-		return getLiteral();
+		return content;
+	}
+	
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

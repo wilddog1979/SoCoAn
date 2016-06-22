@@ -1,7 +1,6 @@
 package org.eaSTars.socoan.lang.base;
 
 import java.io.IOException;
-import java.util.Stack;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -9,7 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import org.eaSTars.socoan.SourcecodeInputStream;
-import org.eaSTars.socoan.lang.LanguageFragment;
+import org.eaSTars.socoan.lang.LanguageContext;
 import org.eaSTars.socoan.lang.LanguageNode;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -37,9 +36,10 @@ public class Literal extends LanguageNode {
 	}
 	
 	@Override
-	public boolean recognizeNode(Stack<LanguageFragment> context, SourcecodeInputStream sis) throws IOException {
+	public boolean recognizeNode(LanguageContext context, SourcecodeInputStream sis) throws IOException {
 		boolean result = true;
 		StringBuffer sb = new StringBuffer();
+		literal = replaceControls(literal);
 		for (int i = 0; i < literal.length(); ++i) {
 			int ch = sis.read();
 			if (ch == -1) {
@@ -54,7 +54,9 @@ public class Literal extends LanguageNode {
 		}
 		
 		if (result) {
-			context.push(new LiteralFragment(sb.toString()));
+			LiteralFragment literalFragment = new LiteralFragment();
+			literalFragment.setFragment(sb.toString());
+			context.push(literalFragment);
 		} else if (sb.length() != 0) {
 			sis.unread(sb.toString().getBytes());
 		}

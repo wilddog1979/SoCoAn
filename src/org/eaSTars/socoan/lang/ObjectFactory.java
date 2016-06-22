@@ -23,20 +23,8 @@ public class ObjectFactory {
 		return new Literal();
 	}
 	
-	public NextNode createLanguageNodeNextNode() {
-		return new NextNode();
-	}
-	
 	public ComplexNode createComplexNode() {
 		return new ComplexNode();
-	}
-	
-	public StartNode createComplexNodeStartNode() {
-		return new StartNode();
-	}
-	
-	public EndNode createComplexNodeEndNode() {
-		return new EndNode();
 	}
 	
 	@XmlElementDecl(namespace = "http://eaSTars.com/SoCoAn/lang", name = "Language")

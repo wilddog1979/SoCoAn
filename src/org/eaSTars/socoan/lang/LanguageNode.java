@@ -3,7 +3,6 @@ package org.eaSTars.socoan.lang;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -22,11 +21,16 @@ import org.eaSTars.socoan.lang.base.Literal;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LanguageNode")
 @XmlSeeAlso({
-	ComplexNode.class,
-    Literal.class
+	Literal.class,
+	ComplexNode.class
 })
 public abstract class LanguageNode {
 	
+	private static final String[][] CONTROL_CHARACTERS = {
+				{"\\\\n", "\n"},
+				{"\\\\t", "\t"}
+		};
+
 	@XmlAttribute(name = "NodeID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
@@ -34,24 +38,28 @@ public abstract class LanguageNode {
     protected String nodeID;
 	
 	@XmlElement(name="NextNode")
-	protected List<NextNode> nextNodes;
+	protected List<NodeRef> nextNodes;
 	
-	public List<NextNode> getNextNodes() {
+	public List<NodeRef> getNextNodes() {
         if (nextNodes == null) {
-        	nextNodes = new ArrayList<NextNode>();
+        	nextNodes = new ArrayList<NodeRef>();
         }
         return nextNodes;
     }
 	
-	public abstract boolean recognizeNode(Stack<LanguageFragment> context, SourcecodeInputStream sis) throws IOException;
+	public abstract boolean recognizeNode(LanguageContext context, SourcecodeInputStream sis) throws IOException;
 	
-	public boolean recognize(Stack<LanguageFragment> context, SourcecodeInputStream sis) throws IOException {
-		Stack<LanguageFragment> subcontext = new Stack<LanguageFragment>();
+	protected LanguageContext processSubcontext(LanguageContext subcontext) {
+		return subcontext;
+	}
+	
+	public boolean recognize(LanguageContext context, SourcecodeInputStream sis) throws IOException {
+		LanguageContext subcontext = context.createSubContext();
 		boolean result = recognizeNode(subcontext, sis);
 		
 		if (result) {
-			context.addAll(subcontext);
-			for (NextNode nextNode : getNextNodes()) {
+			context.addAll(processSubcontext(subcontext));
+			for (NodeRef nextNode : getNextNodes()) {
 				result = nextNode.getRef().recognize(context, sis);
 				if (result) {
 					break;
@@ -60,11 +68,22 @@ public abstract class LanguageNode {
 			if (!result) {
 				context.removeAll(subcontext);
 				while (!subcontext.isEmpty()) {
-					sis.unread(subcontext.pop().getContent().getBytes());
+					sis.unread(subcontext.pop().getFragment().getBytes());
 				}
 			}
 		}
 		
 		return result;
+	}
+
+	public String getNodeID() {
+		return nodeID;
+	}
+
+	protected String replaceControls(String value) {
+		for (String[] strings : CONTROL_CHARACTERS) {
+			value = value.replaceAll(strings[0], strings[1]);
+		}
+		return value;
 	}
 }

@@ -6,16 +6,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "NodeRef")
 @XmlSeeAlso({
-	NextNode.class,
-    StartNode.class,
-    EndNode.class
+	
 })
-public abstract class NodeRef {
+public class NodeRef {
 
 	@XmlAttribute(name = "ref")
     @XmlIDREF
