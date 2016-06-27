@@ -1,57 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Language xmlns="http://eaSTars.com/SoCoAn/lang">
-
-	<!-- comment section -->
-
-	<Literal NodeID="linecomment_start" literal="//">
-		<NextNode ref="linecomment_content"/>
-	</Literal>
+	<Include file="Java/BaseTypes.xml"/>
+	<Include file="Java/Comments.xml"/>
 	
-	<Terminated NodeID="linecomment_content">
-		<Terminator>\n</Terminator>
-	</Terminated>
-	
-	<Literal NodeID="blockcomment_start" literal="/*">
-		<NextNode ref="blockcomment_content"/>
-	</Literal>
-	
-	<Terminated NodeID="blockcomment_content">
-		<Terminator>*/</Terminator>
-	</Terminated>
-	
-	<CommentNode NodeID="Comment">
-		<StartNode ref="linecomment_start"/>
-		<StartNode ref="blockcomment_start"/>
-	</CommentNode>
-	
-	<!-- white spaces -->
-	
-	<Literal NodeID="whitespace_space" literal=" "/>
-	<Literal NodeID="whitespace_tab" literal="\t"/>
-	<Literal NodeID="whitespace_newline" literal="\n"/>
-	
-	<ComplexNode NodeID="Whitespaces">
-		<StartNode ref="whitespace_space"/>
-		<StartNode ref="whitespace_tab"/>
-		<StartNode ref="whitespace_newline"/>
-	</ComplexNode>
-	
-	<!-- separator -->
-	
-	<Separator NodeID="Separator">
-		<Entry ref="Whitespaces"/>
-		<Entry ref="Comment"/>
-	</Separator>
-
-	<!-- package -->
-	
-	<Literal NodeID="package_literal" literal="package"/>
-	
-	
-	
-	<Literal NodeID="package_end" literal=";"/>
-	
-	<ComplexNode NodeID="Package">
-		<StartNode ref="package_literal"/>
-	</ComplexNode>
 </Language>

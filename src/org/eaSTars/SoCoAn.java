@@ -13,7 +13,8 @@ import javax.xml.bind.Unmarshaller;
 
 import org.eaSTars.socoan.Configuration;
 import org.eaSTars.socoan.lang.Language;
-import org.eaSTars.socoan.lang.ObjectFactory;
+import org.eaSTars.socoan.lang.LanguageObjectFactory;
+import org.eaSTars.socoan.lang.ReferenceNotFoundException;
 
 public class SoCoAn {
 
@@ -47,16 +48,21 @@ public class SoCoAn {
 		}
 		
 		try {
-			JAXBContext context = JAXBContext.newInstance(ObjectFactory.class);
+			JAXBContext context = JAXBContext.newInstance(LanguageObjectFactory.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			@SuppressWarnings("unchecked")
 			JAXBElement<Language> doc = (JAXBElement<Language>) unmarshaller.unmarshal(new File("resources/JavaLang.xml"));
 			Language language = doc.getValue();
 			
-			System.out.println(language.getNodeTypes().size());
+			language.resolveFileReferences(new File("resources"));
+			language.resolveNodeReferences(null);
+			
+			System.out.println(language);
 			
 		} catch (JAXBException e) {
 			e.printStackTrace();
-		}	
+		} catch (ReferenceNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }

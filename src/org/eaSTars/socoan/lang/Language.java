@@ -1,51 +1,91 @@
 package org.eaSTars.socoan.lang;
 
-import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlType;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
-import org.eaSTars.socoan.lang.base.Literal;
-import org.eaSTars.socoan.lang.base.TerminatedNode;
-import org.eaSTars.socoan.lang.java.SeparatorNode;
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Language")
-public class Language {
+public class Language extends AbstractBaseElement{
 
 	@XmlElements({
-        @XmlElement(name = "Literal", type = Literal.class),
-        @XmlElement(name = "Terminated", type = TerminatedNode.class),
-        @XmlElement(name = "ComplexNode", type = ComplexNode.class),
-        @XmlElement(name = "CommentNode", type = ComplexNode.class),
-        @XmlElement(name = "Separator", type = SeparatorNode.class)
-    })
-	protected List<LanguageNode> nodeTypes;
+		@XmlElement(name="Include", type=Include.class),
+		@XmlElement(name="LiteralType", type=LiteralType.class),
+		@XmlElement(name="TerminatedType", type=TerminatedType.class),
+		@XmlElement(name="ComplexType", type=ComplexType.class)
+	})
+	private List<AbstractBaseElement> elements;
 	
-	public List<LanguageNode> getNodeTypes() {
-        if (nodeTypes == null) {
-        	nodeTypes = new ArrayList<LanguageNode>();
-        }
-        return nodeTypes;
-    }
+	private Language parent;
 	
-	public boolean recognize(String id, LanguageContext context, SourcecodeInputStream sis) throws IOException {
-		boolean result = false;
+	public List<AbstractBaseElement> getElements() {
+		if (elements == null) {
+			elements = new ArrayList<AbstractBaseElement>();
+		}
+		return elements;
+	}
+	
+	public Language getParent() {
+		return parent;
+	}
+
+	@Override
+	public void resolveFileReferences(File location) throws JAXBException {
+		for (AbstractBaseElement element : getElements()) {
+			element.resolveFileReferences(location);
+		}
+	}
+	
+	@Override
+	public void resolveNodeReferences(Language parent) throws ReferenceNotFoundException {
+		this.parent = parent;
+		for (AbstractBaseElement element : elements) {
+			element.resolveNodeReferences(this);
+			element.setProcessed(true);
+		}
+	}
+	
+	AbstractTypeDeclaration resolveTypeDeclaration(String id) {
+		AbstractTypeDeclaration result = null;
 		
-		for (LanguageNode languageNode : getNodeTypes()) {
-			if (languageNode.getNodeID().equals(id)) {
-				result = languageNode.recognize(context, sis);
-				if (!result) {
-					while (!context.isEmpty()) {
-						sis.unread(context.pop().getFragment().getBytes());
+		for (AbstractBaseElement element : elements) {
+			if (element.isProcessed()) {
+				if (element instanceof AbstractTypeDeclaration && ((AbstractTypeDeclaration)element).getId().equals(id)) {
+					result = (AbstractTypeDeclaration) element;
+					break;
+				} else if (element instanceof Include) {
+					result = ((Include)element).getInclude().resolveTypeDeclaration(id);
+					if (result != null) {
+						break;
 					}
-				} else {
+				}
+			}
+		}
+		
+		if (result == null && parent != null) {
+			result = parent.resolveTypeDeclaration(id);
+		}
+		
+		return result;
+	}
+	
+	public AbstractTypeDeclaration getTypeDeclaration(String id) {
+		AbstractTypeDeclaration result = null;
+		
+		for (AbstractBaseElement element : elements) {
+			if (element instanceof AbstractTypeDeclaration && ((AbstractTypeDeclaration)element).getId().equals(id)) {
+				result = (AbstractTypeDeclaration) element;
+				break;
+			} else if (element instanceof Include) {
+				result = ((Include)element).getInclude().getTypeDeclaration(id);
+				if (result != null) {
 					break;
 				}
 			}
