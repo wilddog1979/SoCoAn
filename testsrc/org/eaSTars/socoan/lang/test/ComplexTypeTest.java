@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.lang.AggregatingComplexType;
 import org.eaSTars.socoan.lang.ComplexType;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -15,7 +16,7 @@ public class ComplexTypeTest {
 
 	@Test
 	public void testSimpleMatch() {
-		ComplexType complextype = new ComplexType();
+		ComplexType complextype = new AggregatingComplexType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -34,7 +35,7 @@ public class ComplexTypeTest {
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
 		assertEquals("Fragment should be equal to the recognized piece", "a", fragment.getFragment());
-		assertNull("Fragment should not contain content", fragment.getContent());
+		assertEquals("Formatted fragment should be equal to the recognized piece", "a", fragment.getFormattedFragment());
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
@@ -52,7 +53,7 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexType complextype = new ComplexType();
+		ComplexType complextype = new AggregatingComplexType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -81,7 +82,7 @@ public class ComplexTypeTest {
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
 		assertEquals("Fragment should be equal to the recognized piece", "abd", fragment.getFragment());
-		assertNull("Fragment should not contain content", fragment.getContent());
+		assertEquals("Formatted fragment should be equal to the recognized piece", "abd", fragment.getFormattedFragment());
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
@@ -99,7 +100,7 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexType complextype = new ComplexType();
+		ComplexType complextype = new AggregatingComplexType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -128,7 +129,7 @@ public class ComplexTypeTest {
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
 		assertEquals("Fragment should be equal to the recognized piece", "acd", fragment.getFragment());
-		assertNull("Fragment should not contain content", fragment.getContent());
+		assertEquals("Formatted fragment should be equal to the recognized piece", "acd", fragment.getFormattedFragment());
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
@@ -148,14 +149,14 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      d
 		 */
-		ComplexType xcomplextype = new ComplexType();
+		ComplexType xcomplextype = new AggregatingComplexType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		xcomplextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
 		node_a.getNextNodes().add(new NextNodeHelper(node_b));
 		
-		ComplexType complextype = new ComplexType();
+		ComplexType complextype = new AggregatingComplexType();
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
 		complextype.getStartnodes().add(node_c);
 		
@@ -184,7 +185,7 @@ public class ComplexTypeTest {
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
 		assertEquals("Fragment should be equal to the recognized piece", "cabe", fragment.getFragment());
-		assertNull("Fragment should not contain content", fragment.getContent());
+		assertEquals("Formatted fragment should be equal to the recognized piece", "cabe", fragment.getFormattedFragment());
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
@@ -195,7 +196,7 @@ public class ComplexTypeTest {
 	
 	@Test
 	public void testSimpleNoMatch() {
-		ComplexType complextype = new ComplexType();
+		ComplexType complextype = new AggregatingComplexType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -229,7 +230,7 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexType complextype = new ComplexType();
+		ComplexType complextype = new AggregatingComplexType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -273,7 +274,7 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexType complextype = new ComplexType();
+		ComplexType complextype = new AggregatingComplexType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -319,14 +320,14 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      d
 		 */
-		ComplexType xcomplextype = new ComplexType();
+		ComplexType xcomplextype = new AggregatingComplexType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		xcomplextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
 		node_a.getNextNodes().add(new NextNodeHelper(node_b));
 		
-		ComplexType complextype = new ComplexType();
+		ComplexType complextype = new AggregatingComplexType();
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
 		complextype.getStartnodes().add(node_c);
 		

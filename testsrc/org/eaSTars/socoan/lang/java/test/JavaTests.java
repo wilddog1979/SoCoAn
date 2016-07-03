@@ -17,7 +17,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-	CommentsTest.class
+	CommentTypeTest.class,
+	SeparatorTypeTest.class
 })
 public class JavaTests {
 
@@ -35,7 +36,10 @@ public class JavaTests {
 		javalang.resolveNodeReferences(null);
 	}
 	
-	static Language getJavaLang() {
+	static Language getJavaLang() throws JAXBException, ReferenceNotFoundException {
+		if (javalang == null) {
+			initJavaLang();
+		}
 		return javalang; 
 	}
 }

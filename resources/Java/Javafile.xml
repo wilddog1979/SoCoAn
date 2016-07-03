@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Language xmlns="http://eaSTars.com/SoCoAn/lang">
+	<Include file="Package.xml"/>
+	<Include file="Import.xml"/>
+
+	<AggregatingType id="javafile">
+		<StartNode id="java_1" type="package">
+			<NextNode ref="java_2"/>
+			<NextNode ref="separator_1"/>
+		</StartNode>
+		
+		<StartNode id="java_2" type="import">
+			<NextNode ref="java_2"/>
+			<NextNode ref="separator_1"/>
+		</StartNode>
+		
+		<Node id="separator_1" type="separator">
+		</Node>
+	</AggregatingType>
+</Language>

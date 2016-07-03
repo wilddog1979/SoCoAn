@@ -16,7 +16,17 @@
 	<LiteralType id="javadoc_start" literal="/**"/>
 	
 	<TerminatedType id="javadoc_content">
-		<Terminator>**/</Terminator>
+		<Terminator>*/</Terminator>
+	</TerminatedType>
+	
+	<LiteralType id="spacechar" literal=" "/>
+	
+	<LiteralType id="tabchar" literal="\t"/>
+	
+	<LiteralType id="newline" literal="\n"/>
+	
+	<TerminatedType id="simplecommand_end">
+		<Terminator>;</Terminator>
 	</TerminatedType>
 	
 </Language>

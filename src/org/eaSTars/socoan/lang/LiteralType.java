@@ -19,7 +19,8 @@ public class LiteralType extends AbstractTypeDeclaration {
 		boolean result = false;
 		
 		StringBuffer sb = new StringBuffer();
-		for (char c : literal.toCharArray()) {
+		String fixedliteral = replaceCharacters(literal);
+		for (char c : fixedliteral.toCharArray()) {
 			int ch = sis.read();
 			if (ch == -1) {
 				result = false;
@@ -33,13 +34,19 @@ public class LiteralType extends AbstractTypeDeclaration {
 		}
 		
 		if (result) {
-			Fragment fragment = new Fragment();
-			fragment.setFragment(sb.toString());
-			context.push(fragment);
+			context.push(createFragment(sb.toString()));
 		} else if (sb.length() > 0) {
 			sis.unread(sb.toString().getBytes());
 		}
 		
 		return result;
+	}
+	
+	protected Fragment createFragment(String content) {
+		Fragment fragment = new Fragment();
+		fragment.setId(this.getId());
+		fragment.setFragment(content);
+		fragment.setFormattedFragment(content);
+		return fragment;
 	}
 }

@@ -2,5 +2,7 @@
 <Language xmlns="http://eaSTars.com/SoCoAn/lang">
 	<Include file="Java/BaseTypes.xml"/>
 	<Include file="Java/Comments.xml"/>
+	<Include file="Java/Keywords.xml"/>
 	
+	<Include file="Java/Javafile.xml"/>
 </Language>

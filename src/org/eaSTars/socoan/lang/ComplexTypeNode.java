@@ -8,10 +8,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
-
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ComplexTypeNode extends AbstractTypeDeclaration{
+public class ComplexTypeNode {
+	
+	@XmlAttribute(name="id")
+	private String id;
 	
 	@XmlAttribute(name="type")
 	private String type;
@@ -21,6 +22,10 @@ public class ComplexTypeNode extends AbstractTypeDeclaration{
 	@XmlElement(name = "NextNode")
 	private List<NextNode> nextNodes;
 
+	public String getId() {
+		return id;
+	}
+	
 	public String getType() {
 		return type;
 	}
@@ -36,23 +41,13 @@ public class ComplexTypeNode extends AbstractTypeDeclaration{
 		return nextNodes;
 	}
 
-	@Override
-	public void resolveNodeReferences(Language parent) throws ReferenceNotFoundException {
-		typeDeclaration = parent.resolveTypeDeclaration(type);
+	public void resolveNodeReferences(Language parent, ComplexType complexType) throws ReferenceNotFoundException {
+		typeDeclaration = parent.resolveTypeDeclaration(type, true);
 		if (typeDeclaration == null) {
 			throw new ReferenceNotFoundException("type",type);
 		}
-	}
-	
-	public void resolveNodeReferences(ComplexType complexType) throws ReferenceNotFoundException {
 		for (NextNode nextnode : getNextNodes()) {
 			nextnode.setNode(complexType.getComplexNode(nextnode.getRef()));
 		}
-	}
-	
-	@Override
-	public boolean recognizeType(Context context, SourcecodeInputStream sis) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

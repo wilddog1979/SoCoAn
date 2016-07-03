@@ -7,17 +7,27 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.lang.java.CommentType;
+import org.eaSTars.socoan.lang.java.SimpleCommandType;
+import org.eaSTars.socoan.lang.java.SeparatorType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ComplexType extends AbstractTypeDeclaration {
+@XmlSeeAlso({
+	AggregatingComplexType.class,
+	CommentType.class,
+	SimpleCommandType.class,
+	SeparatorType.class
+})
+public abstract class ComplexType extends AbstractTypeDeclaration {
 
 	@XmlElement(name = "StartNode")
-	List<ComplexTypeNode> startnodes;
+	private List<ComplexTypeNode> startnodes;
 	
 	@XmlElement(name = "Node")
-	List<ComplexTypeNode> nodes;
+	private List<ComplexTypeNode> nodes;
 
 	public List<ComplexTypeNode> getStartnodes() {
 		if (startnodes == null) {
@@ -35,28 +45,26 @@ public class ComplexType extends AbstractTypeDeclaration {
 	
 	@Override
 	public void resolveNodeReferences(Language parent) throws ReferenceNotFoundException {
-		for (ComplexTypeNode node : startnodes) {
-			node.resolveNodeReferences(parent);
-			node.resolveNodeReferences(this);
+		for (ComplexTypeNode node : getStartnodes()) {
+			node.resolveNodeReferences(parent, this);
 		}
 		
-		for (ComplexTypeNode node : nodes) {
-			node.resolveNodeReferences(parent);
-			node.resolveNodeReferences(this);
+		for (ComplexTypeNode node : getNodes()) {
+			node.resolveNodeReferences(parent, this);
 		}
 	}
 	
 	public ComplexTypeNode getComplexNode(String id) throws ReferenceNotFoundException {
 		ComplexTypeNode result = null;
 		
-		for (ComplexTypeNode startnode : startnodes) {
+		for (ComplexTypeNode startnode : getStartnodes()) {
 			if (startnode.getId().equals(id)) {
 				result = startnode;
 			}
 		}
 		
 		if (result == null) {
-			for (ComplexTypeNode node : nodes) {
+			for (ComplexTypeNode node : getNodes()) {
 				if (node.getId().equals(id)) {
 					result = node;
 				}
@@ -75,7 +83,7 @@ public class ComplexType extends AbstractTypeDeclaration {
 		boolean result = false;
 		Context subcontext = new Context(context);
 		
-		for (ComplexTypeNode startnode : startnodes) {
+		for (ComplexTypeNode startnode : getStartnodes()) {
 			result = recognizeNode(startnode, subcontext, sis);
 			if (result) {
 				break;
@@ -83,33 +91,20 @@ public class ComplexType extends AbstractTypeDeclaration {
 		}
 
 		if (result) {
-			Fragment fragment = new Fragment();
-			StringBuffer frgment = new StringBuffer();
-			StringBuffer content = new StringBuffer();
-			for (int i = 0; i < subcontext.size(); ++i) {
-				Fragment subfragment = subcontext.get(i);
-				if (subfragment.getFragment() != null) {
-					frgment.append(subfragment.getFragment());
-				}
-				if (subfragment.getContent() != null) {
-					content.append(subfragment.getContent());
-				}
-			}
-			if (frgment.length() != 0) {
-				fragment.setFragment(frgment.toString());
-			}
-			if (content.length() != 0) {
-				fragment.setContent(content.toString());
-			}
+			Fragment fragment = processSubcontext(subcontext);
+			fragment.setId(this.getId());
 			context.push(fragment);
 		}
 		
 		return result;
 	}
 	
-	private boolean recognizeNode(ComplexTypeNode node, Context context, SourcecodeInputStream sis) throws IOException {
+	public abstract Fragment processSubcontext(Context subcontext);
+	
+	protected boolean recognizeNode(ComplexTypeNode node, Context context, SourcecodeInputStream sis) throws IOException {
 		boolean result = node.getTypeDeclaration().recognizeType(context, sis);
 		if (result) {
+			context.peek().setId(node.getId());
 			for (NextNode nextnode : node.getNextNodes()) {
 				result = recognizeNode(nextnode.getNode(), context, sis);
 				if (result) {

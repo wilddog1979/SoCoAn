@@ -23,6 +23,10 @@ public class Context {
 		return context.pop();
 	}
 	
+	public Fragment peek() {
+		return context.peek();
+	}
+
 	public int size() {
 		return context.size();
 	}

@@ -36,7 +36,7 @@ public class TerminatedTypeTest {
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
 		assertEquals("Fragment should be equal to the recognized piece", "contentterm1", fragment.getFragment());
-		assertEquals("Fragment should contain content", "content" , fragment.getContent());
+		assertEquals("Formatted fragment should contain content", "content" , fragment.getFormattedFragment());
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 5, sis.available());
@@ -67,7 +67,7 @@ public class TerminatedTypeTest {
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
 		assertEquals("Fragment should be equal to the recognized piece", "contentterm2", fragment.getFragment());
-		assertEquals("Fragment should contain content", "content" , fragment.getContent());
+		assertEquals("Formatted fragment should contain content", "content" , fragment.getFormattedFragment());
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 5, sis.available());

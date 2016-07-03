@@ -2,16 +2,26 @@ package org.eaSTars.socoan.lang;
 
 public class Fragment {
 
-	private String content;
+	private String id;
+	
+	private String formattedFragment;
 	
 	private String fragment;
 
-	public String getContent() {
-		return content;
+	public String getId() {
+		return id;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getFormattedFragment() {
+		return formattedFragment;
+	}
+
+	public void setFormattedFragment(String formattedFragment) {
+		this.formattedFragment = formattedFragment;
 	}
 
 	public String getFragment() {

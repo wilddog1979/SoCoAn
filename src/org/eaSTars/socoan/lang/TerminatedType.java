@@ -13,11 +13,6 @@ import org.eaSTars.socoan.SourcecodeInputStream;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class TerminatedType extends AbstractTypeDeclaration {
 
-	private final static String[][] REPLACE_RULES = {
-			{"(\\\\n)", "\n"},
-			{"(\\\\t)", "\t"}
-	};
-	
 	@XmlElement(name = "Terminator")
 	private List<String> terminators;
 
@@ -28,14 +23,6 @@ public class TerminatedType extends AbstractTypeDeclaration {
 		return terminators;
 	}
 	
-	private String replaceCharacters(String value) {
-		for (String[] rule : REPLACE_RULES) {
-			value = value.replaceAll(rule[0], rule[1]);
-		}
-		
-		return value;
-	}
-	
 	@Override
 	public boolean recognizeType(Context context, SourcecodeInputStream sis) throws IOException {
 		boolean result = false;
@@ -43,7 +30,7 @@ public class TerminatedType extends AbstractTypeDeclaration {
 		StringBuffer content = new StringBuffer();
 		int ch = -1;
 		while ((ch = sis.read()) != -1) {
-			for (String terminator : terminators) {
+			for (String terminator : getTerminators()) {
 				String fixedterminator = replaceCharacters(terminator);
 				StringBuffer sb = new StringBuffer();
 				if (fixedterminator.charAt(0) == (char)ch) {
@@ -62,7 +49,8 @@ public class TerminatedType extends AbstractTypeDeclaration {
 					}
 					if (result) {
 						Fragment fragment = new Fragment();
-						fragment.setContent(content.toString());
+						fragment.setId(this.getId());
+						fragment.setFormattedFragment(content.toString());
 						fragment.setFragment(content.toString() + fixedterminator);
 						context.push(fragment);
 						break;

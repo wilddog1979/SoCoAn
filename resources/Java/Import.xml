@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Language xmlns="http://eaSTars.com/SoCoAn/lang">
+	<SimpleCommandType id="import">
+		<StartNode id="separator_1" type="separator">
+			<NextNode ref="import_node"/>
+		</StartNode>
+		
+		<StartNode id="import_node" type="keyword_import">
+			<NextNode ref="separator_2"/>
+		</StartNode>
+		
+		<Node id="separator_2" type="separator">
+			<NextNode ref="import_end"/>
+		</Node>
+		
+		<Node id="import_end" type="simplecommand_end">
+		</Node>
+	</SimpleCommandType>
+</Language>

@@ -31,7 +31,7 @@ public class LiteralTypeTest {
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
 		assertEquals("Fragment should be equal to the recognized piece", "test", fragment.getFragment());
-		assertNull("Fragment should not contain any content", fragment.getContent());
+		assertEquals("Formatted fragment should be equal to the recognized piece", "test", fragment.getFormattedFragment());
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 7, sis.available());

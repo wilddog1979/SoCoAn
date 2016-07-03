@@ -22,9 +22,12 @@ public class Include extends AbstractBaseElement {
 	public void resolveFileReferences(File location) throws JAXBException {
 		JAXBContext context = JAXBContext.newInstance(LanguageObjectFactory.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
+		File includefilelocation = new File(location, file);
 		@SuppressWarnings("unchecked")
-		JAXBElement<Language> doc = (JAXBElement<Language>) unmarshaller.unmarshal(new File(location, file));
+		JAXBElement<Language> doc = (JAXBElement<Language>) unmarshaller.unmarshal(includefilelocation);
 		include = doc.getValue();
+		
+		include.resolveFileReferences(includefilelocation.getParentFile());
 	}
 	
 	public Language getInclude() {

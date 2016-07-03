@@ -25,6 +25,9 @@
 			<fileset dir="gensrc">
 				<include name="**/*"/>
 			</fileset>
+			<fileset dir="test">
+				<include name="**/*"/>
+			</fileset>
 		</delete>
 	</target>
 	
@@ -36,6 +39,30 @@
 		<javac destdir="bin" debug="true" includeantruntime="false" classpathref="class.path">
 			<src refid="src.path" />
 		</javac>
+	</target>
+	
+	<target name="runtests" depends="all">
+		<junit fork="true" printsummary="true" dir=".">
+			<classpath>
+				<path refid="class.path"/>
+				<pathelement location="bin"/>
+			</classpath>
+			
+			<formatter type="brief" usefile="false" />
+			<formatter type="xml"/>
+			
+			<batchtest fork="yes" todir="test">
+				<fileset dir="testsrc">
+					<include name="**/*Test.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+		<junitreport todir="test">
+			<fileset dir="test">
+				<include name="TEST-*.xml"/>
+			</fileset>
+			<report format="frames" todir="test/report"/>
+		</junitreport>
 	</target>
 	
 	<target name="all" depends="clean,gensrc,compile">
