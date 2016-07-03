@@ -25,9 +25,9 @@ public class Language extends AbstractBaseElement{
 		@XmlElement(name="LiteralType", type=LiteralType.class),
 		@XmlElement(name="KeywordType", type=KeywordType.class),
 		@XmlElement(name="TerminatedType", type=TerminatedType.class),
-		@XmlElement(name="AggregatingType", type=AggregatingComplexType.class),
+		@XmlElement(name="AggregatingType", type=AggregatingType.class),
 		@XmlElement(name="CommentType", type=CommentType.class),
-		@XmlElement(name="Separator", type=SeparatorType.class),
+		@XmlElement(name="SeparatorType", type=SeparatorType.class),
 		@XmlElement(name="SimpleCommandType", type=SimpleCommandType.class)
 	})
 	private List<AbstractBaseElement> elements;

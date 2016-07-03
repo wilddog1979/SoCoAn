@@ -1,10 +1,10 @@
 package org.eaSTars.socoan.lang.java;
 
-import org.eaSTars.socoan.lang.AggregatingComplexType;
+import org.eaSTars.socoan.lang.AggregatingType;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 
-public class SimpleCommandType extends AggregatingComplexType {
+public class SimpleCommandType extends AggregatingType {
 	
 	@Override
 	public Fragment processSubcontext(Context subcontext) {

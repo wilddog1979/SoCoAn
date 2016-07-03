@@ -18,7 +18,7 @@
 		<Node id="blockcomment_content" type="blockcomment_content"/>
 	</CommentType>
 
-	<Separator id="separator">
+	<SeparatorType id="separator">
 		<StartNode id="comment" type="comments">
 		</StartNode>
 		
@@ -30,5 +30,5 @@
 		
 		<StartNode id="newline" type="newline">
 		</StartNode>
-	</Separator>	
+	</SeparatorType>	
 </Language>

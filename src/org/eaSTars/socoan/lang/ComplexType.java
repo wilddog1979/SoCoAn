@@ -16,7 +16,7 @@ import org.eaSTars.socoan.lang.java.SeparatorType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso({
-	AggregatingComplexType.class,
+	AggregatingType.class,
 	CommentType.class,
 	SimpleCommandType.class,
 	SeparatorType.class

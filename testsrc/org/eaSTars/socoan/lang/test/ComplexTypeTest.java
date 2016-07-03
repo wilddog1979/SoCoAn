@@ -6,7 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import org.eaSTars.socoan.SourcecodeInputStream;
-import org.eaSTars.socoan.lang.AggregatingComplexType;
+import org.eaSTars.socoan.lang.AggregatingType;
 import org.eaSTars.socoan.lang.ComplexType;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -16,7 +16,7 @@ public class ComplexTypeTest {
 
 	@Test
 	public void testSimpleMatch() {
-		ComplexType complextype = new AggregatingComplexType();
+		ComplexType complextype = new AggregatingType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -53,7 +53,7 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexType complextype = new AggregatingComplexType();
+		ComplexType complextype = new AggregatingType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -100,7 +100,7 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexType complextype = new AggregatingComplexType();
+		ComplexType complextype = new AggregatingType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -149,14 +149,14 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      d
 		 */
-		ComplexType xcomplextype = new AggregatingComplexType();
+		ComplexType xcomplextype = new AggregatingType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		xcomplextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
 		node_a.getNextNodes().add(new NextNodeHelper(node_b));
 		
-		ComplexType complextype = new AggregatingComplexType();
+		ComplexType complextype = new AggregatingType();
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
 		complextype.getStartnodes().add(node_c);
 		
@@ -196,7 +196,7 @@ public class ComplexTypeTest {
 	
 	@Test
 	public void testSimpleNoMatch() {
-		ComplexType complextype = new AggregatingComplexType();
+		ComplexType complextype = new AggregatingType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -230,7 +230,7 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexType complextype = new AggregatingComplexType();
+		ComplexType complextype = new AggregatingType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -274,7 +274,7 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexType complextype = new AggregatingComplexType();
+		ComplexType complextype = new AggregatingType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -320,14 +320,14 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      d
 		 */
-		ComplexType xcomplextype = new AggregatingComplexType();
+		ComplexType xcomplextype = new AggregatingType();
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		xcomplextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
 		node_a.getNextNodes().add(new NextNodeHelper(node_b));
 		
-		ComplexType complextype = new AggregatingComplexType();
+		ComplexType complextype = new AggregatingType();
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
 		complextype.getStartnodes().add(node_c);
 		
