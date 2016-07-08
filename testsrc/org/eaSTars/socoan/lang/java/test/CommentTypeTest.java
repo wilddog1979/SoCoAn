@@ -15,7 +15,7 @@ import org.eaSTars.socoan.lang.ReferenceNotFoundException;
 import org.eaSTars.socoan.lang.java.CommentFragment;
 import org.junit.Test;
 
-public class CommentTypeTest {
+public class CommentTypeTest extends AbstractJavaLangTest{
 
 	@Test
 	public void testRecognizeLineComment() {
@@ -45,9 +45,13 @@ public class CommentTypeTest {
 		assertTrue("Fragment should be an instance of CommentFragment", fragment instanceof CommentFragment);
 		CommentFragment commentfragment = (CommentFragment) fragment;
 		assertEquals("ID of the fragment should match", "comments", commentfragment.getId());
-		assertEquals("Fragment should be equal to the recognized piece", "//some comment\n", commentfragment.getFragment());
-		assertEquals("Fragment should contain formatted content", "<span class=\"linecomment\">//some comment\n</span>" , commentfragment.getFormattedFragment());
-		assertEquals("CommentFragment should contain comment", "some comment", commentfragment.getComment());
+		testCommentFragment(
+				commentfragment,
+				CommentFragment.Type.LineComment,
+				"//some comment\n",
+				"<span class=\"linecomment\">//some comment\n</span>",
+				"some comment"
+		);
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
@@ -84,9 +88,13 @@ public class CommentTypeTest {
 		assertTrue("Fragment should be an instance of CommentFragment", fragment instanceof CommentFragment);
 		CommentFragment commentfragment = (CommentFragment) fragment;
 		assertEquals("ID of the fragment should match", "comments", commentfragment.getId());
-		assertEquals("Fragment should be equal to the recognized piece", "/*\n\tsome\n\tcomment\n*/", commentfragment.getFragment());
-		assertEquals("Fragment should contain formatted content", "<span class=\"blockcomment\">/*\n\tsome\n\tcomment\n*/</span>" , commentfragment.getFormattedFragment());
-		assertEquals("CommentFragment should contain comment", "\n\tsome\n\tcomment\n", commentfragment.getComment());
+		testCommentFragment(
+				commentfragment,
+				CommentFragment.Type.BlockComment,
+				"/*\n\tsome\n\tcomment\n*/",
+				"<span class=\"blockcomment\">/*\n\tsome\n\tcomment\n*/</span>",
+				"\n\tsome\n\tcomment\n"
+		);
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
@@ -123,9 +131,13 @@ public class CommentTypeTest {
 		assertTrue("Fragment should be an instance of CommentFragment", fragment instanceof CommentFragment);
 		CommentFragment commentfragment = (CommentFragment) fragment;
 		assertEquals("ID of the fragment should match", "comments", commentfragment.getId());
-		assertEquals("Fragment should be equal to the recognized piece", "/**\n\tsome\n\tjavadoc\n*/", commentfragment.getFragment());
-		assertEquals("Fragment should contain formatted content", "<span class=\"javadoc\">/**\n\tsome\n\tjavadoc\n*/</span>" , commentfragment.getFormattedFragment());
-		assertEquals("CommentFragment should contain comment", "\n\tsome\n\tjavadoc\n", commentfragment.getComment());
+		testCommentFragment(
+				commentfragment,
+				CommentFragment.Type.JavaDoc,
+				"/**\n\tsome\n\tjavadoc\n*/",
+				"<span class=\"javadoc\">/**\n\tsome\n\tjavadoc\n*/</span>",
+				"\n\tsome\n\tjavadoc\n"
+		);
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 8, sis.available());

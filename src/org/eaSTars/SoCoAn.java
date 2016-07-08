@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -66,9 +67,12 @@ public class SoCoAn {
 					fout.write(filename.getBytes());
 					fout.write("</h1>\n\t\t<div>\n\t\t\t<hr/>\n\t\t\t<pre>".getBytes());
 					
-					fout.write(pcontext.pop().getFormattedFragment().getBytes());
+					Optional<String> formattedcontent = pcontext.pop().getFormattedFragment();
+					if (formattedcontent.isPresent()) {
+						fout.write(formattedcontent.get().getBytes());
+					}
 					
-					fout.write("</pre>\n\t\t\t<hr/>\n\t\t</div>\n\t</body>\n</html>\n".getBytes());
+					fout.write("<br/></pre>\n\t\t\t<hr/>\n\t\t</div>\n\t</body>\n</html>\n".getBytes());
 					
 					fout.close();
 				} catch (IOException e) {

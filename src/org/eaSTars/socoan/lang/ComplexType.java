@@ -6,22 +6,25 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 import org.eaSTars.socoan.SourcecodeInputStream;
-import org.eaSTars.socoan.lang.java.CommentType;
-import org.eaSTars.socoan.lang.java.SimpleCommandType;
-import org.eaSTars.socoan.lang.java.SeparatorType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso({
-	AggregatingType.class,
-	CommentType.class,
-	SimpleCommandType.class,
-	SeparatorType.class
+	
 })
-public abstract class ComplexType extends AbstractTypeDeclaration {
+public class ComplexType extends AbstractTypeDeclaration {
+
+	@XmlAttribute(name="multiple")
+	private boolean multiple = false;
+	
+	@XmlAttribute(name="processor")
+	private String processorName;
+	
+	protected SubcontextProcessor processor;
 
 	@XmlElement(name = "StartNode")
 	private List<ComplexTypeNode> startnodes;
@@ -42,9 +45,22 @@ public abstract class ComplexType extends AbstractTypeDeclaration {
 		}
 		return nodes;
 	}
-	
+
 	@Override
 	public void resolveNodeReferences(Language parent) throws ReferenceNotFoundException {
+		if (processorName != null) {
+			ProcessorFactory processorFactory = parent.getProcessorFactory();
+			if (processorFactory == null) {
+				throw new ReferenceNotFoundException("processorFactory", "processorFactory");
+			}
+			processor = processorFactory.createProcessor(processorName);
+			if (processor == null) {
+				throw new ReferenceNotFoundException("processor name", processorName);
+			}
+		} else {
+			throw new ReferenceNotFoundException("complextype", "processorName");
+		}
+		
 		for (ComplexTypeNode node : getStartnodes()) {
 			node.resolveNodeReferences(parent, this);
 		}
@@ -80,26 +96,26 @@ public abstract class ComplexType extends AbstractTypeDeclaration {
 	
 	@Override
 	public boolean recognizeType(Context context, SourcecodeInputStream sis) throws IOException {
-		boolean result = false;
 		Context subcontext = new Context(context);
 		
-		for (ComplexTypeNode startnode : getStartnodes()) {
-			result = recognizeNode(startnode, subcontext, sis);
-			if (result) {
-				break;
+		boolean result = false;
+		do {
+			for (ComplexTypeNode startnode : getStartnodes()) {
+				result = recognizeNode(startnode, subcontext, sis);
+				if (result) {
+					break;
+				}
 			}
-		}
+		} while (multiple && result);
 
-		if (result) {
-			Fragment fragment = processSubcontext(subcontext);
+		if (subcontext.size() != 0 && processor != null) {
+			Fragment fragment = processor.processSubcontext(subcontext);
 			fragment.setId(this.getId());
 			context.push(fragment);
 		}
 		
-		return result;
+		return subcontext.size() != 0;
 	}
-	
-	public abstract Fragment processSubcontext(Context subcontext);
 	
 	protected boolean recognizeNode(ComplexTypeNode node, Context context, SourcecodeInputStream sis) throws IOException {
 		boolean result = node.getTypeDeclaration().recognizeType(context, sis);
@@ -112,7 +128,7 @@ public abstract class ComplexType extends AbstractTypeDeclaration {
 				}
 			}
 			if (!result) {
-				sis.unread(context.pop().getFragment().getBytes());
+				context.pop().getFragment().ifPresent(s -> sis.unread(s.getBytes()));
 			}
 		}
 		

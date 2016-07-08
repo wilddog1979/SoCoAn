@@ -1,5 +1,7 @@
 package org.eaSTars.socoan.lang.java;
 
+import java.util.Optional;
+
 import org.eaSTars.socoan.lang.Fragment;
 
 public class CommentFragment extends Fragment {
@@ -12,7 +14,7 @@ public class CommentFragment extends Fragment {
 	
 	private Type type;
 
-	private String comment;
+	private Optional<String> comment;
 	
 	public Type getType() {
 		return type;
@@ -22,12 +24,12 @@ public class CommentFragment extends Fragment {
 		this.type = type;
 	}
 
-	public String getComment() {
+	public Optional<String> getComment() {
 		return comment;
 	}
 
 	public void setComment(String comment) {
-		this.comment = comment;
+		this.comment = Optional.ofNullable(comment);
 	}
 	
 	@Override
@@ -35,18 +37,18 @@ public class CommentFragment extends Fragment {
 	}
 	
 	@Override
-	public String getFormattedFragment() {
-		String result = null;
+	public Optional<String> getFormattedFragment() {
+		Optional<String> result = Optional.empty();
 		
 		switch (type) {
 		case JavaDoc:
-			result = String.format(JavaFormat.JAVADOC_FORMAT, getComment());
+			result = getComment().map(s -> String.format(JavaFormat.JAVADOC_FORMAT, s));
 			break;
 		case LineComment:
-			result = String.format(JavaFormat.LINECOMMENT_FORMAT, getComment());
+			result = getComment().map(s -> String.format(JavaFormat.LINECOMMENT_FORMAT, s));
 			break;
 		case BlockComment:
-			result = String.format(JavaFormat.BLOCKCOMMENT_FORMAT, getComment());
+			result = getComment().map(s -> String.format(JavaFormat.BLOCKCOMMENT_FORMAT, s));
 			break;
 		default:
 			break;

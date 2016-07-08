@@ -10,7 +10,7 @@ import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 import org.junit.Test;
 
-public class LiteralTypeTest {
+public class LiteralTypeTest extends AbstractLangTest {
 
 	@Test
 	public void testRecognizeSimple() {
@@ -30,8 +30,8 @@ public class LiteralTypeTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		assertEquals("Fragment should be equal to the recognized piece", "test", fragment.getFragment());
-		assertEquals("Formatted fragment should be equal to the recognized piece", "test", fragment.getFormattedFragment());
+		testOptionalString("Fragment", "test", fragment.getFragment());
+		testOptionalString("Formatted fragment", "test", fragment.getFormattedFragment());
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 7, sis.available());

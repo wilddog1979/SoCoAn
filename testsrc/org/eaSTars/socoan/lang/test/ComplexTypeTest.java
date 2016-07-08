@@ -6,17 +6,16 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import org.eaSTars.socoan.SourcecodeInputStream;
-import org.eaSTars.socoan.lang.AggregatingType;
-import org.eaSTars.socoan.lang.ComplexType;
+import org.eaSTars.socoan.lang.AggregatingProcessor;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 import org.junit.Test;
 
-public class ComplexTypeTest {
+public class ComplexTypeTest extends AbstractLangTest {
 
 	@Test
 	public void testSimpleMatch() {
-		ComplexType complextype = new AggregatingType();
+		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -34,8 +33,8 @@ public class ComplexTypeTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		assertEquals("Fragment should be equal to the recognized piece", "a", fragment.getFragment());
-		assertEquals("Formatted fragment should be equal to the recognized piece", "a", fragment.getFormattedFragment());
+		testOptionalString("Fragment", "a", fragment.getFragment());
+		testOptionalString("Formatted fragment", "a", fragment.getFormattedFragment());
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
@@ -53,7 +52,7 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexType complextype = new AggregatingType();
+		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -81,8 +80,7 @@ public class ComplexTypeTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		assertEquals("Fragment should be equal to the recognized piece", "abd", fragment.getFragment());
-		assertEquals("Formatted fragment should be equal to the recognized piece", "abd", fragment.getFormattedFragment());
+		testFragment(fragment, "abd", "abd");
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
@@ -100,7 +98,7 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexType complextype = new AggregatingType();
+		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -128,8 +126,7 @@ public class ComplexTypeTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		assertEquals("Fragment should be equal to the recognized piece", "acd", fragment.getFragment());
-		assertEquals("Formatted fragment should be equal to the recognized piece", "acd", fragment.getFormattedFragment());
+		testFragment(fragment, "acd", "acd");
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
@@ -149,14 +146,14 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      d
 		 */
-		ComplexType xcomplextype = new AggregatingType();
+		ComplexTypeHelper xcomplextype = new ComplexTypeHelper(new AggregatingProcessor());
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		xcomplextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
 		node_a.getNextNodes().add(new NextNodeHelper(node_b));
 		
-		ComplexType complextype = new AggregatingType();
+		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
 		complextype.getStartnodes().add(node_c);
 		
@@ -184,8 +181,7 @@ public class ComplexTypeTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		assertEquals("Fragment should be equal to the recognized piece", "cabe", fragment.getFragment());
-		assertEquals("Formatted fragment should be equal to the recognized piece", "cabe", fragment.getFormattedFragment());
+		testFragment(fragment, "cabe", "cabe");
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
@@ -196,7 +192,7 @@ public class ComplexTypeTest {
 	
 	@Test
 	public void testSimpleNoMatch() {
-		ComplexType complextype = new AggregatingType();
+		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -230,7 +226,7 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexType complextype = new AggregatingType();
+		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -274,7 +270,7 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexType complextype = new AggregatingType();
+		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -320,14 +316,14 @@ public class ComplexTypeTest {
 		 *    \   /
 		 *      d
 		 */
-		ComplexType xcomplextype = new AggregatingType();
+		ComplexTypeHelper xcomplextype = new ComplexTypeHelper(new AggregatingProcessor());
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		xcomplextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
 		node_a.getNextNodes().add(new NextNodeHelper(node_b));
 		
-		ComplexType complextype = new AggregatingType();
+		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
 		complextype.getStartnodes().add(node_c);
 		

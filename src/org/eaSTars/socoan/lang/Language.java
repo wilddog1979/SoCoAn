@@ -7,28 +7,28 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlType;
 
-import org.eaSTars.socoan.lang.java.CommentType;
 import org.eaSTars.socoan.lang.java.KeywordType;
-import org.eaSTars.socoan.lang.java.SimpleCommandType;
-import org.eaSTars.socoan.lang.java.SeparatorType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Language")
 public class Language extends AbstractBaseElement{
 
+	@XmlAttribute(name="processorfactory")
+	private String factoryname;
+	
+	private ProcessorFactory processorFactory = null;
+	
 	@XmlElements({
 		@XmlElement(name="Include", type=Include.class),
 		@XmlElement(name="LiteralType", type=LiteralType.class),
 		@XmlElement(name="KeywordType", type=KeywordType.class),
 		@XmlElement(name="TerminatedType", type=TerminatedType.class),
-		@XmlElement(name="AggregatingType", type=AggregatingType.class),
-		@XmlElement(name="CommentType", type=CommentType.class),
-		@XmlElement(name="SeparatorType", type=SeparatorType.class),
-		@XmlElement(name="SimpleCommandType", type=SimpleCommandType.class)
+		@XmlElement(name="ComplexType", type=ComplexType.class)
 	})
 	private List<AbstractBaseElement> elements;
 	
@@ -52,9 +52,28 @@ public class Language extends AbstractBaseElement{
 		}
 	}
 	
+	public ProcessorFactory getProcessorFactory() {
+		ProcessorFactory result = processorFactory;
+		
+		if (result == null && parent != null) {
+			result = parent.getProcessorFactory();
+		}
+		
+		return result;
+	}
+	
 	@Override
 	public void resolveNodeReferences(Language parent) throws ReferenceNotFoundException {
 		this.parent = parent;
+		
+		if (factoryname != null) {
+			try {
+				processorFactory = Class.forName(factoryname).asSubclass(ProcessorFactory.class).newInstance();
+			} catch (Exception e) {
+				throw new ReferenceNotFoundException("processorfactory", factoryname);
+			}
+		}
+		
 		for (AbstractBaseElement element : getElements()) {
 			element.resolveNodeReferences(this);
 			element.setProcessed(true);

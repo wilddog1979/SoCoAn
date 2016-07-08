@@ -1,12 +1,14 @@
 package org.eaSTars.socoan.lang;
 
+import java.util.Optional;
+
 public class Fragment {
 
 	private String id;
 	
-	private String formattedFragment;
+	private Optional<String> formattedFragment;
 	
-	private String fragment;
+	private Optional<String> fragment;
 
 	public String getId() {
 		return id;
@@ -16,19 +18,19 @@ public class Fragment {
 		this.id = id;
 	}
 
-	public String getFormattedFragment() {
+	public Optional<String> getFormattedFragment() {
 		return formattedFragment;
 	}
 
 	public void setFormattedFragment(String formattedFragment) {
-		this.formattedFragment = formattedFragment;
+		this.formattedFragment = Optional.ofNullable(formattedFragment);
 	}
 
-	public String getFragment() {
+	public Optional<String> getFragment() {
 		return fragment;
 	}
 
 	public void setFragment(String fragment) {
-		this.fragment = fragment;
+		this.fragment = Optional.ofNullable(fragment);
 	}
 }

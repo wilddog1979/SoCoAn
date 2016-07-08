@@ -1,5 +1,7 @@
 package org.eaSTars.socoan.lang.java;
 
+import java.util.Optional;
+
 import org.eaSTars.socoan.lang.Fragment;
 
 public class KeywordFragment extends Fragment {
@@ -15,7 +17,7 @@ public class KeywordFragment extends Fragment {
 	}
 	
 	@Override
-	public String getFormattedFragment() {
-		return String.format(JavaFormat.KEYWORD_FORMAT, keyword);
+	public Optional<String> getFormattedFragment() {
+		return Optional.ofNullable(String.format(JavaFormat.KEYWORD_FORMAT, keyword));
 	}
 }

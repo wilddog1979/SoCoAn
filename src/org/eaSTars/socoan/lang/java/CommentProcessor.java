@@ -1,10 +1,10 @@
 package org.eaSTars.socoan.lang.java;
 
-import org.eaSTars.socoan.lang.ComplexType;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
+import org.eaSTars.socoan.lang.SubcontextProcessor;
 
-public class CommentType extends ComplexType {
+public class CommentProcessor extends SubcontextProcessor {
 
 	private static final String ID_JAVADOC = "javadoc";
 	
@@ -15,9 +15,9 @@ public class CommentType extends ComplexType {
 	@Override
 	public Fragment processSubcontext(Context subcontext) {
 		CommentFragment fragment = new CommentFragment();
+		aggregateContext(fragment, subcontext);
 		
 		Fragment firstfragment = subcontext.get(0);
-		Fragment secondfragment = subcontext.get(1);
 		if (ID_JAVADOC.equals(firstfragment.getId())) {
 			fragment.setType(CommentFragment.Type.JavaDoc);
 		} else if (ID_LINECOMMENT.equals(firstfragment.getId())) {
@@ -26,8 +26,7 @@ public class CommentType extends ComplexType {
 			fragment.setType(CommentFragment.Type.BlockComment);
 		}
 		
-		fragment.setComment(secondfragment.getFormattedFragment());
-		fragment.setFragment(firstfragment.getFragment() + secondfragment.getFragment());
+		subcontext.get(1).getFormattedFragment().ifPresent(s -> fragment.setComment(s));
 		
 		return fragment;
 	}

@@ -1,8 +1,10 @@
 package org.eaSTars.socoan.lang;
 
+import java.util.Iterator;
 import java.util.Stack;
+import java.util.stream.Stream;
 
-public class Context {
+public class Context implements Iterable<Fragment>{
 
 	private Context parent = null;
 	
@@ -33,5 +35,14 @@ public class Context {
 
 	public Fragment get(int index) {
 		return context.get(index);
+	}
+
+	@Override
+	public Iterator<Fragment> iterator() {
+		return context.iterator();
+	}
+	
+	public Stream<Fragment> stream() {
+		return context.stream();
 	}
 }

@@ -16,7 +16,7 @@ import org.eaSTars.socoan.lang.java.CommentFragment;
 import org.eaSTars.socoan.lang.java.SeparatorFragment;
 import org.junit.Test;
 
-public class SeparatorTypeTest {
+public class SeparatorTypeTest extends AbstractJavaLangTest {
 
 	@Test
 	public void testRecognizeSpace() {
@@ -46,8 +46,7 @@ public class SeparatorTypeTest {
 		assertTrue("Fragment should be an instance of SeparatorFragment", fragment instanceof SeparatorFragment);
 		SeparatorFragment separatorfragment = (SeparatorFragment) fragment;
 		assertEquals("ID of the fragment should match", "separator", separatorfragment.getId());
-		assertEquals("Fragment should be equal to the recognized piece", " ", separatorfragment.getFragment());
-		assertEquals("Fragment should contain formatted content", " " , separatorfragment.getFormattedFragment());
+		testFragment(separatorfragment, " ", " ");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
 		try {
@@ -85,8 +84,7 @@ public class SeparatorTypeTest {
 		assertTrue("Fragment should be an instance of SeparatorFragment", fragment instanceof SeparatorFragment);
 		SeparatorFragment separatorfragment = (SeparatorFragment) fragment;
 		assertEquals("ID of the fragment should match", "separator", separatorfragment.getId());
-		assertEquals("Fragment should be equal to the recognized piece", "\t", separatorfragment.getFragment());
-		assertEquals("Fragment should contain formatted content", "\t" , separatorfragment.getFormattedFragment());
+		testFragment(separatorfragment, "\t", "\t");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
 		try {
@@ -124,8 +122,7 @@ public class SeparatorTypeTest {
 		assertTrue("Fragment should be an instance of SeparatorFragment", fragment instanceof SeparatorFragment);
 		SeparatorFragment separatorfragment = (SeparatorFragment) fragment;
 		assertEquals("ID of the fragment should match", "separator", separatorfragment.getId());
-		assertEquals("Fragment should be equal to the recognized piece", "\n", separatorfragment.getFragment());
-		assertEquals("Fragment should contain formatted content", "\n" , separatorfragment.getFormattedFragment());
+		testFragment(separatorfragment, "\n", "\n");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
 		try {
@@ -195,8 +192,7 @@ public class SeparatorTypeTest {
 		assertTrue("Fragment should be an instance of SeparatorFragment", fragment instanceof SeparatorFragment);
 		SeparatorFragment separatorfragment = (SeparatorFragment) fragment;
 		assertEquals("ID of the fragment should match", "separator", separatorfragment.getId());
-		assertEquals("Fragment should be equal to the recognized piece", " \t\n", separatorfragment.getFragment());
-		assertEquals("Fragment should contain formatted content", " \t\n" , separatorfragment.getFormattedFragment());
+		testFragment(separatorfragment, " \t\n", " \t\n");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
 		try {
@@ -234,8 +230,7 @@ public class SeparatorTypeTest {
 		assertTrue("Fragment should be an instance of SeparatorFragment", fragment instanceof SeparatorFragment);
 		SeparatorFragment separatorfragment = (SeparatorFragment) fragment;
 		assertEquals("ID of the fragment should match", "separator", separatorfragment.getId());
-		assertEquals("Fragment should be equal to the recognized piece", " \t//linecomment\n\n", separatorfragment.getFragment());
-		assertEquals("Fragment should contain formatted content", " \t<span class=\"linecomment\">//linecomment\n</span>\n" , separatorfragment.getFormattedFragment());
+		testFragment(separatorfragment, " \t//linecomment\n\n", " \t<span class=\"linecomment\">//linecomment\n</span>\n");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
 		try {
@@ -273,8 +268,7 @@ public class SeparatorTypeTest {
 		assertTrue("Fragment should be an instance of SeparatorFragment", fragment instanceof SeparatorFragment);
 		SeparatorFragment separatorfragment = (SeparatorFragment) fragment;
 		assertEquals("ID of the fragment should match", "separator", separatorfragment.getId());
-		assertEquals("Fragment should be equal to the recognized piece", " \t/*blockcomment*/\n", separatorfragment.getFragment());
-		assertEquals("Fragment should contain formatted content", " \t<span class=\"blockcomment\">/*blockcomment*/</span>\n" , separatorfragment.getFormattedFragment());
+		testFragment(separatorfragment, " \t/*blockcomment*/\n", " \t<span class=\"blockcomment\">/*blockcomment*/</span>\n");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
 		try {
@@ -312,14 +306,16 @@ public class SeparatorTypeTest {
 		assertTrue("Fragment should be an instance of SeparatorFragment", fragment instanceof SeparatorFragment);
 		SeparatorFragment separatorfragment = (SeparatorFragment) fragment;
 		assertEquals("ID of the fragment should match", "separator", separatorfragment.getId());
-		assertEquals("Fragment should be equal to the recognized piece", " \t/**javadoc*/\n", separatorfragment.getFragment());
-		assertEquals("Fragment should contain formatted content", " \t<span class=\"javadoc\">/**javadoc*/</span>\n" , separatorfragment.getFormattedFragment());
-		assertNotNull("SeparatorFragment should contain a javadoc elements", separatorfragment.getJavadoc());
+		testFragment(separatorfragment, " \t/**javadoc*/\n", " \t<span class=\"javadoc\">/**javadoc*/</span>\n");
 		CommentFragment commentFragment = separatorfragment.getJavadoc();
-		assertEquals("Comment element should contain java doc", CommentFragment.Type.JavaDoc, commentFragment.getType());
-		assertEquals("Javadoc comment element fragment should contain the recognized piece", "/**javadoc*/", commentFragment.getFragment());
-		assertEquals("Javadoc comment element formatted fragment should contain the recognized piece", "<span class=\"javadoc\">/**javadoc*/</span>", commentFragment.getFormattedFragment());
-		assertEquals("Javadoc comment element should contain the recognized piece", "javadoc", commentFragment.getComment());
+		assertNotNull("SeparatorFragment should contain a javadoc elements", commentFragment);
+		testCommentFragment(
+				commentFragment,
+				CommentFragment.Type.JavaDoc,
+				"/**javadoc*/",
+				"<span class=\"javadoc\">/**javadoc*/</span>",
+				"javadoc"
+		);
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 8, sis.available());

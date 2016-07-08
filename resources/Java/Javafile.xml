@@ -3,7 +3,8 @@
 	<Include file="Package.xml"/>
 	<Include file="Import.xml"/>
 
-	<AggregatingType id="javafile">
+	<ComplexType id="javafile" processor="aggregating">
+	
 		<StartNode id="java_1" type="package">
 			<NextNode ref="java_2"/>
 			<NextNode ref="separator_1"/>
@@ -16,5 +17,5 @@
 		
 		<Node id="separator_1" type="separator">
 		</Node>
-	</AggregatingType>
+	</ComplexType>
 </Language>

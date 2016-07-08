@@ -12,7 +12,7 @@ import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.TerminatedType;
 import org.junit.Test;
 
-public class TerminatedTypeTest {
+public class TerminatedTypeTest extends AbstractLangTest {
 
 	@Test
 	public void testRecognizeSimple1() {
@@ -35,8 +35,7 @@ public class TerminatedTypeTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		assertEquals("Fragment should be equal to the recognized piece", "contentterm1", fragment.getFragment());
-		assertEquals("Formatted fragment should contain content", "content" , fragment.getFormattedFragment());
+		testFragment(fragment, "contentterm1", "content");
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 5, sis.available());
@@ -66,8 +65,7 @@ public class TerminatedTypeTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		assertEquals("Fragment should be equal to the recognized piece", "contentterm2", fragment.getFragment());
-		assertEquals("Formatted fragment should contain content", "content" , fragment.getFormattedFragment());
+		testFragment(fragment, "contentterm2", "content");
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 5, sis.available());
