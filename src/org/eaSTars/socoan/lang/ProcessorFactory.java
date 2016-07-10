@@ -1,6 +1,8 @@
 package org.eaSTars.socoan.lang;
 
+import java.util.function.Function;
+
 public abstract class ProcessorFactory {
 
-	public abstract SubcontextProcessor createProcessor(String id);
+	public abstract Function<Context, Fragment> createProcessor(String id);
 }

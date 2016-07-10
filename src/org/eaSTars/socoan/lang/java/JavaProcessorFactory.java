@@ -2,10 +2,11 @@ package org.eaSTars.socoan.lang.java;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
-import org.eaSTars.socoan.lang.AggregatingProcessor;
+import org.eaSTars.socoan.lang.Context;
+import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.ProcessorFactory;
-import org.eaSTars.socoan.lang.SubcontextProcessor;
 
 public class JavaProcessorFactory extends ProcessorFactory {
 
@@ -17,19 +18,20 @@ public class JavaProcessorFactory extends ProcessorFactory {
 	
 	public static final String AGGREGATING_PROCESSOR = "aggregating";
 	
-	private static final Map<String, SubcontextProcessor> SUBCONTEXTPROCESSORS =
-			new HashMap<String, SubcontextProcessor>() {
-				private static final long serialVersionUID = 5365113095278146024L;
-			{
-				put(COMMENT_PROCESSOR, new CommentProcessor());
-				put(SEPARATOR_PROCESSOR, new SeparatorProcessor());
-				put(SIMPLECOMMAND_PROCESSOR, new SimpleCommandProcessor());
-				put(AGGREGATING_PROCESSOR, new AggregatingProcessor());
-			}};
+	private static final Map<String, Function<Context, Fragment>> FUNCTION_MAP =
+			new HashMap<String, Function<Context, Fragment>>() {
+				private static final long serialVersionUID = 5082635489425605921L;
+				{
+					JavaBaseProcessors processors = new JavaBaseProcessors();
+					put(COMMENT_PROCESSOR, context -> processors.processComment(context));
+					put(SEPARATOR_PROCESSOR, context -> processors.processSeparator(context));
+					put(SIMPLECOMMAND_PROCESSOR, context -> processors.processSimpleCommand(context));
+					put(AGGREGATING_PROCESSOR, context -> processors.processAggregation(context));
+				}
+	};
 	
-	@Override
-	public SubcontextProcessor createProcessor(String id) {
-		return SUBCONTEXTPROCESSORS.get(id);
+	public Function<Context, Fragment> createProcessor(String id) {
+		return FUNCTION_MAP.get(id);
 	}
 
 }

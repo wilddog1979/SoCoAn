@@ -1,12 +1,6 @@
 package org.eaSTars.socoan.lang;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-
-@XmlAccessorType(XmlAccessType.FIELD)
-public abstract class SubcontextProcessor {
-
-	public abstract Fragment processSubcontext(Context subcontext);
+public class LangProcessors {
 
 	protected void aggregateContext(Fragment fragment, Context subcontext) {
 		StringBuffer frgment = new StringBuffer();
@@ -23,5 +17,12 @@ public abstract class SubcontextProcessor {
 		if (content.length() != 0) {
 			fragment.setFormattedFragment(content.toString());
 		}
+	}
+	
+	public Fragment processAggregation(Context subcontext) {
+		Fragment fragment = new Fragment();
+		aggregateContext(fragment, subcontext);
+		
+		return fragment;
 	}
 }

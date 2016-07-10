@@ -1,21 +1,24 @@
 package org.eaSTars.socoan.lang.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import org.eaSTars.socoan.SourcecodeInputStream;
-import org.eaSTars.socoan.lang.AggregatingProcessor;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
+import org.eaSTars.socoan.lang.LangProcessors;
 import org.junit.Test;
 
 public class ComplexTypeTest extends AbstractLangTest {
 
 	@Test
 	public void testSimpleMatch() {
-		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -52,7 +55,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -98,7 +101,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -146,14 +149,14 @@ public class ComplexTypeTest extends AbstractLangTest {
 		 *    \   /
 		 *      d
 		 */
-		ComplexTypeHelper xcomplextype = new ComplexTypeHelper(new AggregatingProcessor());
+		ComplexTypeHelper xcomplextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		xcomplextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
 		node_a.getNextNodes().add(new NextNodeHelper(node_b));
 		
-		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
 		complextype.getStartnodes().add(node_c);
 		
@@ -192,7 +195,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 	
 	@Test
 	public void testSimpleNoMatch() {
-		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -226,7 +229,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -270,7 +273,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		 *    \   /
 		 *      c
 		 */
-		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
@@ -316,14 +319,14 @@ public class ComplexTypeTest extends AbstractLangTest {
 		 *    \   /
 		 *      d
 		 */
-		ComplexTypeHelper xcomplextype = new ComplexTypeHelper(new AggregatingProcessor());
+		ComplexTypeHelper xcomplextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		xcomplextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
 		node_a.getNextNodes().add(new NextNodeHelper(node_b));
 		
-		ComplexTypeHelper complextype = new ComplexTypeHelper(new AggregatingProcessor());
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
 		complextype.getStartnodes().add(node_c);
 		

@@ -19,9 +19,9 @@ import org.eaSTars.socoan.lang.java.KeywordType;
 public class Language extends AbstractBaseElement{
 
 	@XmlAttribute(name="processorfactory")
-	private String factoryname;
+	protected String factoryname;
 	
-	private ProcessorFactory processorFactory = null;
+	protected ProcessorFactory processorFactory = null;
 	
 	@XmlElements({
 		@XmlElement(name="Include", type=Include.class),

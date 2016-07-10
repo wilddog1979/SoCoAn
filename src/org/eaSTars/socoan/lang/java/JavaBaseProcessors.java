@@ -2,9 +2,9 @@ package org.eaSTars.socoan.lang.java;
 
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
-import org.eaSTars.socoan.lang.SubcontextProcessor;
+import org.eaSTars.socoan.lang.LangProcessors;
 
-public class CommentProcessor extends SubcontextProcessor {
+public class JavaBaseProcessors extends LangProcessors {
 
 	private static final String ID_JAVADOC = "javadoc";
 	
@@ -12,8 +12,7 @@ public class CommentProcessor extends SubcontextProcessor {
 	
 	private static final String ID_BLOCKCOMMENT = "blockcomment";
 	
-	@Override
-	public Fragment processSubcontext(Context subcontext) {
+	public Fragment processComment(Context subcontext) {
 		CommentFragment fragment = new CommentFragment();
 		aggregateContext(fragment, subcontext);
 		
@@ -30,5 +29,24 @@ public class CommentProcessor extends SubcontextProcessor {
 		
 		return fragment;
 	}
-
+	
+	public Fragment processSeparator(Context subcontext) {
+		SeparatorFragment fragment = new SeparatorFragment();
+		aggregateContext(fragment, subcontext);
+		
+		subcontext.stream()
+			.filter(subfragment -> subfragment instanceof CommentFragment && ((CommentFragment)subfragment).getType() == CommentFragment.Type.JavaDoc)
+			.forEach(subfragment -> fragment.setJavadoc((CommentFragment)subfragment));
+		
+		return fragment;
+	}
+	
+	public Fragment processSimpleCommand(Context subcontext) {
+		Fragment fragment = processAggregation(subcontext);
+		
+		fragment.getFragment().ifPresent(s -> fragment.setFragment(s+";"));
+		fragment.getFormattedFragment().ifPresent(s -> fragment.setFormattedFragment(s+";"));
+		
+		return fragment;
+	}
 }

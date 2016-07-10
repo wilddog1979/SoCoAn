@@ -3,6 +3,7 @@ package org.eaSTars.socoan.lang;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -24,14 +25,14 @@ public class ComplexType extends AbstractTypeDeclaration {
 	@XmlAttribute(name="processor")
 	private String processorName;
 	
-	protected SubcontextProcessor processor;
-
 	@XmlElement(name = "StartNode")
 	private List<ComplexTypeNode> startnodes;
 	
 	@XmlElement(name = "Node")
 	private List<ComplexTypeNode> nodes;
 
+	protected Language parent;
+	
 	public List<ComplexTypeNode> getStartnodes() {
 		if (startnodes == null) {
 			startnodes = new ArrayList<ComplexTypeNode>();
@@ -48,13 +49,13 @@ public class ComplexType extends AbstractTypeDeclaration {
 
 	@Override
 	public void resolveNodeReferences(Language parent) throws ReferenceNotFoundException {
+		this.parent = parent;
 		if (processorName != null) {
 			ProcessorFactory processorFactory = parent.getProcessorFactory();
 			if (processorFactory == null) {
 				throw new ReferenceNotFoundException("processorFactory", "processorFactory");
 			}
-			processor = processorFactory.createProcessor(processorName);
-			if (processor == null) {
+			if (processorFactory.createProcessor(processorName) == null) {
 				throw new ReferenceNotFoundException("processor name", processorName);
 			}
 		} else {
@@ -70,28 +71,19 @@ public class ComplexType extends AbstractTypeDeclaration {
 		}
 	}
 	
+	private Optional<ComplexTypeNode> getNodeById(List<ComplexTypeNode> nodelist, String id) {
+		return nodelist.stream().filter(node -> node.getId().equals(id)).findFirst();
+	}
+	
 	public ComplexTypeNode getComplexNode(String id) throws ReferenceNotFoundException {
-		ComplexTypeNode result = null;
-		
-		for (ComplexTypeNode startnode : getStartnodes()) {
-			if (startnode.getId().equals(id)) {
-				result = startnode;
-			}
+		Optional<ComplexTypeNode> result = getNodeById(getStartnodes(), id);
+		if (!result.isPresent()) {
+			result = getNodeById(getNodes(), id);
 		}
-		
-		if (result == null) {
-			for (ComplexTypeNode node : getNodes()) {
-				if (node.getId().equals(id)) {
-					result = node;
-				}
-			}
-		}
-		
-		if (result == null) {
+		if (!result.isPresent()) {
 			throw new ReferenceNotFoundException("complexnode",id);
 		}
-		
-		return result;
+		return result.get();
 	}
 	
 	@Override
@@ -108,8 +100,8 @@ public class ComplexType extends AbstractTypeDeclaration {
 			}
 		} while (multiple && result);
 
-		if (subcontext.size() != 0 && processor != null) {
-			Fragment fragment = processor.processSubcontext(subcontext);
+		if (subcontext.size() != 0) {
+			Fragment fragment = parent.getProcessorFactory().createProcessor(processorName).apply(subcontext);
 			fragment.setId(this.getId());
 			context.push(fragment);
 		}
