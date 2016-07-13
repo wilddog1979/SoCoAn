@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.eaSTars.socoan.SourcecodeInputStream;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
+import org.eaSTars.socoan.lang.Language;
 import org.junit.Test;
 
 public class LiteralTypeTest extends AbstractLangTest {
@@ -18,7 +19,7 @@ public class LiteralTypeTest extends AbstractLangTest {
 
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("testcontent".getBytes()));
 		
-		Context context = new Context();
+		Context context = new Context((Language)null);
 		
 		boolean testresult = false;
 		try {
@@ -46,7 +47,7 @@ public class LiteralTypeTest extends AbstractLangTest {
 
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("te".getBytes()));
 		
-		Context context = new Context();
+		Context context = new Context((Language)null);
 		
 		boolean testresult = false;
 		try {

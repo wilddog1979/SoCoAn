@@ -6,11 +6,14 @@ import java.util.stream.Stream;
 
 public class Context implements Iterable<Fragment>{
 
+	private FormatProvider formatProvider;
+	
 	private Context parent = null;
 	
 	private Stack<Fragment> context = new Stack<Fragment>();
 
-	public Context() {
+	public Context(FormatProvider formatProvider) {
+		this.formatProvider = formatProvider;
 	}
 	
 	public Context(Context parent) {
@@ -44,5 +47,15 @@ public class Context implements Iterable<Fragment>{
 	
 	public Stream<Fragment> stream() {
 		return context.stream();
+	}
+	
+	public FormatProvider getFormatProvider() {
+		FormatProvider formatProvider = this.formatProvider;
+		
+		if (formatProvider == null && parent != null) {
+			formatProvider = parent.getFormatProvider();
+		}
+		
+		return formatProvider;
 	}
 }

@@ -13,7 +13,7 @@ public class JavaBaseProcessors extends LangProcessors {
 	private static final String ID_BLOCKCOMMENT = "blockcomment";
 	
 	public Fragment processComment(Context subcontext) {
-		CommentFragment fragment = new CommentFragment();
+		CommentFragment fragment = new CommentFragment(subcontext.getFormatProvider());
 		aggregateContext(fragment, subcontext);
 		
 		Fragment firstfragment = subcontext.get(0);
@@ -31,7 +31,7 @@ public class JavaBaseProcessors extends LangProcessors {
 	}
 	
 	public Fragment processSeparator(Context subcontext) {
-		SeparatorFragment fragment = new SeparatorFragment();
+		SeparatorFragment fragment = new SeparatorFragment(subcontext.getFormatProvider());
 		aggregateContext(fragment, subcontext);
 		
 		subcontext.stream()

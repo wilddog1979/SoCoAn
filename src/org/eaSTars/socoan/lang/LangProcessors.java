@@ -20,7 +20,7 @@ public class LangProcessors {
 	}
 	
 	public Fragment processAggregation(Context subcontext) {
-		Fragment fragment = new Fragment();
+		Fragment fragment = new Fragment(subcontext.getFormatProvider());
 		aggregateContext(fragment, subcontext);
 		
 		return fragment;

@@ -3,6 +3,8 @@ package org.eaSTars.socoan.lang;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -11,17 +13,20 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlType;
-
-import org.eaSTars.socoan.lang.java.KeywordType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Language")
-public class Language extends AbstractBaseElement{
+public class Language extends AbstractBaseElement implements FormatProvider{
 
-	@XmlAttribute(name="processorfactory")
-	protected String factoryname;
+	@XmlAttribute(name="languageprocessorfactory")
+	protected String processorfactoryname;
 	
 	protected ProcessorFactory processorFactory = null;
+	
+	@XmlElement(name="FormatMasks")
+	@XmlJavaTypeAdapter(FormatEntriesAdapter.class)
+	private Map<String, String> formatmasks;
 	
 	@XmlElements({
 		@XmlElement(name="Include", type=Include.class),
@@ -66,11 +71,11 @@ public class Language extends AbstractBaseElement{
 	public void resolveNodeReferences(Language parent) throws ReferenceNotFoundException {
 		this.parent = parent;
 		
-		if (factoryname != null) {
+		if (processorfactoryname != null) {
 			try {
-				processorFactory = Class.forName(factoryname).asSubclass(ProcessorFactory.class).newInstance();
+				processorFactory = Class.forName(processorfactoryname).asSubclass(ProcessorFactory.class).newInstance();
 			} catch (Exception e) {
-				throw new ReferenceNotFoundException("processorfactory", factoryname);
+				throw new ReferenceNotFoundException("processorfactory", processorfactoryname);
 			}
 		}
 		
@@ -98,13 +103,13 @@ public class Language extends AbstractBaseElement{
 		}
 		
 		if (upward && result == null && parent != null) {
-			result = parent.resolveTypeDeclaration(id, true);
+			result = parent.resolveTypeDeclaration(id, upward);
 		}
 		
 		return result;
 	}
 	
-	public AbstractTypeDeclaration getTypeDeclaration(String id) {
+	private AbstractTypeDeclaration getTypeDeclaration(Language origin, String id, boolean upward) {
 		AbstractTypeDeclaration result = null;
 		
 		for (AbstractBaseElement element : getElements()) {
@@ -112,7 +117,11 @@ public class Language extends AbstractBaseElement{
 				result = (AbstractTypeDeclaration) element;
 				break;
 			} else if (element instanceof Include) {
-				result = ((Include)element).getInclude().getTypeDeclaration(id);
+				Include include = (Include) element;
+				if (include.getInclude() == origin) {
+					break;
+				}
+				result = include.getInclude().getTypeDeclaration(id);
 				if (result != null) {
 					break;
 				}
@@ -120,5 +129,49 @@ public class Language extends AbstractBaseElement{
 		}
 		
 		return result;
+	}
+	
+	public AbstractTypeDeclaration getTypeDeclaration(String id) {
+		return getTypeDeclaration(null, id, true);
+	}
+	
+	private Optional<String> getFormat(Language origin, String maskid, boolean upward) {
+		Optional<String> result = Optional.empty();
+		
+		if (formatmasks != null && formatmasks.containsKey(maskid)) {
+			result = Optional.ofNullable(replaceCharacters(formatmasks.get(maskid)));
+		}
+		
+		if (!result.isPresent()) {
+			for (AbstractBaseElement element : getElements()) {
+				if (element instanceof Include) {
+					Include include = (Include) element;
+					if (include.getInclude() == origin) {
+						break;
+					}
+					result = include.getInclude().getFormat(null, maskid, false);
+					if (result.isPresent()) {
+						break;
+					}
+				}
+			}
+		}
+		
+		if (upward && !result.isPresent() && parent != null) {
+			result = parent.getFormat(this, maskid, upward);
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public Optional<String> getFormat(String maskid) {
+		return getFormat(null, maskid, true);
+	}
+	
+	@Override
+	public String getFormat(String key, String defaultvalue) {
+		Optional<String> result = getFormat(key);
+		return result.isPresent() ? result.get() : defaultvalue;
 	}
 }

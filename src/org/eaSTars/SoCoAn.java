@@ -57,7 +57,7 @@ public class SoCoAn {
 				
 				AbstractTypeDeclaration javafile = language.getTypeDeclaration("javafile");
 				
-				Context pcontext = new Context();
+				Context pcontext = new Context(language);
 				try {
 					javafile.recognizeType(pcontext, sis);
 					

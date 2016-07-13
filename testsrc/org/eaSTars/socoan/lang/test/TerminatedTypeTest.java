@@ -9,6 +9,7 @@ import java.util.List;
 import org.eaSTars.socoan.SourcecodeInputStream;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
+import org.eaSTars.socoan.lang.Language;
 import org.eaSTars.socoan.lang.TerminatedType;
 import org.junit.Test;
 
@@ -23,7 +24,7 @@ public class TerminatedTypeTest extends AbstractLangTest {
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("contentterm1other".getBytes()));
 		
-		Context context = new Context();
+		Context context = new Context((Language)null);
 		
 		boolean testresult = false;
 		try {
@@ -53,7 +54,7 @@ public class TerminatedTypeTest extends AbstractLangTest {
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("contentterm2other".getBytes()));
 		
-		Context context = new Context();
+		Context context = new Context((Language)null);
 		
 		boolean testresult = false;
 		try {
@@ -83,7 +84,7 @@ public class TerminatedTypeTest extends AbstractLangTest {
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("contentterm3other".getBytes()));
 		
-		Context context = new Context();
+		Context context = new Context((Language)null);
 		
 		boolean testresult = false;
 		try {

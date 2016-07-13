@@ -34,7 +34,7 @@ public class LiteralType extends AbstractTypeDeclaration {
 		}
 		
 		if (result) {
-			context.push(createFragment(sb.toString()));
+			context.push(createFragment(context, sb.toString()));
 		} else if (sb.length() > 0) {
 			sis.unread(sb.toString().getBytes());
 		}
@@ -42,8 +42,8 @@ public class LiteralType extends AbstractTypeDeclaration {
 		return result;
 	}
 	
-	protected Fragment createFragment(String content) {
-		Fragment fragment = new Fragment();
+	protected Fragment createFragment(Context context, String content) {
+		Fragment fragment = new Fragment(context.getFormatProvider());
 		fragment.setId(this.getId());
 		fragment.setFragment(content);
 		fragment.setFormattedFragment(content);

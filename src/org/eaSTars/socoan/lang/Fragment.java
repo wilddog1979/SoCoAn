@@ -4,12 +4,29 @@ import java.util.Optional;
 
 public class Fragment {
 
+	protected FormatProvider formatProvider = new FormatProvider() {
+		
+		@Override
+		public String getFormat(String key, String defaultvalue) {
+			return defaultvalue;
+		}
+		
+		@Override
+		public Optional<String> getFormat(String key) {
+			return Optional.of("");
+		}
+	};
+	
 	private String id;
 	
 	private Optional<String> formattedFragment;
 	
 	private Optional<String> fragment;
 
+	public Fragment(FormatProvider formatProvider) {
+		this.formatProvider = formatProvider;
+	}
+	
 	public String getId() {
 		return id;
 	}

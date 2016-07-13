@@ -14,6 +14,10 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 })
 public abstract class AbstractBaseElement {
 
+	private static final String[][] REPLACE_RULES = {
+					{"(\\\\n)", "\n"},
+					{"(\\\\t)", "\t"}
+			};
 	private boolean processed = false;
 	
 	public void resolveFileReferences(File location) throws JAXBException {
@@ -30,5 +34,13 @@ public abstract class AbstractBaseElement {
 
 	public void setProcessed(boolean processed) {
 		this.processed = processed;
+	}
+
+	protected String replaceCharacters(String value) {
+		for (String[] rule : REPLACE_RULES) {
+			value = value.replaceAll(rule[0], rule[1]);
+		}
+		
+		return value;
 	}
 }

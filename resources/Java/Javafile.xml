@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Language xmlns="http://eaSTars.com/SoCoAn/lang">
+	<Include file="JavaFundamentals.xml"/>
 	<Include file="Package.xml"/>
 	<Include file="Import.xml"/>
 

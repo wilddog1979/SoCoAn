@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Language xmlns="http://eaSTars.com/SoCoAn/lang" processorfactory="org.eaSTars.socoan.lang.java.JavaProcessorFactory">
+<Language
+		xmlns="http://eaSTars.com/SoCoAn/lang"
+		languageprocessorfactory="org.eaSTars.socoan.lang.java.JavaProcessorFactory">
+	<Include file="Java/JavaFormats.xml"/>
+	
 	<Include file="Java/BaseTypes.xml"/>
 	<Include file="Java/Comments.xml"/>
 	<Include file="Java/Keywords.xml"/>

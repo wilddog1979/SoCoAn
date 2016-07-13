@@ -20,8 +20,10 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 	@Test
 	public void testRecognizeLineComment() {
 		AbstractTypeDeclaration comments = null;
+		Context context = null;
 		try {
 			comments = JavaTests.getJavaLang().getTypeDeclaration("comments");
+			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -29,8 +31,6 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 		assertNotNull("comments type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("//some comment\nleftover".getBytes()));
-		
-		Context context = new Context();
 		
 		boolean testresult = false;
 		try {
@@ -63,8 +63,10 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 	@Test
 	public void testRecognizeBlockComment() {
 		AbstractTypeDeclaration comments = null;
+		Context context = null;
 		try {
 			comments = JavaTests.getJavaLang().getTypeDeclaration("comments");
+			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -72,8 +74,6 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 		assertNotNull("comments type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("/*\n\tsome\n\tcomment\n*/leftover".getBytes()));
-		
-		Context context = new Context();
 		
 		boolean testresult = false;
 		try {
@@ -106,8 +106,10 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 	@Test
 	public void testRecognizeJavadocComment() {
 		AbstractTypeDeclaration comments = null;
+		Context context = null;
 		try {
 			comments = JavaTests.getJavaLang().getTypeDeclaration("comments");
+			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -115,8 +117,6 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 		assertNotNull("comments type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("/**\n\tsome\n\tjavadoc\n*/leftover".getBytes()));
-		
-		Context context = new Context();
 		
 		boolean testresult = false;
 		try {

@@ -21,8 +21,10 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 	@Test
 	public void testRecognizeSpace() {
 		AbstractTypeDeclaration comments = null;
+		Context context = null;
 		try {
 			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -30,8 +32,6 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		assertNotNull("comments type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" leftover".getBytes()));
-		
-		Context context = new Context();
 		
 		boolean testresult = false;
 		try {
@@ -59,8 +59,10 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 	@Test
 	public void testRecognizeTab() {
 		AbstractTypeDeclaration comments = null;
+		Context context = null;
 		try {
 			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -68,8 +70,6 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		assertNotNull("comments type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("\tleftover".getBytes()));
-		
-		Context context = new Context();
 		
 		boolean testresult = false;
 		try {
@@ -97,8 +97,10 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 	@Test
 	public void testRecognizeNewline() {
 		AbstractTypeDeclaration comments = null;
+		Context context = null;
 		try {
 			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -106,8 +108,6 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		assertNotNull("comments type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("\nleftover".getBytes()));
-		
-		Context context = new Context();
 		
 		boolean testresult = false;
 		try {
@@ -135,8 +135,10 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 	@Test
 	public void testRecognizeNoMatch() {
 		AbstractTypeDeclaration comments = null;
+		Context context = null;
 		try {
 			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -144,8 +146,6 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		assertNotNull("comments type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("leftover".getBytes()));
-		
-		Context context = new Context();
 		
 		boolean testresult = false;
 		try {
@@ -167,8 +167,10 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 	@Test
 	public void testRecognizeMultiplePlain() {
 		AbstractTypeDeclaration comments = null;
+		Context context = null;
 		try {
 			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -176,8 +178,6 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		assertNotNull("comments type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" \t\nleftover".getBytes()));
-		
-		Context context = new Context();
 		
 		boolean testresult = false;
 		try {
@@ -205,8 +205,10 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 	@Test
 	public void testRecognizeMultipleWithLinecomment() {
 		AbstractTypeDeclaration comments = null;
+		Context context = null;
 		try {
 			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -214,8 +216,6 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		assertNotNull("comments type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" \t//linecomment\n\nleftover".getBytes()));
-		
-		Context context = new Context();
 		
 		boolean testresult = false;
 		try {
@@ -243,8 +243,10 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 	@Test
 	public void testRecognizeMultipleWithBlockcomment() {
 		AbstractTypeDeclaration comments = null;
+		Context context = null;
 		try {
 			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -252,8 +254,6 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		assertNotNull("comments type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" \t/*blockcomment*/\nleftover".getBytes()));
-		
-		Context context = new Context();
 		
 		boolean testresult = false;
 		try {
@@ -281,8 +281,10 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 	@Test
 	public void testRecognizeMultipleWithJavadoc() {
 		AbstractTypeDeclaration comments = null;
+		Context context = null;
 		try {
 			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -290,8 +292,6 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		assertNotNull("comments type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" \t/**javadoc*/\nleftover".getBytes()));
-		
-		Context context = new Context();
 		
 		boolean testresult = false;
 		try {

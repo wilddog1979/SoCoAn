@@ -12,6 +12,7 @@ import org.eaSTars.socoan.SourcecodeInputStream;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.LangProcessors;
+import org.eaSTars.socoan.lang.Language;
 import org.junit.Test;
 
 public class ComplexTypeTest extends AbstractLangTest {
@@ -24,7 +25,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("aleftover".getBytes()));
 		
-		Context context = new Context();
+		Context context = new Context((Language)null);
 		
 		boolean testresult = false;
 		try {
@@ -71,7 +72,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("abdleftover".getBytes()));
 		
-		Context context = new Context();
+		Context context = new Context((Language)null);
 		
 		boolean testresult = false;
 		try {
@@ -117,7 +118,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("acdleftover".getBytes()));
 		
-		Context context = new Context();
+		Context context = new Context((Language)null);
 		
 		boolean testresult = false;
 		try {
@@ -172,7 +173,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("cabeleftover".getBytes()));
 		
-		Context context = new Context();
+		Context context = new Context((Language)null);
 		
 		boolean testresult = false;
 		try {
@@ -201,7 +202,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("leftover".getBytes()));
 		
-		Context context = new Context();
+		Context context = new Context((Language)null);
 		
 		boolean testresult = false;
 		try {
@@ -245,7 +246,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("ableftover".getBytes()));
 		
-		Context context = new Context();
+		Context context = new Context((Language)null);
 		
 		boolean testresult = false;
 		try {
@@ -289,7 +290,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("acleftover".getBytes()));
 		
-		Context context = new Context();
+		Context context = new Context((Language)null);
 		
 		boolean testresult = false;
 		try {
@@ -342,7 +343,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("cableftover".getBytes()));
 		
-		Context context = new Context();
+		Context context = new Context((Language)null);
 		
 		boolean testresult = false;
 		try {

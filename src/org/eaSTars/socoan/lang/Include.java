@@ -38,4 +38,8 @@ public class Include extends AbstractBaseElement {
 	public void resolveNodeReferences(Language parent) throws ReferenceNotFoundException {
 		include.resolveNodeReferences(parent);
 	}
+
+	public String getFile() {
+		return file;
+	}
 }

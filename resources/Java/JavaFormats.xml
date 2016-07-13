@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Language xmlns="http://eaSTars.com/SoCoAn/lang">
+	<FormatMasks>
+		<entry key="JAVADOC_FORMAT">&lt;span class="javadoc"&gt;/**%s*/&lt;/span&gt;</entry>
+		<entry key="LINECOMMENT_FORMAT">&lt;span class="linecomment"&gt;//%s\n&lt;/span&gt;</entry>
+		<entry key="BLOCKCOMMENT_FORMAT">&lt;span class="blockcomment"&gt;/*%s*/&lt;/span&gt;</entry>
+		<entry key="KEYWORD_FORMAT">&lt;span class="keyword"&gt;%s&lt;/span&gt;</entry>
+	</FormatMasks>
+</Language>

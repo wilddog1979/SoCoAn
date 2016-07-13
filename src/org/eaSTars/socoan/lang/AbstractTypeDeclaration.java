@@ -17,11 +17,6 @@ import org.eaSTars.socoan.SourcecodeInputStream;
 })
 public abstract class AbstractTypeDeclaration extends AbstractBaseElement {
 
-	private static final String[][] REPLACE_RULES = {
-				{"(\\\\n)", "\n"},
-				{"(\\\\t)", "\t"}
-		};
-	
 	@XmlAttribute(name="id")
 	private String id;
 
@@ -30,12 +25,4 @@ public abstract class AbstractTypeDeclaration extends AbstractBaseElement {
 	}
 	
 	public abstract boolean recognizeType(Context context, SourcecodeInputStream sis) throws IOException;
-
-	protected String replaceCharacters(String value) {
-		for (String[] rule : REPLACE_RULES) {
-			value = value.replaceAll(rule[0], rule[1]);
-		}
-		
-		return value;
-	}
 }
