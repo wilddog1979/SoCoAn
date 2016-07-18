@@ -21,8 +21,8 @@ public class CommentFragment extends Fragment {
 	
 	public static enum Type {
 		JavaDoc,
-		LineComment,
-		BlockComment
+		EndOfLineComment,
+		TraditionalComment
 	}
 	
 	private Type type;
@@ -61,10 +61,10 @@ public class CommentFragment extends Fragment {
 		case JavaDoc:
 			result = getComment().map(s -> String.format(formatProvider.getFormat(JAVADOC_FORMAT_KEY,DEFAULT_JAVADOC_FORMAT_VALUE), s));
 			break;
-		case LineComment:
+		case EndOfLineComment:
 			result = getComment().map(s -> String.format(formatProvider.getFormat(LINECOMMENT_FORMAT_KEY,DEFAULT_LINECOMMENT_FORMAT_VALUE), s));
 			break;
-		case BlockComment:
+		case TraditionalComment:
 			result = getComment().map(s -> String.format(formatProvider.getFormat(BLOCKCOMMENT_FORMAT_KEY,DEFAULT_BLOCKCOMMENT_FORMAT_VALUE), s));
 			break;
 		default:

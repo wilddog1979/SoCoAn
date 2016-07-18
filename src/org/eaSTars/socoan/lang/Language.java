@@ -33,7 +33,8 @@ public class Language extends AbstractBaseElement implements FormatProvider{
 		@XmlElement(name="LiteralType", type=LiteralType.class),
 		@XmlElement(name="KeywordType", type=KeywordType.class),
 		@XmlElement(name="TerminatedType", type=TerminatedType.class),
-		@XmlElement(name="ComplexType", type=ComplexType.class)
+		@XmlElement(name="ComplexType", type=ComplexType.class),
+		@XmlElement(name="CustomType", type=CustomType.class)
 	})
 	private List<AbstractBaseElement> elements;
 	
@@ -48,6 +49,10 @@ public class Language extends AbstractBaseElement implements FormatProvider{
 	
 	public Language getParent() {
 		return parent;
+	}
+	
+	public Language getRoot() {
+		return parent == null ? this : parent.getRoot();
 	}
 
 	@Override

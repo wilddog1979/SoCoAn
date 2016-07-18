@@ -55,7 +55,7 @@ public class SoCoAn {
 				String filename = "samplesrc/org/eaSTars/testsrc/SampleClass.java";
 				SourcecodeInputStream sis = new SourcecodeInputStream(new FileInputStream(filename));
 				
-				AbstractTypeDeclaration javafile = language.getTypeDeclaration("javafile");
+				AbstractTypeDeclaration javafile = language.getTypeDeclaration("JavaFile");
 				
 				Context pcontext = new Context(language);
 				try {

@@ -25,6 +25,9 @@ public class ComplexType extends AbstractTypeDeclaration {
 	@XmlAttribute(name="processor")
 	private String processorName;
 	
+	@XmlAttribute(name="checker")
+	private String checkerName;
+	
 	@XmlElement(name = "StartNode")
 	private List<ComplexTypeNode> startnodes;
 	
@@ -57,6 +60,9 @@ public class ComplexType extends AbstractTypeDeclaration {
 			}
 			if (processorFactory.createProcessor(processorName) == null) {
 				throw new ReferenceNotFoundException("processor name", processorName);
+			}
+			if (checkerName != null && processorFactory.createChecker(checkerName) == null) {
+				throw new ReferenceNotFoundException("checker", checkerName);
 			}
 		} else {
 			throw new ReferenceNotFoundException("complextype", "processorName");
@@ -103,7 +109,13 @@ public class ComplexType extends AbstractTypeDeclaration {
 		if (subcontext.size() != 0) {
 			Fragment fragment = parent.getProcessorFactory().createProcessor(processorName).apply(subcontext);
 			fragment.setId(this.getId());
-			context.push(fragment);
+			if (checkerName == null || (checkerName != null && !parent.getProcessorFactory().createChecker(checkerName).apply(parent, fragment))) {
+				context.push(fragment);
+			} else if (checkerName != null) {
+				while (subcontext.size() != 0) {
+					subcontext.pop().getFragment().ifPresent(s -> sis.unread(s.getBytes()));
+				}
+			}
 		}
 		
 		return subcontext.size() != 0;

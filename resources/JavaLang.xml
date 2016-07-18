@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Language
 		xmlns="http://eaSTars.com/SoCoAn/lang"
 		languageprocessorfactory="org.eaSTars.socoan.lang.java.JavaProcessorFactory">
 	<Include file="Java/JavaFormats.xml"/>
 	
-	<Include file="Java/BaseTypes.xml"/>
-	<Include file="Java/Comments.xml"/>
-	<Include file="Java/Keywords.xml"/>
+	<Include file="Java/lexical/structures.xml"/>
 	
-	<Include file="Java/Javafile.xml"/>
+	<Include file="Java/JavaFile.xml"/>
 </Language>

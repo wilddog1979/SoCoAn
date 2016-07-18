@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Language xmlns="http://eaSTars.com/SoCoAn/lang">
+
+	<TerminatedType id="SimpleCommandEnd">
+		<Terminator>;</Terminator>
+	</TerminatedType>
+
+	<Include file="Package.xml"/>
+	<Include file="Import.xml"/>
+
+	<ComplexType id="JavaFile" processor="aggregating">
+		<StartNode id="Java1" type="Package">
+			<NextNode ref="Java2"/>
+			<NextNode ref="Separator1"/>
+		</StartNode>
+		
+		<StartNode id="Java2" type="Import">
+			<NextNode ref="Java2"/>
+			<NextNode ref="Separator1"/>
+		</StartNode>
+		
+		<Node id="Separator1" type="Separator">
+		</Node>
+	</ComplexType>
+
+</Language>

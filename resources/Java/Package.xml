@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Language xmlns="http://eaSTars.com/SoCoAn/lang">
-	<ComplexType id="package" processor="simplecommand">
-	
-		<StartNode id="separator_1" type="separator">
-			<NextNode ref="package_node"/>
+	<ComplexType id="Package" processor="simplecommand">
+		<StartNode id="Separator1" type="Separator">
+			<NextNode ref="PackageNode"/>
 		</StartNode>
 		
-		<StartNode id="package_node" type="keyword_package">
-			<NextNode ref="separator_2"/>
+		<StartNode id="PackageNode" type="keyword_package">
+			<NextNode ref="Separator2"/>
 		</StartNode>
 		
-		<Node id="separator_2" type="separator">
-			<NextNode ref="package_end"/>
+		<Node id="Separator2" type="Separator">
+			<NextNode ref="PackageEnd"/>
 		</Node>
 		
-		<Node id="package_end" type="simplecommand_end">
+		<Node id="PackageEnd" type="SimpleCommandEnd">
 		</Node>
 	</ComplexType>
 </Language>

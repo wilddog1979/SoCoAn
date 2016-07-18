@@ -18,18 +18,20 @@ import org.junit.Test;
 
 public class SeparatorTypeTest extends AbstractJavaLangTest {
 
+	private static final String ELEMENT_NAME = "Separator";
+	
 	@Test
 	public void testRecognizeSpace() {
 		AbstractTypeDeclaration comments = null;
 		Context context = null;
 		try {
-			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			comments = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("comments type should be found", comments);
+		assertNotNull("element type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" leftover".getBytes()));
 		
@@ -45,7 +47,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		assertTrue("Fragment should be an instance of SeparatorFragment", fragment instanceof SeparatorFragment);
 		SeparatorFragment separatorfragment = (SeparatorFragment) fragment;
-		assertEquals("ID of the fragment should match", "separator", separatorfragment.getId());
+		assertEquals("ID of the fragment should match", "Separator", separatorfragment.getId());
 		testFragment(separatorfragment, " ", " ");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
@@ -61,13 +63,13 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		AbstractTypeDeclaration comments = null;
 		Context context = null;
 		try {
-			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			comments = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("comments type should be found", comments);
+		assertNotNull("element type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("\tleftover".getBytes()));
 		
@@ -83,7 +85,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		assertTrue("Fragment should be an instance of SeparatorFragment", fragment instanceof SeparatorFragment);
 		SeparatorFragment separatorfragment = (SeparatorFragment) fragment;
-		assertEquals("ID of the fragment should match", "separator", separatorfragment.getId());
+		assertEquals("ID of the fragment should match", "Separator", separatorfragment.getId());
 		testFragment(separatorfragment, "\t", "\t");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
@@ -99,13 +101,13 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		AbstractTypeDeclaration comments = null;
 		Context context = null;
 		try {
-			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			comments = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("comments type should be found", comments);
+		assertNotNull("element type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("\nleftover".getBytes()));
 		
@@ -121,7 +123,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		assertTrue("Fragment should be an instance of SeparatorFragment", fragment instanceof SeparatorFragment);
 		SeparatorFragment separatorfragment = (SeparatorFragment) fragment;
-		assertEquals("ID of the fragment should match", "separator", separatorfragment.getId());
+		assertEquals("ID of the fragment should match", "Separator", separatorfragment.getId());
 		testFragment(separatorfragment, "\n", "\n");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
@@ -137,13 +139,13 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		AbstractTypeDeclaration comments = null;
 		Context context = null;
 		try {
-			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			comments = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("comments type should be found", comments);
+		assertNotNull("element type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("leftover".getBytes()));
 		
@@ -169,13 +171,13 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		AbstractTypeDeclaration comments = null;
 		Context context = null;
 		try {
-			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			comments = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("comments type should be found", comments);
+		assertNotNull("element type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" \t\nleftover".getBytes()));
 		
@@ -191,7 +193,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		assertTrue("Fragment should be an instance of SeparatorFragment", fragment instanceof SeparatorFragment);
 		SeparatorFragment separatorfragment = (SeparatorFragment) fragment;
-		assertEquals("ID of the fragment should match", "separator", separatorfragment.getId());
+		assertEquals("ID of the fragment should match", "Separator", separatorfragment.getId());
 		testFragment(separatorfragment, " \t\n", " \t\n");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
@@ -207,13 +209,13 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		AbstractTypeDeclaration comments = null;
 		Context context = null;
 		try {
-			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			comments = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("comments type should be found", comments);
+		assertNotNull("element type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" \t//linecomment\n\nleftover".getBytes()));
 		
@@ -229,7 +231,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		assertTrue("Fragment should be an instance of SeparatorFragment", fragment instanceof SeparatorFragment);
 		SeparatorFragment separatorfragment = (SeparatorFragment) fragment;
-		assertEquals("ID of the fragment should match", "separator", separatorfragment.getId());
+		assertEquals("ID of the fragment should match", "Separator", separatorfragment.getId());
 		testFragment(separatorfragment, " \t//linecomment\n\n", " \t<span class=\"linecomment\">//linecomment\n</span>\n");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
@@ -245,13 +247,13 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		AbstractTypeDeclaration comments = null;
 		Context context = null;
 		try {
-			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			comments = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("comments type should be found", comments);
+		assertNotNull("element type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" \t/*blockcomment*/\nleftover".getBytes()));
 		
@@ -267,7 +269,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		assertTrue("Fragment should be an instance of SeparatorFragment", fragment instanceof SeparatorFragment);
 		SeparatorFragment separatorfragment = (SeparatorFragment) fragment;
-		assertEquals("ID of the fragment should match", "separator", separatorfragment.getId());
+		assertEquals("ID of the fragment should match", "Separator", separatorfragment.getId());
 		testFragment(separatorfragment, " \t/*blockcomment*/\n", " \t<span class=\"blockcomment\">/*blockcomment*/</span>\n");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
@@ -283,13 +285,13 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		AbstractTypeDeclaration comments = null;
 		Context context = null;
 		try {
-			comments = JavaTests.getJavaLang().getTypeDeclaration("separator");
+			comments = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("comments type should be found", comments);
+		assertNotNull("element type should be found", comments);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" \t/**javadoc*/\nleftover".getBytes()));
 		
@@ -305,7 +307,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		assertTrue("Fragment should be an instance of SeparatorFragment", fragment instanceof SeparatorFragment);
 		SeparatorFragment separatorfragment = (SeparatorFragment) fragment;
-		assertEquals("ID of the fragment should match", "separator", separatorfragment.getId());
+		assertEquals("ID of the fragment should match", "Separator", separatorfragment.getId());
 		testFragment(separatorfragment, " \t/**javadoc*/\n", " \t<span class=\"javadoc\">/**javadoc*/</span>\n");
 		CommentFragment commentFragment = separatorfragment.getJavadoc();
 		assertNotNull("SeparatorFragment should contain a javadoc elements", commentFragment);

@@ -18,7 +18,12 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	CommentTypeTest.class,
-	SeparatorTypeTest.class
+	SeparatorTypeTest.class,
+	IdentifierTest.class,
+	DecimalIntegerLiteralTest.class,
+	HexIntegerLiteralTest.class,
+	OctalIntegerLiteralTest.class,
+	BinaryIntegerLiteralTest.class
 })
 public class JavaTests {
 

@@ -17,12 +17,14 @@ import org.junit.Test;
 
 public class CommentTypeTest extends AbstractJavaLangTest{
 
+	private static final String ELEMENT_NAME = "Comment";
+	
 	@Test
-	public void testRecognizeLineComment() {
+	public void testRecognizeEndOfLineComment() {
 		AbstractTypeDeclaration comments = null;
 		Context context = null;
 		try {
-			comments = JavaTests.getJavaLang().getTypeDeclaration("comments");
+			comments = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
@@ -44,10 +46,10 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 		Fragment fragment = context.pop();
 		assertTrue("Fragment should be an instance of CommentFragment", fragment instanceof CommentFragment);
 		CommentFragment commentfragment = (CommentFragment) fragment;
-		assertEquals("ID of the fragment should match", "comments", commentfragment.getId());
+		assertEquals("ID of the fragment should match", "Comment", commentfragment.getId());
 		testCommentFragment(
 				commentfragment,
-				CommentFragment.Type.LineComment,
+				CommentFragment.Type.EndOfLineComment,
 				"//some comment\n",
 				"<span class=\"linecomment\">//some comment\n</span>",
 				"some comment"
@@ -61,11 +63,11 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 	}
 
 	@Test
-	public void testRecognizeBlockComment() {
+	public void testRecognizeTraditionalComment() {
 		AbstractTypeDeclaration comments = null;
 		Context context = null;
 		try {
-			comments = JavaTests.getJavaLang().getTypeDeclaration("comments");
+			comments = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
@@ -87,10 +89,10 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 		Fragment fragment = context.pop();
 		assertTrue("Fragment should be an instance of CommentFragment", fragment instanceof CommentFragment);
 		CommentFragment commentfragment = (CommentFragment) fragment;
-		assertEquals("ID of the fragment should match", "comments", commentfragment.getId());
+		assertEquals("ID of the fragment should match", "Comment", commentfragment.getId());
 		testCommentFragment(
 				commentfragment,
-				CommentFragment.Type.BlockComment,
+				CommentFragment.Type.TraditionalComment,
 				"/*\n\tsome\n\tcomment\n*/",
 				"<span class=\"blockcomment\">/*\n\tsome\n\tcomment\n*/</span>",
 				"\n\tsome\n\tcomment\n"
@@ -108,7 +110,7 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 		AbstractTypeDeclaration comments = null;
 		Context context = null;
 		try {
-			comments = JavaTests.getJavaLang().getTypeDeclaration("comments");
+			comments = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
@@ -130,7 +132,7 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 		Fragment fragment = context.pop();
 		assertTrue("Fragment should be an instance of CommentFragment", fragment instanceof CommentFragment);
 		CommentFragment commentfragment = (CommentFragment) fragment;
-		assertEquals("ID of the fragment should match", "comments", commentfragment.getId());
+		assertEquals("ID of the fragment should match", "Comment", commentfragment.getId());
 		testCommentFragment(
 				commentfragment,
 				CommentFragment.Type.JavaDoc,

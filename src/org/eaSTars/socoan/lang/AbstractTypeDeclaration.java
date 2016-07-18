@@ -13,7 +13,8 @@ import org.eaSTars.socoan.SourcecodeInputStream;
 @XmlSeeAlso({
 	ComplexType.class,
 	LiteralType.class,
-	TerminatedType.class
+	TerminatedType.class,
+	CustomType.class
 })
 public abstract class AbstractTypeDeclaration extends AbstractBaseElement {
 

@@ -6,11 +6,11 @@ import org.eaSTars.socoan.lang.LangProcessors;
 
 public class JavaBaseProcessors extends LangProcessors {
 
-	private static final String ID_JAVADOC = "javadoc";
+	private static final String ID_JAVADOC = "JavaDoc";
 	
-	private static final String ID_LINECOMMENT = "linecomment";
+	private static final String ID_ENDOFLINECOMMENT = "EndOfLineComment";
 	
-	private static final String ID_BLOCKCOMMENT = "blockcomment";
+	private static final String ID_TRADITIONALCOMMENT = "TraditionalComment";
 	
 	public Fragment processComment(Context subcontext) {
 		CommentFragment fragment = new CommentFragment(subcontext.getFormatProvider());
@@ -19,10 +19,10 @@ public class JavaBaseProcessors extends LangProcessors {
 		Fragment firstfragment = subcontext.get(0);
 		if (ID_JAVADOC.equals(firstfragment.getId())) {
 			fragment.setType(CommentFragment.Type.JavaDoc);
-		} else if (ID_LINECOMMENT.equals(firstfragment.getId())) {
-			fragment.setType(CommentFragment.Type.LineComment);
-		} else if (ID_BLOCKCOMMENT.equals(firstfragment.getId())) {
-			fragment.setType(CommentFragment.Type.BlockComment);
+		} else if (ID_ENDOFLINECOMMENT.equals(firstfragment.getId())) {
+			fragment.setType(CommentFragment.Type.EndOfLineComment);
+		} else if (ID_TRADITIONALCOMMENT.equals(firstfragment.getId())) {
+			fragment.setType(CommentFragment.Type.TraditionalComment);
 		}
 		
 		subcontext.get(1).getFormattedFragment().ifPresent(s -> fragment.setComment(s));

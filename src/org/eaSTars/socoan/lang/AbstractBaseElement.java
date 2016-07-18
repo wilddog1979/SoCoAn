@@ -16,7 +16,9 @@ public abstract class AbstractBaseElement {
 
 	private static final String[][] REPLACE_RULES = {
 					{"(\\\\n)", "\n"},
-					{"(\\\\t)", "\t"}
+					{"(\\\\t)", "\t"},
+					{"(\\\\r)", "\r"},
+					{"(\\\\f)", "\f"}
 			};
 	private boolean processed = false;
 	

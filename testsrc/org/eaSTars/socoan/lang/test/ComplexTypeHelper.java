@@ -24,7 +24,6 @@ public class ComplexTypeHelper extends ComplexType {
 		public Function<Context, Fragment> createProcessor(String id) {
 			return function;
 		}
-		
 	}
 	
 	public ComplexTypeHelper(Function<Context, Fragment> function) {
