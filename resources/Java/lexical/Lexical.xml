@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Language 
+		xmlns="http://eaSTars.com/SoCoAn/lang">
+	<Include file="Keywords.xml"/>
+
+	<LiteralType id="Digit0" literal="0"/>
+	<LiteralType id="Digit1" literal="1"/>
+	<LiteralType id="Digit2" literal="2"/>
+	<LiteralType id="Digit3" literal="3"/>
+	<LiteralType id="Digit4" literal="4"/>
+	<LiteralType id="Digit5" literal="5"/>
+	<LiteralType id="Digit6" literal="6"/>
+	<LiteralType id="Digit7" literal="7"/>
+	<LiteralType id="Digit8" literal="8"/>
+	<LiteralType id="Digit9" literal="9"/>
+	<LiteralType id="Digita" literal="a"/>
+	<LiteralType id="Digitb" literal="b"/>
+	<LiteralType id="Digitc" literal="c"/>
+	<LiteralType id="Digitd" literal="d"/>
+	<LiteralType id="Digite" literal="e"/>
+	<LiteralType id="Digitf" literal="f"/>
+	<LiteralType id="DigitA" literal="A"/>
+	<LiteralType id="DigitB" literal="B"/>
+	<LiteralType id="DigitC" literal="C"/>
+	<LiteralType id="DigitD" literal="D"/>
+	<LiteralType id="DigitE" literal="E"/>
+	<LiteralType id="DigitF" literal="F"/>
+	
+	<ComplexType id="BinaryDigit" processor="aggregating">
+		<StartNode id="Digit0" type="Digit0"/>
+		<StartNode id="Digit1" type="Digit1"/>
+	</ComplexType>
+	
+	<ComplexType id="ZeroToThree" processor="aggregating">
+		<StartNode id="Digit0" type="Digit0"/>
+		<StartNode id="Digit1" type="Digit1"/>
+		<StartNode id="Digit2" type="Digit2"/>
+		<StartNode id="Digit3" type="Digit3"/>
+	</ComplexType>
+	
+	<ComplexType id="OctalDigit" processor="aggregating">
+		<StartNode id="Digit0" type="Digit0"/>
+		<StartNode id="Digit1" type="Digit1"/>
+		<StartNode id="Digit2" type="Digit2"/>
+		<StartNode id="Digit3" type="Digit3"/>
+		<StartNode id="Digit4" type="Digit4"/>
+		<StartNode id="Digit5" type="Digit5"/>
+		<StartNode id="Digit6" type="Digit6"/>
+		<StartNode id="Digit7" type="Digit7"/>
+	</ComplexType>
+	
+	<ComplexType id="NonZeroDigit" processor="aggregating">
+		<StartNode id="Digit1" type="Digit1"/>
+		<StartNode id="Digit2" type="Digit2"/>
+		<StartNode id="Digit3" type="Digit3"/>
+		<StartNode id="Digit4" type="Digit4"/>
+		<StartNode id="Digit5" type="Digit5"/>
+		<StartNode id="Digit6" type="Digit6"/>
+		<StartNode id="Digit7" type="Digit7"/>
+		<StartNode id="Digit8" type="Digit8"/>
+		<StartNode id="Digit9" type="Digit9"/>
+	</ComplexType>
+	
+	<ComplexType id="Digit" processor="aggregating">
+		<StartNode id="Digit0" type="Digit0"/>
+		<StartNode id="NonZeroDigit" type="NonZeroDigit"/>
+	</ComplexType>
+	
+	<ComplexType id="HexDigit" processor="aggregating">
+		<StartNode id="Digit0" type="Digit0"/>
+		<StartNode id="Digit1" type="Digit1"/>
+		<StartNode id="Digit2" type="Digit2"/>
+		<StartNode id="Digit3" type="Digit3"/>
+		<StartNode id="Digit4" type="Digit4"/>
+		<StartNode id="Digit5" type="Digit5"/>
+		<StartNode id="Digit6" type="Digit6"/>
+		<StartNode id="Digit7" type="Digit7"/>
+		<StartNode id="Digit8" type="Digit8"/>
+		<StartNode id="Digit9" type="Digit9"/>
+		<StartNode id="Digita" type="Digita"/>
+		<StartNode id="Digitb" type="Digitb"/>
+		<StartNode id="Digitc" type="Digitc"/>
+		<StartNode id="Digitd" type="Digitd"/>
+		<StartNode id="Digite" type="Digite"/>
+		<StartNode id="Digitf" type="Digitf"/>
+		<StartNode id="DigitA" type="DigitA"/>
+		<StartNode id="DigitB" type="DigitB"/>
+		<StartNode id="DigitC" type="DigitC"/>
+		<StartNode id="DigitD" type="DigitD"/>
+		<StartNode id="DigitE" type="DigitE"/>
+		<StartNode id="DigitF" type="DigitF"/>
+	</ComplexType>
+
+	<LiteralType id="SP" literal=" "/>
+	<LiteralType id="BS" literal="\b"/>
+	<LiteralType id="HT" literal="\t"/>
+	<LiteralType id="LF" literal="\n"/>
+	<LiteralType id="FF" literal="\f"/>
+	<LiteralType id="CR" literal="\r"/>
+	
+	<LiteralType id="DoubleQuote" literal="&quot;"/>
+	<LiteralType id="SingleQuote" literal="'"/>
+	<LiteralType id="Backslash" literal="\"/>
+
+	<!-- 3.3 Unicode Escapes -->
+	
+	<LiteralType id="UnicodeEscapeu" literal="u"/>
+
+	<ComplexType id="UnicodeMarker" processor="aggregating" multiple="true">
+		<StartNode id="UnicodeEscapeu" type="UnicodeEscapeu"/>
+	</ComplexType>
+
+	<ComplexType id="UnicodeEscape" processor="aggregating">
+		<StartNode id="Backslash" type="Backslash">
+			<NextNode ref="UnicodeMarker"/>
+		</StartNode>
+		<Node id="UnicodeMarker" type="UnicodeMarker">	
+			<NextNode ref="HexDigit1"/>
+		</Node>
+		<Node id="HexDigit1" type="HexDigit">
+			<NextNode ref="HexDigit2"/>
+		</Node>
+		<Node id="HexDigit2" type="HexDigit">
+			<NextNode ref="HexDigit3"/>
+		</Node>
+		<Node id="HexDigit3" type="HexDigit">
+			<NextNode ref="HexDigit4"/>
+		</Node>
+		<Node id="HexDigit4" type="HexDigit"/>
+	</ComplexType>
+	
+	<CustomType id="RawInputCharacter" recognizer="RawInputCharacter"/>
+
+	<ComplexType id="UnicodeInputCharacter" processor="aggregating">
+		<StartNode id="UnicodeEscape" type="UnicodeEscape"/>
+		<StartNode id="RawInputCharacter" type="RawInputCharacter"/>
+	</ComplexType>
+
+	<!-- 3.4 Line Terminators -->
+
+	<ComplexType id="LineTerminator" processor="aggregating">
+		<StartNode id="LF" type="LF"/>
+		<StartNode id="CR1" type="CR">
+			<NextNode ref="LF"/>
+		</StartNode>
+		<StartNode id="CR2" type="CR"/>
+	</ComplexType>
+
+	<ComplexType id="InputCharacter" processor="aggregating" checker="InputCharacterCheck">
+		<StartNode id="UnicodeInputCharacter" type="UnicodeInputCharacter"/>
+	</ComplexType>
+
+	<!-- 3.6 White Space -->
+
+	<ComplexType id="WhiteSpace" multiple="true" processor="aggregating">
+		<StartNode id="SP" type="SP"/>
+		<StartNode id="HT" type="HT"/>
+		<StartNode id="FF" type="FF"/>
+		<StartNode id="LineTerminator" type="LineTerminator"/>
+	</ComplexType>
+	
+	<!--  Comments -->
+	
+	<LiteralType id="JavaDocStart" literal="/**"/>
+	<LiteralType id="TraditionalCommentStart" literal="/*"/>
+	
+	<TerminatedType id="TraditionalCommentContent">
+		<Terminator>*/</Terminator>
+	</TerminatedType>
+	
+	<LiteralType id="EndOfLineCommentStart" literal="//"/>
+	
+	<TerminatedType id="EndOfLineCommentContent">
+		<Terminator>\r\n</Terminator>
+		<Terminator>\n</Terminator>
+	</TerminatedType>
+	
+	<ComplexType id="Comment" processor="comment">
+		<StartNode id="JavaDoc" type="JavaDocStart">
+			<NextNode ref="TraditionalCommentContent"/>
+		</StartNode>
+		<Node id="TraditionalCommentContent" type="TraditionalCommentContent"/>
+		
+		<StartNode id="TraditionalComment" type="TraditionalCommentStart">
+			<NextNode ref="TraditionalCommentContent"/>
+		</StartNode>
+		
+		<StartNode id="EndOfLineComment" type="EndOfLineCommentStart">
+			<NextNode ref="EndOfLineCommentContent"/>
+		</StartNode>
+		<Node id="EndOfLineCommentContent" type="EndOfLineCommentContent"/>
+	</ComplexType>
+	
+	<ComplexType id="Separator" processor="separator" multiple="true">
+		<StartNode id="WhiteSpace" type="WhiteSpace"/>
+		<StartNode id="Comment" type="Comment"/>
+	</ComplexType>
+	
+	<!-- 3.8 Identifiers -->
+	
+	<CustomType id="JavaLetter" recognizer="JavaLetter"/>
+	
+	<CustomType id="JavaLetterOrDigit" recognizer="JavaLetterOrDigit"/>
+	
+	<ComplexType id="IdentifierCharsRest" processor="aggregating" multiple="true">
+		<StartNode id="JavaLetterOrDigit" type="JavaLetterOrDigit"/>
+	</ComplexType>
+	
+	<ComplexType id="Identifier" processor="aggregating" checker="IdentifierCheck">
+		<StartNode id="JavaLetter1" type="JavaLetter">
+			<NextNode ref="IdentifierCharsRest"/>
+		</StartNode>
+		<Node id="IdentifierCharsRest" type="IdentifierCharsRest"/>
+		<StartNode id="JavaLetter2" type="JavaLetter">
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.10 Literals -->
+	
+	<!-- 3.10.1 Integer Literals -->
+	
+	<LiteralType id="Suffixl" literal="l"/>
+	<LiteralType id="SuffixL" literal="L"/>
+	<LiteralType id="Underscore" literal="_"/>
+	<LiteralType id="Prefix0x" literal="0x"/>
+	<LiteralType id="Prefix0X" literal="0X"/>
+	<LiteralType id="Prefix0b" literal="0b"/>
+	<LiteralType id="Prefix0B" literal="0B"/>
+	
+	<Include file="IntegerLiterals.xml"/>
+	
+	<!-- 3.10.2 Floating-Point Literals -->
+	
+	<LiteralType id="Exponente" literal="e"/>
+	<LiteralType id="ExponentE" literal="E"/>
+	<LiteralType id="Sign+" literal="+"/>
+	<LiteralType id="Sign-" literal="-"/>
+	<LiteralType id="FloatTypef" literal="f"/>
+	<LiteralType id="FloatTypeF" literal="F"/>
+	<LiteralType id="FloatTyped" literal="d"/>
+	<LiteralType id="FloatTypeD" literal="D"/>
+	<LiteralType id="DecimalSeparator" literal="."/>
+	<LiteralType id="BinaryExpp" literal="p"/>
+	<LiteralType id="BinaryExpP" literal="P"/>
+	
+	<Include file="FloatingPointLiterals.xml"/>
+	
+	<!-- 3.10.3 Boolean Literals -->
+	
+	<LiteralType id="True" literal="true"/>
+	
+	<LiteralType id="False" literal="false"/>
+	
+	<ComplexType id="BooleanLiteral" processor="aggregating">
+		<StartNode id="True" type="True"/>
+		<StartNode id="False" type="False"/>
+	</ComplexType>
+	
+	<!-- 3.10.6 Escape Sequences for Character and String Literals -->
+	
+	<LiteralType id="Escapeb" literal="b"/>
+	<LiteralType id="Escapet" literal="t"/>
+	<LiteralType id="Escapen" literal="n"/>
+	<LiteralType id="Escapef" literal="f"/>
+	<LiteralType id="Escaper" literal="r"/>
+	
+	<ComplexType id="OctalEscape" processor="aggregating">
+		<StartNode id="Backslash1" type="Backslash">
+			<NextNode ref="ZeroToThree"/>
+		</StartNode>
+		<StartNode id="Backslash2" type="Backslash">
+			<NextNode ref="OctalDigit1"/>
+		</StartNode>
+		<StartNode id="Backslash3" type="Backslash">
+			<NextNode ref="OctalDigit2"/>
+		</StartNode>
+		<Node id="ZeroToThree" type="ZeroToThree">
+			<NextNode ref="OctalDigit1"/>
+		</Node>
+		<Node id="OctalDigit1" type="OctalDigit">
+			<NextNode ref="OctalDigit2"/>
+		</Node>
+		<Node id="OctalDigit2" type="OctalDigit"/>
+	</ComplexType>
+	
+	<ComplexType id="EscapeSequence" processor="aggregating">
+		<StartNode id="BS" type="Backslash">
+			<NextNode ref="Escapeb"/>
+		</StartNode>
+		<Node id="Escapeb" type="Escapeb"/>
+		<StartNode id="HT" type="Backslash">
+			<NextNode ref="Escapet"/>
+		</StartNode>
+		<Node id="Escapet" type="Escapet"/>
+		<StartNode id="LF" type="Backslash">
+			<NextNode ref="Escapen"/>
+		</StartNode>
+		<Node id="Escapen" type="Escapen"/>
+		<StartNode id="FF" type="Backslash">
+			<NextNode ref="Escapef"/>
+		</StartNode>
+		<Node id="Escapef" type="Escapef"/>
+		<StartNode id="CR" type="Backslash">
+			<NextNode ref="Escaper"/>
+		</StartNode>
+		<Node id="Escaper" type="Escaper"/>
+		<StartNode id="DoubleQuote" type="Backslash">
+			<NextNode ref="EscapeDoubleQuote"/>
+		</StartNode>
+		<Node id="EscapeDoubleQuote" type="DoubleQuote"/>
+		<StartNode id="SingleQuote" type="Backslash">
+			<NextNode ref="EscapeSingleQuote"/>
+		</StartNode>
+		<Node id="EscapeSingleQuote" type="SingleQuote"/>
+		<StartNode id="Backslash" type="Backslash">
+			<NextNode ref="EscapeBackslash"/>
+		</StartNode>
+		<Node id="EscapeBackslash" type="Backslash"/>
+		<StartNode id="OctalEscape" type="OctalEscape"/>
+	</ComplexType>
+	
+	<!-- 3.10.4 Character Literals -->
+	
+	<ComplexType id="SingleCharacter" processor="aggregating" checker="SingleCharacterCheck">
+		<StartNode id="InputCharacter" type="InputCharacter"/>
+	</ComplexType>
+	
+	<ComplexType id="CharacterLiteral" processor="aggregating">
+		<StartNode id="SingleQuote1" type="SingleQuote">
+			<NextNode ref="SingleCharacter"/>
+		</StartNode>
+		<Node id="SingleCharacter" type="SingleCharacter">
+			<NextNode ref="SingleQuote2"/>
+		</Node>
+		<Node id="SingleQuote2" type="SingleQuote"/>
+		
+		<StartNode id="SingleQuote3" type="SingleQuote">
+			<NextNode ref="EscapeSequence"/>
+		</StartNode>
+		<Node id="EscapeSequence" type="EscapeSequence">
+			<NextNode ref="SingleQuote2"/>
+		</Node>
+	</ComplexType>
+	
+	<!-- 3.10.5 String Literals -->
+	
+	<ComplexType id="StringCharacters" processor="aggregating" checker="StringCharactersCheck">
+		<StartNode id="InputCharacter" type="InputCharacter"/>
+	</ComplexType>
+	
+	<ComplexType id="StringCharacter" processor="aggregating" multiple="true">
+		<StartNode id="StringCharacters" type="StringCharacters"/>
+		<StartNode id="EscapeSequence" type="EscapeSequence"/>
+	</ComplexType>
+	
+	<ComplexType id="StringLiteral" processor="aggregating">
+		<StartNode id="DoubleQuote1" type="DoubleQuote">
+			<NextNode ref="StringCharacter"/>
+			<NextNode ref="DoubleQuote2"/>
+		</StartNode>
+		<Node id="StringCharacter" type="StringCharacter">
+			<NextNode ref="DoubleQuote2"/>
+		</Node>
+		<Node id="DoubleQuote2" type="DoubleQuote"/>
+	</ComplexType>
+	
+	<!-- 3.10.7 The Null Literal -->
+	
+	<LiteralType id="NullLiteral" literal="null"/>
+	
+	<!-- 3.11 Separators -->
+	
+	<LiteralType id="bracket_open" literal="("/>
+	<LiteralType id="bracket_close" literal=")"/>
+	<LiteralType id="curlybracket_open" literal="{"/>
+	<LiteralType id="curlybracket_close" literal="}"/>
+	<LiteralType id="squarebracket_open" literal="["/>
+	<LiteralType id="squarebracket_close" literal="]"/>
+	<LiteralType id="semicolon" literal=";"/>
+	<LiteralType id="comma" literal=","/>
+	<LiteralType id="dot" literal="."/>
+	<LiteralType id="tripledot" literal="..."/>
+	<LiteralType id="at" literal="@"/>
+	<LiteralType id="doubecolon" literal="::"/>
+	
+	<ComplexType id="Separator" processor="aggregating">
+		<StartNode id="bracket_open" type="bracket_open"/>
+		<StartNode id="bracket_close" type="bracket_close"/>
+		<StartNode id="curlybracket_open" type="curlybracket_open"/>
+		<StartNode id="curlybracket_close" type="curlybracket_close"/>
+		<StartNode id="squarebracket_open" type="squarebracket_open"/>
+		<StartNode id="squarebracket_close" type="squarebracket_close"/>
+		<StartNode id="semicolon" type="semicolon"/>
+		<StartNode id="comma" type="comma"/>
+		<StartNode id="dot" type="dot"/>
+		<StartNode id="tripledot" type="tripledot"/>
+		<StartNode id="at" type="at"/>
+		<StartNode id="doubecolon" type="doubecolon"/>
+	</ComplexType>
+	
+	<!-- 3.12 Operators -->
+	
+	<LiteralType id="equal" literal="="/>
+	<LiteralType id="greaterthan" literal="&gt;"/>
+	<LiteralType id="lowerthan" literal="&lt;"/>
+	<LiteralType id="exclamationmark" literal="!"/>
+	<LiteralType id="tilde" literal="~"/>
+	<LiteralType id="questionmark" literal="?"/>
+	<LiteralType id="colon" literal=":"/>
+	<LiteralType id="arrowtoken" literal="-&gt;"/>
+	
+	<LiteralType id="doubleequal" literal="=="/>
+	<LiteralType id="greaterthanorequal" literal="&gt;="/>
+	<LiteralType id="lowerthanorequal" literal="&lt;="/>
+	<LiteralType id="notequal" literal="!="/>
+	<LiteralType id="doubleand" literal="&amp;&amp;"/>
+	<LiteralType id="doubleor" literal="||"/>
+	<LiteralType id="doubleplus" literal="++"/>
+	<LiteralType id="doubleminus" literal="--"/>
+	
+	<LiteralType id="plus" literal="+"/>
+	<LiteralType id="minus" literal="-"/>
+	<LiteralType id="multiply" literal="*"/>
+	<LiteralType id="divide" literal="/"/>
+	<LiteralType id="and" literal="&amp;"/>
+	<LiteralType id="or" literal="|"/>
+	<LiteralType id="xor" literal="^"/>
+	<LiteralType id="modulo" literal="%"/>
+	<LiteralType id="shiftleft" literal="&lt;&lt;"/>
+	<LiteralType id="shiftright" literal="&gt;&gt;"/>
+	<LiteralType id="zerofillshiftright" literal="&gt;&gt;&gt;"/>
+	
+	<LiteralType id="plusequal" literal="+="/>
+	<LiteralType id="minusequal" literal="-="/>
+	<LiteralType id="multiplyequal" literal="*="/>
+	<LiteralType id="divideequal" literal="/="/>
+	<LiteralType id="andequal" literal="&amp;="/>
+	<LiteralType id="orequal" literal="|="/>
+	<LiteralType id="xorequal" literal="^="/>
+	<LiteralType id="moduloequal" literal="%="/>
+	<LiteralType id="shiftleftequal" literal="&lt;&lt;="/>
+	<LiteralType id="shiftrightequal" literal="&gt;&gt;="/>
+	<LiteralType id="zerofillshiftrightequal" literal="&gt;&gt;&gt;="/>
+	
+	<ComplexType id="Operator" processor="aggregating">
+		<StartNode id="equal" type="equal"/>
+		<StartNode id="greaterthan" type="greaterthan"/>
+		<StartNode id="lowerthan" type="lowerthan"/>
+		<StartNode id="exclamationmark" type="exclamationmark"/>
+		<StartNode id="tilde" type="tilde"/>
+		<StartNode id="questionmark" type="questionmark"/>
+		<StartNode id="colon" type="colon"/>
+		<StartNode id="arrowtoken" type="arrowtoken"/>
+		
+		<StartNode id="doubleequal" type="doubleequal"/>
+		<StartNode id="greaterthanorequal" type="greaterthanorequal"/>
+		<StartNode id="lowerthanorequal" type="lowerthanorequal"/>
+		<StartNode id="notequal" type="notequal"/>
+		<StartNode id="doubleand" type="doubleand"/>
+		<StartNode id="doubleor" type="doubleor"/>
+		<StartNode id="doubleplus" type="doubleplus"/>
+		<StartNode id="doubleminus" type="doubleminus"/>
+		
+		<StartNode id="plus" type="plus"/>
+		<StartNode id="minus" type="minus"/>
+		<StartNode id="multiply" type="multiply"/>
+		<StartNode id="divide" type="divide"/>
+		<StartNode id="and" type="and"/>
+		<StartNode id="or" type="or"/>
+		<StartNode id="xor" type="xor"/>
+		<StartNode id="modulo" type="modulo"/>
+		<StartNode id="shiftleft" type="shiftleft"/>
+		<StartNode id="shiftright" type="shiftright"/>
+		<StartNode id="zerofillshiftright" type="zerofillshiftright"/>
+		
+		<StartNode id="plusequal" type="plusequal"/>
+		<StartNode id="minusequal" type="minusequal"/>
+		<StartNode id="multiplyequal" type="multiplyequal"/>
+		<StartNode id="divideequal" type="divideequal"/>
+		<StartNode id="andequal" type="andequal"/>
+		<StartNode id="orequal" type="orequal"/>
+		<StartNode id="xorequal" type="xorequal"/>
+		<StartNode id="moduloequal" type="moduloequal"/>
+		<StartNode id="shiftleftequal" type="shiftleftequal"/>
+		<StartNode id="shiftrightequal" type="shiftrightequal"/>
+		<StartNode id="zerofillshiftrightequal" type="zerofillshiftrightequal"/>
+	</ComplexType>
+</Language>

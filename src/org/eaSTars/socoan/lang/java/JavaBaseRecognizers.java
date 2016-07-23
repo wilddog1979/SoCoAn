@@ -10,6 +10,20 @@ import org.eaSTars.socoan.lang.WrappedIOException;
 
 public class JavaBaseRecognizers extends LangRecognizers {
 	
+	public boolean recognizeRawInputCharacter(Context context, SourcecodeInputStream sis) {
+		int c = 0;
+		try {
+			c = sis.read();
+		} catch (IOException e) {
+			throw new WrappedIOException(e);
+		}
+		Fragment fragment = new Fragment(context.getFormatProvider());
+		fragment.setFragment(""+(char)c);
+		fragment.setFormattedFragment(""+(char)c);
+		context.push(fragment);
+		return true;
+	}
+	
 	public boolean recognizeJavaLetter(Context context, SourcecodeInputStream sis) {
 		int c = 0;
 		try {

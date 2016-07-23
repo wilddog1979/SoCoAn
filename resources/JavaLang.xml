@@ -4,7 +4,7 @@
 		languageprocessorfactory="org.eaSTars.socoan.lang.java.JavaProcessorFactory">
 	<Include file="Java/JavaFormats.xml"/>
 	
-	<Include file="Java/lexical/structures.xml"/>
+	<Include file="Java/lexical/Lexical.xml"/>
 	
 	<Include file="Java/JavaFile.xml"/>
 </Language>

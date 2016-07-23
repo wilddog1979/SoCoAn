@@ -35,14 +35,23 @@ public class JavaProcessorFactory extends ProcessorFactory {
 		return result == null ? super.createProcessor(id) : result;
 	}
 
+	private static final String INPUTCHARACTER_CHECKER = "InputCharacterCheck";
+	
 	private static final String IDENTIFIER_CHECKER = "IdentifierCheck";
+	
+	private static final String SINGLECHARACTER_CHECKER = "SingleCharacterCheck";
+	
+	private static final String STRINGCHARACTERs_CHECKER = "StringCharactersCheck";
 	
 	private static final Map<String, RecognizingFunction<Language, Fragment, Boolean>> CHECKERS_MAP =
 			new HashMap<String, RecognizingFunction<Language, Fragment, Boolean>>() {
 				private static final long serialVersionUID = 5082635489425605921L;
 				{
 					JavaBaseCheckers checkers = new JavaBaseCheckers();
+					put(INPUTCHARACTER_CHECKER, (language, fragment) -> checkers.checkInputCharacter(language, fragment));
 					put(IDENTIFIER_CHECKER, (language, fragment) -> checkers.checkIdentifierChars(language, fragment));
+					put(SINGLECHARACTER_CHECKER, (language, fragment) -> checkers.checkSingleCharacter(language, fragment));
+					put(STRINGCHARACTERs_CHECKER, (language, fragment) -> checkers.checkStringCharacters(language, fragment));
 				}
 	};
 	
@@ -51,6 +60,8 @@ public class JavaProcessorFactory extends ProcessorFactory {
 		RecognizingFunction<Language, Fragment, Boolean> result = CHECKERS_MAP.get(id);
 		return result == null ? super.createChecker(id) : result;
 	}
+	
+	private static final String RAWINPUTCHARACTER_RECOGNIZER = "RawInputCharacter";
 	
 	private static final String JAVALETTER_RECOGNIZER = "JavaLetter";
 	
@@ -61,6 +72,7 @@ public class JavaProcessorFactory extends ProcessorFactory {
 				private static final long serialVersionUID = 5082635489425605921L;
 				{
 					JavaBaseRecognizers recognizers = new JavaBaseRecognizers();
+					put(RAWINPUTCHARACTER_RECOGNIZER, (context, sis) -> recognizers.recognizeRawInputCharacter(context, sis));
 					put(JAVALETTER_RECOGNIZER, (context, sis) -> recognizers.recognizeJavaLetter(context, sis));
 					put(JAVALETTERORDIGIT_RECOGNIZER, (context, sis) -> recognizers.recognizeJavaLetterOrDigit(context, sis));
 				}

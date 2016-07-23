@@ -15,10 +15,14 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 public abstract class AbstractBaseElement {
 
 	private static final String[][] REPLACE_RULES = {
-					{"(\\\\n)", "\n"},
+					{"(\\\\b)", "\b"},
 					{"(\\\\t)", "\t"},
+					{"(\\\\n)", "\n"},
+					{"(\\\\f)", "\f"},
 					{"(\\\\r)", "\r"},
-					{"(\\\\f)", "\f"}
+					{"(\\\\\")", "\""},
+					{"(\\\\')", "\'"},
+					{"(\\\\\\\\)", "\\"}
 			};
 	private boolean processed = false;
 	

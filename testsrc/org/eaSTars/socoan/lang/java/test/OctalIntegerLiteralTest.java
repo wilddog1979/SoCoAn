@@ -23,22 +23,22 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testSimple0_1() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("00 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -57,22 +57,22 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testSimple0_2() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("008 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -91,22 +91,22 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testSimple0L() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("00L leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -125,22 +125,22 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testSimple1() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("01 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -159,22 +159,22 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testSimple12() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("012 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -193,22 +193,22 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testSimple123() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0123 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -227,22 +227,22 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testSimple123_45() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0123_45 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -261,22 +261,22 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testSimpleMax() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0214743647 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}

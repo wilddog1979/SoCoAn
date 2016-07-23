@@ -20,22 +20,22 @@ public class IdentifierTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testRecognizeSimpleidentifier1() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("_test123 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -54,22 +54,22 @@ public class IdentifierTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testNoRecognizeKeyword() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("class leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -86,22 +86,22 @@ public class IdentifierTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testRecognizeKeywordlike() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("classes leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -120,22 +120,22 @@ public class IdentifierTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testNoRecognizeBooleanTrue() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("true leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -152,22 +152,22 @@ public class IdentifierTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testNoRecognizeBooleanFalse() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("false leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -184,22 +184,22 @@ public class IdentifierTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testNoRecognizeNull() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("null leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
@@ -216,22 +216,22 @@ public class IdentifierTest extends AbstractJavaLangTest {
 	
 	@Test
 	public void testRecognizeNulllike() {
-		AbstractTypeDeclaration identifiersChars = null;
+		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
-			identifiersChars = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
 			context = new Context(JavaTests.getJavaLang());
 		} catch (JAXBException | ReferenceNotFoundException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", identifiersChars);
+		assertNotNull("element type should be found", typeDeclaration);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("nullable leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
-			testresult = identifiersChars.recognizeType(context, sis);
+			testresult = typeDeclaration.recognizeType(context, sis);
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}

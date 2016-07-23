@@ -1,168 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Language 
-		xmlns="http://eaSTars.com/SoCoAn/lang">
-	<Include file="Keywords.xml"/>
-
-	<!-- 3.4 Line Terminators -->
-
-	<LiteralType id="LF" literal="\n"/>
-	
-	<LiteralType id="CR" literal="\r"/>
-
-	<ComplexType id="LineTerminator" processor="aggregating">
-		<StartNode id="LF" type="LF"/>
-		<StartNode id="CR1" type="CR">
-			<NextNode ref="LF"/>
-		</StartNode>
-		<StartNode id="CR2" type="CR"/>
-	</ComplexType>
-
-	<!-- 3.6 White Space -->
-
-	<LiteralType id="SP" literal=" "/>
-	
-	<LiteralType id="HT" literal="\t"/>
-
-	<LiteralType id="FF" literal="\f"/>
-
-	<ComplexType id="WhiteSpace" multiple="true" processor="aggregating">
-		<StartNode id="SP" type="SP"/>
-		<StartNode id="HT" type="HT"/>
-		<StartNode id="FF" type="FF"/>
-		<StartNode id="LineTerminator" type="LineTerminator"/>
-	</ComplexType>
-	
-	<!--  Comments -->
-	
-	<LiteralType id="JavaDocStart" literal="/**"/>
-	
-	<LiteralType id="TraditionalCommentStart" literal="/*"/>
-	
-	<TerminatedType id="TraditionalCommentContent">
-		<Terminator>*/</Terminator>
-	</TerminatedType>
-	
-	<LiteralType id="EndOfLineCommentStart" literal="//"/>
-	
-	<TerminatedType id="EndOfLineCommentContent">
-		<Terminator>\r\n</Terminator>
-		<Terminator>\n</Terminator>
-	</TerminatedType>
-	
-	<ComplexType id="Comment" processor="comment">
-		<StartNode id="JavaDoc" type="JavaDocStart">
-			<NextNode ref="TraditionalCommentContent"/>
-		</StartNode>
-		<Node id="TraditionalCommentContent" type="TraditionalCommentContent"/>
-		
-		<StartNode id="TraditionalComment" type="TraditionalCommentStart">
-			<NextNode ref="TraditionalCommentContent"/>
-		</StartNode>
-		
-		<StartNode id="EndOfLineComment" type="EndOfLineCommentStart">
-			<NextNode ref="EndOfLineCommentContent"/>
-		</StartNode>
-		<Node id="EndOfLineCommentContent" type="EndOfLineCommentContent"/>
-	</ComplexType>
-	
-	<ComplexType id="Separator" processor="separator" multiple="true">
-		<StartNode id="WhiteSpace" type="WhiteSpace"/>
-		<StartNode id="Comment" type="Comment"/>
-	</ComplexType>
-	
-	<!-- 3.8 Identifiers -->
-	
-	<LiteralType id="True" literal="true"/>
-	
-	<LiteralType id="False" literal="false"/>
-	
-	<ComplexType id="BooleanLiteral" processor="aggregating">
-		<StartNode id="True" type="True"/>
-		<StartNode id="False" type="False"/>
-	</ComplexType>
-	
-	<LiteralType id="NullLiteral" literal="null"/>
-	
-	<CustomType id="JavaLetter" recognizer="JavaLetter"/>
-	
-	<CustomType id="JavaLetterOrDigit" recognizer="JavaLetterOrDigit"/>
-	
-	<ComplexType id="IdentifierCharsRest" processor="aggregating" multiple="true">
-		<StartNode id="JavaLetterOrDigit" type="JavaLetterOrDigit"/>
-	</ComplexType>
-	
-	<ComplexType id="Identifier" processor="aggregating" checker="IdentifierCheck">
-		<StartNode id="JavaLetter1" type="JavaLetter">
-			<NextNode ref="IdentifierCharsRest"/>
-		</StartNode>
-		<Node id="IdentifierCharsRest" type="IdentifierCharsRest"/>
-		<StartNode id="JavaLetter2" type="JavaLetter">
-		</StartNode>
-	</ComplexType>
-	
-	<!-- 3.10 Literals -->
-	
-	<!-- 3.10.1 Integer Literals -->
-	
-	<LiteralType id="Digit0" literal="0"/>
-	<LiteralType id="Digit1" literal="1"/>
-	<LiteralType id="Digit2" literal="2"/>
-	<LiteralType id="Digit3" literal="3"/>
-	<LiteralType id="Digit4" literal="4"/>
-	<LiteralType id="Digit5" literal="5"/>
-	<LiteralType id="Digit6" literal="6"/>
-	<LiteralType id="Digit7" literal="7"/>
-	<LiteralType id="Digit8" literal="8"/>
-	<LiteralType id="Digit9" literal="9"/>
-	
-	<LiteralType id="Digita" literal="a"/>
-	<LiteralType id="Digitb" literal="b"/>
-	<LiteralType id="Digitc" literal="c"/>
-	<LiteralType id="Digitd" literal="d"/>
-	<LiteralType id="Digite" literal="e"/>
-	<LiteralType id="Digitf" literal="f"/>
-	
-	<LiteralType id="DigitA" literal="A"/>
-	<LiteralType id="DigitB" literal="B"/>
-	<LiteralType id="DigitC" literal="C"/>
-	<LiteralType id="DigitD" literal="D"/>
-	<LiteralType id="DigitE" literal="E"/>
-	<LiteralType id="DigitF" literal="F"/>
-	
-	<LiteralType id="Suffixl" literal="l"/>
-	
-	<LiteralType id="SuffixL" literal="L"/>
-	
-	<LiteralType id="Underscore" literal="_"/>
-	
-	<LiteralType id="Prefix0x" literal="0x"/>
-	
-	<LiteralType id="Prefix0X" literal="0X"/>
-	
-	<LiteralType id="Prefix0b" literal="0b"/>
-	
-	<LiteralType id="Prefix0B" literal="0B"/>
-	
+<Language xmlns="http://eaSTars.com/SoCoAn/lang">
 	<ComplexType id="IntegerTypeSuffix" processor="aggregating">
 		<StartNode id="Suffixl" type="Suffixl"/>
 		<StartNode id="SuffixL" type="SuffixL"/>
-	</ComplexType>
-	
-	<ComplexType id="NonZeroDigit" processor="aggregating">
-		<StartNode id="Digit1" type="Digit1"/>
-		<StartNode id="Digit2" type="Digit2"/>
-		<StartNode id="Digit3" type="Digit3"/>
-		<StartNode id="Digit4" type="Digit4"/>
-		<StartNode id="Digit5" type="Digit5"/>
-		<StartNode id="Digit6" type="Digit6"/>
-		<StartNode id="Digit7" type="Digit7"/>
-		<StartNode id="Digit8" type="Digit8"/>
-		<StartNode id="Digit9" type="Digit9"/>
-	</ComplexType>
-	
-	<ComplexType id="Digit" processor="aggregating">
-		<StartNode id="Digit0" type="Digit0"/>
-		<StartNode id="NonZeroDigit" type="NonZeroDigit"/>
 	</ComplexType>
 	
 	<ComplexType id="DigitOrUnderscore" processor="aggregating">
@@ -216,31 +56,6 @@
 		<StartNode id="DecimalNumeral2" type="DecimalNumeral"/>
 	</ComplexType>
 	
-	<ComplexType id="HexDigit" processor="aggregating">
-		<StartNode id="Digit0" type="Digit0"/>
-		<StartNode id="Digit1" type="Digit1"/>
-		<StartNode id="Digit2" type="Digit2"/>
-		<StartNode id="Digit3" type="Digit3"/>
-		<StartNode id="Digit4" type="Digit4"/>
-		<StartNode id="Digit5" type="Digit5"/>
-		<StartNode id="Digit6" type="Digit6"/>
-		<StartNode id="Digit7" type="Digit7"/>
-		<StartNode id="Digit8" type="Digit8"/>
-		<StartNode id="Digit9" type="Digit9"/>
-		<StartNode id="Digita" type="Digita"/>
-		<StartNode id="Digitb" type="Digitb"/>
-		<StartNode id="Digitc" type="Digitc"/>
-		<StartNode id="Digitd" type="Digitd"/>
-		<StartNode id="Digite" type="Digite"/>
-		<StartNode id="Digitf" type="Digitf"/>
-		<StartNode id="DigitA" type="DigitA"/>
-		<StartNode id="DigitB" type="DigitB"/>
-		<StartNode id="DigitC" type="DigitC"/>
-		<StartNode id="DigitD" type="DigitD"/>
-		<StartNode id="DigitE" type="DigitE"/>
-		<StartNode id="DigitF" type="DigitF"/>
-	</ComplexType>
-	
 	<ComplexType id="HexDigitOrUnderscore" processor="aggregating">
 		<StartNode id="HexDigit" type="HexDigit"/>
 		<StartNode id="Underscore" type="Underscore"/>
@@ -282,17 +97,6 @@
 		</StartNode>
 		<Node id="IntegerTypeSuffix" type="IntegerTypeSuffix"/>
 		<StartNode id="HexNumeral2" type="HexNumeral"/>
-	</ComplexType>
-	
-	<ComplexType id="OctalDigit" processor="aggregating">
-		<StartNode id="Digit0" type="Digit0"/>
-		<StartNode id="Digit1" type="Digit1"/>
-		<StartNode id="Digit2" type="Digit2"/>
-		<StartNode id="Digit3" type="Digit3"/>
-		<StartNode id="Digit4" type="Digit4"/>
-		<StartNode id="Digit5" type="Digit5"/>
-		<StartNode id="Digit6" type="Digit6"/>
-		<StartNode id="Digit7" type="Digit7"/>
 	</ComplexType>
 	
 	<ComplexType id="OctalDigitOrUnderscore" processor="aggregating">
@@ -337,11 +141,6 @@
 		</StartNode>
 		<Node id="IntegerTypeSuffix" type="IntegerTypeSuffix"/>
 		<StartNode id="OctalNumeral2" type="OctalNumeral"/>
-	</ComplexType>
-
-	<ComplexType id="BinaryDigit" processor="aggregating">
-		<StartNode id="Digit0" type="Digit0"/>
-		<StartNode id="Digit1" type="Digit1"/>
 	</ComplexType>
 	
 	<ComplexType id="BinaryDigitOrUnderscore" processor="aggregating">
@@ -393,8 +192,4 @@
 		<StartNode id="OctalIntegerLiteral" type="OctalIntegerLiteral"/>
 		<StartNode id="DecimalIntegerLiteral" type="DecimalIntegerLiteral"/>
 	</ComplexType>
-	
-	<!-- 3.10.2 Floating-Point Literals -->
-	
-	
 </Language>
