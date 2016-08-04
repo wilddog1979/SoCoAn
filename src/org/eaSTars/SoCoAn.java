@@ -38,14 +38,16 @@ public class SoCoAn {
 
 	private SoCoAn(Configuration configuration) {
 		System.out.println(configuration.getConfig().getProjectPath());
+		File javalang = new File("resources/JavaLang.xml");
 		
 		try {
 			JAXBContext context = JAXBContext.newInstance(LanguageObjectFactory.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			@SuppressWarnings("unchecked")
-			JAXBElement<Language> doc = (JAXBElement<Language>) unmarshaller.unmarshal(new File("resources/JavaLang.xml"));
+			JAXBElement<Language> doc = (JAXBElement<Language>) unmarshaller.unmarshal(javalang);
 			Language language = doc.getValue();
 			
+			language.setFilename(javalang.getAbsolutePath());
 			language.resolveFileReferences(new File("resources"));
 			language.resolveNodeReferences(null);
 			

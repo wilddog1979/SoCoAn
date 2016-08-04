@@ -1,4 +1,4 @@
-package org.eaSTars.socoan.lang.java.test;
+package org.eaSTars.socoan.lang.java.types.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -15,14 +15,16 @@ import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.ReferenceNotFoundException;
+import org.eaSTars.socoan.lang.java.test.AbstractJavaLangTest;
+import org.eaSTars.socoan.lang.java.test.JavaTests;
 import org.junit.Test;
 
-public class HexIntegerLiteralTest extends AbstractJavaLangTest {
+public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 
-	private static final String ELEMENT_NAME = "IntegerLiteral";
+	private static final String ELEMENT_NAME = "ReferenceType";
 	
 	@Test
-	public void testSimple0_1() {
+	public void testidentifier() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -34,7 +36,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0x0 leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("Identifier leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -46,7 +48,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "0x0", "0x0");
+		testFragment(fragment, "Identifier", "Identifier");
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
@@ -56,7 +58,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 	}
 	
 	@Test
-	public void testSimple0_2() {
+	public void testtestannotationidentifier() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -68,7 +70,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0x0g leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -80,41 +82,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "0x0", "0x0");
-		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 10, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-	}
-	
-	@Test
-	public void testSimple0L() {
-		AbstractTypeDeclaration typeDeclaration = null;
-		Context context = null;
-		try {
-			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
-			context = new Context(JavaTests.getJavaLang());
-		} catch (JAXBException | ReferenceNotFoundException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-		
-		assertNotNull("element type should be found", typeDeclaration);
-		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0x0L leftover".getBytes()));
-		
-		boolean testresult = false;
-		try {
-			testresult = typeDeclaration.recognizeType(context, sis);
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-		
-		assertTrue("Sample should be recognized", testresult);
-		assertEquals("Context buffer should contain one entry", 1, context.size());
-		Fragment fragment = context.pop();
-		testFragment(fragment, "0x0L", "0x0L");
+		testFragment(fragment, "@testannotation Identifier", "@testannotation Identifier");
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
@@ -124,7 +92,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 	}
 	
 	@Test
-	public void testSimple1() {
+	public void testtestannotationidentifier2() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -136,7 +104,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0x1 leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier1.@testannotation Identifier2 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -148,7 +116,10 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "0x1", "0x1");
+		testFragment(fragment,
+				"@testannotation Identifier1.@testannotation Identifier2",
+				"@testannotation Identifier1.@testannotation Identifier2"
+				);
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
@@ -158,7 +129,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 	}
 	
 	@Test
-	public void testSimple12() {
+	public void testtestannotationidentifiertypeargumentsimple() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -170,7 +141,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0x12 leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier1 <Identifier2> leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -182,7 +153,10 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "0x12", "0x12");
+		testFragment(fragment,
+				"@testannotation Identifier1 <Identifier2>",
+				"@testannotation Identifier1 <Identifier2>"
+				);
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
@@ -192,7 +166,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 	}
 	
 	@Test
-	public void testSimple123() {
+	public void testtestannotationidentifiertypeargumentannotated() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -204,7 +178,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0x123 leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier1 <@testannotation Identifier2> leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -216,7 +190,10 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "0x123", "0x123");
+		testFragment(fragment,
+				"@testannotation Identifier1 <@testannotation Identifier2>",
+				"@testannotation Identifier1 <@testannotation Identifier2>"
+				);
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
@@ -226,7 +203,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 	}
 	
 	@Test
-	public void testSimple123_45() {
+	public void testtestannotationidentifiermultipletypeargumentannotated() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -238,7 +215,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0x123_45 leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier1 <@testannotation Identifier2, Identifier3, Identifier4> leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -250,7 +227,10 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "0x123_45", "0x123_45");
+		testFragment(fragment,
+				"@testannotation Identifier1 <@testannotation Identifier2, Identifier3, Identifier4>",
+				"@testannotation Identifier1 <@testannotation Identifier2, Identifier3, Identifier4>"
+				);
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
@@ -260,7 +240,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 	}
 	
 	@Test
-	public void testSimpleMax() {
+	public void testtestannotationidentifiermultipletypeargumentannotatedextendsandsuper() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -272,7 +252,7 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0x2147483647 leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier1 <@testannotation Identifier2, ? extends Identifier3, ? super Identifier4, ?> leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -284,7 +264,10 @@ public class HexIntegerLiteralTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "0x2147483647", "0x2147483647");
+		testFragment(fragment,
+				"@testannotation Identifier1 <@testannotation Identifier2, ? extends Identifier3, ? super Identifier4, ?>",
+				"@testannotation Identifier1 <@testannotation Identifier2, ? <span class=\"keyword\">extends</span> Identifier3, ? <span class=\"keyword\">super</span> Identifier4, ?>"
+				);
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 9, sis.available());

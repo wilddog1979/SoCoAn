@@ -56,16 +56,16 @@ public class ComplexType extends AbstractTypeDeclaration {
 		if (processorName != null) {
 			ProcessorFactory processorFactory = parent.getProcessorFactory();
 			if (processorFactory == null) {
-				throw new ReferenceNotFoundException("processorFactory", "processorFactory");
+				throw new ReferenceNotFoundException(parent.getFilename(), "processorFactory (" + this.getId() + ")", "processorFactory");
 			}
 			if (processorFactory.createProcessor(processorName) == null) {
-				throw new ReferenceNotFoundException("processor name", processorName);
+				throw new ReferenceNotFoundException(parent.getFilename(), "processor name (" + this.getId() + ")", processorName);
 			}
 			if (checkerName != null && processorFactory.createChecker(checkerName) == null) {
-				throw new ReferenceNotFoundException("checker", checkerName);
+				throw new ReferenceNotFoundException(parent.getFilename(), "checker (" + this.getId() + ")", checkerName);
 			}
 		} else {
-			throw new ReferenceNotFoundException("complextype", "processorName");
+			throw new ReferenceNotFoundException(parent.getFilename(), "complextype (" + this.getId() + ")", "processorName");
 		}
 		
 		for (ComplexTypeNode node : getStartnodes()) {
@@ -87,7 +87,7 @@ public class ComplexType extends AbstractTypeDeclaration {
 			result = getNodeById(getNodes(), id);
 		}
 		if (!result.isPresent()) {
-			throw new ReferenceNotFoundException("complexnode",id);
+			throw new ReferenceNotFoundException("complexnode (" + this.getId() + ")",id);
 		}
 		return result.get();
 	}
@@ -108,12 +108,14 @@ public class ComplexType extends AbstractTypeDeclaration {
 
 		if (subcontext.size() != 0) {
 			Fragment fragment = parent.getProcessorFactory().createProcessor(processorName).apply(subcontext);
-			fragment.setId(this.getId());
-			if (checkerName == null || (checkerName != null && !parent.getProcessorFactory().createChecker(checkerName).apply(parent, fragment))) {
-				context.push(fragment);
-			} else if (checkerName != null) {
-				while (subcontext.size() != 0) {
-					subcontext.pop().getFragment().ifPresent(s -> sis.unread(s.getBytes()));
+			if (fragment != null) {
+				fragment.setId(this.getId());
+				if (checkerName == null || (checkerName != null && !parent.getProcessorFactory().createChecker(checkerName).apply(parent, fragment))) {
+					context.push(fragment);
+				} else if (checkerName != null) {
+					while (subcontext.size() != 0) {
+						subcontext.pop().getFragment().ifPresent(s -> sis.unread(s.getBytes()));
+					}
 				}
 			}
 		}
@@ -122,9 +124,29 @@ public class ComplexType extends AbstractTypeDeclaration {
 	}
 	
 	protected boolean recognizeNode(ComplexTypeNode node, Context context, SourcecodeInputStream sis) throws IOException {
-		boolean result = node.getTypeDeclaration().recognizeType(context, sis);
+		int contextsize = context.size();
+		boolean result = false;
+		switch(node.getOccurrance()) {
+		case ZeroOrMore: // {}
+			while(node.getTypeDeclaration().recognizeType(context, sis)){
+				context.peek().setId(node.getId());
+			}
+			result = true;
+			break;
+		case ZeroOrOne: // []
+			if (node.getTypeDeclaration().recognizeType(context, sis)) {
+				context.peek().setId(node.getId());
+			}
+			result = true;
+			break;
+		default:
+			result = node.getTypeDeclaration().recognizeType(context, sis);
+			if (result) {
+				context.peek().setId(node.getId());
+			}
+			break;
+		}
 		if (result) {
-			context.peek().setId(node.getId());
 			for (NextNode nextnode : node.getNextNodes()) {
 				result = recognizeNode(nextnode.getNode(), context, sis);
 				if (result) {
@@ -132,7 +154,9 @@ public class ComplexType extends AbstractTypeDeclaration {
 				}
 			}
 			if (!result) {
-				context.pop().getFragment().ifPresent(s -> sis.unread(s.getBytes()));
+				while (context.size() > contextsize) {
+					context.pop().getFragment().ifPresent(s -> sis.unread(s.getBytes()));
+				}
 			}
 		}
 		

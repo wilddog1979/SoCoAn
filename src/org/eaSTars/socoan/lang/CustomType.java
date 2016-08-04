@@ -21,7 +21,7 @@ public class CustomType extends AbstractTypeDeclaration {
 	public void resolveNodeReferences(Language parent) throws ReferenceNotFoundException {
 		this.parent = parent;
 		if (parent.getProcessorFactory().createRecognizer(recognizer) == null) {
-			throw new ReferenceNotFoundException("recognizer", recognizer);
+			throw new ReferenceNotFoundException(parent.getFilename(), "recognizer (" + this.getId() + ")", recognizer);
 		}
 	}
 	

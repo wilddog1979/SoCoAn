@@ -9,6 +9,7 @@ import org.eaSTars.socoan.SourcecodeInputStream;
 public abstract class ProcessorFactory {
 
 	public static final String AGGREGATING_PROCESSOR = "aggregating";
+	public static final String FALLTHROUGH_PROCESSOR = "fallthrough";
 	
 	private static final Map<String, Function<Context, Fragment>> FUNCTION_MAP =
 			new HashMap<String, Function<Context, Fragment>>() {
@@ -16,6 +17,7 @@ public abstract class ProcessorFactory {
 				{
 					LangProcessors processors = new LangProcessors();
 					put(AGGREGATING_PROCESSOR, context -> processors.processAggregation(context));
+					put(FALLTHROUGH_PROCESSOR, context -> processors.processFallThrought(context));
 				}
 	};
 	

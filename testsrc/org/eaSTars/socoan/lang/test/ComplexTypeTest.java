@@ -13,6 +13,7 @@ import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.LangProcessors;
 import org.eaSTars.socoan.lang.Language;
+import org.eaSTars.socoan.lang.Occurrance;
 import org.junit.Test;
 
 public class ComplexTypeTest extends AbstractLangTest {
@@ -357,6 +358,384 @@ public class ComplexTypeTest extends AbstractLangTest {
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 11, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testzeroormore_a() {
+		/*
+		 * -a--{b}-
+		 *     /
+		 * --c
+		 */
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
+		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
+		complextype.getStartnodes().add(node_a);
+		
+		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
+		node_b.setOccurrance(Occurrance.ZeroOrMore);
+		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		
+		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
+		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		complextype.getStartnodes().add(node_c);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("aleftover".getBytes()));
+		
+		Context context = new Context((Language)null);
+		
+		boolean testresult = false;
+		try {
+			testresult = complextype.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment, "a", "a");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testzeroormore_abbbb() {
+		/*
+		 * -a--{b}-
+		 *     /
+		 * --c
+		 */
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
+		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
+		complextype.getStartnodes().add(node_a);
+		
+		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
+		node_b.setOccurrance(Occurrance.ZeroOrMore);
+		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		
+		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
+		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		complextype.getStartnodes().add(node_c);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("abbbbleftover".getBytes()));
+		
+		Context context = new Context((Language)null);
+		
+		boolean testresult = false;
+		try {
+			testresult = complextype.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment, "abbbb", "abbbb");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testzeroormore_aaaab() {
+		/*
+		 * -{a}-b-
+		 *     /
+		 * --c
+		 */
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
+		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
+		node_a.setOccurrance(Occurrance.ZeroOrMore);
+		complextype.getStartnodes().add(node_a);
+		
+		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
+		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		
+		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
+		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		complextype.getStartnodes().add(node_c);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("aaaableftover".getBytes()));
+		
+		Context context = new Context((Language)null);
+		
+		boolean testresult = false;
+		try {
+			testresult = complextype.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment, "aaaab", "aaaab");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testzeroormore_cb() {
+		/*
+		 * -{a}-b-
+		 *     /
+		 * --c
+		 */
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
+		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
+		node_a.setOccurrance(Occurrance.ZeroOrMore);
+		complextype.getStartnodes().add(node_a);
+		
+		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
+		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		
+		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
+		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		complextype.getStartnodes().add(node_c);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("cbleftover".getBytes()));
+		
+		Context context = new Context((Language)null);
+		
+		boolean testresult = false;
+		try {
+			testresult = complextype.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment, "cb", "cb");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testzeroorone_a() {
+		/*
+		 * -a--[b]-
+		 *     /
+		 * --c
+		 */
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
+		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
+		complextype.getStartnodes().add(node_a);
+		
+		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
+		node_b.setOccurrance(Occurrance.ZeroOrOne);
+		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		
+		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
+		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		complextype.getStartnodes().add(node_c);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("aleftover".getBytes()));
+		
+		Context context = new Context((Language)null);
+		
+		boolean testresult = false;
+		try {
+			testresult = complextype.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment, "a", "a");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testzeroorone_ab() {
+		/*
+		 * -a--{b}-
+		 *     /
+		 * --c
+		 */
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
+		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
+		complextype.getStartnodes().add(node_a);
+		
+		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
+		node_b.setOccurrance(Occurrance.ZeroOrOne);
+		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		
+		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
+		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		complextype.getStartnodes().add(node_c);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("abbbbleftover".getBytes()));
+		
+		Context context = new Context((Language)null);
+		
+		boolean testresult = false;
+		try {
+			testresult = complextype.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment, "ab", "ab");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 11, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testzeroorone_b() {
+		/*
+		 * -[a]-b-
+		 *     /
+		 * --c
+		 */
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
+		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
+		node_a.setOccurrance(Occurrance.ZeroOrOne);
+		complextype.getStartnodes().add(node_a);
+		
+		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
+		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		
+		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
+		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		complextype.getStartnodes().add(node_c);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("bleftover".getBytes()));
+		
+		Context context = new Context((Language)null);
+		
+		boolean testresult = false;
+		try {
+			testresult = complextype.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment, "b", "b");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testzeroorone_ab_2() {
+		/*
+		 * -[a]-b-
+		 *     /
+		 * --c
+		 */
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
+		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
+		node_a.setOccurrance(Occurrance.ZeroOrOne);
+		complextype.getStartnodes().add(node_a);
+		
+		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
+		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		
+		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
+		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		complextype.getStartnodes().add(node_c);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("ableftover".getBytes()));
+		
+		Context context = new Context((Language)null);
+		
+		boolean testresult = false;
+		try {
+			testresult = complextype.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment, "ab", "ab");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testzeroorone_cb() {
+		/*
+		 * -[a]-b-
+		 *     /
+		 * --c
+		 */
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
+		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
+		node_a.setOccurrance(Occurrance.ZeroOrOne);
+		complextype.getStartnodes().add(node_a);
+		
+		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
+		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		
+		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
+		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		complextype.getStartnodes().add(node_c);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("cbleftover".getBytes()));
+		
+		Context context = new Context((Language)null);
+		
+		boolean testresult = false;
+		try {
+			testresult = complextype.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment, "cb", "cb");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}

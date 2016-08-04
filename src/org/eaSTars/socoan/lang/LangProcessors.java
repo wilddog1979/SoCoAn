@@ -25,4 +25,13 @@ public class LangProcessors {
 		
 		return fragment;
 	}
+	
+	public Fragment processFallThrought(Context subcontext) {
+		Context parent = subcontext.getParent();
+		if (parent != null) {
+			subcontext.forEach(fragment -> parent.push(fragment));
+		}
+		
+		return null;
+	}
 }

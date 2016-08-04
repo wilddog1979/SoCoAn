@@ -1,4 +1,4 @@
-package org.eaSTars.socoan.lang.java.test;
+package org.eaSTars.socoan.lang.java.lexical.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -15,14 +15,16 @@ import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.ReferenceNotFoundException;
+import org.eaSTars.socoan.lang.java.test.AbstractJavaLangTest;
+import org.eaSTars.socoan.lang.java.test.JavaTests;
 import org.junit.Test;
 
-public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
+public class CharacterLiteralTest extends AbstractJavaLangTest {
 
-	private static final String ELEMENT_NAME = "FloatingPointLiteral";
+	private static final String ELEMENT_NAME = "CharacterLiteral";
 	
 	@Test
-	public void testSimple0x0_p__1() {
+	public void test_a_() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -34,7 +36,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0x0.p+1 leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("'a' leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -46,7 +48,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "0x0.p+1", "0x0.p+1");
+		testFragment(fragment, "'a'", "'a'");
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
@@ -56,7 +58,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 	}
 	
 	@Test
-	public void testSimple0x0_p__1F() {
+	public void test__t_() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -68,7 +70,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0x0.p+1F leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("'\t' leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -80,7 +82,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "0x0.p+1F", "0x0.p+1F");
+		testFragment(fragment, "'\t'", "'\t'");
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
@@ -90,7 +92,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 	}
 	
 	@Test
-	public void testSimple0x_12p__1F() {
+	public void test__u00a4_() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -102,7 +104,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0x.12p+1F leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("'\\u00a4' leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -114,7 +116,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "0x.12p+1F", "0x.12p+1F");
+		testFragment(fragment, "'\\u00a4'", "'\\u00a4'");
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
@@ -124,7 +126,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 	}
 	
 	@Test
-	public void testSimple0X15_12p__1F() {
+	public void test__244_() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -136,7 +138,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0X15.12p+1F leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("'\\244' leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -148,7 +150,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "0X15.12p+1F", "0X15.12p+1F");
+		testFragment(fragment, "'\\244'", "'\\244'");
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 9, sis.available());

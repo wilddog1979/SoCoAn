@@ -1,6 +1,9 @@
-package org.eaSTars.socoan.lang.java.test;
+package org.eaSTars.socoan.lang.java.lexical.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -12,14 +15,16 @@ import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.ReferenceNotFoundException;
+import org.eaSTars.socoan.lang.java.test.AbstractJavaLangTest;
+import org.eaSTars.socoan.lang.java.test.JavaTests;
 import org.junit.Test;
 
-public class IdentifierTest extends AbstractJavaLangTest {
+public class DecimalIntegerLiteralTest extends AbstractJavaLangTest {
 
-	private static final String ELEMENT_NAME = "Identifier";
+	private static final String ELEMENT_NAME = "IntegerLiteral";
 	
 	@Test
-	public void testRecognizeSimpleidentifier1() {
+	public void testSimple0_1() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -31,7 +36,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("_test123 leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -43,7 +48,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "_test123", "_test123");
+		testFragment(fragment, "0", "0");
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
@@ -53,7 +58,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 	}
 	
 	@Test
-	public void testNoRecognizeKeyword() {
+	public void testSimple0_2() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -65,39 +70,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("class leftover".getBytes()));
-		
-		boolean testresult = false;
-		try {
-			testresult = typeDeclaration.recognizeType(context, sis);
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-		
-		assertFalse("Sample should not be recognized", testresult);
-		assertEquals("Context buffer should not contain any entries", 0, context.size());
-		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 14, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-	}
-	
-	@Test
-	public void testRecognizeKeywordlike() {
-		AbstractTypeDeclaration typeDeclaration = null;
-		Context context = null;
-		try {
-			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
-			context = new Context(JavaTests.getJavaLang());
-		} catch (JAXBException | ReferenceNotFoundException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-		
-		assertNotNull("element type should be found", typeDeclaration);
-		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("classes leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0a leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -109,7 +82,41 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "classes", "classes");
+		testFragment(fragment, "0", "0");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 10, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testSimple0L() {
+		AbstractTypeDeclaration typeDeclaration = null;
+		Context context = null;
+		try {
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			context = new Context(JavaTests.getJavaLang());
+		} catch (JAXBException | ReferenceNotFoundException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertNotNull("element type should be found", typeDeclaration);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0L leftover".getBytes()));
+		
+		boolean testresult = false;
+		try {
+			testresult = typeDeclaration.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment, "0L", "0L");
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
@@ -119,7 +126,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 	}
 	
 	@Test
-	public void testNoRecognizeBooleanTrue() {
+	public void testSimple1() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -131,103 +138,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("true leftover".getBytes()));
-		
-		boolean testresult = false;
-		try {
-			testresult = typeDeclaration.recognizeType(context, sis);
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-		
-		assertFalse("Sample should not be recognized", testresult);
-		assertEquals("Context buffer should not contain any entries", 0, context.size());
-		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 13, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-	}
-	
-	@Test
-	public void testNoRecognizeBooleanFalse() {
-		AbstractTypeDeclaration typeDeclaration = null;
-		Context context = null;
-		try {
-			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
-			context = new Context(JavaTests.getJavaLang());
-		} catch (JAXBException | ReferenceNotFoundException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-		
-		assertNotNull("element type should be found", typeDeclaration);
-		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("false leftover".getBytes()));
-		
-		boolean testresult = false;
-		try {
-			testresult = typeDeclaration.recognizeType(context, sis);
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-		
-		assertFalse("Sample should not be recognized", testresult);
-		assertEquals("Context buffer should not contain any entries", 0, context.size());
-		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 14, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-	}
-	
-	@Test
-	public void testNoRecognizeNull() {
-		AbstractTypeDeclaration typeDeclaration = null;
-		Context context = null;
-		try {
-			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
-			context = new Context(JavaTests.getJavaLang());
-		} catch (JAXBException | ReferenceNotFoundException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-		
-		assertNotNull("element type should be found", typeDeclaration);
-		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("null leftover".getBytes()));
-		
-		boolean testresult = false;
-		try {
-			testresult = typeDeclaration.recognizeType(context, sis);
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-		
-		assertFalse("Sample should not be recognized", testresult);
-		assertEquals("Context buffer should not contain any entries", 0, context.size());
-		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 13, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-	}
-	
-	@Test
-	public void testRecognizeNulllike() {
-		AbstractTypeDeclaration typeDeclaration = null;
-		Context context = null;
-		try {
-			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
-			context = new Context(JavaTests.getJavaLang());
-		} catch (JAXBException | ReferenceNotFoundException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-		
-		assertNotNull("element type should be found", typeDeclaration);
-		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("nullable leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("1 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -239,7 +150,143 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "nullable", "nullable");
+		testFragment(fragment, "1", "1");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testSimple12() {
+		AbstractTypeDeclaration typeDeclaration = null;
+		Context context = null;
+		try {
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			context = new Context(JavaTests.getJavaLang());
+		} catch (JAXBException | ReferenceNotFoundException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertNotNull("element type should be found", typeDeclaration);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("12 leftover".getBytes()));
+		
+		boolean testresult = false;
+		try {
+			testresult = typeDeclaration.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment, "12", "12");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testSimple123() {
+		AbstractTypeDeclaration typeDeclaration = null;
+		Context context = null;
+		try {
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			context = new Context(JavaTests.getJavaLang());
+		} catch (JAXBException | ReferenceNotFoundException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertNotNull("element type should be found", typeDeclaration);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("123 leftover".getBytes()));
+		
+		boolean testresult = false;
+		try {
+			testresult = typeDeclaration.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment, "123", "123");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testSimple123_45() {
+		AbstractTypeDeclaration typeDeclaration = null;
+		Context context = null;
+		try {
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			context = new Context(JavaTests.getJavaLang());
+		} catch (JAXBException | ReferenceNotFoundException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertNotNull("element type should be found", typeDeclaration);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("123_45 leftover".getBytes()));
+		
+		boolean testresult = false;
+		try {
+			testresult = typeDeclaration.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment, "123_45", "123_45");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testSimpleMax() {
+		AbstractTypeDeclaration typeDeclaration = null;
+		Context context = null;
+		try {
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			context = new Context(JavaTests.getJavaLang());
+		} catch (JAXBException | ReferenceNotFoundException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertNotNull("element type should be found", typeDeclaration);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("2147483647 leftover".getBytes()));
+		
+		boolean testresult = false;
+		try {
+			testresult = typeDeclaration.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment, "2147483647", "2147483647");
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 9, sis.available());

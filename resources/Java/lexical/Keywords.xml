@@ -1,104 +1,104 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Language xmlns="http://eaSTars.com/SoCoAn/lang">
-	<KeywordType id="keyword_abstract"  literal="abstract"/>
+	<KeywordType id="keyword_abstract" literal="abstract"/>
 	
-	<KeywordType id="keyword_assert"  literal="assert"/>
+	<KeywordType id="keyword_assert" literal="assert"/>
 	
-	<KeywordType id="keyword_boolean"  literal="boolean"/>
+	<KeywordType id="keyword_boolean" literal="boolean"/>
 	
-	<KeywordType id="keyword_break"  literal="break"/>
+	<KeywordType id="keyword_break" literal="break"/>
 	
-	<KeywordType id="keyword_byte"  literal="byte"/>
+	<KeywordType id="keyword_byte" literal="byte"/>
 	
-	<KeywordType id="keyword_case"  literal="case"/>
+	<KeywordType id="keyword_case" literal="case"/>
 	
-	<KeywordType id="keyword_catch"  literal="catch"/>
+	<KeywordType id="keyword_catch" literal="catch"/>
 	
-	<KeywordType id="keyword_char"  literal="char"/>
+	<KeywordType id="keyword_char" literal="char"/>
 	
-	<KeywordType id="keyword_class"  literal="class"/>
+	<KeywordType id="keyword_class" literal="class"/>
 	
-	<KeywordType id="keyword_const"  literal="const"/>
+	<KeywordType id="keyword_const" literal="const"/>
 	
-	<KeywordType id="keyword_continue"  literal="continue"/>
+	<KeywordType id="keyword_continue" literal="continue"/>
 	
-	<KeywordType id="keyword_default"  literal="default"/>
+	<KeywordType id="keyword_default" literal="default"/>
 	
-	<KeywordType id="keyword_do"  literal="do"/>
+	<KeywordType id="keyword_do" literal="do"/>
 	
-	<KeywordType id="keyword_double"  literal="double"/>
+	<KeywordType id="keyword_double" literal="double"/>
 	
-	<KeywordType id="keyword_else"  literal="else"/>
+	<KeywordType id="keyword_else" literal="else"/>
 	
-	<KeywordType id="keyword_enum"  literal="enum"/>
+	<KeywordType id="keyword_enum" literal="enum"/>
 	
-	<KeywordType id="keyword_extends"  literal="extends"/>
+	<KeywordType id="keyword_extends" literal="extends"/>
 	
-	<KeywordType id="keyword_final"  literal="final"/>
+	<KeywordType id="keyword_final" literal="final"/>
 	
-	<KeywordType id="keyword_finally"  literal="finally"/>
+	<KeywordType id="keyword_finally" literal="finally"/>
 	
-	<KeywordType id="keyword_float"  literal="float"/>
+	<KeywordType id="keyword_float" literal="float"/>
 	
-	<KeywordType id="keyword_for"  literal="for"/>
+	<KeywordType id="keyword_for" literal="for"/>
 	
-	<KeywordType id="keyword_if"  literal="if"/>
+	<KeywordType id="keyword_if" literal="if"/>
 	
-	<KeywordType id="keyword_goto"  literal="goto"/>
+	<KeywordType id="keyword_goto" literal="goto"/>
 	
-	<KeywordType id="keyword_implements"  literal="implements"/>
+	<KeywordType id="keyword_implements" literal="implements"/>
 	
-	<KeywordType id="keyword_import"  literal="import"/>
+	<KeywordType id="keyword_import" literal="import"/>
 	
-	<KeywordType id="keyword_instanceof"  literal="instanceof"/>
+	<KeywordType id="keyword_instanceof" literal="instanceof"/>
 	
-	<KeywordType id="keyword_int"  literal="int"/>
+	<KeywordType id="keyword_int" literal="int"/>
 	
-	<KeywordType id="keyword_interface"  literal="interface"/>
+	<KeywordType id="keyword_interface" literal="interface"/>
 	
-	<KeywordType id="keyword_long"  literal="long"/>
+	<KeywordType id="keyword_long" literal="long"/>
 	
-	<KeywordType id="keyword_native"  literal="native"/>
+	<KeywordType id="keyword_native" literal="native"/>
 	
-	<KeywordType id="keyword_new"  literal="new"/>
+	<KeywordType id="keyword_new" literal="new"/>
 	
-	<KeywordType id="keyword_package"  literal="package"/>
+	<KeywordType id="keyword_package" literal="package"/>
 	
-	<KeywordType id="keyword_private"  literal="private"/>
+	<KeywordType id="keyword_private" literal="private"/>
 	
-	<KeywordType id="keyword_protected"  literal="protected"/>
+	<KeywordType id="keyword_protected" literal="protected"/>
 	
-	<KeywordType id="keyword_public"  literal="public"/>
+	<KeywordType id="keyword_public" literal="public"/>
 	
-	<KeywordType id="keyword_return"  literal="return"/>
+	<KeywordType id="keyword_return" literal="return"/>
 	
-	<KeywordType id="keyword_short"  literal="short"/>
+	<KeywordType id="keyword_short" literal="short"/>
 	
-	<KeywordType id="keyword_static"  literal="static"/>
+	<KeywordType id="keyword_static" literal="static"/>
 	
-	<KeywordType id="keyword_strictfp"  literal="strictfp"/>
+	<KeywordType id="keyword_strictfp" literal="strictfp"/>
 	
-	<KeywordType id="keyword_super"  literal="super"/>
+	<KeywordType id="keyword_super" literal="super"/>
 	
-	<KeywordType id="keyword_switch"  literal="switch"/>
+	<KeywordType id="keyword_switch" literal="switch"/>
 	
-	<KeywordType id="keyword_synchronized"  literal="synchronized"/>
+	<KeywordType id="keyword_synchronized" literal="synchronized"/>
 	
-	<KeywordType id="keyword_this"  literal="this"/>
+	<KeywordType id="keyword_this" literal="this"/>
 	
-	<KeywordType id="keyword_throw"  literal="throw"/>
+	<KeywordType id="keyword_throw" literal="throw"/>
 	
-	<KeywordType id="keyword_throws"  literal="throws"/>
+	<KeywordType id="keyword_throws" literal="throws"/>
 	
-	<KeywordType id="keyword_transient"  literal="transient"/>
+	<KeywordType id="keyword_transient" literal="transient"/>
 	
-	<KeywordType id="keyword_try"  literal="try"/>
+	<KeywordType id="keyword_try" literal="try"/>
 	
-	<KeywordType id="keyword_void"  literal="void"/>
+	<KeywordType id="keyword_void" literal="void"/>
 	
-	<KeywordType id="keyword_volatile"  literal="volatile"/>
+	<KeywordType id="keyword_volatile" literal="volatile"/>
 	
-	<KeywordType id="keyword_while"  literal="while"/>
+	<KeywordType id="keyword_while" literal="while"/>
 	
 	<ComplexType id="Keyword" processor="aggregating">
 		<StartNode id="keyword_abstract" type="keyword_abstract"/>

@@ -58,4 +58,8 @@ public class Context implements Iterable<Fragment>{
 		
 		return formatProvider;
 	}
+
+	public Context getParent() {
+		return parent;
+	}
 }

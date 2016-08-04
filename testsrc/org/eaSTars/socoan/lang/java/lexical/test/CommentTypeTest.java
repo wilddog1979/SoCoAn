@@ -1,4 +1,4 @@
-package org.eaSTars.socoan.lang.java.test;
+package org.eaSTars.socoan.lang.java.lexical.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -15,14 +15,17 @@ import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.ReferenceNotFoundException;
+import org.eaSTars.socoan.lang.java.CommentFragment;
+import org.eaSTars.socoan.lang.java.test.AbstractJavaLangTest;
+import org.eaSTars.socoan.lang.java.test.JavaTests;
 import org.junit.Test;
 
-public class StringLiteralTest extends AbstractJavaLangTest {
+public class CommentTypeTest extends AbstractJavaLangTest{
 
-	private static final String ELEMENT_NAME = "StringLiteral";
+	private static final String ELEMENT_NAME = "Comment";
 	
 	@Test
-	public void test__() {
+	public void testRecognizeEndOfLineComment() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -32,9 +35,9 @@ public class StringLiteralTest extends AbstractJavaLangTest {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", typeDeclaration);
+		assertNotNull("comments type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("\"\" leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("//some comment\nleftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -46,17 +49,69 @@ public class StringLiteralTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "\"\"", "\"\"");
+		assertTrue("Fragment should be an instance of CommentFragment", fragment instanceof CommentFragment);
+		CommentFragment commentfragment = (CommentFragment) fragment;
+		assertEquals("ID of the fragment should match", "Comment", commentfragment.getId());
+		testCommentFragment(
+				commentfragment,
+				CommentFragment.Type.EndOfLineComment,
+				"//some comment\n",
+				"<span class=\"linecomment\">//some comment\n</span>",
+				"some comment"
+		);
 		
 		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
+			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+
+	@Test
+	public void testRecognizeTraditionalComment() {
+		AbstractTypeDeclaration typeDeclaration = null;
+		Context context = null;
+		try {
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			context = new Context(JavaTests.getJavaLang());
+		} catch (JAXBException | ReferenceNotFoundException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertNotNull("comments type should be found", typeDeclaration);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("/*\n\tsome\n\tcomment\n*/leftover".getBytes()));
+		
+		boolean testresult = false;
+		try {
+			testresult = typeDeclaration.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		assertTrue("Fragment should be an instance of CommentFragment", fragment instanceof CommentFragment);
+		CommentFragment commentfragment = (CommentFragment) fragment;
+		assertEquals("ID of the fragment should match", "Comment", commentfragment.getId());
+		testCommentFragment(
+				commentfragment,
+				CommentFragment.Type.TraditionalComment,
+				"/*\n\tsome\n\tcomment\n*/",
+				"<span class=\"blockcomment\">/*\n\tsome\n\tcomment\n*/</span>",
+				"\n\tsome\n\tcomment\n"
+		);
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 	}
 	
 	@Test
-	public void test_abc_() {
+	public void testRecognizeJavadocComment() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -66,9 +121,9 @@ public class StringLiteralTest extends AbstractJavaLangTest {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 		
-		assertNotNull("element type should be found", typeDeclaration);
+		assertNotNull("comments type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("\"abc\" leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("/**\n\tsome\n\tjavadoc\n*/leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -80,44 +135,19 @@ public class StringLiteralTest extends AbstractJavaLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "\"abc\"", "\"abc\"");
+		assertTrue("Fragment should be an instance of CommentFragment", fragment instanceof CommentFragment);
+		CommentFragment commentfragment = (CommentFragment) fragment;
+		assertEquals("ID of the fragment should match", "Comment", commentfragment.getId());
+		testCommentFragment(
+				commentfragment,
+				CommentFragment.Type.JavaDoc,
+				"/**\n\tsome\n\tjavadoc\n*/",
+				"<span class=\"javadoc\">/**\n\tsome\n\tjavadoc\n*/</span>",
+				"\n\tsome\n\tjavadoc\n"
+		);
 		
 		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-	}
-	
-	@Test
-	public void test_au004ac_() {
-		AbstractTypeDeclaration typeDeclaration = null;
-		Context context = null;
-		try {
-			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
-			context = new Context(JavaTests.getJavaLang());
-		} catch (JAXBException | ReferenceNotFoundException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-		
-		assertNotNull("element type should be found", typeDeclaration);
-		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("\"a\\u004c\" leftover".getBytes()));
-		
-		boolean testresult = false;
-		try {
-			testresult = typeDeclaration.recognizeType(context, sis);
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-		
-		assertTrue("Sample should be recognized", testresult);
-		assertEquals("Context buffer should contain one entry", 1, context.size());
-		Fragment fragment = context.pop();
-		testFragment(fragment, "\"a\\u004c\"", "\"a\\u004c\"");
-		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
+			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}

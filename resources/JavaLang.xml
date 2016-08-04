@@ -2,9 +2,18 @@
 <Language
 		xmlns="http://eaSTars.com/SoCoAn/lang"
 		languageprocessorfactory="org.eaSTars.socoan.lang.java.JavaProcessorFactory">
+		
+	<!--
+	
+	{} - zero or more
+	[] - zero or one
+	 
+	 -->
+	
 	<Include file="Java/JavaFormats.xml"/>
 	
 	<Include file="Java/lexical/Lexical.xml"/>
+	<Include file="Java/types/TypesValuesVariables.xml"/>
 	
 	<Include file="Java/JavaFile.xml"/>
 </Language>

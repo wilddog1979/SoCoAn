@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ComplexTypeNode {
@@ -17,7 +18,11 @@ public class ComplexTypeNode {
 	@XmlAttribute(name="type")
 	private String type;
 	
+	@XmlTransient
 	protected AbstractTypeDeclaration typeDeclaration;
+	
+	@XmlAttribute(name="occurrance", required=false)
+	protected Occurrance occurrance = Occurrance.Single;
 	
 	@XmlElement(name = "NextNode")
 	private List<NextNode> nextNodes;
@@ -41,10 +46,15 @@ public class ComplexTypeNode {
 		return nextNodes;
 	}
 
+	public Occurrance getOccurrance() {
+		return occurrance;
+	}
+
 	public void resolveNodeReferences(Language parent, ComplexType complexType) throws ReferenceNotFoundException {
-		typeDeclaration = parent.resolveTypeDeclaration(type, true);
+		//typeDeclaration = parent.resolveTypeDeclaration(type, true);
+		typeDeclaration = parent.resolveRecursiveTypeDeclaration(type);
 		if (typeDeclaration == null) {
-			throw new ReferenceNotFoundException("type",type);
+			throw new ReferenceNotFoundException(parent.getFilename(), "type (" + this.getId() + ")",type);
 		}
 		for (NextNode nextnode : getNextNodes()) {
 			nextnode.setNode(complexType.getComplexNode(nextnode.getRef()));

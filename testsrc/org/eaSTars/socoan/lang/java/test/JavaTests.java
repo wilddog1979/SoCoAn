@@ -10,6 +10,8 @@ import javax.xml.bind.Unmarshaller;
 import org.eaSTars.socoan.lang.Language;
 import org.eaSTars.socoan.lang.LanguageObjectFactory;
 import org.eaSTars.socoan.lang.ReferenceNotFoundException;
+import org.eaSTars.socoan.lang.java.lexical.test.JavaLexicalTests;
+import org.eaSTars.socoan.lang.java.types.test.JavaTypesTests;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -17,22 +19,12 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-	UnicodeInputCharacterTest.class,
-	CommentTypeTest.class,
-	SeparatorTypeTest.class,
-	IdentifierTest.class,
-	DecimalIntegerLiteralTest.class,
-	HexIntegerLiteralTest.class,
-	OctalIntegerLiteralTest.class,
-	BinaryIntegerLiteralTest.class,
-	DecimalFloatingPointLiteralTest.class,
-	HexadecimalFloatingPointLiteralTest.class,
-	CharacterLiteralTest.class,
-	StringLiteralTest.class
+	JavaLexicalTests.class,
+	JavaTypesTests.class
 })
 public class JavaTests {
 
-	private static Language javalang = null;
+private static Language javalang = null;
 	
 	@BeforeClass
 	public static void initJavaLang() throws JAXBException, ReferenceNotFoundException {
@@ -46,7 +38,7 @@ public class JavaTests {
 		javalang.resolveNodeReferences(null);
 	}
 	
-	static Language getJavaLang() throws JAXBException, ReferenceNotFoundException {
+	public static Language getJavaLang() throws JAXBException, ReferenceNotFoundException {
 		if (javalang == null) {
 			initJavaLang();
 		}

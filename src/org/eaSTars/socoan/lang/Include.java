@@ -26,6 +26,7 @@ public class Include extends AbstractBaseElement {
 		@SuppressWarnings("unchecked")
 		JAXBElement<Language> doc = (JAXBElement<Language>) unmarshaller.unmarshal(includefilelocation);
 		include = doc.getValue();
+		include.setFilename(includefilelocation.getAbsolutePath());
 		
 		include.resolveFileReferences(includefilelocation.getParentFile());
 	}

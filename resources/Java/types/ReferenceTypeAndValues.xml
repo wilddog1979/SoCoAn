@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Language xmlns="http://eaSTars.com/SoCoAn/lang">
+
+	<ComplexType id="WildcardBounds" processor="aggregating">
+		<StartNode id="keyword_extends" type="keyword_extends">
+			<NextNode ref="Separator"/>
+		</StartNode>
+		<StartNode id="keyword_super" type="keyword_super">
+			<NextNode ref="Separator"/>
+		</StartNode>
+		<Node id="Separator" type="Separator">
+			<NextNode ref="ReferenceType"/>
+		</Node>
+		<Node id="ReferenceType" type="ReferenceType"/>
+	</ComplexType>
+
+	<ComplexType id="Wildcard" processor="aggregating">
+		<StartNode id="Annotations" type="Annotations">
+			<NextNode ref="Separator1"/>
+		</StartNode>
+		<Node id="Separator1" type="Separator">
+			<NextNode ref="questionmark1"/>
+		</Node>
+		<StartNode id="questionmark1" type="questionmark">
+			<NextNode ref="Separator2"/>
+			<NextNode ref="Separator3"/>
+		</StartNode>
+		<Node id="Separator2" type="Separator">
+			<NextNode ref="WildcardBounds"/>
+		</Node>
+		<Node id="Separator3" type="Separator"/>
+		<Node id="WildcardBounds" type="WildcardBounds"/>
+		<StartNode id="questionmark2" type="questionmark">
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="TypeArgument" processor="aggregating">
+		<StartNode id="ReferenceType" type="ReferenceType"/>
+		<StartNode id="Wildcard" type="Wildcard"/>
+	</ComplexType>
+	
+	<ComplexType id="TypeArgumentEntry" processor="aggregating" multiple="true">
+		<StartNode id="Separator1" type="Separator">
+			<NextNode ref="comma"/>
+		</StartNode>
+		<StartNode id="comma" type="comma">
+			<NextNode ref="Separator2"/>
+			<NextNode ref="TypeArgument"/>
+		</StartNode>
+		<Node id="Separator2" type="Separator">
+			<NextNode ref="TypeArgument"/>
+		</Node>
+		<Node id="TypeArgument" type="TypeArgument"/>
+	</ComplexType>
+	
+	<ComplexType id="TypeArgumentList" processor="aggregating">
+		<StartNode id="TypeArgument1" type="TypeArgument">
+			<NextNode ref="TypeArgumentEntry"/>
+		</StartNode>
+		<Node id="TypeArgumentEntry" type="TypeArgumentEntry"/>
+		<StartNode id="TypeArgument2" type="TypeArgument"/>
+	</ComplexType>
+	
+	<ComplexType id="TypeArguments" processor="aggregating">
+		<StartNode id="lowerthan" type="lowerthan">
+			<NextNode ref="Separator1"/>
+			<NextNode ref="TypeArgumentList"/>
+		</StartNode>
+		
+		<Node id="Separator1" type="Separator">
+			<NextNode ref="TypeArgumentList"/>
+		</Node>
+		
+		<Node id="TypeArgumentList" type="TypeArgumentList">
+			<NextNode ref="Separator2"/>
+			<NextNode ref="greaterthan"/>
+		</Node>
+		
+		<Node id="Separator2" type="Separator">
+			<NextNode ref="greaterthan"/>
+		</Node>
+		
+		<Node id="greaterthan" type="greaterthan"/>
+	</ComplexType>
+	
+	<ComplexType id="AnnotationIdentifierTypeAgrument" processor="fallthrough">
+		<StartNode id="Annotations" type="Annotations">
+			<NextNode ref="Separator1"/>
+		</StartNode>
+		<Node id="Separator1" type="Separator">
+			<NextNode ref="Identifier1"/>
+			<NextNode ref="Identifier2"/>
+		</Node>
+		<StartNode id="Identifier1" type="Identifier">
+			<NextNode ref="Separator2"/>
+		</StartNode>
+		<Node id="Separator2" type="Separator">
+			<NextNode ref="TypeArguments"/>
+		</Node>
+		<Node id="TypeArguments" type="TypeArguments"/>
+		<StartNode id="Identifier2" type="Identifier"/>
+	</ComplexType>
+	
+	<!-- NOTE: ClassType declaration should be handled carefully, extraction method should be added later -->
+	<ComplexType id="ClassType" processor="fallthrough">
+		<StartNode id="AnnotationIdentifierTypeAgrument" type="AnnotationIdentifierTypeAgrument"/>
+	</ComplexType>
+	
+	<!-- NOTE: InterfaceType declaration should be handled carefully, extraction method should be added later -->
+	<ComplexType id="InterfaceType" processor="fallthrough">
+		<StartNode id="AnnotationIdentifierTypeAgrument" type="AnnotationIdentifierTypeAgrument"/>
+	</ComplexType>
+	
+	<ComplexType id="ClassOrInterfaceType" processor="aggregating">
+		<StartNode id="ClassType" type="ClassType"/>
+		<StartNode id="InterfaceType" type="InterfaceType"/>
+	</ComplexType>
+	
+	<ComplexType id="ClassesOrInterfaces" processor="aggregating" multiple="true">
+		<StartNode id="ClassOrInterfaceType" type="ClassOrInterfaceType">
+			<NextNode ref="Dot"/>
+		</StartNode>
+		<Node id="Dot" type="dot"/>
+	</ComplexType>
+	
+	<ComplexType id="ClassOrInterfaceTypeCommon" processor="aggregating">
+		<StartNode id="ClassesOrInterfaces" type="ClassesOrInterfaces">
+			<NextNode ref="AnnotationIdentifierTypeAgrument"/>
+		</StartNode>
+			
+		<StartNode id="AnnotationIdentifierTypeAgrument" type="AnnotationIdentifierTypeAgrument"/>
+	</ComplexType>
+	
+	<ComplexType id="TypeVariable" processor="aggregating">
+		<StartNode id="Annotations" type="Annotations">
+			<NextNode ref="Separator1"/>
+		</StartNode>
+		<Node id="Separator1" type="Separator">
+			<NextNode ref="Identifier1"/>
+		</Node>
+		<StartNode id="Identifier1" type="Identifier"/>
+	</ComplexType>
+	
+	<ComplexType id="Dims" processor="aggregating" multiple="true">
+		<StartNode id="Annotations" type="Annotations">
+			<NextNode ref="Separator1"/>
+			<NextNode ref="squarebracket_open"/>
+		</StartNode>
+		<Node id="Separator1" type="Separator">
+			<NextNode ref="squarebracket_open"/>
+		</Node>
+		
+		<StartNode id="squarebracket_open" type="squarebracket_open">
+			<NextNode ref="Separator2"/>
+			<NextNode ref="squarebracket_close"/>
+		</StartNode>
+		<Node id="Separator2" type="Separator">
+			<NextNode ref="squarebracket_close"/>
+		</Node>
+		<Node id="squarebracket_close" type="squarebracket_close">
+		</Node>
+	</ComplexType>
+	
+	<ComplexType id="ArrayType" processor="aggregating">
+		<StartNode id="PrimitiveType" type="PrimitiveType">
+			<NextNode ref="Separator"/>
+			<NextNode ref="Dims"/>
+		</StartNode>
+		<StartNode id="ClassOrInterfaceTypeCommon" type="ClassOrInterfaceTypeCommon">
+			<NextNode ref="Separator"/>
+			<NextNode ref="Dims"/>
+		</StartNode>
+		<StartNode id="TypeVariable" type="TypeVariable">
+			<NextNode ref="Separator"/>
+			<NextNode ref="Dims"/>
+		</StartNode>
+		<Node id="Separator" type="Separator">
+			<NextNode ref="Dims"/>
+		</Node>
+		<Node id="Dims" type="Dims"/>
+	</ComplexType>
+	
+	<ComplexType id="ReferenceType" processor="aggregating">
+		<StartNode id="ArrayType" type="ArrayType"/>
+		<StartNode id="ClassOrInterfaceTypeCommon" type="ClassOrInterfaceTypeCommon"/>
+		<StartNode id="TypeVariable" type="TypeVariable"/>
+	</ComplexType>
+</Language>

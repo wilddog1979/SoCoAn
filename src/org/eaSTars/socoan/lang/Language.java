@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -19,6 +20,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlType(name = "Language")
 public class Language extends AbstractBaseElement implements FormatProvider{
 
+	@XmlTransient
+	private String filename;
+	
 	@XmlAttribute(name="languageprocessorfactory")
 	protected String processorfactoryname;
 	
@@ -80,7 +84,7 @@ public class Language extends AbstractBaseElement implements FormatProvider{
 			try {
 				processorFactory = Class.forName(processorfactoryname).asSubclass(ProcessorFactory.class).newInstance();
 			} catch (Exception e) {
-				throw new ReferenceNotFoundException("processorfactory", processorfactoryname);
+				throw new ReferenceNotFoundException(parent.getFilename(), "processorfactory", processorfactoryname);
 			}
 		}
 		
@@ -112,6 +116,19 @@ public class Language extends AbstractBaseElement implements FormatProvider{
 		}
 		
 		return result;
+	}
+	
+	public AbstractTypeDeclaration resolveRecursiveTypeDeclaration(String id) {
+		AbstractTypeDeclaration result = null;
+		
+		for (AbstractBaseElement element : getElements()) {
+			if (element instanceof AbstractTypeDeclaration && ((AbstractTypeDeclaration)element).getId().equals(id)) {
+				result = (AbstractTypeDeclaration) element;
+				break;
+			}
+		}
+		
+		return result != null ? result : resolveTypeDeclaration(id, true);
 	}
 	
 	private AbstractTypeDeclaration getTypeDeclaration(Language origin, String id, boolean upward) {
@@ -178,5 +195,13 @@ public class Language extends AbstractBaseElement implements FormatProvider{
 	public String getFormat(String key, String defaultvalue) {
 		Optional<String> result = getFormat(key);
 		return result.isPresent() ? result.get() : defaultvalue;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Language xmlns="http://eaSTars.com/SoCoAn/lang">
+
+	<!-- FOR TESTS ONLY!!! -->
+
+	<LiteralType id="TestAnnotation" literal="@testannotation"/>
+
+	<ComplexType id="Annotation" processor="aggregating">
+		<StartNode id="TestAnnotation" type="TestAnnotation"/>
+	</ComplexType>
+
+	<!-- 4.2 Primitive Types and Values -->
+
+	<ComplexType id="Annotations" processor="aggregating" multiple="true">
+		<StartNode id="Annotation" type="Annotation"/>
+	</ComplexType>
+
+	<ComplexType id="FloatingPointType" processor="aggregating">
+		<StartNode id="keyword_float" type="keyword_float"/>
+		<StartNode id="keyword_double" type="keyword_double"/>
+	</ComplexType>
+
+	<ComplexType id="IntegralType" processor="aggregating">
+		<StartNode id="keyword_byte" type="keyword_byte"/>
+		<StartNode id="keyword_short" type="keyword_short"/>
+		<StartNode id="keyword_int" type="keyword_int"/>
+		<StartNode id="keyword_long" type="keyword_long"/>
+		<StartNode id="keyword_char" type="keyword_char"/>
+	</ComplexType>
+
+	<ComplexType id="NumericType" processor="aggregating">
+		<StartNode id="IntegralType" type="IntegralType"/>
+		<StartNode id="FloatingPointType" type="FloatingPointType"/>
+	</ComplexType>
+
+	<ComplexType id="PrimitiveType" processor="aggregating">
+		<StartNode id="Annotations" type="Annotations">
+			<NextNode ref="Separator"/>
+		</StartNode>
+		<Node id="Separator" type="Separator">
+			<NextNode ref="NumericType"/>
+			<NextNode ref="keyword_boolean"/>
+		</Node>
+		<StartNode id="NumericType" type="NumericType"/>
+		<StartNode id="keyword_boolean" type="keyword_boolean"/>
+	</ComplexType>
+
+	<!-- 4.3 Reference Types and Values -->
+	
+	<Include file="ReferenceTypeAndValues.xml"/>
+
+	<!-- 4.1 The Kinds of Types and Values -->
+	
+	<ComplexType id="Type" processor="aggregating">
+		<StartNode id="PrimitiveType" type="PrimitiveType"/>
+		<StartNode id="ReferenceType" type="ReferenceType"/>
+	</ComplexType>
+	
+	<!-- 4.4 Type Variables -->
+	
+	<ComplexType id="TypeParameter" processor="aggregating">
+	</ComplexType>
+</Language>
