@@ -11,10 +11,10 @@
 	</ComplexType>
 	
 	<ComplexType id="SignedInteger" processor="aggregating">
-		<StartNode type="Sign">
+		<StartNode type="Sign" occurrence="ZeroOrOne">
 			<NextNode ref="Digits"/>
 		</StartNode>
-		<StartNode id="Digits" type="Digits"/>
+		<Node id="Digits" type="Digits"/>
 	</ComplexType>
 	
 	<ComplexType id="ExponentPart" processor="aggregating">
@@ -33,40 +33,35 @@
 	
 	<ComplexType id="DecimalFloatingPointLiteral" processor="aggregating">
 		<StartNode type="Digits">
-			<NextNode ref="DecimalSeparator2"/>
+			<NextNode ref="DecimalSeparator"/>
 		</StartNode>
-		<Node id="DecimalSeparator2" type="DecimalSeparator">
-			<NextNode ref="Digits4"/>
-			<NextNode ref="Digits3"/>
+		<Node id="DecimalSeparator" type="DecimalSeparator">
+			<NextNode ref="DigitsOptional"/>
 		</Node>
-		<Node id="Digits3" type="Digits">
+		<Node id="DigitsOptional" type="Digits" occurrence="ZeroOrOne">
+			<NextNode ref="ExponentPartOptional"/>
 		</Node>
-		<Node id="ExponentPart1" type="ExponentPart">
-			<NextNode ref="FloatTypeSuffix"/>
+		<Node id="ExponentPartOptional" type="ExponentPart" occurrence="ZeroOrOne">
+			<NextNode ref="FloatTypeSuffixOptional"/>
 		</Node>
-		<Node id="FloatTypeSuffix" type="FloatTypeSuffix">
-		</Node>
-		<Node id="ExponentPart2" type="ExponentPart"/>
-		
-		<StartNode type="Digits">
-			<NextNode ref="DecimalSeparator1"/>
-		</StartNode>
-		<Node id="DecimalSeparator1" type="DecimalSeparator"/>
-		
+		<Node id="FloatTypeSuffixOptional" type="FloatTypeSuffix" occurrence="ZeroOrOne"/>
 		<StartNode type="DecimalSeparator">
-			<NextNode ref="Digits4"/>
-			<NextNode ref="Digits3"/>
+			<NextNode ref="Digits"/>
 		</StartNode>
-		<Node id="Digits4" type="Digits">
-			<NextNode ref="FloatTypeSuffix"/>
-			<NextNode ref="ExponentPart1"/>
-			<NextNode ref="ExponentPart2"/>
+		<Node id="Digits" type="Digits">
+			<NextNode ref="ExponentPartOptional"/>
 		</Node>
 		<StartNode type="Digits">
-			<NextNode ref="FloatTypeSuffix"/>
-			<NextNode ref="ExponentPart1"/>
-			<NextNode ref="ExponentPart2"/>
+			<NextNode ref="ExponentPart"/>
+			<NextNode ref="ExponentPartOptional2"/>
 		</StartNode>
+		<Node id="ExponentPart" type="ExponentPart">
+			<NextNode ref="FloatTypeSuffixOptional"/>
+		</Node>
+		<Node id="ExponentPartOptional2" type="ExponentPart" occurrence="ZeroOrOne">
+			<NextNode ref="FloatTypeSuffix"/>
+		</Node>
+		<Node id="FloatTypeSuffix" type="FloatTypeSuffix"/>
 	</ComplexType>
 	
 	<ComplexType id="BinaryExponentIndicator" processor="aggregating">
@@ -81,31 +76,24 @@
 		<Node id="SignedInteger" type="SignedInteger"/>
 	</ComplexType>
 	
-	<ComplexType id="HexSignificant" processor="aggregating">		
+	<ComplexType id="HexSignificant" processor="aggregating">
 		<StartNode type="Prefix0x">
-			<NextNode ref="HexDigits1"/>
-			<NextNode ref="DecimalSeparator2"/>
+			<NextNode ref="HexDigitsOptional"/>
 		</StartNode>
-		
 		<StartNode type="Prefix0X">
-			<NextNode ref="HexDigits1"/>
-			<NextNode ref="DecimalSeparator2"/>
+			<NextNode ref="HexDigitsOptional"/>
 		</StartNode>
-		
-		<Node id="HexDigits1" type="HexDigits">
-			<NextNode ref="DecimalSeparator2"/>
+		<Node id="HexDigitsOptional" type="HexDigits" occurrence="ZeroOrOne">
+			<NextNode ref="DecimalSeparator"/>
 		</Node>
-		<Node id="DecimalSeparator2" type="DecimalSeparator">
-			<NextNode ref="HexDigits2"/>
+		<Node id="DecimalSeparator" type="DecimalSeparator">
+			<NextNode ref="HexDigits"/>
 		</Node>
-		<Node id="HexDigits2" type="HexDigits"/>
-		
+		<Node id="HexDigits" type="HexDigits"/>
 		<StartNode type="HexNumeral">
-			<NextNode ref="DecimalSeparator1"/>
+			<NextNode ref="DecimalSeparatorOptional"/>
 		</StartNode>
-		<Node id="DecimalSeparator1" type="DecimalSeparator"/>
-		
-		<StartNode type="HexNumeral"/>
+		<Node id="DecimalSeparatorOptional" type="DecimalSeparator" occurrence="ZeroOrOne"/>
 	</ComplexType>
 	
 	<ComplexType id="HexadecimalFloatingPointLiteral" processor="aggregating">

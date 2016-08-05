@@ -13,7 +13,7 @@ import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.LangProcessors;
 import org.eaSTars.socoan.lang.Language;
-import org.eaSTars.socoan.lang.Occurrance;
+import org.eaSTars.socoan.lang.Occurrence;
 import org.junit.Test;
 
 public class ComplexTypeTest extends AbstractLangTest {
@@ -375,7 +375,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_b.setOccurrance(Occurrance.ZeroOrMore);
+		node_b.setOccurrence(Occurrence.ZeroOrMore);
 		node_a.getNextNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
@@ -417,7 +417,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_b.setOccurrance(Occurrance.ZeroOrMore);
+		node_b.setOccurrence(Occurrence.ZeroOrMore);
 		node_a.getNextNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
@@ -456,7 +456,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		 */
 		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
-		node_a.setOccurrance(Occurrance.ZeroOrMore);
+		node_a.setOccurrence(Occurrence.ZeroOrMore);
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
@@ -498,7 +498,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		 */
 		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
-		node_a.setOccurrance(Occurrance.ZeroOrMore);
+		node_a.setOccurrence(Occurrence.ZeroOrMore);
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
@@ -543,7 +543,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_b.setOccurrance(Occurrance.ZeroOrOne);
+		node_b.setOccurrence(Occurrence.ZeroOrOne);
 		node_a.getNextNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
@@ -585,7 +585,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_b.setOccurrance(Occurrance.ZeroOrOne);
+		node_b.setOccurrence(Occurrence.ZeroOrOne);
 		node_a.getNextNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
@@ -624,7 +624,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		 */
 		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
-		node_a.setOccurrance(Occurrance.ZeroOrOne);
+		node_a.setOccurrence(Occurrence.ZeroOrOne);
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
@@ -666,7 +666,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		 */
 		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
-		node_a.setOccurrance(Occurrance.ZeroOrOne);
+		node_a.setOccurrence(Occurrence.ZeroOrOne);
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
@@ -708,7 +708,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		 */
 		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
-		node_a.setOccurrance(Occurrance.ZeroOrOne);
+		node_a.setOccurrence(Occurrence.ZeroOrOne);
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));

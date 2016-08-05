@@ -3,7 +3,7 @@ package org.eaSTars.socoan.lang;
 import javax.xml.bind.annotation.XmlEnum;
 
 @XmlEnum
-public enum Occurrance {
+public enum Occurrence {
 
 	Single,
 	ZeroOrMore,	// {}
@@ -13,7 +13,7 @@ public enum Occurrance {
 		return name();
 	}
 	
-	public static Occurrance fromValue(String value) {
+	public static Occurrence fromValue(String value) {
 		return valueOf(value);
 	}
 }

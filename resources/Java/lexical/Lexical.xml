@@ -355,9 +355,8 @@
 	<ComplexType id="StringLiteral" processor="aggregating">
 		<StartNode type="DoubleQuote">
 			<NextNode ref="StringCharacter"/>
-			<NextNode ref="DoubleQuote2"/>
 		</StartNode>
-		<Node id="StringCharacter" type="StringCharacter">
+		<Node id="StringCharacter" type="StringCharacter" occurrence="ZeroOrMore">
 			<NextNode ref="DoubleQuote2"/>
 		</Node>
 		<Node id="DoubleQuote2" type="DoubleQuote"/>

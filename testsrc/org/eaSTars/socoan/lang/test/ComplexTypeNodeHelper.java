@@ -2,7 +2,7 @@ package org.eaSTars.socoan.lang.test;
 
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.ComplexTypeNode;
-import org.eaSTars.socoan.lang.Occurrance;
+import org.eaSTars.socoan.lang.Occurrence;
 
 public class ComplexTypeNodeHelper extends ComplexTypeNode {
 
@@ -17,7 +17,7 @@ public class ComplexTypeNodeHelper extends ComplexTypeNode {
 		super.typeDeclaration = typedeclaration;
 	}
 	
-	public void setOccurrance(Occurrance occurrance) {
-		super.occurrance = occurrance;
+	public void setOccurrence(Occurrence occurrence) {
+		super.occurrence = occurrence;
 	}
 }

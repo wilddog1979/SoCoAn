@@ -126,7 +126,7 @@ public class ComplexType extends AbstractTypeDeclaration {
 	protected boolean recognizeNode(ComplexTypeNode node, Context context, SourcecodeInputStream sis) throws IOException {
 		int contextsize = context.size();
 		boolean result = false;
-		switch(node.getOccurrance()) {
+		switch(node.getOccurrence()) {
 		case ZeroOrMore: // {}
 			while(node.getTypeDeclaration().recognizeType(context, sis)){
 				context.peek().setId(node.getId());

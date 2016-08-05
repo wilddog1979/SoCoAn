@@ -21,8 +21,8 @@ public class ComplexTypeNode {
 	@XmlTransient
 	protected AbstractTypeDeclaration typeDeclaration;
 	
-	@XmlAttribute(name="occurrance", required=false)
-	protected Occurrance occurrance = Occurrance.Single;
+	@XmlAttribute(name="occurrence", required=false)
+	protected Occurrence occurrence = Occurrence.Single;
 	
 	@XmlElement(name = "NextNode")
 	private List<NextNode> nextNodes;
@@ -46,8 +46,8 @@ public class ComplexTypeNode {
 		return nextNodes;
 	}
 
-	public Occurrance getOccurrance() {
-		return occurrance;
+	public Occurrence getOccurrence() {
+		return occurrence;
 	}
 
 	public void resolveNodeReferences(Language parent, ComplexType complexType) throws ReferenceNotFoundException {
