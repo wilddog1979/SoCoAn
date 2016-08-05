@@ -6,35 +6,35 @@
 	<LiteralType id="TestAnnotation" literal="@testannotation"/>
 
 	<ComplexType id="Annotation" processor="aggregating">
-		<StartNode id="TestAnnotation" type="TestAnnotation"/>
+		<StartNode type="TestAnnotation"/>
 	</ComplexType>
 
 	<!-- 4.2 Primitive Types and Values -->
 
 	<ComplexType id="Annotations" processor="aggregating" multiple="true">
-		<StartNode id="Annotation" type="Annotation"/>
+		<StartNode type="Annotation"/>
 	</ComplexType>
 
 	<ComplexType id="FloatingPointType" processor="aggregating">
-		<StartNode id="keyword_float" type="keyword_float"/>
-		<StartNode id="keyword_double" type="keyword_double"/>
+		<StartNode type="keyword_float"/>
+		<StartNode type="keyword_double"/>
 	</ComplexType>
 
 	<ComplexType id="IntegralType" processor="aggregating">
-		<StartNode id="keyword_byte" type="keyword_byte"/>
-		<StartNode id="keyword_short" type="keyword_short"/>
-		<StartNode id="keyword_int" type="keyword_int"/>
-		<StartNode id="keyword_long" type="keyword_long"/>
-		<StartNode id="keyword_char" type="keyword_char"/>
+		<StartNode type="keyword_byte"/>
+		<StartNode type="keyword_short"/>
+		<StartNode type="keyword_int"/>
+		<StartNode type="keyword_long"/>
+		<StartNode type="keyword_char"/>
 	</ComplexType>
 
 	<ComplexType id="NumericType" processor="aggregating">
-		<StartNode id="IntegralType" type="IntegralType"/>
-		<StartNode id="FloatingPointType" type="FloatingPointType"/>
+		<StartNode type="IntegralType"/>
+		<StartNode type="FloatingPointType"/>
 	</ComplexType>
 
 	<ComplexType id="PrimitiveType" processor="aggregating">
-		<StartNode id="Annotations" type="Annotations">
+		<StartNode type="Annotations">
 			<NextNode ref="Separator"/>
 		</StartNode>
 		<Node id="Separator" type="Separator">
@@ -52,8 +52,8 @@
 	<!-- 4.1 The Kinds of Types and Values -->
 	
 	<ComplexType id="Type" processor="aggregating">
-		<StartNode id="PrimitiveType" type="PrimitiveType"/>
-		<StartNode id="ReferenceType" type="ReferenceType"/>
+		<StartNode type="PrimitiveType"/>
+		<StartNode type="ReferenceType"/>
 	</ComplexType>
 	
 	<!-- 4.4 Type Variables -->

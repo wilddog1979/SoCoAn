@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Language xmlns="http://eaSTars.com/SoCoAn/lang">
 	<ComplexType id="ExponentIndicator" processor="aggregating">
-		<StartNode id="Exponente" type="Exponente"/>
-		<StartNode id="ExponentE" type="ExponentE"/>
+		<StartNode type="Exponente"/>
+		<StartNode type="ExponentE"/>
 	</ComplexType>
 	
 	<ComplexType id="Sign" processor="aggregating">
-		<StartNode id="Sign+" type="Sign+"/>
-		<StartNode id="Sign-" type="Sign-"/>
+		<StartNode type="Sign+"/>
+		<StartNode type="Sign-"/>
 	</ComplexType>
 	
 	<ComplexType id="SignedInteger" processor="aggregating">
-		<StartNode id="Sign" type="Sign">
+		<StartNode type="Sign">
 			<NextNode ref="Digits"/>
 		</StartNode>
 		<StartNode id="Digits" type="Digits"/>
 	</ComplexType>
 	
 	<ComplexType id="ExponentPart" processor="aggregating">
-		<StartNode id="ExponentIndicator" type="ExponentIndicator">
+		<StartNode type="ExponentIndicator">
 			<NextNode ref="SignedInteger"/>
 		</StartNode>
 		<Node id="SignedInteger" type="SignedInteger"/>
 	</ComplexType>
 	
 	<ComplexType id="FloatTypeSuffix" processor="aggregating">
-		<StartNode id="FloatTypef" type="FloatTypef"/>
-		<StartNode id="FloatTypeF" type="FloatTypeF"/>
-		<StartNode id="FloatTyped" type="FloatTyped"/>
-		<StartNode id="FloatTypeD" type="FloatTypeD"/>
+		<StartNode type="FloatTypef"/>
+		<StartNode type="FloatTypeF"/>
+		<StartNode type="FloatTyped"/>
+		<StartNode type="FloatTypeD"/>
 	</ComplexType>
 	
 	<ComplexType id="DecimalFloatingPointLiteral" processor="aggregating">
-		<StartNode id="Digits2" type="Digits">
+		<StartNode type="Digits">
 			<NextNode ref="DecimalSeparator2"/>
 		</StartNode>
 		<Node id="DecimalSeparator2" type="DecimalSeparator">
@@ -48,12 +48,12 @@
 		</Node>
 		<Node id="ExponentPart2" type="ExponentPart"/>
 		
-		<StartNode id="Digits1" type="Digits">
+		<StartNode type="Digits">
 			<NextNode ref="DecimalSeparator1"/>
 		</StartNode>
 		<Node id="DecimalSeparator1" type="DecimalSeparator"/>
 		
-		<StartNode id="DecimalSeparator3" type="DecimalSeparator">
+		<StartNode type="DecimalSeparator">
 			<NextNode ref="Digits4"/>
 			<NextNode ref="Digits3"/>
 		</StartNode>
@@ -62,7 +62,7 @@
 			<NextNode ref="ExponentPart1"/>
 			<NextNode ref="ExponentPart2"/>
 		</Node>
-		<StartNode id="Digits5" type="Digits">
+		<StartNode type="Digits">
 			<NextNode ref="FloatTypeSuffix"/>
 			<NextNode ref="ExponentPart1"/>
 			<NextNode ref="ExponentPart2"/>
@@ -70,24 +70,24 @@
 	</ComplexType>
 	
 	<ComplexType id="BinaryExponentIndicator" processor="aggregating">
-		<StartNode id="BinaryExpp" type="BinaryExpp"/>
-		<StartNode id="BinaryExpP" type="BinaryExpP"/>
+		<StartNode type="BinaryExpp"/>
+		<StartNode type="BinaryExpP"/>
 	</ComplexType>
 	
 	<ComplexType id="BinaryExponent" processor="aggregating">
-		<StartNode id="BinaryExponentIndicator" type="BinaryExponentIndicator">
+		<StartNode type="BinaryExponentIndicator">
 			<NextNode ref="SignedInteger"/>
 		</StartNode>
 		<Node id="SignedInteger" type="SignedInteger"/>
 	</ComplexType>
 	
 	<ComplexType id="HexSignificant" processor="aggregating">		
-		<StartNode id="Prefix0x" type="Prefix0x">
+		<StartNode type="Prefix0x">
 			<NextNode ref="HexDigits1"/>
 			<NextNode ref="DecimalSeparator2"/>
 		</StartNode>
 		
-		<StartNode id="Prefix0X" type="Prefix0X">
+		<StartNode type="Prefix0X">
 			<NextNode ref="HexDigits1"/>
 			<NextNode ref="DecimalSeparator2"/>
 		</StartNode>
@@ -100,16 +100,16 @@
 		</Node>
 		<Node id="HexDigits2" type="HexDigits"/>
 		
-		<StartNode id="HexNumeral1" type="HexNumeral">
+		<StartNode type="HexNumeral">
 			<NextNode ref="DecimalSeparator1"/>
 		</StartNode>
 		<Node id="DecimalSeparator1" type="DecimalSeparator"/>
 		
-		<StartNode id="HexNumeral2" type="HexNumeral"/>
+		<StartNode type="HexNumeral"/>
 	</ComplexType>
 	
 	<ComplexType id="HexadecimalFloatingPointLiteral" processor="aggregating">
-		<StartNode id="HexSignificant1" type="HexSignificant">
+		<StartNode type="HexSignificant">
 			<NextNode ref="BinaryExponent1"/>
 			<NextNode ref="BinaryExponent2"/>
 		</StartNode>
@@ -121,7 +121,7 @@
 	</ComplexType>
 	
 	<ComplexType id="FloatingPointLiteral" processor="aggregating">
-		<StartNode id="DecimalFloatingPointLiteral" type="DecimalFloatingPointLiteral"/>
-		<StartNode id="HexadecimalFloatingPointLiteral" type="HexadecimalFloatingPointLiteral"/>
+		<StartNode type="DecimalFloatingPointLiteral"/>
+		<StartNode type="HexadecimalFloatingPointLiteral"/>
 	</ComplexType>
 </Language>

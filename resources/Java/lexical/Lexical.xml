@@ -27,68 +27,68 @@
 	<LiteralType id="DigitF" literal="F"/>
 	
 	<ComplexType id="BinaryDigit" processor="aggregating">
-		<StartNode id="Digit0" type="Digit0"/>
-		<StartNode id="Digit1" type="Digit1"/>
+		<StartNode type="Digit0"/>
+		<StartNode type="Digit1"/>
 	</ComplexType>
 	
 	<ComplexType id="ZeroToThree" processor="aggregating">
-		<StartNode id="Digit0" type="Digit0"/>
-		<StartNode id="Digit1" type="Digit1"/>
-		<StartNode id="Digit2" type="Digit2"/>
-		<StartNode id="Digit3" type="Digit3"/>
+		<StartNode type="Digit0"/>
+		<StartNode type="Digit1"/>
+		<StartNode type="Digit2"/>
+		<StartNode type="Digit3"/>
 	</ComplexType>
 	
 	<ComplexType id="OctalDigit" processor="aggregating">
-		<StartNode id="Digit0" type="Digit0"/>
-		<StartNode id="Digit1" type="Digit1"/>
-		<StartNode id="Digit2" type="Digit2"/>
-		<StartNode id="Digit3" type="Digit3"/>
-		<StartNode id="Digit4" type="Digit4"/>
-		<StartNode id="Digit5" type="Digit5"/>
-		<StartNode id="Digit6" type="Digit6"/>
-		<StartNode id="Digit7" type="Digit7"/>
+		<StartNode type="Digit0"/>
+		<StartNode type="Digit1"/>
+		<StartNode type="Digit2"/>
+		<StartNode type="Digit3"/>
+		<StartNode type="Digit4"/>
+		<StartNode type="Digit5"/>
+		<StartNode type="Digit6"/>
+		<StartNode type="Digit7"/>
 	</ComplexType>
 	
 	<ComplexType id="NonZeroDigit" processor="aggregating">
-		<StartNode id="Digit1" type="Digit1"/>
-		<StartNode id="Digit2" type="Digit2"/>
-		<StartNode id="Digit3" type="Digit3"/>
-		<StartNode id="Digit4" type="Digit4"/>
-		<StartNode id="Digit5" type="Digit5"/>
-		<StartNode id="Digit6" type="Digit6"/>
-		<StartNode id="Digit7" type="Digit7"/>
-		<StartNode id="Digit8" type="Digit8"/>
-		<StartNode id="Digit9" type="Digit9"/>
+		<StartNode type="Digit1"/>
+		<StartNode type="Digit2"/>
+		<StartNode type="Digit3"/>
+		<StartNode type="Digit4"/>
+		<StartNode type="Digit5"/>
+		<StartNode type="Digit6"/>
+		<StartNode type="Digit7"/>
+		<StartNode type="Digit8"/>
+		<StartNode type="Digit9"/>
 	</ComplexType>
 	
 	<ComplexType id="Digit" processor="aggregating">
-		<StartNode id="Digit0" type="Digit0"/>
-		<StartNode id="NonZeroDigit" type="NonZeroDigit"/>
+		<StartNode type="Digit0"/>
+		<StartNode type="NonZeroDigit"/>
 	</ComplexType>
 	
 	<ComplexType id="HexDigit" processor="aggregating">
-		<StartNode id="Digit0" type="Digit0"/>
-		<StartNode id="Digit1" type="Digit1"/>
-		<StartNode id="Digit2" type="Digit2"/>
-		<StartNode id="Digit3" type="Digit3"/>
-		<StartNode id="Digit4" type="Digit4"/>
-		<StartNode id="Digit5" type="Digit5"/>
-		<StartNode id="Digit6" type="Digit6"/>
-		<StartNode id="Digit7" type="Digit7"/>
-		<StartNode id="Digit8" type="Digit8"/>
-		<StartNode id="Digit9" type="Digit9"/>
-		<StartNode id="Digita" type="Digita"/>
-		<StartNode id="Digitb" type="Digitb"/>
-		<StartNode id="Digitc" type="Digitc"/>
-		<StartNode id="Digitd" type="Digitd"/>
-		<StartNode id="Digite" type="Digite"/>
-		<StartNode id="Digitf" type="Digitf"/>
-		<StartNode id="DigitA" type="DigitA"/>
-		<StartNode id="DigitB" type="DigitB"/>
-		<StartNode id="DigitC" type="DigitC"/>
-		<StartNode id="DigitD" type="DigitD"/>
-		<StartNode id="DigitE" type="DigitE"/>
-		<StartNode id="DigitF" type="DigitF"/>
+		<StartNode type="Digit0"/>
+		<StartNode type="Digit1"/>
+		<StartNode type="Digit2"/>
+		<StartNode type="Digit3"/>
+		<StartNode type="Digit4"/>
+		<StartNode type="Digit5"/>
+		<StartNode type="Digit6"/>
+		<StartNode type="Digit7"/>
+		<StartNode type="Digit8"/>
+		<StartNode type="Digit9"/>
+		<StartNode type="Digita"/>
+		<StartNode type="Digitb"/>
+		<StartNode type="Digitc"/>
+		<StartNode type="Digitd"/>
+		<StartNode type="Digite"/>
+		<StartNode type="Digitf"/>
+		<StartNode type="DigitA"/>
+		<StartNode type="DigitB"/>
+		<StartNode type="DigitC"/>
+		<StartNode type="DigitD"/>
+		<StartNode type="DigitE"/>
+		<StartNode type="DigitF"/>
 	</ComplexType>
 
 	<LiteralType id="SP" literal=" "/>
@@ -107,11 +107,11 @@
 	<LiteralType id="UnicodeEscapeu" literal="u"/>
 
 	<ComplexType id="UnicodeMarker" processor="aggregating" multiple="true">
-		<StartNode id="UnicodeEscapeu" type="UnicodeEscapeu"/>
+		<StartNode type="UnicodeEscapeu"/>
 	</ComplexType>
 
 	<ComplexType id="UnicodeEscape" processor="aggregating">
-		<StartNode id="Backslash" type="Backslash">
+		<StartNode type="Backslash">
 			<NextNode ref="UnicodeMarker"/>
 		</StartNode>
 		<Node id="UnicodeMarker" type="UnicodeMarker">	
@@ -132,31 +132,31 @@
 	<CustomType id="RawInputCharacter" recognizer="RawInputCharacter"/>
 
 	<ComplexType id="UnicodeInputCharacter" processor="aggregating">
-		<StartNode id="UnicodeEscape" type="UnicodeEscape"/>
-		<StartNode id="RawInputCharacter" type="RawInputCharacter"/>
+		<StartNode type="UnicodeEscape"/>
+		<StartNode type="RawInputCharacter"/>
 	</ComplexType>
 
 	<!-- 3.4 Line Terminators -->
 
 	<ComplexType id="LineTerminator" processor="aggregating">
 		<StartNode id="LF" type="LF"/>
-		<StartNode id="CR1" type="CR">
+		<StartNode type="CR">
 			<NextNode ref="LF"/>
 		</StartNode>
-		<StartNode id="CR2" type="CR"/>
+		<StartNode type="CR"/>
 	</ComplexType>
 
 	<ComplexType id="InputCharacter" processor="aggregating" checker="InputCharacterCheck">
-		<StartNode id="UnicodeInputCharacter" type="UnicodeInputCharacter"/>
+		<StartNode type="UnicodeInputCharacter"/>
 	</ComplexType>
 
 	<!-- 3.6 White Space -->
 
 	<ComplexType id="WhiteSpace" multiple="true" processor="aggregating">
-		<StartNode id="SP" type="SP"/>
-		<StartNode id="HT" type="HT"/>
-		<StartNode id="FF" type="FF"/>
-		<StartNode id="LineTerminator" type="LineTerminator"/>
+		<StartNode type="SP"/>
+		<StartNode type="HT"/>
+		<StartNode type="FF"/>
+		<StartNode type="LineTerminator"/>
 	</ComplexType>
 	
 	<!--  Comments -->
@@ -192,8 +192,8 @@
 	</ComplexType>
 	
 	<ComplexType id="Separator" processor="separator" multiple="true">
-		<StartNode id="WhiteSpace" type="WhiteSpace"/>
-		<StartNode id="Comment" type="Comment"/>
+		<StartNode type="WhiteSpace"/>
+		<StartNode type="Comment"/>
 	</ComplexType>
 	
 	<!-- 3.8 Identifiers -->
@@ -203,16 +203,15 @@
 	<CustomType id="JavaLetterOrDigit" recognizer="JavaLetterOrDigit"/>
 	
 	<ComplexType id="IdentifierCharsRest" processor="aggregating" multiple="true">
-		<StartNode id="JavaLetterOrDigit" type="JavaLetterOrDigit"/>
+		<StartNode type="JavaLetterOrDigit"/>
 	</ComplexType>
 	
 	<ComplexType id="Identifier" processor="aggregating" checker="IdentifierCheck">
-		<StartNode id="JavaLetter1" type="JavaLetter">
+		<StartNode type="JavaLetter">
 			<NextNode ref="IdentifierCharsRest"/>
 		</StartNode>
 		<Node id="IdentifierCharsRest" type="IdentifierCharsRest"/>
-		<StartNode id="JavaLetter2" type="JavaLetter">
-		</StartNode>
+		<StartNode type="JavaLetter"/>
 	</ComplexType>
 	
 	<!-- 3.10 Literals -->
@@ -252,8 +251,8 @@
 	<LiteralType id="False" literal="false"/>
 	
 	<ComplexType id="BooleanLiteral" processor="aggregating">
-		<StartNode id="True" type="True"/>
-		<StartNode id="False" type="False"/>
+		<StartNode type="True"/>
+		<StartNode type="False"/>
 	</ComplexType>
 	
 	<!-- 3.10.6 Escape Sequences for Character and String Literals -->
@@ -265,13 +264,13 @@
 	<LiteralType id="Escaper" literal="r"/>
 	
 	<ComplexType id="OctalEscape" processor="aggregating">
-		<StartNode id="Backslash1" type="Backslash">
+		<StartNode type="Backslash">
 			<NextNode ref="ZeroToThree"/>
 		</StartNode>
-		<StartNode id="Backslash2" type="Backslash">
+		<StartNode type="Backslash">
 			<NextNode ref="OctalDigit1"/>
 		</StartNode>
-		<StartNode id="Backslash3" type="Backslash">
+		<StartNode type="Backslash">
 			<NextNode ref="OctalDigit2"/>
 		</StartNode>
 		<Node id="ZeroToThree" type="ZeroToThree">
@@ -284,49 +283,49 @@
 	</ComplexType>
 	
 	<ComplexType id="EscapeSequence" processor="aggregating">
-		<StartNode id="BS" type="Backslash">
+		<StartNode type="Backslash">
 			<NextNode ref="Escapeb"/>
 		</StartNode>
 		<Node id="Escapeb" type="Escapeb"/>
-		<StartNode id="HT" type="Backslash">
+		<StartNode type="Backslash">
 			<NextNode ref="Escapet"/>
 		</StartNode>
 		<Node id="Escapet" type="Escapet"/>
-		<StartNode id="LF" type="Backslash">
+		<StartNode type="Backslash">
 			<NextNode ref="Escapen"/>
 		</StartNode>
 		<Node id="Escapen" type="Escapen"/>
-		<StartNode id="FF" type="Backslash">
+		<StartNode type="Backslash">
 			<NextNode ref="Escapef"/>
 		</StartNode>
 		<Node id="Escapef" type="Escapef"/>
-		<StartNode id="CR" type="Backslash">
+		<StartNode type="Backslash">
 			<NextNode ref="Escaper"/>
 		</StartNode>
 		<Node id="Escaper" type="Escaper"/>
-		<StartNode id="DoubleQuote" type="Backslash">
+		<StartNode type="Backslash">
 			<NextNode ref="EscapeDoubleQuote"/>
 		</StartNode>
 		<Node id="EscapeDoubleQuote" type="DoubleQuote"/>
-		<StartNode id="SingleQuote" type="Backslash">
+		<StartNode type="Backslash">
 			<NextNode ref="EscapeSingleQuote"/>
 		</StartNode>
 		<Node id="EscapeSingleQuote" type="SingleQuote"/>
-		<StartNode id="Backslash" type="Backslash">
+		<StartNode type="Backslash">
 			<NextNode ref="EscapeBackslash"/>
 		</StartNode>
 		<Node id="EscapeBackslash" type="Backslash"/>
-		<StartNode id="OctalEscape" type="OctalEscape"/>
+		<StartNode type="OctalEscape"/>
 	</ComplexType>
 	
 	<!-- 3.10.4 Character Literals -->
 	
 	<ComplexType id="SingleCharacter" processor="aggregating" checker="SingleCharacterCheck">
-		<StartNode id="InputCharacter" type="InputCharacter"/>
+		<StartNode type="InputCharacter"/>
 	</ComplexType>
 	
 	<ComplexType id="CharacterLiteral" processor="aggregating">
-		<StartNode id="SingleQuote1" type="SingleQuote">
+		<StartNode type="SingleQuote">
 			<NextNode ref="SingleCharacter"/>
 		</StartNode>
 		<Node id="SingleCharacter" type="SingleCharacter">
@@ -334,7 +333,7 @@
 		</Node>
 		<Node id="SingleQuote2" type="SingleQuote"/>
 		
-		<StartNode id="SingleQuote3" type="SingleQuote">
+		<StartNode type="SingleQuote">
 			<NextNode ref="EscapeSequence"/>
 		</StartNode>
 		<Node id="EscapeSequence" type="EscapeSequence">
@@ -345,16 +344,16 @@
 	<!-- 3.10.5 String Literals -->
 	
 	<ComplexType id="StringCharacters" processor="aggregating" checker="StringCharactersCheck">
-		<StartNode id="InputCharacter" type="InputCharacter"/>
+		<StartNode type="InputCharacter"/>
 	</ComplexType>
 	
 	<ComplexType id="StringCharacter" processor="aggregating" multiple="true">
-		<StartNode id="StringCharacters" type="StringCharacters"/>
-		<StartNode id="EscapeSequence" type="EscapeSequence"/>
+		<StartNode type="StringCharacters"/>
+		<StartNode type="EscapeSequence"/>
 	</ComplexType>
 	
 	<ComplexType id="StringLiteral" processor="aggregating">
-		<StartNode id="DoubleQuote1" type="DoubleQuote">
+		<StartNode type="DoubleQuote">
 			<NextNode ref="StringCharacter"/>
 			<NextNode ref="DoubleQuote2"/>
 		</StartNode>
@@ -384,18 +383,18 @@
 	<LiteralType id="doubecolon" literal="::"/>
 	
 	<ComplexType id="Separator" processor="aggregating">
-		<StartNode id="bracket_open" type="bracket_open"/>
-		<StartNode id="bracket_close" type="bracket_close"/>
-		<StartNode id="curlybracket_open" type="curlybracket_open"/>
-		<StartNode id="curlybracket_close" type="curlybracket_close"/>
-		<StartNode id="squarebracket_open" type="squarebracket_open"/>
-		<StartNode id="squarebracket_close" type="squarebracket_close"/>
-		<StartNode id="semicolon" type="semicolon"/>
-		<StartNode id="comma" type="comma"/>
-		<StartNode id="dot" type="dot"/>
-		<StartNode id="tripledot" type="tripledot"/>
-		<StartNode id="at" type="at"/>
-		<StartNode id="doubecolon" type="doubecolon"/>
+		<StartNode type="bracket_open"/>
+		<StartNode type="bracket_close"/>
+		<StartNode type="curlybracket_open"/>
+		<StartNode type="curlybracket_close"/>
+		<StartNode type="squarebracket_open"/>
+		<StartNode type="squarebracket_close"/>
+		<StartNode type="semicolon"/>
+		<StartNode type="comma"/>
+		<StartNode type="dot"/>
+		<StartNode type="tripledot"/>
+		<StartNode type="at"/>
+		<StartNode type="doubecolon"/>
 	</ComplexType>
 	
 	<!-- 3.12 Operators -->
@@ -443,46 +442,46 @@
 	<LiteralType id="zerofillshiftrightequal" literal="&gt;&gt;&gt;="/>
 	
 	<ComplexType id="Operator" processor="aggregating">
-		<StartNode id="equal" type="equal"/>
-		<StartNode id="greaterthan" type="greaterthan"/>
-		<StartNode id="lowerthan" type="lowerthan"/>
-		<StartNode id="exclamationmark" type="exclamationmark"/>
-		<StartNode id="tilde" type="tilde"/>
-		<StartNode id="questionmark" type="questionmark"/>
-		<StartNode id="colon" type="colon"/>
-		<StartNode id="arrowtoken" type="arrowtoken"/>
+		<StartNode type="equal"/>
+		<StartNode type="greaterthan"/>
+		<StartNode type="lowerthan"/>
+		<StartNode type="exclamationmark"/>
+		<StartNode type="tilde"/>
+		<StartNode type="questionmark"/>
+		<StartNode type="colon"/>
+		<StartNode type="arrowtoken"/>
 		
-		<StartNode id="doubleequal" type="doubleequal"/>
-		<StartNode id="greaterthanorequal" type="greaterthanorequal"/>
-		<StartNode id="lowerthanorequal" type="lowerthanorequal"/>
-		<StartNode id="notequal" type="notequal"/>
-		<StartNode id="doubleand" type="doubleand"/>
-		<StartNode id="doubleor" type="doubleor"/>
-		<StartNode id="doubleplus" type="doubleplus"/>
-		<StartNode id="doubleminus" type="doubleminus"/>
+		<StartNode type="doubleequal"/>
+		<StartNode type="greaterthanorequal"/>
+		<StartNode type="lowerthanorequal"/>
+		<StartNode type="notequal"/>
+		<StartNode type="doubleand"/>
+		<StartNode type="doubleor"/>
+		<StartNode type="doubleplus"/>
+		<StartNode type="doubleminus"/>
 		
-		<StartNode id="plus" type="plus"/>
-		<StartNode id="minus" type="minus"/>
-		<StartNode id="multiply" type="multiply"/>
-		<StartNode id="divide" type="divide"/>
-		<StartNode id="and" type="and"/>
-		<StartNode id="or" type="or"/>
-		<StartNode id="xor" type="xor"/>
-		<StartNode id="modulo" type="modulo"/>
-		<StartNode id="shiftleft" type="shiftleft"/>
-		<StartNode id="shiftright" type="shiftright"/>
-		<StartNode id="zerofillshiftright" type="zerofillshiftright"/>
+		<StartNode type="plus"/>
+		<StartNode type="minus"/>
+		<StartNode type="multiply"/>
+		<StartNode type="divide"/>
+		<StartNode type="and"/>
+		<StartNode type="or"/>
+		<StartNode type="xor"/>
+		<StartNode type="modulo"/>
+		<StartNode type="shiftleft"/>
+		<StartNode type="shiftright"/>
+		<StartNode type="zerofillshiftright"/>
 		
-		<StartNode id="plusequal" type="plusequal"/>
-		<StartNode id="minusequal" type="minusequal"/>
-		<StartNode id="multiplyequal" type="multiplyequal"/>
-		<StartNode id="divideequal" type="divideequal"/>
-		<StartNode id="andequal" type="andequal"/>
-		<StartNode id="orequal" type="orequal"/>
-		<StartNode id="xorequal" type="xorequal"/>
-		<StartNode id="moduloequal" type="moduloequal"/>
-		<StartNode id="shiftleftequal" type="shiftleftequal"/>
-		<StartNode id="shiftrightequal" type="shiftrightequal"/>
-		<StartNode id="zerofillshiftrightequal" type="zerofillshiftrightequal"/>
+		<StartNode type="plusequal"/>
+		<StartNode type="minusequal"/>
+		<StartNode type="multiplyequal"/>
+		<StartNode type="divideequal"/>
+		<StartNode type="andequal"/>
+		<StartNode type="orequal"/>
+		<StartNode type="xorequal"/>
+		<StartNode type="moduloequal"/>
+		<StartNode type="shiftleftequal"/>
+		<StartNode type="shiftrightequal"/>
+		<StartNode type="zerofillshiftrightequal"/>
 	</ComplexType>
 </Language>

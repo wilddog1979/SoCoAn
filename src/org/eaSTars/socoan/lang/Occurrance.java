@@ -6,8 +6,8 @@ import javax.xml.bind.annotation.XmlEnum;
 public enum Occurrance {
 
 	Single,
-	ZeroOrMore,
-	ZeroOrOne;
+	ZeroOrMore,	// {}
+	ZeroOrOne;	// []
 	
 	public String value() {
 		return name();

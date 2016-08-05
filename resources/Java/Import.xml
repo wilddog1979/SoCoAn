@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Language xmlns="http://eaSTars.com/SoCoAn/lang">
 	<ComplexType id="Import" processor="simplecommand">
-		<StartNode id="Separator1" type="Separator">
+		<StartNode type="Separator">
 			<NextNode ref="ImportNode"/>
 		</StartNode>
 		

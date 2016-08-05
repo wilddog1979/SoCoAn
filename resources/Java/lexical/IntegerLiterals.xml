@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Language xmlns="http://eaSTars.com/SoCoAn/lang">
 	<ComplexType id="IntegerTypeSuffix" processor="aggregating">
-		<StartNode id="Suffixl" type="Suffixl"/>
-		<StartNode id="SuffixL" type="SuffixL"/>
+		<StartNode type="Suffixl"/>
+		<StartNode type="SuffixL"/>
 	</ComplexType>
 	
 	<ComplexType id="DigitOrUnderscore" processor="aggregating">
-		<StartNode id="Digit" type="Digit"/>
-		<StartNode id="Underscore" type="Underscore"/>
+		<StartNode type="Digit"/>
+		<StartNode type="Underscore"/>
 	</ComplexType>
 	
 	<ComplexType id="DigitOrUnderscores" processor="aggregating" multiple="true">
-		<StartNode id="DigitOrUnderscore" type="DigitOrUnderscore"/>
+		<StartNode type="DigitOrUnderscore"/>
 	</ComplexType>
 	
 	<ComplexType id="DigitsAndUnderscores" processor="aggregating">
-		<StartNode id="DigitOrUnderscore1" type="DigitOrUnderscore">
+		<StartNode type="DigitOrUnderscore">
 			<NextNode ref="DigitOrUnderscores"/>
 		</StartNode>
-		<StartNode id="DigitOrUnderscore2" type="DigitOrUnderscore"/>
+		<StartNode type="DigitOrUnderscore"/>
 		<Node id="DigitOrUnderscores" type="DigitOrUnderscores"/>
 	</ComplexType>
 	
 	<ComplexType id="Digits" processor="aggregating">
-		<StartNode id="Digit1" type="Digit">
+		<StartNode type="Digit">
 			<NextNode ref="DigitsAndUnderscores"/>
 			<NextNode ref="Digit2"/>
 		</StartNode>
@@ -34,14 +34,14 @@
 	</ComplexType>
 	
 	<ComplexType id="DecimalNumeral" processor="aggregating">
-		<StartNode id="Digit0" type="Digit0"/>
-		<StartNode id="NonZeroDigit1" type="NonZeroDigit">
+		<StartNode type="Digit0"/>
+		<StartNode type="NonZeroDigit">
 			<NextNode ref="Underscore"/>
 		</StartNode>
-		<StartNode id="NonZeroDigit2" type="NonZeroDigit">
+		<StartNode type="NonZeroDigit">
 			<NextNode ref="Digits"/>
 		</StartNode>
-		<StartNode id="NonZeroDigit3" type="NonZeroDigit"/>
+		<StartNode type="NonZeroDigit"/>
 		<Node id="Underscore" type="Underscore">
 			<NextNode ref="Digits"/>
 		</Node>
@@ -49,83 +49,81 @@
 	</ComplexType>
 	
 	<ComplexType id="DecimalIntegerLiteral" processor="aggregating">
-		<StartNode id="DecimalNumeral1" type="DecimalNumeral">
+		<StartNode type="DecimalNumeral">
 			<NextNode ref="IntegerTypeSuffix"/>
 		</StartNode>
-		<Node id="IntegerTypeSuffix" type="IntegerTypeSuffix"/>
-		<StartNode id="DecimalNumeral2" type="DecimalNumeral"/>
+		<Node id="IntegerTypeSuffix" type="IntegerTypeSuffix" occurrance="ZeroOrOne"/>
 	</ComplexType>
 	
 	<ComplexType id="HexDigitOrUnderscore" processor="aggregating">
-		<StartNode id="HexDigit" type="HexDigit"/>
-		<StartNode id="Underscore" type="Underscore"/>
+		<StartNode type="HexDigit"/>
+		<StartNode type="Underscore"/>
 	</ComplexType>
 	
 	<ComplexType id="HexDigitOrUnderscores" processor="aggregating" multiple="true">
-		<StartNode id="HexDigitOrUnderscore" type="HexDigitOrUnderscore"/>
+		<StartNode type="HexDigitOrUnderscore"/>
 	</ComplexType>
 	
 	<ComplexType id="HexDigitsAndUnderscores" processor="aggregating">
-		<StartNode id="HexDigitOrUnderscore" type="HexDigitOrUnderscore">
+		<StartNode type="HexDigitOrUnderscore">
 			<NextNode ref="HexDigitOrUnderscores"/>
 		</StartNode>
-		<StartNode id="HexDigitOrUnderscore" type="HexDigitOrUnderscore"/>
+		<StartNode type="HexDigitOrUnderscore"/>
 		<Node id="HexDigitOrUnderscores" type="HexDigitOrUnderscores"/>
 	</ComplexType>
 	
 	<ComplexType id="HexDigits" processor="aggregating">
-		<StartNode id="HexDigit1" type="HexDigit">
+		<StartNode type="HexDigit">
 			<NextNode ref="HexDigitsAndUnderscores"/>
 		</StartNode>
-		<StartNode id="HexDigit1" type="HexDigit"/>
+		<StartNode type="HexDigit"/>
 		<Node id="HexDigitsAndUnderscores" type="HexDigitsAndUnderscores"/>
 	</ComplexType>
 	
 	<ComplexType id="HexNumeral" processor="aggregating">
-		<StartNode id="Prefix0x" type="Prefix0x">
+		<StartNode type="Prefix0x">
 			<NextNode ref="HexDigits"/>
 		</StartNode>
-		<StartNode id="Prefix0X" type="Prefix0X">
+		<StartNode type="Prefix0X">
 			<NextNode ref="HexDigits"/>
 		</StartNode>
 		<Node id="HexDigits" type="HexDigits"/>
 	</ComplexType>
 	
 	<ComplexType id="HexIntegerLiteral" processor="aggregating">
-		<StartNode id="HexNumeral1" type="HexNumeral">
+		<StartNode type="HexNumeral">
 			<NextNode ref="IntegerTypeSuffix"/>
 		</StartNode>
-		<Node id="IntegerTypeSuffix" type="IntegerTypeSuffix"/>
-		<StartNode id="HexNumeral2" type="HexNumeral"/>
+		<Node id="IntegerTypeSuffix" type="IntegerTypeSuffix" occurrance="ZeroOrOne"/>
 	</ComplexType>
 	
 	<ComplexType id="OctalDigitOrUnderscore" processor="aggregating">
-		<StartNode id="OctalDigit" type="OctalDigit"/>
-		<StartNode id="Underscore" type="Underscore"/>
+		<StartNode type="OctalDigit"/>
+		<StartNode type="Underscore"/>
 	</ComplexType>
 	
 	<ComplexType id="OctalDigitOrUnderscores" processor="aggregating" multiple="true">
-		<StartNode id="OctalDigitOrUnderscore" type="OctalDigitOrUnderscore"/>
+		<StartNode type="OctalDigitOrUnderscore"/>
 	</ComplexType>
 	
 	<ComplexType id="OctalDigitsAndUnderscores" processor="aggregating">
-		<StartNode id="OctalDigitOrUnderscore" type="OctalDigitOrUnderscore">
+		<StartNode type="OctalDigitOrUnderscore">
 			<NextNode ref="OctalDigitOrUnderscores"/>
 		</StartNode>
-		<StartNode id="OctalDigitOrUnderscore" type="OctalDigitOrUnderscore"/>
+		<StartNode type="OctalDigitOrUnderscore"/>
 		<Node id="OctalDigitOrUnderscores" type="OctalDigitOrUnderscores"/>
 	</ComplexType>
 	
 	<ComplexType id="OctalDigits" processor="aggregating">
-		<StartNode id="OctalDigit1" type="OctalDigit">
+		<StartNode type="OctalDigit">
 			<NextNode ref="OctalDigitsAndUnderscores"/>
 		</StartNode>
-		<StartNode id="OctalDigit2" type="OctalDigit"/>
+		<StartNode type="OctalDigit"/>
 		<Node id="OctalDigitsAndUnderscores" type="OctalDigitsAndUnderscores"/>
 	</ComplexType>
 	
 	<ComplexType id="OctalNumeral" processor="aggregating">
-		<StartNode id="Digit0" type="Digit0">
+		<StartNode type="Digit0">
 			<NextNode ref="Underscore"/>
 			<NextNode ref="OctalDigits"/>
 		</StartNode>
@@ -136,60 +134,58 @@
 	</ComplexType>
 	
 	<ComplexType id="OctalIntegerLiteral" processor="aggregating">
-		<StartNode id="OctalNumeral1" type="OctalNumeral">
+		<StartNode type="OctalNumeral">
 			<NextNode ref="IntegerTypeSuffix"/>
 		</StartNode>
-		<Node id="IntegerTypeSuffix" type="IntegerTypeSuffix"/>
-		<StartNode id="OctalNumeral2" type="OctalNumeral"/>
+		<Node id="IntegerTypeSuffix" type="IntegerTypeSuffix" occurrance="ZeroOrOne"/>
 	</ComplexType>
 	
 	<ComplexType id="BinaryDigitOrUnderscore" processor="aggregating">
-		<StartNode id="BinaryDigit" type="BinaryDigit"/>
-		<StartNode id="Underscore" type="Underscore"/>
+		<StartNode type="BinaryDigit"/>
+		<StartNode type="Underscore"/>
 	</ComplexType>
 	
 	<ComplexType id="BinaryDigitOrUnderscores" processor="aggregating" multiple="true">
-		<StartNode id="BinaryDigitOrUnderscore" type="BinaryDigitOrUnderscore"/>
+		<StartNode type="BinaryDigitOrUnderscore"/>
 	</ComplexType>
 	
 	<ComplexType id="BinaryDigitsAndUnderscores" processor="aggregating">
-		<StartNode id="BinaryDigitOrUnderscore" type="BinaryDigitOrUnderscore">
+		<StartNode type="BinaryDigitOrUnderscore">
 			<NextNode ref="BinaryDigitOrUnderscores"/>
 		</StartNode>
-		<StartNode id="BinaryDigitOrUnderscore" type="BinaryDigitOrUnderscore"/>
+		<StartNode type="BinaryDigitOrUnderscore"/>
 		<Node id="BinaryDigitOrUnderscores" type="BinaryDigitOrUnderscores"/>
 	</ComplexType>
 
 	<ComplexType id="BinaryDigits" processor="aggregating">
-		<StartNode id="BinaryDigit1" type="BinaryDigit">
+		<StartNode type="BinaryDigit">
 			<NextNode ref="BinaryDigitsAndUnderscores"/>
 		</StartNode>
-		<StartNode id="BinaryDigit2" type="BinaryDigit"/>
+		<StartNode type="BinaryDigit"/>
 		<Node id="BinaryDigitsAndUnderscores" type="BinaryDigitsAndUnderscores"/>
 	</ComplexType>
 
 	<ComplexType id="BinaryNumeral" processor="aggregating">
-		<StartNode id="Prefix0b" type="Prefix0b">
+		<StartNode type="Prefix0b">
 			<NextNode ref="BinaryDigits"/>
 		</StartNode>
-		<StartNode id="Prefix0B" type="Prefix0B">
+		<StartNode type="Prefix0B">
 			<NextNode ref="BinaryDigits"/>
 		</StartNode>
 		<Node id="BinaryDigits" type="BinaryDigits"/>
 	</ComplexType>	
 	
 	<ComplexType id="BinaryIntegerLiteral" processor="aggregating">
-		<StartNode id="BinaryNumeral1" type="BinaryNumeral">
+		<StartNode type="BinaryNumeral">
 			<NextNode ref="IntegerTypeSuffix"/>
 		</StartNode>
-		<Node id="IntegerTypeSuffix" type="IntegerTypeSuffix"/>
-		<StartNode id="BinaryNumeral2" type="BinaryNumeral"/>
+		<Node id="IntegerTypeSuffix" type="IntegerTypeSuffix" occurrance="ZeroOrOne"/>
 	</ComplexType>
 	
 	<ComplexType id="IntegerLiteral" processor="aggregating">
-		<StartNode id="HexIntegerLiteral" type="HexIntegerLiteral"/>
-		<StartNode id="BinaryIntegerLiteral" type="BinaryIntegerLiteral"/>
-		<StartNode id="OctalIntegerLiteral" type="OctalIntegerLiteral"/>
-		<StartNode id="DecimalIntegerLiteral" type="DecimalIntegerLiteral"/>
+		<StartNode type="HexIntegerLiteral"/>
+		<StartNode type="BinaryIntegerLiteral"/>
+		<StartNode type="OctalIntegerLiteral"/>
+		<StartNode type="DecimalIntegerLiteral"/>
 	</ComplexType>
 </Language>

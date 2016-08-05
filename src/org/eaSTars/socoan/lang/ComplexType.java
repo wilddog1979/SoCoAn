@@ -78,7 +78,7 @@ public class ComplexType extends AbstractTypeDeclaration {
 	}
 	
 	private Optional<ComplexTypeNode> getNodeById(List<ComplexTypeNode> nodelist, String id) {
-		return nodelist.stream().filter(node -> node.getId().equals(id)).findFirst();
+		return nodelist.stream().filter(node -> id.equals(node.getId())).findFirst();
 	}
 	
 	public ComplexTypeNode getComplexNode(String id) throws ReferenceNotFoundException {
