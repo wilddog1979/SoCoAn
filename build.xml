@@ -1,4 +1,4 @@
-<project name="SoCoAn">
+<project name="SoCoAn" default="all">
 	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
 		<classpath>
 		<fileset dir="lib/JAXB" includes="jaxb-*.jar" />
@@ -6,8 +6,9 @@
 	</taskdef>
 	
 	<path id="src.path">
-		<pathelement location="src" />
-		<pathelement location="gensrc" />
+		<pathelement location="core/src" />
+		<pathelement location="core/gensrc" />
+		<pathelement location="java/src" />
 		<pathelement location="testsrc" />
 	</path>
 	
@@ -22,7 +23,7 @@
 			<fileset dir="bin">
 				<include name="**/*"/>
 			</fileset>
-			<fileset dir="gensrc">
+			<fileset dir="core/gensrc">
 				<include name="**/*"/>
 			</fileset>
 			<fileset dir="test">
@@ -32,7 +33,7 @@
 	</target>
 	
 	<target name="gensrc">
-		<xjc schema="resources/config.xsd" destdir="gensrc" removeOldOutput="yes" package="org.eaSTars.socoan.config"/>
+		<xjc schema="resources/config.xsd" destdir="core/gensrc" removeOldOutput="yes" package="org.eaSTars.socoan.config"/>
 	</target>
 	
 	<target name="compile">
