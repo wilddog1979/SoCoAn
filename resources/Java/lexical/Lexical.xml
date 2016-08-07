@@ -113,16 +113,12 @@
 	</ComplexType>
 
 	<ComplexType id="UnicodeEscape" processor="aggregating">
-		<StartNode type="Backslash">
-			<Node type="UnicodeMarker">
-				<Node type="HexDigit">
-					<Node type="HexDigit">
-						<Node type="HexDigit">
-							<Node type="HexDigit"/>
-						</Node>
-					</Node>
-				</Node>
-			</Node>
+		<StartNode type="Backslash" sequence="Order">
+			<Node type="UnicodeMarker"/>
+			<Node type="HexDigit"/>
+			<Node type="HexDigit"/>
+			<Node type="HexDigit"/>
+			<Node type="HexDigit"/>
 		</StartNode>
 	</ComplexType>
 	
@@ -253,20 +249,18 @@
 	<LiteralType id="Escaper" literal="r"/>
 	
 	<ComplexType id="OctalEscape" processor="aggregating">
-		<StartNode type="Backslash">
-			<Node type="ZeroToThree">
-				<NextNode ref="OctalDigit1"/>
-			</Node>
+		<StartNode type="Backslash" sequence="Order">
+			<Node type="ZeroToThree"/>
+			<Node type="OctalDigit"/>
+			<Node type="OctalDigit"/>
 		</StartNode>
-		<StartNode type="Backslash">
-			<NextNode ref="OctalDigit1"/>
+		<StartNode type="Backslash" sequence="Order">
+			<Node type="OctalDigit"/>
+			<Node type="OctalDigit"/>
 		</StartNode>
 		<StartNode type="Backslash">
 			<Node type="OctalDigit"/>
 		</StartNode>
-		<Node id="OctalDigit1" type="OctalDigit">
-			<Node type="OctalDigit"/>
-		</Node>
 	</ComplexType>
 	
 	<ComplexType id="EscapeSequence" processor="aggregating">
@@ -304,16 +298,13 @@
 	</ComplexType>
 	
 	<ComplexType id="CharacterLiteral" processor="aggregating">
-		<StartNode type="SingleQuote">
-			<Node type="SingleCharacter">
-				<Node type="SingleQuote"/>
-			</Node>
+		<StartNode type="SingleQuote" sequence="Order">
+			<Node type="SingleCharacter"/>
+			<Node type="SingleQuote"/>
 		</StartNode>
-		
-		<StartNode type="SingleQuote">
-			<Node type="EscapeSequence">
-				<Node type="SingleQuote"/>
-			</Node>
+		<StartNode type="SingleQuote" sequence="Order">
+			<Node type="EscapeSequence"/>
+			<Node type="SingleQuote"/>
 		</StartNode>
 	</ComplexType>
 	
@@ -329,10 +320,9 @@
 	</ComplexType>
 	
 	<ComplexType id="StringLiteral" processor="aggregating">
-		<StartNode type="DoubleQuote">
-			<Node type="StringCharacter" occurrence="ZeroOrMore">
-				<Node type="DoubleQuote"/>
-			</Node>
+		<StartNode type="DoubleQuote" sequence="Order">
+			<Node type="StringCharacter" occurrence="ZeroOrMore"/>
+			<Node type="DoubleQuote"/>
 		</StartNode>
 	</ComplexType>
 	

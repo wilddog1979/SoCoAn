@@ -30,31 +30,24 @@
 	</ComplexType>
 	
 	<ComplexType id="DecimalFloatingPointLiteral" processor="aggregating">
-		<StartNode type="Digits">
-			<Node type="DecimalSeparator">
-				<Node type="Digits" occurrence="ZeroOrOne">
-					<NextNode ref="ExponentPartOptional"/>
-				</Node>
-			</Node>
-		</StartNode>
-		
-		<Node id="ExponentPartOptional" type="ExponentPart" occurrence="ZeroOrOne">
+		<StartNode type="Digits" sequence="Order">
+			<Node type="DecimalSeparator"/>
+			<Node type="Digits" occurrence="ZeroOrOne"/>
+			<Node type="ExponentPart" occurrence="ZeroOrOne"/>
 			<Node type="FloatTypeSuffix" occurrence="ZeroOrOne"/>
-		</Node>
-		
-		<StartNode type="DecimalSeparator">
-			<Node type="Digits">
-				<NextNode ref="ExponentPartOptional"/>
-			</Node>
 		</StartNode>
-		
-		<StartNode type="Digits">
-			<Node type="ExponentPart">
-				<Node type="FloatTypeSuffix" occurrence="ZeroOrOne"/>
-			</Node>
-			<Node type="ExponentPart" occurrence="ZeroOrOne">
-				<Node type="FloatTypeSuffix"/>
-			</Node>
+		<StartNode type="DecimalSeparator" sequence="Order">
+			<Node type="Digits"/>
+			<Node type="ExponentPart" occurrence="ZeroOrOne"/>
+			<Node type="FloatTypeSuffix" occurrence="ZeroOrOne"/>
+		</StartNode>
+		<StartNode type="Digits" sequence="Order">
+			<Node type="ExponentPart"/>
+			<Node type="FloatTypeSuffix" occurrence="ZeroOrOne"/>
+		</StartNode>
+		<StartNode type="Digits" sequence="Order">
+			<Node type="ExponentPart" occurrence="ZeroOrOne"/>
+			<Node type="FloatTypeSuffix"/>
 		</StartNode>
 	</ComplexType>
 	
@@ -70,31 +63,25 @@
 	</ComplexType>
 	
 	<ComplexType id="HexSignificant" processor="aggregating">
-		<StartNode type="Prefix0x">
-			<NextNode ref="HexDigitsOptional"/>
+		<StartNode type="Prefix0x" sequence="Order">
+			<Node type="HexDigits" occurrence="ZeroOrOne"/>
+			<Node type="DecimalSeparator"/>
+			<Node type="HexDigits"/>
 		</StartNode>
-		
-		<StartNode type="Prefix0X">
-			<NextNode ref="HexDigitsOptional"/>
+		<StartNode type="Prefix0X" sequence="Order">
+			<Node type="HexDigits" occurrence="ZeroOrOne"/>
+			<Node type="DecimalSeparator"/>
+			<Node type="HexDigits"/>
 		</StartNode>
-		
-		<Node id="HexDigitsOptional" type="HexDigits" occurrence="ZeroOrOne">
-			<Node type="DecimalSeparator">
-				<Node type="HexDigits"/>
-			</Node>
-		</Node>
-		
 		<StartNode type="HexNumeral">
 			<Node type="DecimalSeparator" occurrence="ZeroOrOne"/>
 		</StartNode>
 	</ComplexType>
 	
 	<ComplexType id="HexadecimalFloatingPointLiteral" processor="aggregating">
-		<StartNode type="HexSignificant">
-			<Node type="BinaryExponent">
-				<Node type="FloatTypeSuffix"/>
-			</Node>
+		<StartNode type="HexSignificant" sequence="Order">
 			<Node type="BinaryExponent"/>
+			<Node type="FloatTypeSuffix" occurrence="ZeroOrOne"/>
 		</StartNode>
 	</ComplexType>
 	

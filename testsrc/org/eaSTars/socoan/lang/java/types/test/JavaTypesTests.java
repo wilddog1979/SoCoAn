@@ -9,7 +9,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	PrimitiveTypeTest.class,
 	ClassOrInterfaceTypeTest.class,
 	TypeVariableTest.class,
-	ArrayTypeTest.class
+	ArrayTypeTest.class,
+	TypeParameterTest.class
 })
 public class JavaTypesTests {
 	

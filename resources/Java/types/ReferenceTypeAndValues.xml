@@ -14,7 +14,7 @@
 	</ComplexType>
 
 	<ComplexType id="Wildcard" processor="aggregating">
-		<StartNode type="Annotations">
+		<StartNode type="Annotation" occurrence="ZeroOrMore">
 			<Node type="Separator">
 				<NextNode ref="questionmark1"/>
 			</Node>
@@ -70,7 +70,7 @@
 	</ComplexType>
 	
 	<ComplexType id="AnnotationIdentifierTypeAgrument" processor="fallthrough">
-		<StartNode type="Annotations">
+		<StartNode type="Annotation" occurrence="ZeroOrMore">
 			<Node type="Separator">
 				<NextNode ref="Identifier1"/>
 				<NextNode ref="Identifier2"/>
@@ -116,7 +116,7 @@
 	</ComplexType>
 	
 	<ComplexType id="TypeVariable" processor="aggregating">
-		<StartNode type="Annotations">
+		<StartNode type="Annotation" occurrence="ZeroOrMore">
 			<Node type="Separator">
 				<NextNode ref="Identifier1"/>
 			</Node>
@@ -126,30 +126,25 @@
 	</ComplexType>
 	
 	<ComplexType id="Dims" processor="aggregating" multiple="true">
-		<StartNode type="Annotations">
-			<Node type="Separator">
-				<NextNode ref="squarebracket_open"/>
-			</Node>
+		<StartNode type="Annotation" occurrence="ZeroOrMore" sequence="Order">
+			<Node type="Separator" occurrence="ZeroOrOne"/>
 			<NextNode ref="squarebracket_open"/>
 		</StartNode>
-		
-		<StartNode id="squarebracket_open" type="squarebracket_open">
-			<Node type="Separator">
-				<Node type="squarebracket_close"/>
-			</Node>
+		<StartNode id="squarebracket_open" type="squarebracket_open" sequence="Order">
+			<Node type="Separator" occurrence="ZeroOrOne"/>
 			<Node type="squarebracket_close"/>
 		</StartNode>
 	</ComplexType>
 	
 	<ComplexType id="ArrayType" processor="aggregating">
 		<StartNode type="PrimitiveType">
-			<Node type="Dims"/>
+			<NextNode ref="Separator"/>
 		</StartNode>
 		<StartNode type="ClassOrInterfaceTypeCommon">
-			<Node type="Dims"/>
+			<NextNode ref="Separator"/>
 		</StartNode>
 		<StartNode type="TypeVariable">
-			<Node type="Dims"/>
+			<NextNode ref="Separator"/>
 		</StartNode>
 		<Node id="Separator" type="Separator" occurrence="ZeroOrOne">
 			<Node type="Dims"/>

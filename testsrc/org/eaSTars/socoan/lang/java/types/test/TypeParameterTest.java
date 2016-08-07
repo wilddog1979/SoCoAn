@@ -18,12 +18,12 @@ import org.eaSTars.socoan.lang.java.test.AbstractJavaLangTest;
 import org.eaSTars.socoan.lang.java.test.JavaTests;
 import org.junit.Test;
 
-public class TypeVariableTest extends AbstractJavaLangTest {
+public class TypeParameterTest extends AbstractJavaLangTest {
 
-	private static final String ELEMENT_NAME = "ReferenceType";
+	private static final String ELEMENT_NAME = "TypeParameter";
 	
 	@Test
-	public void testidentifier() {
+	public void testsimple() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -48,7 +48,7 @@ public class TypeVariableTest extends AbstractJavaLangTest {
 	}
 	
 	@Test
-	public void testtestannotationidentifier() {
+	public void testsimplewithannotation() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -68,6 +68,60 @@ public class TypeVariableTest extends AbstractJavaLangTest {
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
 		testFragment(fragment, "@testannotation Identifier", "@testannotation Identifier");
+		
+		checkLeftover(sis, 9);
+	}
+	
+	@Test
+	public void testsimplewithannotationextends() {
+		AbstractTypeDeclaration typeDeclaration = null;
+		Context context = null;
+		try {
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			context = new Context(JavaTests.getJavaLang());
+		} catch (JAXBException | ReferenceNotFoundException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertNotNull("element type should be found", typeDeclaration);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier1 extends Identifier2 leftover".getBytes()));
+		
+		boolean testresult = recognizetype(typeDeclaration, context, sis);
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment,
+				"@testannotation Identifier1 extends Identifier2",
+				"@testannotation Identifier1 <span class=\"keyword\">extends</span> Identifier2");
+		
+		checkLeftover(sis, 9);
+	}
+	
+	@Test
+	public void testsimplewithannotationextendsannotation() {
+		AbstractTypeDeclaration typeDeclaration = null;
+		Context context = null;
+		try {
+			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
+			context = new Context(JavaTests.getJavaLang());
+		} catch (JAXBException | ReferenceNotFoundException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertNotNull("element type should be found", typeDeclaration);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier1 extends @testannotation Identifier2 leftover".getBytes()));
+		
+		boolean testresult = recognizetype(typeDeclaration, context, sis);
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testFragment(fragment,
+				"@testannotation Identifier1 extends @testannotation Identifier2",
+				"@testannotation Identifier1 <span class=\"keyword\">extends</span> @testannotation Identifier2");
 		
 		checkLeftover(sis, 9);
 	}

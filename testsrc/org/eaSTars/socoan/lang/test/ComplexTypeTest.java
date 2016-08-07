@@ -778,4 +778,38 @@ public class ComplexTypeTest extends AbstractLangTest {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}
 	}
+	
+	@Test
+	public void testSequenceNoMatch() {
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
+		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
+		node_a.setSequence(Sequence.Order);
+		complextype.getStartnodes().add(node_a);
+		
+		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
+		node_a.getNextNodes().add(node_b);
+		
+		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
+		node_a.getNextNodes().add(node_c);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("ableftover".getBytes()));
+		
+		Context context = new Context((Language)null);
+		
+		boolean testresult = false;
+		try {
+			testresult = complextype.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertFalse("Sample should not be recognized", testresult);
+		assertEquals("Context buffer should not contain any entries", 0, context.size());
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 10, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
 }
