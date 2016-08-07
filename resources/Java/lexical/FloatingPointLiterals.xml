@@ -12,16 +12,14 @@
 	
 	<ComplexType id="SignedInteger" processor="aggregating">
 		<StartNode type="Sign" occurrence="ZeroOrOne">
-			<NextNode ref="Digits"/>
+			<Node type="Digits"/>
 		</StartNode>
-		<Node id="Digits" type="Digits"/>
 	</ComplexType>
 	
 	<ComplexType id="ExponentPart" processor="aggregating">
 		<StartNode type="ExponentIndicator">
-			<NextNode ref="SignedInteger"/>
+			<Node type="SignedInteger"/>
 		</StartNode>
-		<Node id="SignedInteger" type="SignedInteger"/>
 	</ComplexType>
 	
 	<ComplexType id="FloatTypeSuffix" processor="aggregating">
@@ -33,35 +31,31 @@
 	
 	<ComplexType id="DecimalFloatingPointLiteral" processor="aggregating">
 		<StartNode type="Digits">
-			<NextNode ref="DecimalSeparator"/>
+			<Node type="DecimalSeparator">
+				<Node type="Digits" occurrence="ZeroOrOne">
+					<NextNode ref="ExponentPartOptional"/>
+				</Node>
+			</Node>
 		</StartNode>
-		<Node id="DecimalSeparator" type="DecimalSeparator">
-			<NextNode ref="DigitsOptional"/>
-		</Node>
-		<Node id="DigitsOptional" type="Digits" occurrence="ZeroOrOne">
-			<NextNode ref="ExponentPartOptional"/>
-		</Node>
+		
 		<Node id="ExponentPartOptional" type="ExponentPart" occurrence="ZeroOrOne">
-			<NextNode ref="FloatTypeSuffixOptional"/>
+			<Node type="FloatTypeSuffix" occurrence="ZeroOrOne"/>
 		</Node>
-		<Node id="FloatTypeSuffixOptional" type="FloatTypeSuffix" occurrence="ZeroOrOne"/>
+		
 		<StartNode type="DecimalSeparator">
-			<NextNode ref="Digits"/>
+			<Node type="Digits">
+				<NextNode ref="ExponentPartOptional"/>
+			</Node>
 		</StartNode>
-		<Node id="Digits" type="Digits">
-			<NextNode ref="ExponentPartOptional"/>
-		</Node>
+		
 		<StartNode type="Digits">
-			<NextNode ref="ExponentPart"/>
-			<NextNode ref="ExponentPartOptional2"/>
+			<Node type="ExponentPart">
+				<Node type="FloatTypeSuffix" occurrence="ZeroOrOne"/>
+			</Node>
+			<Node type="ExponentPart" occurrence="ZeroOrOne">
+				<Node type="FloatTypeSuffix"/>
+			</Node>
 		</StartNode>
-		<Node id="ExponentPart" type="ExponentPart">
-			<NextNode ref="FloatTypeSuffixOptional"/>
-		</Node>
-		<Node id="ExponentPartOptional2" type="ExponentPart" occurrence="ZeroOrOne">
-			<NextNode ref="FloatTypeSuffix"/>
-		</Node>
-		<Node id="FloatTypeSuffix" type="FloatTypeSuffix"/>
 	</ComplexType>
 	
 	<ComplexType id="BinaryExponentIndicator" processor="aggregating">
@@ -71,41 +65,37 @@
 	
 	<ComplexType id="BinaryExponent" processor="aggregating">
 		<StartNode type="BinaryExponentIndicator">
-			<NextNode ref="SignedInteger"/>
+			<Node type="SignedInteger"/>
 		</StartNode>
-		<Node id="SignedInteger" type="SignedInteger"/>
 	</ComplexType>
 	
 	<ComplexType id="HexSignificant" processor="aggregating">
 		<StartNode type="Prefix0x">
 			<NextNode ref="HexDigitsOptional"/>
 		</StartNode>
+		
 		<StartNode type="Prefix0X">
 			<NextNode ref="HexDigitsOptional"/>
 		</StartNode>
+		
 		<Node id="HexDigitsOptional" type="HexDigits" occurrence="ZeroOrOne">
-			<NextNode ref="DecimalSeparator"/>
+			<Node type="DecimalSeparator">
+				<Node type="HexDigits"/>
+			</Node>
 		</Node>
-		<Node id="DecimalSeparator" type="DecimalSeparator">
-			<NextNode ref="HexDigits"/>
-		</Node>
-		<Node id="HexDigits" type="HexDigits"/>
+		
 		<StartNode type="HexNumeral">
-			<NextNode ref="DecimalSeparatorOptional"/>
+			<Node type="DecimalSeparator" occurrence="ZeroOrOne"/>
 		</StartNode>
-		<Node id="DecimalSeparatorOptional" type="DecimalSeparator" occurrence="ZeroOrOne"/>
 	</ComplexType>
 	
 	<ComplexType id="HexadecimalFloatingPointLiteral" processor="aggregating">
 		<StartNode type="HexSignificant">
-			<NextNode ref="BinaryExponent1"/>
-			<NextNode ref="BinaryExponent2"/>
+			<Node type="BinaryExponent">
+				<Node type="FloatTypeSuffix"/>
+			</Node>
+			<Node type="BinaryExponent"/>
 		</StartNode>
-		<Node id="BinaryExponent1" type="BinaryExponent">
-			<NextNode ref="FloatTypeSuffix"/>
-		</Node>
-		<Node id="BinaryExponent2" type="BinaryExponent"/>
-		<Node id="FloatTypeSuffix" type="FloatTypeSuffix"/>
 	</ComplexType>
 	
 	<ComplexType id="FloatingPointLiteral" processor="aggregating">

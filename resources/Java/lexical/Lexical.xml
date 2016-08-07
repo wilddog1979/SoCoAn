@@ -106,27 +106,24 @@
 	
 	<LiteralType id="UnicodeEscapeu" literal="u"/>
 
-	<ComplexType id="UnicodeMarker" processor="aggregating" multiple="true">
-		<StartNode type="UnicodeEscapeu"/>
+	<ComplexType id="UnicodeMarker" processor="aggregating">
+		<StartNode type="UnicodeEscapeu">
+			<Node type="UnicodeEscapeu" occurrence="ZeroOrMore"/>
+		</StartNode>
 	</ComplexType>
 
 	<ComplexType id="UnicodeEscape" processor="aggregating">
 		<StartNode type="Backslash">
-			<NextNode ref="UnicodeMarker"/>
+			<Node type="UnicodeMarker">
+				<Node type="HexDigit">
+					<Node type="HexDigit">
+						<Node type="HexDigit">
+							<Node type="HexDigit"/>
+						</Node>
+					</Node>
+				</Node>
+			</Node>
 		</StartNode>
-		<Node id="UnicodeMarker" type="UnicodeMarker">	
-			<NextNode ref="HexDigit1"/>
-		</Node>
-		<Node id="HexDigit1" type="HexDigit">
-			<NextNode ref="HexDigit2"/>
-		</Node>
-		<Node id="HexDigit2" type="HexDigit">
-			<NextNode ref="HexDigit3"/>
-		</Node>
-		<Node id="HexDigit3" type="HexDigit">
-			<NextNode ref="HexDigit4"/>
-		</Node>
-		<Node id="HexDigit4" type="HexDigit"/>
 	</ComplexType>
 	
 	<CustomType id="RawInputCharacter" recognizer="RawInputCharacter"/>
@@ -152,7 +149,7 @@
 
 	<!-- 3.6 White Space -->
 
-	<ComplexType id="WhiteSpace" multiple="true" processor="aggregating">
+	<ComplexType id="WhiteSpace" processor="aggregating" multiple="true">
 		<StartNode type="SP"/>
 		<StartNode type="HT"/>
 		<StartNode type="FF"/>
@@ -177,18 +174,16 @@
 	
 	<ComplexType id="Comment" processor="comment">
 		<StartNode id="JavaDoc" type="JavaDocStart">
-			<NextNode ref="TraditionalCommentContent"/>
+			<Node type="TraditionalCommentContent"/>
 		</StartNode>
-		<Node id="TraditionalCommentContent" type="TraditionalCommentContent"/>
 		
 		<StartNode id="TraditionalComment" type="TraditionalCommentStart">
-			<NextNode ref="TraditionalCommentContent"/>
+			<Node type="TraditionalCommentContent"/>
 		</StartNode>
 		
 		<StartNode id="EndOfLineComment" type="EndOfLineCommentStart">
-			<NextNode ref="EndOfLineCommentContent"/>
+			<Node type="EndOfLineCommentContent"/>
 		</StartNode>
-		<Node id="EndOfLineCommentContent" type="EndOfLineCommentContent"/>
 	</ComplexType>
 	
 	<ComplexType id="Separator" processor="separator" multiple="true">
@@ -202,16 +197,10 @@
 	
 	<CustomType id="JavaLetterOrDigit" recognizer="JavaLetterOrDigit"/>
 	
-	<ComplexType id="IdentifierCharsRest" processor="aggregating" multiple="true">
-		<StartNode type="JavaLetterOrDigit"/>
-	</ComplexType>
-	
 	<ComplexType id="Identifier" processor="aggregating" checker="IdentifierCheck">
 		<StartNode type="JavaLetter">
-			<NextNode ref="IdentifierCharsRest"/>
+			<Node type="JavaLetterOrDigit" occurrence="ZeroOrMore"/>
 		</StartNode>
-		<Node id="IdentifierCharsRest" type="IdentifierCharsRest"/>
-		<StartNode type="JavaLetter"/>
 	</ComplexType>
 	
 	<!-- 3.10 Literals -->
@@ -265,56 +254,46 @@
 	
 	<ComplexType id="OctalEscape" processor="aggregating">
 		<StartNode type="Backslash">
-			<NextNode ref="ZeroToThree"/>
+			<Node type="ZeroToThree">
+				<NextNode ref="OctalDigit1"/>
+			</Node>
 		</StartNode>
 		<StartNode type="Backslash">
 			<NextNode ref="OctalDigit1"/>
 		</StartNode>
 		<StartNode type="Backslash">
-			<NextNode ref="OctalDigit2"/>
+			<Node type="OctalDigit"/>
 		</StartNode>
-		<Node id="ZeroToThree" type="ZeroToThree">
-			<NextNode ref="OctalDigit1"/>
-		</Node>
 		<Node id="OctalDigit1" type="OctalDigit">
-			<NextNode ref="OctalDigit2"/>
+			<Node type="OctalDigit"/>
 		</Node>
-		<Node id="OctalDigit2" type="OctalDigit"/>
 	</ComplexType>
 	
 	<ComplexType id="EscapeSequence" processor="aggregating">
 		<StartNode type="Backslash">
-			<NextNode ref="Escapeb"/>
+			<Node type="Escapeb"/>
 		</StartNode>
-		<Node id="Escapeb" type="Escapeb"/>
 		<StartNode type="Backslash">
-			<NextNode ref="Escapet"/>
+			<Node type="Escapet"/>
 		</StartNode>
-		<Node id="Escapet" type="Escapet"/>
 		<StartNode type="Backslash">
-			<NextNode ref="Escapen"/>
+			<Node type="Escapen"/>
 		</StartNode>
-		<Node id="Escapen" type="Escapen"/>
 		<StartNode type="Backslash">
-			<NextNode ref="Escapef"/>
+			<Node type="Escapef"/>
 		</StartNode>
-		<Node id="Escapef" type="Escapef"/>
 		<StartNode type="Backslash">
-			<NextNode ref="Escaper"/>
+			<Node type="Escaper"/>
 		</StartNode>
-		<Node id="Escaper" type="Escaper"/>
 		<StartNode type="Backslash">
-			<NextNode ref="EscapeDoubleQuote"/>
+			<Node type="DoubleQuote"/>
 		</StartNode>
-		<Node id="EscapeDoubleQuote" type="DoubleQuote"/>
 		<StartNode type="Backslash">
-			<NextNode ref="EscapeSingleQuote"/>
+			<Node type="SingleQuote"/>
 		</StartNode>
-		<Node id="EscapeSingleQuote" type="SingleQuote"/>
 		<StartNode type="Backslash">
-			<NextNode ref="EscapeBackslash"/>
+			<Node type="Backslash"/>
 		</StartNode>
-		<Node id="EscapeBackslash" type="Backslash"/>
 		<StartNode type="OctalEscape"/>
 	</ComplexType>
 	
@@ -326,19 +305,16 @@
 	
 	<ComplexType id="CharacterLiteral" processor="aggregating">
 		<StartNode type="SingleQuote">
-			<NextNode ref="SingleCharacter"/>
+			<Node type="SingleCharacter">
+				<Node type="SingleQuote"/>
+			</Node>
 		</StartNode>
-		<Node id="SingleCharacter" type="SingleCharacter">
-			<NextNode ref="SingleQuote2"/>
-		</Node>
-		<Node id="SingleQuote2" type="SingleQuote"/>
 		
 		<StartNode type="SingleQuote">
-			<NextNode ref="EscapeSequence"/>
+			<Node type="EscapeSequence">
+				<Node type="SingleQuote"/>
+			</Node>
 		</StartNode>
-		<Node id="EscapeSequence" type="EscapeSequence">
-			<NextNode ref="SingleQuote2"/>
-		</Node>
 	</ComplexType>
 	
 	<!-- 3.10.5 String Literals -->
@@ -347,19 +323,17 @@
 		<StartNode type="InputCharacter"/>
 	</ComplexType>
 	
-	<ComplexType id="StringCharacter" processor="aggregating" multiple="true">
+	<ComplexType id="StringCharacter" processor="aggregating">
 		<StartNode type="StringCharacters"/>
 		<StartNode type="EscapeSequence"/>
 	</ComplexType>
 	
 	<ComplexType id="StringLiteral" processor="aggregating">
 		<StartNode type="DoubleQuote">
-			<NextNode ref="StringCharacter"/>
+			<Node type="StringCharacter" occurrence="ZeroOrMore">
+				<Node type="DoubleQuote"/>
+			</Node>
 		</StartNode>
-		<Node id="StringCharacter" type="StringCharacter" occurrence="ZeroOrMore">
-			<NextNode ref="DoubleQuote2"/>
-		</Node>
-		<Node id="DoubleQuote2" type="DoubleQuote"/>
 	</ComplexType>
 	
 	<!-- 3.10.7 The Null Literal -->

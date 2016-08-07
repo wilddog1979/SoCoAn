@@ -33,6 +33,18 @@
                         </xs:simpleContent>
                       </xs:complexType>
                     </xs:element>
+                    <xs:element name="Node" maxOccurs="unbounded" minOccurs="0">
+		                <xs:complexType mixed="true">
+		                  <xs:sequence>
+		                    <xs:element name="NextNode" type="NextNode" maxOccurs="unbounded" minOccurs="0">
+		                    </xs:element>
+		                    <xs:element name="Node" type="Node" maxOccurs="unbounded" minOccurs="0">
+		                    </xs:element>
+		                  </xs:sequence>
+		                  <xs:attribute type="xs:string" name="type" use="required"/>
+		                  <xs:attribute type="OccurrenceEnum" name="occurrence" use="optional"/>
+		                </xs:complexType>
+		              </xs:element>
                   </xs:sequence>
                   <xs:attribute type="xs:string" name="id" use="optional"/>
                   <xs:attribute type="xs:string" name="type" use="required"/>

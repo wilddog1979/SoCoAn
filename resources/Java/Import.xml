@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Language xmlns="http://eaSTars.com/SoCoAn/lang">
 	<ComplexType id="Import" processor="simplecommand">
-		<StartNode type="Separator">
-			<NextNode ref="ImportNode"/>
+		<StartNode type="Separator" occurrence="ZeroOrOne">
+			<Node id="ImportNode" type="keyword_import">
+				<Node type="Separator">
+					<Node id="ImportEnd" type="SimpleCommandEnd"/>
+				</Node>
+			</Node>
 		</StartNode>
-		
-		<StartNode id="ImportNode" type="keyword_import">
-			<NextNode ref="Separator2"/>
-		</StartNode>
-		
-		<Node id="Separator2" type="Separator">
-			<NextNode ref="ImportEnd"/>
-		</Node>
-		
-		<Node id="ImportEnd" type="SimpleCommandEnd">
-		</Node>
 	</ComplexType>
 </Language>

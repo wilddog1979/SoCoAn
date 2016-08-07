@@ -99,7 +99,7 @@ public class ComplexType extends AbstractTypeDeclaration {
 		boolean result = false;
 		do {
 			for (ComplexTypeNode startnode : getStartnodes()) {
-				result = recognizeNode(startnode, subcontext, sis);
+				result = startnode.recognizeNode(subcontext, sis);
 				if (result) {
 					break;
 				}
@@ -121,45 +121,5 @@ public class ComplexType extends AbstractTypeDeclaration {
 		}
 		
 		return subcontext.size() != 0;
-	}
-	
-	protected boolean recognizeNode(ComplexTypeNode node, Context context, SourcecodeInputStream sis) throws IOException {
-		int contextsize = context.size();
-		boolean result = false;
-		switch(node.getOccurrence()) {
-		case ZeroOrMore: // {}
-			while(node.getTypeDeclaration().recognizeType(context, sis)){
-				context.peek().setId(node.getId());
-			}
-			result = true;
-			break;
-		case ZeroOrOne: // []
-			if (node.getTypeDeclaration().recognizeType(context, sis)) {
-				context.peek().setId(node.getId());
-			}
-			result = true;
-			break;
-		default:
-			result = node.getTypeDeclaration().recognizeType(context, sis);
-			if (result) {
-				context.peek().setId(node.getId());
-			}
-			break;
-		}
-		if (result) {
-			for (NextNode nextnode : node.getNextNodes()) {
-				result = recognizeNode(nextnode.getNode(), context, sis);
-				if (result) {
-					break;
-				}
-			}
-			if (!result) {
-				while (context.size() > contextsize) {
-					context.pop().getFragment().ifPresent(s -> sis.unread(s.getBytes()));
-				}
-			}
-		}
-		
-		return result;
 	}
 }

@@ -10,6 +10,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	LiteralTypeTest.class,
 	TerminatedTypeTest.class,
 	ComplexTypeTest.class,
+	ComplexTypeEmbeddedNodesTest.class,
 	JavaTests.class
 })
 public class LangTests {

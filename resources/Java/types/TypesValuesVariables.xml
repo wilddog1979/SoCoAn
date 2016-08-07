@@ -35,12 +35,12 @@
 
 	<ComplexType id="PrimitiveType" processor="aggregating">
 		<StartNode type="Annotations">
-			<NextNode ref="Separator"/>
+			<Node type="Separator">
+				<NextNode ref="NumericType"/>
+				<NextNode ref="keyword_boolean"/>
+			</Node>
 		</StartNode>
-		<Node id="Separator" type="Separator">
-			<NextNode ref="NumericType"/>
-			<NextNode ref="keyword_boolean"/>
-		</Node>
+		
 		<StartNode id="NumericType" type="NumericType"/>
 		<StartNode id="keyword_boolean" type="keyword_boolean"/>
 	</ComplexType>

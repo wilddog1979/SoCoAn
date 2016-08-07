@@ -12,37 +12,31 @@
 	
 	<ComplexType id="DigitsAndUnderscores" processor="aggregating">
 		<StartNode type="DigitOrUnderscore">
-			<NextNode ref="DigitOrUnderscore"/>
+			<Node type="DigitOrUnderscore" occurrence="ZeroOrMore"/>
 		</StartNode>
-		<Node id="DigitOrUnderscore" type="DigitOrUnderscore" occurrence="ZeroOrMore"/>
 	</ComplexType>
 	
 	<!-- this definition must be fixed because it allows underscore on the end of the number which is not valid -->
 	<ComplexType id="Digits" processor="aggregating">
 		<StartNode type="Digit">
-			<NextNode ref="DigitsAndUnderscores"/>
+			<Node type="DigitsAndUnderscores" occurrence="ZeroOrOne"/>
 		</StartNode>
-		<Node id="DigitsAndUnderscores" type="DigitsAndUnderscores" occurrence="ZeroOrOne"/>
 	</ComplexType>
 	
 	<ComplexType id="DecimalNumeral" processor="aggregating">
 		<StartNode type="Digit0"/>
 		<StartNode type="NonZeroDigit">
-			<NextNode ref="Underscore"/>
-			<NextNode ref="Digits2"/>
+			<Node type="Underscore">
+				<Node type="Digits"/>
+			</Node>
+			<Node type="Digits" occurrence="ZeroOrOne"/>
 		</StartNode>
-		<Node id="Underscore" type="Underscore">
-			<NextNode ref="Digits1"/>
-		</Node>
-		<Node id="Digits1" type="Digits"/>
-		<Node id="Digits2" type="Digits" occurrence="ZeroOrOne"/>
 	</ComplexType>
 	
 	<ComplexType id="DecimalIntegerLiteral" processor="aggregating">
 		<StartNode type="DecimalNumeral">
-			<NextNode ref="IntegerTypeSuffix"/>
+			<Node type="IntegerTypeSuffix" occurrence="ZeroOrOne"/>
 		</StartNode>
-		<Node id="IntegerTypeSuffix" type="IntegerTypeSuffix" occurrence="ZeroOrOne"/>
 	</ComplexType>
 	
 	<ComplexType id="HexDigitOrUnderscore" processor="aggregating">
@@ -50,40 +44,32 @@
 		<StartNode type="Underscore" occurrence="ZeroOrMore"/>
 	</ComplexType>
 	
-	<ComplexType id="HexDigitOrUnderscores" processor="aggregating" multiple="true">
-		<StartNode type="HexDigitOrUnderscore"/>
-	</ComplexType>
-	
 	<ComplexType id="HexDigitsAndUnderscores" processor="aggregating">
 		<StartNode type="HexDigitOrUnderscore">
-			<NextNode ref="HexDigitOrUnderscores"/>
+			<Node type="HexDigitOrUnderscore" occurrence="ZeroOrMore"/>
 		</StartNode>
-		<Node id="HexDigitOrUnderscores" type="HexDigitOrUnderscores" occurrence="ZeroOrMore"/>
 	</ComplexType>
 	
 	<!-- this definition must be fixed because it allows underscore on the end of the number which is not valid -->
 	<ComplexType id="HexDigits" processor="aggregating">
 		<StartNode type="HexDigit">
-			<NextNode ref="HexDigitsAndUnderscores"/>
+			<Node type="HexDigitsAndUnderscores"  occurrence="ZeroOrOne"/>
 		</StartNode>
-		<Node id="HexDigitsAndUnderscores" type="HexDigitsAndUnderscores"  occurrence="ZeroOrOne"/>
 	</ComplexType>
 	
 	<ComplexType id="HexNumeral" processor="aggregating">
 		<StartNode type="Prefix0x">
-			<NextNode ref="HexDigits"/>
+			<Node type="HexDigits"/>
 		</StartNode>
 		<StartNode type="Prefix0X">
-			<NextNode ref="HexDigits"/>
+			<Node type="HexDigits"/>
 		</StartNode>
-		<Node id="HexDigits" type="HexDigits"/>
 	</ComplexType>
 	
 	<ComplexType id="HexIntegerLiteral" processor="aggregating">
 		<StartNode type="HexNumeral">
-			<NextNode ref="IntegerTypeSuffix"/>
+			<Node type="IntegerTypeSuffix" occurrence="ZeroOrOne"/>
 		</StartNode>
-		<Node id="IntegerTypeSuffix" type="IntegerTypeSuffix" occurrence="ZeroOrOne"/>
 	</ComplexType>
 	
 	<ComplexType id="OctalDigitOrUnderscore" processor="aggregating">
@@ -91,41 +77,32 @@
 		<StartNode type="Underscore"/>
 	</ComplexType>
 	
-	<ComplexType id="OctalDigitOrUnderscores" processor="aggregating" multiple="true">
-		<StartNode type="OctalDigitOrUnderscore"/>
-	</ComplexType>
-	
 	<ComplexType id="OctalDigitsAndUnderscores" processor="aggregating">
 		<StartNode type="OctalDigitOrUnderscore">
-			<NextNode ref="OctalDigitOrUnderscores"/>
+			<Node type="OctalDigitOrUnderscore" occurrence="ZeroOrMore"/>
 		</StartNode>
-		<Node id="OctalDigitOrUnderscores" type="OctalDigitOrUnderscores" occurrence="ZeroOrMore"/>
 	</ComplexType>
 	
 	<!-- this definition must be fixed because it allows underscore on the end of the number which is not valid -->
 	<ComplexType id="OctalDigits" processor="aggregating">
 		<StartNode type="OctalDigit">
-			<NextNode ref="OctalDigitsAndUnderscores"/>
+			<Node type="OctalDigitsAndUnderscores" occurrence="ZeroOrOne"/>
 		</StartNode>
-		<Node id="OctalDigitsAndUnderscores" type="OctalDigitsAndUnderscores" occurrence="ZeroOrOne"/>
 	</ComplexType>
 	
 	<ComplexType id="OctalNumeral" processor="aggregating">
 		<StartNode type="Digit0">
-			<NextNode ref="Underscore"/>
-			<NextNode ref="OctalDigits"/>
+			<Node type="Underscore">
+				<Node type="OctalDigits"/>
+			</Node>
+			<Node type="OctalDigits"/>
 		</StartNode>
-		<Node id="Underscore" type="Underscore">
-			<NextNode ref="OctalDigits"/>
-		</Node>
-		<Node id="OctalDigits" type="OctalDigits"/>
 	</ComplexType>
 	
 	<ComplexType id="OctalIntegerLiteral" processor="aggregating">
 		<StartNode type="OctalNumeral">
-			<NextNode ref="IntegerTypeSuffix"/>
+			<Node type="IntegerTypeSuffix" occurrence="ZeroOrOne"/>
 		</StartNode>
-		<Node id="IntegerTypeSuffix" type="IntegerTypeSuffix" occurrence="ZeroOrOne"/>
 	</ComplexType>
 	
 	<ComplexType id="BinaryDigitOrUnderscore" processor="aggregating">
@@ -133,40 +110,32 @@
 		<StartNode type="Underscore"/>
 	</ComplexType>
 	
-	<ComplexType id="BinaryDigitOrUnderscores" processor="aggregating" multiple="true">
-		<StartNode type="BinaryDigitOrUnderscore"/>
-	</ComplexType>
-	
 	<ComplexType id="BinaryDigitsAndUnderscores" processor="aggregating">
 		<StartNode type="BinaryDigitOrUnderscore">
-			<NextNode ref="BinaryDigitOrUnderscores"/>
+			<Node type="BinaryDigitOrUnderscore" occurrence="ZeroOrMore"/>
 		</StartNode>
-		<Node id="BinaryDigitOrUnderscores" type="BinaryDigitOrUnderscores" occurrence="ZeroOrMore"/>
 	</ComplexType>
 	
 	<!-- this definition must be fixed because it allows underscore on the end of the number which is not valid -->
 	<ComplexType id="BinaryDigits" processor="aggregating">
 		<StartNode type="BinaryDigit">
-			<NextNode ref="BinaryDigitsAndUnderscores"/>
+			<Node type="BinaryDigitsAndUnderscores" occurrence="ZeroOrOne"/>
 		</StartNode>
-		<Node id="BinaryDigitsAndUnderscores" type="BinaryDigitsAndUnderscores" occurrence="ZeroOrOne"/>
 	</ComplexType>
 
 	<ComplexType id="BinaryNumeral" processor="aggregating">
 		<StartNode type="Prefix0b">
-			<NextNode ref="BinaryDigits"/>
+			<Node type="BinaryDigits"/>
 		</StartNode>
 		<StartNode type="Prefix0B">
-			<NextNode ref="BinaryDigits"/>
+			<Node type="BinaryDigits"/>
 		</StartNode>
-		<Node id="BinaryDigits" type="BinaryDigits"/>
 	</ComplexType>	
 	
 	<ComplexType id="BinaryIntegerLiteral" processor="aggregating">
 		<StartNode type="BinaryNumeral">
-			<NextNode ref="IntegerTypeSuffix"/>
+			<Node type="IntegerTypeSuffix" occurrence="ZeroOrOne"/>
 		</StartNode>
-		<Node id="IntegerTypeSuffix" type="IntegerTypeSuffix" occurrence="ZeroOrOne"/>
 	</ComplexType>
 	
 	<ComplexType id="IntegerLiteral" processor="aggregating">
