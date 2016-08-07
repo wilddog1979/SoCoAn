@@ -40,6 +40,7 @@
 				<NextNode ref="keyword_boolean"/>
 			</Node>
 		</StartNode>
+		 
 		
 		<StartNode id="NumericType" type="NumericType"/>
 		<StartNode id="keyword_boolean" type="keyword_boolean"/>

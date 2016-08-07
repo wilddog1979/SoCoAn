@@ -28,6 +28,9 @@ public class ComplexTypeNode extends ComplexTypeInnerNode {
 	@XmlAttribute(name="occurrence", required=false)
 	protected Occurrence occurrence = Occurrence.Single;
 	
+	@XmlAttribute(name="sequence", required=false)
+	protected Sequence sequence = Sequence.Any;
+	
 	@XmlElements({
 		@XmlElement(name="NextNode", type=ComplexTypeNextNode.class),
 		@XmlElement(name="Node", type=ComplexTypeNode.class)
@@ -51,10 +54,6 @@ public class ComplexTypeNode extends ComplexTypeInnerNode {
 			nextNodes = new ArrayList<ComplexTypeInnerNode>();
 		}
 		return nextNodes;
-	}
-
-	public Occurrence getOccurrence() {
-		return occurrence;
 	}
 
 	@Override
@@ -96,7 +95,9 @@ public class ComplexTypeNode extends ComplexTypeInnerNode {
 		if (result) {
 			for (ComplexTypeInnerNode nextnode : getNextNodes()) {
 				result = nextnode.recognizeNode(context, sis);
-				if (result) {
+				if (sequence == Sequence.Any && result) {
+					break;
+				} else if (sequence == Sequence.Order && !result) {
 					break;
 				}
 			}

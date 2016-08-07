@@ -14,6 +14,7 @@ import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.LangProcessors;
 import org.eaSTars.socoan.lang.Language;
 import org.eaSTars.socoan.lang.Occurrence;
+import org.eaSTars.socoan.lang.Sequence;
 import org.junit.Test;
 
 public class ComplexTypeTest extends AbstractLangTest {
@@ -733,6 +734,43 @@ public class ComplexTypeTest extends AbstractLangTest {
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
 		testFragment(fragment, "cb", "cb");
+		
+		try {
+			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testSequenceMatch() {
+		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
+		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
+		node_a.setSequence(Sequence.Order);
+		complextype.getStartnodes().add(node_a);
+		
+		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
+		node_a.getNextNodes().add(node_b);
+		
+		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
+		node_a.getNextNodes().add(node_c);
+		
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("abcleftover".getBytes()));
+		
+		Context context = new Context((Language)null);
+		
+		boolean testresult = false;
+		try {
+			testresult = complextype.recognizeType(context, sis);
+		} catch (IOException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain one entry", 1, context.size());
+		Fragment fragment = context.pop();
+		testOptionalString("Fragment", "abc", fragment.getFragment());
+		testOptionalString("Formatted fragment", "abc", fragment.getFormattedFragment());
 		
 		try {
 			assertEquals("The input stream should contain the leftover characters", 8, sis.available());

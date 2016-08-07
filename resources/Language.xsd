@@ -1,137 +1,108 @@
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://eaSTars.com/SoCoAn/lang" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="Language">
-    <xs:complexType>
-      <xs:choice maxOccurs="unbounded" minOccurs="0">
-        <xs:element name="LiteralType" maxOccurs="unbounded" minOccurs="0">
-          <xs:complexType>
-            <xs:simpleContent>
-              <xs:extension base="xs:string">
-                <xs:attribute type="xs:string" name="id" use="required"/>
-                <xs:attribute type="xs:string" name="literal" use="required"/>
-              </xs:extension>
-            </xs:simpleContent>
-          </xs:complexType>
-        </xs:element>
-        <xsd:simpleType name="OccurrenceEnum">
-            <xsd:restriction base="xsd:string">
-                <xsd:enumeration value="ZeroOrMore"/>
-                <xsd:enumeration value="ZeroOrOne"/>
-            </xsd:restriction>
-        </xsd:simpleType>
-        <xs:element name="ComplexType" maxOccurs="unbounded" minOccurs="0">
-          <xs:complexType mixed="true">
-            <xs:sequence>
-              <xs:element name="StartNode" maxOccurs="unbounded" minOccurs="0">
-                <xs:complexType mixed="true">
-                  <xs:sequence>
-                    <xs:element name="NextNode" maxOccurs="unbounded" minOccurs="0">
-                      <xs:complexType>
-                        <xs:simpleContent>
-                          <xs:extension base="xs:string">
-                            <xs:attribute type="xs:string" name="ref" use="required"/>
-                          </xs:extension>
-                        </xs:simpleContent>
-                      </xs:complexType>
-                    </xs:element>
-                    <xs:element name="Node" maxOccurs="unbounded" minOccurs="0">
-		                <xs:complexType mixed="true">
-		                  <xs:sequence>
-		                    <xs:element name="NextNode" type="NextNode" maxOccurs="unbounded" minOccurs="0">
-		                    </xs:element>
-		                    <xs:element name="Node" type="Node" maxOccurs="unbounded" minOccurs="0">
-		                    </xs:element>
-		                  </xs:sequence>
-		                  <xs:attribute type="xs:string" name="type" use="required"/>
-		                  <xs:attribute type="OccurrenceEnum" name="occurrence" use="optional"/>
-		                </xs:complexType>
-		              </xs:element>
-                  </xs:sequence>
-                  <xs:attribute type="xs:string" name="id" use="optional"/>
-                  <xs:attribute type="xs:string" name="type" use="required"/>
-                  <xs:attribute type="OccurrenceEnum" name="occurrence" use="optional"/>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-            <xs:sequence>
-              <xs:element name="Node" maxOccurs="unbounded" minOccurs="0">
-                <xs:complexType mixed="true">
-                  <xs:sequence>
-                    <xs:element name="NextNode" maxOccurs="unbounded" minOccurs="0">
-                      <xs:complexType>
-                        <xs:simpleContent>
-                          <xs:extension base="xs:string">
-                            <xs:attribute type="xs:string" name="ref" use="required"/>
-                          </xs:extension>
-                        </xs:simpleContent>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                  <xs:attribute type="xs:string" name="id" use="optional"/>
-                  <xs:attribute type="xs:string" name="type" use="required"/>
-                  <xs:attribute type="OccurrenceEnum" name="occurrence" use="optional"/>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-            <xs:attribute type="xs:string" name="id" use="required"/>
-            <xs:attribute type="xs:string" name="processor" use="required"/>
-            <xs:attribute type="xs:boolean" name="multiple" use="optional"/>
-            <xs:attribute type="xs:string" name="checker" use="optional"/>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="Include" maxOccurs="unbounded" minOccurs="0">
-          <xs:complexType>
-            <xs:simpleContent>
-              <xs:extension base="xs:string">
-                <xs:attribute type="xs:string" name="file" use="required"/>
-              </xs:extension>
-            </xs:simpleContent>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="FormatMasks" maxOccurs="unbounded" minOccurs="0">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="entry" maxOccurs="unbounded" minOccurs="0">
-                <xs:complexType>
-                  <xs:simpleContent>
-                    <xs:extension base="xs:string">
-                      <xs:attribute type="xs:string" name="key" use="required"/>
-                    </xs:extension>
-                  </xs:simpleContent>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="TerminatedType" maxOccurs="unbounded" minOccurs="0">
-          <xs:complexType mixed="true">
-            <xs:sequence>
-              <xs:element type="xs:string" name="Terminator" maxOccurs="unbounded" minOccurs="1"/>
-            </xs:sequence>
-            <xs:attribute type="xs:string" name="id" use="required"/>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="KeywordType" maxOccurs="unbounded" minOccurs="0">
-          <xs:complexType>
-            <xs:simpleContent>
-              <xs:extension base="xs:string">
-                <xs:attribute type="xs:string" name="id" use="required"/>
-                <xs:attribute type="xs:string" name="literal" use="required"/>
-              </xs:extension>
-            </xs:simpleContent>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="CustomType" maxOccurs="unbounded" minOccurs="0">
-          <xs:complexType>
-            <xs:simpleContent>
-              <xs:extension base="xs:string">
-                <xs:attribute type="xs:string" name="id" use="required"/>
-                <xs:attribute type="xs:string" name="recognizer" use="required"/>
-              </xs:extension>
-            </xs:simpleContent>
-          </xs:complexType>
-        </xs:element>
-      </xs:choice>
-      <xs:attribute type="xs:string" name="languageprocessorfactory" use="optional"/>
-    </xs:complexType>
-  </xs:element>
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://eaSTars.com/SoCoAn/lang"
+	xmlns="http://eaSTars.com/SoCoAn/lang"
+	elementFormDefault="qualified">
+
+	<xs:complexType name="IncludeType">
+		<xs:attribute name="file" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="FormatMaskEntryType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="key" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="FormatMasksType">
+		<xs:sequence maxOccurs="unbounded" minOccurs="0">
+			<xs:element name="entry" type="FormatMaskEntryType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LiteralType">
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="literal" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="KeywordType">
+		<xs:attribute name="id" type="xs:string" use="required"/>
+		<xs:attribute name="literal" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:simpleType name="OccurrenceEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Single"/>
+			<xs:enumeration value="ZeroOrMore"/>
+			<xs:enumeration value="ZeroOrOne"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="SequenceEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Any"/>
+			<xs:enumeration value="Order"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="NextNodeType">
+		<xs:attribute name="ref" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="NodeType">
+		<xs:choice maxOccurs="unbounded" minOccurs="0">
+			<xs:element name="Node" type="NodeType"/>
+			<xs:element name="NextNode" type="NextNodeType"/>
+		</xs:choice>
+		<xs:attribute name="id" type="xs:string" use="optional"/>
+		<xs:attribute name="type" type="xs:string" use="required"/>
+		<xs:attribute name="occurrence" type="OccurrenceEnum" use="optional"/>
+		<xs:attribute name="sequence" type="SequenceEnum" use="optional"/>
+	</xs:complexType>
+
+	<xs:complexType name="ComplexType">
+		<xs:choice maxOccurs="unbounded" minOccurs="0">
+			<xs:element name="StartNode" type="NodeType"/>
+			<xs:element name="Node" type="NodeType"/>
+		</xs:choice>
+		<xs:attribute name="id" type="xs:string" use="optional"/>
+		<xs:attribute name="processor" type="xs:string" use="required"/>
+		<xs:attribute name="checker" type="xs:string" use="optional"/>
+		<xs:attribute name="multiple" type="xs:boolean" use="optional"/>
+	</xs:complexType>
+
+	<xs:complexType name="CustomType">
+		<xs:attribute name="id" type="xs:string" use="optional"/>
+		<xs:attribute name="recognizer" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="TerminatorType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="TerminatedType">
+		<xs:choice maxOccurs="unbounded" minOccurs="0">
+			<xs:element name="Terminator" type="TerminatorType"/>
+		</xs:choice>
+		<xs:attribute name="id" type="xs:string" use="optional"/>
+	</xs:complexType>
+
+	<xs:complexType name="LanguageType">
+		<xs:choice maxOccurs="unbounded" minOccurs="0">
+			<xs:element name="Include" type="IncludeType"/>
+			<xs:element name="FormatMasks" type="FormatMasksType"/>
+			<xs:element name="LiteralType" type="LiteralType"/>
+			<xs:element name="KeywordType" type="KeywordType"/>
+			<xs:element name="ComplexType" type="ComplexType"/>
+			<xs:element name="CustomType" type="CustomType"/>
+			<xs:element name="TerminatedType" type="TerminatedType"/>
+		</xs:choice>
+		<xs:attribute name="languageprocessorfactory" type="xs:string" use="optional"/>
+	</xs:complexType>
+	
+	<xs:element name="Language" type="LanguageType"/>
 </xs:schema>
