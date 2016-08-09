@@ -9,12 +9,14 @@
 	<Include file="Import.xml"/>
 
 	<ComplexType id="JavaFile" processor="aggregating">
-		<StartNode type="Package">
+		<StartNode sequence="Order">
+			<Node type="Package"/>
 			<NextNode ref="Java2"/>
 			<NextNode ref="Separator1"/>
 		</StartNode>
 		
-		<StartNode id="Java2" type="Import">
+		<StartNode id="Java2" sequence="Order">
+			<Node type="Import"/>
 			<NextNode ref="Java2"/>
 			<NextNode ref="Separator1"/>
 		</StartNode>

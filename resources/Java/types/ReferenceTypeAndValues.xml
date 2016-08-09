@@ -2,158 +2,157 @@
 <Language xmlns="http://eaSTars.com/SoCoAn/lang">
 
 	<ComplexType id="WildcardBounds" processor="aggregating">
-		<StartNode type="keyword_extends">
-			<NextNode ref="Separator"/>
-		</StartNode>
-		<StartNode type="keyword_super">
-			<NextNode ref="Separator"/>
-		</StartNode>
-		<Node id="Separator" type="Separator">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Any">
+				<Node type="keyword_extends"/>
+				<Node type="keyword_super"/>
+			</GroupNode>
+			<Node id="Separator" type="Separator"/>
 			<Node type="ReferenceType"/>
-		</Node>
+		</StartNode>
 	</ComplexType>
 
 	<ComplexType id="Wildcard" processor="aggregating">
-		<StartNode type="Annotation" occurrence="ZeroOrMore">
-			<Node type="Separator">
-				<NextNode ref="questionmark1"/>
-			</Node>
-		</StartNode>
-		
-		<StartNode id="questionmark1" type="questionmark">
-			<Node type="Separator">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="questionmark"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
 				<Node type="WildcardBounds"/>
-			</Node>
-			<Node type="Separator"/>
+			</GroupNode>
 		</StartNode>
-		
-		<StartNode type="questionmark"/>
 	</ComplexType>
 
 	<ComplexType id="TypeArgument" processor="aggregating">
-		<StartNode type="ReferenceType"/>
-		<StartNode type="Wildcard"/>
-	</ComplexType>
-	
-	<ComplexType id="TypeArgumentEntry" processor="aggregating" multiple="true">
-		<StartNode type="Separator">
-			<NextNode ref="comma"/>
-		</StartNode>
-		<StartNode id="comma" type="comma">
-			<Node type="Separator">
-				<Node type="TypeArgument"/>
-			</Node>
-			<Node type="TypeArgument"/>
+		<StartNode sequence="Any">
+			<Node type="ReferenceType"/>
+			<Node type="Wildcard"/>
 		</StartNode>
 	</ComplexType>
 	
 	<ComplexType id="TypeArgumentList" processor="aggregating">
-		<StartNode type="TypeArgument">
-			<Node type="TypeArgumentEntry" occurrence="ZeroOrOne"/>
+		<StartNode sequence="Order">
+			<Node type="TypeArgument"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="TypeArgument"/>
+			</GroupNode>
 		</StartNode>
 	</ComplexType>
 	
 	<ComplexType id="TypeArguments" processor="aggregating">
-		<StartNode type="lowerthan">
-			<Node type="Separator">
-				<NextNode ref="TypeArgumentList"/>
-			</Node>
-			<NextNode ref="TypeArgumentList"/>
-		</StartNode>
-		
-		<Node id="TypeArgumentList" type="TypeArgumentList">
-			<Node type="Separator">
-				<Node type="greaterthan"/>
-			</Node>
+		<StartNode sequence="Order">
+			<Node type="lowerthan"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="TypeArgumentList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
 			<Node type="greaterthan"/>
-		</Node>
+		</StartNode>
 	</ComplexType>
 	
 	<ComplexType id="AnnotationIdentifierTypeAgrument" processor="fallthrough">
-		<StartNode type="Annotation" occurrence="ZeroOrMore">
-			<Node type="Separator">
-				<NextNode ref="Identifier1"/>
-				<NextNode ref="Identifier2"/>
-			</Node>
-		</StartNode>
-		
-		<StartNode id="Identifier1" type="Identifier">
-			<Node type="Separator">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
 				<Node type="TypeArguments"/>
-			</Node>
+			</GroupNode>
 		</StartNode>
-		
-		<StartNode id="Identifier2" type="Identifier"/>
 	</ComplexType>
 	
 	<!-- NOTE: ClassType declaration should be handled carefully, extraction method should be added later -->
 	<ComplexType id="ClassType" processor="fallthrough">
-		<StartNode type="AnnotationIdentifierTypeAgrument"/>
+		<StartNode sequence="Order">
+			<Node type="AnnotationIdentifierTypeAgrument"/>
+		</StartNode>
 	</ComplexType>
 	
 	<!-- NOTE: InterfaceType declaration should be handled carefully, extraction method should be added later -->
 	<ComplexType id="InterfaceType" processor="fallthrough">
-		<StartNode type="AnnotationIdentifierTypeAgrument"/>
+		<StartNode sequence="Order">
+			<Node type="AnnotationIdentifierTypeAgrument"/>
+		</StartNode>
 	</ComplexType>
 	
 	<ComplexType id="ClassOrInterfaceType" processor="aggregating">
-		<StartNode type="ClassType"/>
-		<StartNode type="InterfaceType"/>
+		<StartNode sequence="Any">
+			<Node type="ClassType"/>
+			<Node type="InterfaceType"/>
+		</StartNode>
 	</ComplexType>
 	
 	<ComplexType id="ClassesOrInterfaces" processor="aggregating" multiple="true">
-		<StartNode type="ClassOrInterfaceType">
+		<StartNode sequence="Order">
+			<Node type="ClassOrInterfaceType"/>
 			<Node type="dot"/>
 		</StartNode>
 	</ComplexType>
 	
 	<ComplexType id="ClassOrInterfaceTypeCommon" processor="aggregating">
-		<StartNode type="ClassesOrInterfaces">
-			<NextNode ref="AnnotationIdentifierTypeAgrument"/>
+		<StartNode sequence="Order">
+			<Node type="ClassesOrInterfaces" occurrence="ZeroOrOne"/>
+			<Node type="AnnotationIdentifierTypeAgrument"/>
 		</StartNode>
-			
-		<StartNode id="AnnotationIdentifierTypeAgrument" type="AnnotationIdentifierTypeAgrument"/>
 	</ComplexType>
 	
 	<ComplexType id="TypeVariable" processor="aggregating">
-		<StartNode type="Annotation" occurrence="ZeroOrMore">
-			<Node type="Separator">
-				<NextNode ref="Identifier1"/>
-			</Node>
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
 		</StartNode>
-		
-		<StartNode id="Identifier1" type="Identifier"/>
 	</ComplexType>
 	
 	<ComplexType id="Dims" processor="aggregating" multiple="true">
-		<StartNode type="Annotation" occurrence="ZeroOrMore" sequence="Order">
-			<Node type="Separator" occurrence="ZeroOrOne"/>
-			<NextNode ref="squarebracket_open"/>
-		</StartNode>
-		<StartNode id="squarebracket_open" type="squarebracket_open" sequence="Order">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="squarebracket_open"/>
 			<Node type="Separator" occurrence="ZeroOrOne"/>
 			<Node type="squarebracket_close"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<GroupNode sequence="Order" occurrence="ZeroOrMore">
+					<Node type="Annotation"/>
+					<Node type="Separator"/>
+				</GroupNode>
+				<Node type="squarebracket_open"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="squarebracket_close"/>
+			</GroupNode>
 		</StartNode>
 	</ComplexType>
 	
 	<ComplexType id="ArrayType" processor="aggregating">
-		<StartNode type="PrimitiveType">
-			<NextNode ref="Separator"/>
-		</StartNode>
-		<StartNode type="ClassOrInterfaceTypeCommon">
-			<NextNode ref="Separator"/>
-		</StartNode>
-		<StartNode type="TypeVariable">
-			<NextNode ref="Separator"/>
-		</StartNode>
-		<Node id="Separator" type="Separator" occurrence="ZeroOrOne">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Any">
+				<Node type="PrimitiveType"/>
+				<Node type="ClassOrInterfaceTypeCommon"/>
+				<Node type="TypeVariable"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
 			<Node type="Dims"/>
-		</Node>
+		</StartNode>
 	</ComplexType>
 	
 	<ComplexType id="ReferenceType" processor="aggregating">
-		<StartNode type="ArrayType"/>
-		<StartNode type="ClassOrInterfaceTypeCommon"/>
-		<StartNode type="TypeVariable"/>
+		<StartNode sequence="Any">
+			<Node type="ArrayType"/>
+			<Node type="ClassOrInterfaceTypeCommon"/>
+			<Node type="TypeVariable"/>
+		</StartNode>
 	</ComplexType>
 </Language>

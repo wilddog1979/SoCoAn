@@ -254,12 +254,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier1 <@testannotation Identifier2, ? extends Identifier3, ? super Identifier4, ?> leftover".getBytes()));
 		
-		boolean testresult = false;
-		try {
-			testresult = typeDeclaration.recognizeType(context, sis);
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
@@ -269,10 +264,6 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 				"@testannotation Identifier1 <@testannotation Identifier2, ? <span class=\"keyword\">extends</span> Identifier3, ? <span class=\"keyword\">super</span> Identifier4, ?>"
 				);
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, 9);
 	}
 }

@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 import org.eaSTars.socoan.SourcecodeInputStream;
@@ -29,23 +30,26 @@ public class ComplexType extends AbstractTypeDeclaration {
 	private String checkerName;
 	
 	@XmlElement(name = "StartNode")
-	private List<ComplexTypeNode> startnodes;
+	private List<ComplexTypeNodeGroup> startnodes;
 	
-	@XmlElement(name = "Node")
-	private List<ComplexTypeNode> nodes;
+	@XmlElements({
+		@XmlElement(name="Node", type=ComplexTypeNode.class),
+		@XmlElement(name="GroupNode", type=ComplexTypeNodeGroup.class)
+	})
+	private List<ComplexTypeNodeGroup> nodes;
 
 	protected Language parent;
 	
-	public List<ComplexTypeNode> getStartnodes() {
+	public List<ComplexTypeNodeGroup> getStartnodes() {
 		if (startnodes == null) {
-			startnodes = new ArrayList<ComplexTypeNode>();
+			startnodes = new ArrayList<ComplexTypeNodeGroup>();
 		}
 		return startnodes;
 	}
 
-	public List<ComplexTypeNode> getNodes() {
+	public List<ComplexTypeNodeGroup> getNodes() {
 		if (nodes == null) {
-			nodes = new ArrayList<ComplexTypeNode>();
+			nodes = new ArrayList<ComplexTypeNodeGroup>();
 		}
 		return nodes;
 	}
@@ -68,21 +72,21 @@ public class ComplexType extends AbstractTypeDeclaration {
 			throw new ReferenceNotFoundException(parent.getFilename(), "complextype (" + this.getId() + ")", "processorName");
 		}
 		
-		for (ComplexTypeNode node : getStartnodes()) {
+		for (ComplexTypeNodeGroup node : getStartnodes()) {
 			node.resolveNodeReferences(parent, this);
 		}
 		
-		for (ComplexTypeNode node : getNodes()) {
+		for (ComplexTypeNodeGroup node : getNodes()) {
 			node.resolveNodeReferences(parent, this);
 		}
 	}
 	
-	private Optional<ComplexTypeNode> getNodeById(List<ComplexTypeNode> nodelist, String id) {
+	private Optional<ComplexTypeNodeGroup> getNodeById(List<ComplexTypeNodeGroup> nodelist, String id) {
 		return nodelist.stream().filter(node -> id.equals(node.getId())).findFirst();
 	}
 	
-	public ComplexTypeNode getComplexNode(String id) throws ReferenceNotFoundException {
-		Optional<ComplexTypeNode> result = getNodeById(getStartnodes(), id);
+	public ComplexTypeNodeGroup getComplexNode(String id) throws ReferenceNotFoundException {
+		Optional<ComplexTypeNodeGroup> result = getNodeById(getStartnodes(), id);
 		if (!result.isPresent()) {
 			result = getNodeById(getNodes(), id);
 		}
@@ -98,7 +102,7 @@ public class ComplexType extends AbstractTypeDeclaration {
 		
 		boolean result = false;
 		do {
-			for (ComplexTypeNode startnode : getStartnodes()) {
+			for (ComplexTypeNodeGroup startnode : getStartnodes()) {
 				result = startnode.recognizeNode(subcontext, sis);
 				if (result) {
 					break;
@@ -121,5 +125,10 @@ public class ComplexType extends AbstractTypeDeclaration {
 		}
 		
 		return subcontext.size() != 0;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("ComplexType: ID: %s", this.getId());
 	}
 }

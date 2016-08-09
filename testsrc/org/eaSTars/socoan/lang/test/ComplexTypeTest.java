@@ -63,14 +63,14 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_c));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_c));
 		
 		ComplexTypeNodeHelper node_d = new ComplexTypeNodeHelper(new LiteralTypeHelper("d"));
-		node_b.getNextNodes().add(new NextNodeHelper(node_d));
-		node_c.getNextNodes().add(new NextNodeHelper(node_d));
+		node_b.getInnerNodes().add(new NextNodeHelper(node_d));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_d));
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("abdleftover".getBytes()));
 		
@@ -109,14 +109,14 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_c));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_c));
 		
 		ComplexTypeNodeHelper node_d = new ComplexTypeNodeHelper(new LiteralTypeHelper("d"));
-		node_b.getNextNodes().add(new NextNodeHelper(node_d));
-		node_c.getNextNodes().add(new NextNodeHelper(node_d));
+		node_b.getInnerNodes().add(new NextNodeHelper(node_d));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_d));
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("acdleftover".getBytes()));
 		
@@ -157,21 +157,21 @@ public class ComplexTypeTest extends AbstractLangTest {
 		xcomplextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
 		complextype.getStartnodes().add(node_c);
 		
 		ComplexTypeNodeHelper node_x = new ComplexTypeNodeHelper(xcomplextype);
-		node_c.getNextNodes().add(new NextNodeHelper(node_x));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_x));
 		
 		ComplexTypeNodeHelper node_d = new ComplexTypeNodeHelper(new LiteralTypeHelper("d"));
-		node_c.getNextNodes().add(new NextNodeHelper(node_d));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_d));
 		
 		ComplexTypeNodeHelper node_e = new ComplexTypeNodeHelper(new LiteralTypeHelper("e"));
-		node_x.getNextNodes().add(new NextNodeHelper(node_e));
-		node_d.getNextNodes().add(new NextNodeHelper(node_e));
+		node_x.getInnerNodes().add(new NextNodeHelper(node_e));
+		node_d.getInnerNodes().add(new NextNodeHelper(node_e));
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("cabeleftover".getBytes()));
 		
@@ -237,14 +237,14 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_c));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_c));
 		
 		ComplexTypeNodeHelper node_d = new ComplexTypeNodeHelper(new LiteralTypeHelper("d"));
-		node_b.getNextNodes().add(new NextNodeHelper(node_d));
-		node_c.getNextNodes().add(new NextNodeHelper(node_d));
+		node_b.getInnerNodes().add(new NextNodeHelper(node_d));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_d));
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("ableftover".getBytes()));
 		
@@ -281,14 +281,14 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_c));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_c));
 		
 		ComplexTypeNodeHelper node_d = new ComplexTypeNodeHelper(new LiteralTypeHelper("d"));
-		node_b.getNextNodes().add(new NextNodeHelper(node_d));
-		node_c.getNextNodes().add(new NextNodeHelper(node_d));
+		node_b.getInnerNodes().add(new NextNodeHelper(node_d));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_d));
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("acleftover".getBytes()));
 		
@@ -327,21 +327,21 @@ public class ComplexTypeTest extends AbstractLangTest {
 		xcomplextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeHelper complextype = new ComplexTypeHelper(context -> new LangProcessors().processAggregation(context));
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
 		complextype.getStartnodes().add(node_c);
 		
 		ComplexTypeNodeHelper node_x = new ComplexTypeNodeHelper(xcomplextype);
-		node_c.getNextNodes().add(new NextNodeHelper(node_x));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_x));
 		
 		ComplexTypeNodeHelper node_d = new ComplexTypeNodeHelper(new LiteralTypeHelper("d"));
-		node_c.getNextNodes().add(new NextNodeHelper(node_d));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_d));
 		
 		ComplexTypeNodeHelper node_e = new ComplexTypeNodeHelper(new LiteralTypeHelper("e"));
-		node_x.getNextNodes().add(new NextNodeHelper(node_e));
-		node_d.getNextNodes().add(new NextNodeHelper(node_e));
+		node_x.getInnerNodes().add(new NextNodeHelper(node_e));
+		node_d.getInnerNodes().add(new NextNodeHelper(node_e));
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("cableftover".getBytes()));
 		
@@ -377,10 +377,10 @@ public class ComplexTypeTest extends AbstractLangTest {
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
 		node_b.setOccurrence(Occurrence.ZeroOrMore);
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("aleftover".getBytes()));
@@ -419,10 +419,10 @@ public class ComplexTypeTest extends AbstractLangTest {
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
 		node_b.setOccurrence(Occurrence.ZeroOrMore);
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("abbbbleftover".getBytes()));
@@ -461,10 +461,10 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("aaaableftover".getBytes()));
@@ -503,10 +503,10 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("cbleftover".getBytes()));
@@ -545,10 +545,10 @@ public class ComplexTypeTest extends AbstractLangTest {
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
 		node_b.setOccurrence(Occurrence.ZeroOrOne);
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("aleftover".getBytes()));
@@ -587,10 +587,10 @@ public class ComplexTypeTest extends AbstractLangTest {
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
 		node_b.setOccurrence(Occurrence.ZeroOrOne);
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("abbbbleftover".getBytes()));
@@ -629,10 +629,10 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("bleftover".getBytes()));
@@ -671,10 +671,10 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("ableftover".getBytes()));
@@ -713,10 +713,10 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_a.getNextNodes().add(new NextNodeHelper(node_b));
+		node_a.getInnerNodes().add(new NextNodeHelper(node_b));
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_c.getNextNodes().add(new NextNodeHelper(node_b));
+		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("cbleftover".getBytes()));
@@ -750,10 +750,10 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_a.getNextNodes().add(node_b);
+		node_a.getInnerNodes().add(node_b);
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_a.getNextNodes().add(node_c);
+		node_a.getInnerNodes().add(node_c);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("abcleftover".getBytes()));
 		
@@ -787,10 +787,10 @@ public class ComplexTypeTest extends AbstractLangTest {
 		complextype.getStartnodes().add(node_a);
 		
 		ComplexTypeNodeHelper node_b = new ComplexTypeNodeHelper(new LiteralTypeHelper("b"));
-		node_a.getNextNodes().add(node_b);
+		node_a.getInnerNodes().add(node_b);
 		
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
-		node_a.getNextNodes().add(node_c);
+		node_a.getInnerNodes().add(node_c);
 		
 		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("ableftover".getBytes()));
 		

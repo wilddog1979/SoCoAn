@@ -14,13 +14,13 @@ public class ComplexTypeNextNode extends ComplexTypeInnerNode {
 	@XmlAttribute(name="ref")
 	private String ref;
 	
-	protected ComplexTypeNode node;
+	protected ComplexTypeNodeGroup node;
 
 	public String getRef() {
 		return ref;
 	}
 
-	public ComplexTypeNode getNode() {
+	public ComplexTypeNodeGroup getNode() {
 		return node;
 	}
 

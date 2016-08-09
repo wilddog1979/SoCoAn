@@ -55,6 +55,7 @@
 		<xs:choice maxOccurs="unbounded" minOccurs="0">
 			<xs:element name="Node" type="NodeType"/>
 			<xs:element name="NextNode" type="NextNodeType"/>
+			<xs:element name="GroupNode" type="GroupNodeType"/>
 		</xs:choice>
 		<xs:attribute name="id" type="xs:string" use="optional"/>
 		<xs:attribute name="type" type="xs:string" use="required"/>
@@ -62,10 +63,22 @@
 		<xs:attribute name="sequence" type="SequenceEnum" use="optional"/>
 	</xs:complexType>
 
+	<xs:complexType name="GroupNodeType">
+		<xs:choice maxOccurs="unbounded" minOccurs="0">
+			<xs:element name="Node" type="NodeType"/>
+			<xs:element name="NextNode" type="NextNodeType"/>
+			<xs:element name="GroupNode" type="GroupNodeType"/>
+		</xs:choice>
+		<xs:attribute name="id" type="xs:string" use="optional"/>
+		<xs:attribute name="occurrence" type="OccurrenceEnum" use="optional"/>
+		<xs:attribute name="sequence" type="SequenceEnum" use="required"/>
+	</xs:complexType>
+
 	<xs:complexType name="ComplexType">
 		<xs:choice maxOccurs="unbounded" minOccurs="0">
-			<xs:element name="StartNode" type="NodeType"/>
+			<xs:element name="StartNode" type="GroupNodeType"/>
 			<xs:element name="Node" type="NodeType"/>
+			<xs:element name="GroupNode" type="GroupNodeType"/>
 		</xs:choice>
 		<xs:attribute name="id" type="xs:string" use="optional"/>
 		<xs:attribute name="processor" type="xs:string" use="required"/>

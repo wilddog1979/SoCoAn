@@ -1,59 +1,29 @@
 package org.eaSTars.socoan.lang;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlTransient;
 
 import org.eaSTars.socoan.SourcecodeInputStream;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ComplexTypeNode extends ComplexTypeInnerNode {
-	
-	@XmlAttribute(name="id")
-	private String id;
+public class ComplexTypeNode extends ComplexTypeNodeGroup {
 	
 	@XmlAttribute(name="type")
 	private String type;
 	
 	@XmlTransient
 	protected AbstractTypeDeclaration typeDeclaration;
-	
-	@XmlAttribute(name="occurrence", required=false)
-	protected Occurrence occurrence = Occurrence.Single;
-	
-	@XmlAttribute(name="sequence", required=false)
-	protected Sequence sequence = Sequence.Any;
-	
-	@XmlElements({
-		@XmlElement(name="NextNode", type=ComplexTypeNextNode.class),
-		@XmlElement(name="Node", type=ComplexTypeNode.class)
-	})
-	private List<ComplexTypeInnerNode> nextNodes;
 
-	public String getId() {
-		return id;
-	}
-	
 	public String getType() {
 		return type;
 	}
 
 	public AbstractTypeDeclaration getTypeDeclaration() {
 		return typeDeclaration;
-	}
-	
-	public List<ComplexTypeInnerNode> getNextNodes() {
-		if (nextNodes == null) {
-			nextNodes = new ArrayList<ComplexTypeInnerNode>();
-		}
-		return nextNodes;
 	}
 
 	@Override
@@ -62,9 +32,7 @@ public class ComplexTypeNode extends ComplexTypeInnerNode {
 		if (typeDeclaration == null) {
 			throw new ReferenceNotFoundException(parent.getFilename(), "type (" + this.getId() + ")",type);
 		}
-		for (ComplexTypeInnerNode nextnode : getNextNodes()) {
-			nextnode.resolveNodeReferences(parent, complexType);
-		}
+		super.resolveNodeReferences(parent, complexType);
 	}
 	
 	@Override
@@ -93,14 +61,7 @@ public class ComplexTypeNode extends ComplexTypeInnerNode {
 		}
 		
 		if (result) {
-			for (ComplexTypeInnerNode nextnode : getNextNodes()) {
-				result = nextnode.recognizeNode(context, sis);
-				if (sequence == Sequence.Any && result) {
-					break;
-				} else if (sequence == Sequence.Order && !result) {
-					break;
-				}
-			}
+			result = recognizeInnerNodes(context, sis);
 			if (!result) {
 				while (context.size() > contextsize) {
 					context.pop().getFragment().ifPresent(s -> sis.unread(s.getBytes()));
@@ -109,5 +70,10 @@ public class ComplexTypeNode extends ComplexTypeInnerNode {
 		}
 		
 		return result;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("ID: %s, type: %s, occurrence: %s", this.getId(), this.type, this.occurrence.name());
 	}
 }

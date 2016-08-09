@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Language xmlns="http://eaSTars.com/SoCoAn/lang">
 	<ComplexType id="Package" processor="simplecommand">
-		<StartNode type="Separator" occurrence="ZeroOrOne">
-			<Node id="PackageNode" type="keyword_package">
-				<Node type="Separator">
-					<Node type="SimpleCommandEnd"/>
-				</Node>
-			</Node>
+		<StartNode sequence="Order">
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node id="PackageNode" type="keyword_package"/>
+			<Node type="Separator"/>
+			<Node type="SimpleCommandEnd"/>
 		</StartNode>
 	</ComplexType>
 </Language>

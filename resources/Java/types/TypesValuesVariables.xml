@@ -6,7 +6,8 @@
 	<LiteralType id="TestAnnotation" literal="@testannotation"/>
 
 	<ComplexType id="Annotation" processor="aggregating">
-		<StartNode type="Separator" occurrence="ZeroOrOne">
+		<StartNode sequence="Order">
+			<Node type="Separator" occurrence="ZeroOrOne"/>
 			<Node type="TestAnnotation"/>
 		</StartNode>
 	</ComplexType>
@@ -14,32 +15,42 @@
 	<!-- 4.2 Primitive Types and Values -->
 
 	<ComplexType id="FloatingPointType" processor="aggregating">
-		<StartNode type="keyword_float"/>
-		<StartNode type="keyword_double"/>
+		<StartNode sequence="Any">
+			<Node type="keyword_float"/>
+			<Node type="keyword_double"/>
+		</StartNode>
 	</ComplexType>
 
 	<ComplexType id="IntegralType" processor="aggregating">
-		<StartNode type="keyword_byte"/>
-		<StartNode type="keyword_short"/>
-		<StartNode type="keyword_int"/>
-		<StartNode type="keyword_long"/>
-		<StartNode type="keyword_char"/>
+		<StartNode sequence="Any">
+			<Node type="keyword_byte"/>
+			<Node type="keyword_short"/>
+			<Node type="keyword_int"/>
+			<Node type="keyword_long"/>
+			<Node type="keyword_char"/>
+		</StartNode>
 	</ComplexType>
 
 	<ComplexType id="NumericType" processor="aggregating">
-		<StartNode type="IntegralType"/>
-		<StartNode type="FloatingPointType"/>
+		<StartNode sequence="Any">
+			<Node type="IntegralType"/>
+			<Node type="FloatingPointType"/>
+		</StartNode>
 	</ComplexType>
 
 	<ComplexType id="PrimitiveType" processor="aggregating">
-		<StartNode type="Annotation" occurrence="ZeroOrMore">
-			<Node type="Separator">
-				<NextNode ref="NumericType"/>
-				<NextNode ref="keyword_boolean"/>
-			</Node>
+		<StartNode sequence="Any">
+			<GroupNode sequence="Order">
+				<Node type="Annotation" occurrence="ZeroOrMore"/>
+				<Node type="Separator"/>
+				<GroupNode sequence="Any">
+					<Node type="NumericType"/>
+					<Node type="keyword_boolean"/>
+				</GroupNode>
+			</GroupNode>
+			<Node type="NumericType"/>
+			<Node type="keyword_boolean"/>
 		</StartNode>
-		<StartNode id="NumericType" type="NumericType"/>
-		<StartNode id="keyword_boolean" type="keyword_boolean"/>
 	</ComplexType>
 
 	<!-- 4.3 Reference Types and Values -->
@@ -49,14 +60,17 @@
 	<!-- 4.1 The Kinds of Types and Values -->
 	
 	<ComplexType id="Type" processor="aggregating">
-		<StartNode type="PrimitiveType"/>
-		<StartNode type="ReferenceType"/>
+		<StartNode sequence="Any">
+			<Node type="PrimitiveType"/>
+			<Node type="ReferenceType"/>
+		</StartNode>
 	</ComplexType>
 	
 	<!-- 4.4 Type Variables -->
 	
 	<ComplexType id="AdditionalBound" processor="aggregating">
-		<StartNode type="Separator" occurrence="ZeroOrOne" sequence="Order">
+		<StartNode sequence="Order">
+			<Node type="Separator" occurrence="ZeroOrOne"/>
 			<Node type="and"/>
 			<Node type="Separator" occurrence="ZeroOrOne"/>
 			<Node type="InterfaceType"/>
@@ -64,28 +78,31 @@
 	</ComplexType>
 	
 	<ComplexType id="TypeBound" processor="aggregating">
-		<StartNode type="Separator" occurrence="ZeroOrOne">
-			<Node type="keyword_extends" sequence="Order">
-				<Node type="Separator"/>
+		<StartNode sequence="Order">
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="keyword_extends"/>
+			<Node type="Separator"/>
+			<GroupNode sequence="Any">
 				<Node type="TypeVariable"/>
-			</Node>
-			<Node type="keyword_extends" sequence="Order">
-				<Node type="Separator"/>
-				<Node type="ClassOrInterfaceType"/>
-				<Node type="Separator"/>
-				<Node type="AdditionalBound" occurrence="ZeroOrMore"/>
-			</Node>
+				<GroupNode sequence="Order">
+					<Node type="ClassOrInterfaceType"/>
+					<Node type="Separator"/>
+					<Node type="AdditionalBound" occurrence="ZeroOrMore"/>
+				</GroupNode>
+			</GroupNode>
 		</StartNode>
 	</ComplexType>
 	
 	<ComplexType id="TypeParameterModifier"  processor="aggregating">
-		<StartNode type="Annotation">
+		<StartNode sequence="Order">
+			<Node type="Annotation"/>
 			<Node type="Separator" occurrence="ZeroOrOne"/>
 		</StartNode>
 	</ComplexType>
 	
 	<ComplexType id="TypeParameter" processor="aggregating">
-		<StartNode type="TypeParameterModifier" occurrence="ZeroOrMore" sequence="Order">
+		<StartNode sequence="Order">
+			<Node type="TypeParameterModifier" occurrence="ZeroOrMore"/>
 			<Node type="Identifier"/>
 			<Node type="TypeBound" occurrence="ZeroOrOne"/>
 		</StartNode>

@@ -11,7 +11,8 @@ import org.eaSTars.socoan.SourcecodeInputStream;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso({
 	ComplexTypeNode.class,
-	ComplexTypeNextNode.class
+	ComplexTypeNextNode.class,
+	ComplexTypeNodeGroup.class
 })
 public abstract class ComplexTypeInnerNode {
 
