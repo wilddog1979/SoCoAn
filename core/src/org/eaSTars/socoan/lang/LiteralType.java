@@ -46,7 +46,7 @@ public class LiteralType extends AbstractTypeDeclaration {
 		Fragment fragment = new Fragment(context.getFormatProvider());
 		fragment.setId(this.getId());
 		fragment.setFragment(content);
-		fragment.setFormattedFragment(content);
+		fragment.setFormattedFragment(applyHTMLRules(content));
 		return fragment;
 	}
 }

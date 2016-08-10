@@ -129,6 +129,6 @@ public class ComplexType extends AbstractTypeDeclaration {
 	
 	@Override
 	public String toString() {
-		return String.format("ComplexType: ID: %s", this.getId());
+		return String.format("[ComplexType - ID: %s]", this.getId());
 	}
 }

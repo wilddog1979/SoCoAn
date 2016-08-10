@@ -50,4 +50,9 @@ public class Fragment {
 	public void setFragment(String fragment) {
 		this.fragment = Optional.ofNullable(fragment);
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("[ID: %s, fragment: %s]", this.getId(), this.getFragment());
+	}
 }

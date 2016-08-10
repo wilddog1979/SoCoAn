@@ -55,7 +55,23 @@
 		</StartNode>
 	</ComplexType>
 	
-	<ComplexType id="AnnotationIdentifierTypeAgrument" processor="fallthrough">
+	<!-- NOTE: ClassType declaration should be handled carefully, extraction method should be added later -->
+	<ComplexType id="ClassType" processor="fallthrough">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="TypeArguments"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- NOTE: InterfaceType declaration should be handled carefully, extraction method should be added later -->
+	<ComplexType id="InterfaceType" processor="fallthrough">
 		<StartNode sequence="Order">
 			<GroupNode sequence="Order" occurrence="ZeroOrMore">
 				<Node type="Annotation"/>
@@ -69,20 +85,6 @@
 		</StartNode>
 	</ComplexType>
 	
-	<!-- NOTE: ClassType declaration should be handled carefully, extraction method should be added later -->
-	<ComplexType id="ClassType" processor="fallthrough">
-		<StartNode sequence="Order">
-			<Node type="AnnotationIdentifierTypeAgrument"/>
-		</StartNode>
-	</ComplexType>
-	
-	<!-- NOTE: InterfaceType declaration should be handled carefully, extraction method should be added later -->
-	<ComplexType id="InterfaceType" processor="fallthrough">
-		<StartNode sequence="Order">
-			<Node type="AnnotationIdentifierTypeAgrument"/>
-		</StartNode>
-	</ComplexType>
-	
 	<ComplexType id="ClassOrInterfaceType" processor="aggregating">
 		<StartNode sequence="Any">
 			<Node type="ClassType"/>
@@ -90,17 +92,21 @@
 		</StartNode>
 	</ComplexType>
 	
-	<ComplexType id="ClassesOrInterfaces" processor="aggregating" multiple="true">
-		<StartNode sequence="Order">
-			<Node type="ClassOrInterfaceType"/>
-			<Node type="dot"/>
-		</StartNode>
-	</ComplexType>
-	
 	<ComplexType id="ClassOrInterfaceTypeCommon" processor="aggregating">
 		<StartNode sequence="Order">
-			<Node type="ClassesOrInterfaces" occurrence="ZeroOrOne"/>
-			<Node type="AnnotationIdentifierTypeAgrument"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="ClassOrInterfaceType"/>
+				<Node type="dot"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="TypeArguments"/>
+			</GroupNode>
 		</StartNode>
 	</ComplexType>
 	

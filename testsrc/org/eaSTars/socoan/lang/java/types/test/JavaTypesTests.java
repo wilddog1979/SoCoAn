@@ -10,7 +10,9 @@ import org.junit.runners.Suite.SuiteClasses;
 	ClassOrInterfaceTypeTest.class,
 	TypeVariableTest.class,
 	ArrayTypeTest.class,
-	TypeParameterTest.class
+	TypeParameterTest.class,
+	TypeArgumentTest.class,
+	AnnotationIdentifierTypeAgrumentTest.class
 })
 public class JavaTypesTests {
 	

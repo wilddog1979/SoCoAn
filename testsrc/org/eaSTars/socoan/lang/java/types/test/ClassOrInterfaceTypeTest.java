@@ -155,7 +155,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment,
 				"@testannotation Identifier1 <Identifier2>",
-				"@testannotation Identifier1 <Identifier2>"
+				"@testannotation Identifier1 &lt;Identifier2&gt;"
 				);
 		
 		try {
@@ -192,7 +192,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment,
 				"@testannotation Identifier1 <@testannotation Identifier2>",
-				"@testannotation Identifier1 <@testannotation Identifier2>"
+				"@testannotation Identifier1 &lt;@testannotation Identifier2&gt;"
 				);
 		
 		try {
@@ -229,7 +229,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment,
 				"@testannotation Identifier1 <@testannotation Identifier2, Identifier3, Identifier4>",
-				"@testannotation Identifier1 <@testannotation Identifier2, Identifier3, Identifier4>"
+				"@testannotation Identifier1 &lt;@testannotation Identifier2, Identifier3, Identifier4&gt;"
 				);
 		
 		try {
@@ -261,7 +261,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment,
 				"@testannotation Identifier1 <@testannotation Identifier2, ? extends Identifier3, ? super Identifier4, ?>",
-				"@testannotation Identifier1 <@testannotation Identifier2, ? <span class=\"keyword\">extends</span> Identifier3, ? <span class=\"keyword\">super</span> Identifier4, ?>"
+				"@testannotation Identifier1 &lt;@testannotation Identifier2, ? <span class=\"keyword\">extends</span> Identifier3, ? <span class=\"keyword\">super</span> Identifier4, ?&gt;"
 				);
 		
 		checkLeftover(sis, 9);

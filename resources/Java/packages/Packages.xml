@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Language xmlns="http://eaSTars.com/SoCoAn/lang">
+	
+	<!-- 7.4.1 Named Packages -->
+	
+	<ComplexType id="PackageModifier" processor="aggregating">
+		 <StartNode sequence="Order">
+		 	<Node type="Annotation"/>
+		 </StartNode>
+	</ComplexType>
+	
+	<ComplexType id="PackageDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="PackageModifier"></Node>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="keyword_package"/>
+			<Node type="Separator"/>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="dot"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Identifier"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.5.1 Single-Type-Import Declarations -->
+	
+	<ComplexType id="SingleTypeImportDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_import"/>
+			<Node type="Separator"/>
+			<Node type="TypeName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.5.2 Type-Import-on-Demand Declarations -->
+	
+	<ComplexType id="TypeImportOnDemandDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_import"/>
+			<Node type="Separator"/>
+			<Node type="PackageName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="multiply"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.5.3 Single-Static-Import Declarations -->
+	
+	<ComplexType id="SingleStaticImportDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_import"/>
+			<Node type="Separator"/>
+			<Node type="keyword_static"/>
+			<Node type="Separator"/>
+			<Node type="TypeName"/>
+			<!-- <Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/> -->
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.5.4 Static-Import-on-Demand Declarations -->
+	
+	<ComplexType id="StaticImportOnDemandDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_import"/>
+			<Node type="Separator"/>
+			<Node type="keyword_static"/>
+			<Node type="Separator"/>
+			<Node type="TypeName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="multiply"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.5 Import Declarations -->
+	
+	<ComplexType id="ImportDeclaration" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="SingleTypeImportDeclaration"/>
+			<Node type="TypeImportOnDemandDeclaration"/>
+			<Node type="SingleStaticImportDeclaration"/>
+			<Node type="StaticImportOnDemandDeclaration"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.6 Top Level Type Declarations -->
+	
+	<ComplexType id="ClassModifier" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Annotation"/>
+			<Node type="keyword_public"/>
+			<Node type="keyword_protected"/>
+			<Node type="keyword_private"/>
+			<Node type="keyword_abstract"/>
+			<Node type="keyword_static"/>
+			<Node type="keyword_final"/>
+			<Node type="keyword_strictfp"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="TypeParameterList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="TypeParameter"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="TypeParameter"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="TypeParameters" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="lowerthan"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="TypeParameterList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="greaterthan"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Superclass" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_extends"/>
+			<Node type="Separator"/>
+			<Node type="ClassType"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="InterfaceTypeList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="InterfaceType"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="InterfaceType"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Superinterfaces" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_implements"/>
+			<Node type="Separator"/>
+			<Node type="InterfaceTypeList"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ClassBody" processor="aggregating">
+		<StartNode sequence="Order">
+			<!-- Not complete yet -->
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="NormalClassDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="ClassModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="keyword_class"/>
+			<Node type="Separator"/>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="TypeParameters"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Superclass"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Superinterfaces"/>
+			</GroupNode>
+			<Node type="Separator"/>
+			<Node type="ClassBody"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="EnumBody" processor="aggregating">
+		<StartNode sequence="Order">
+			<!-- Not complete yet -->
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="EnumDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="ClassModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="keyword_enum"/>
+			<Node type="Separator"/>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Superinterfaces"/>
+			</GroupNode>
+			<Node type="Separator"/>
+			<Node type="EnumBody"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ClassDeclaration" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="NormalClassDeclaration"/>
+			<Node type="EnumDeclaration"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="InterfaceDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="TypeDeclaration" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="ClassDeclaration"/>
+			<Node type="InterfaceDeclaration"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.3 Compilation Units -->
+	
+	<ComplexType id="CompilationUnit" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="PackageDeclaration"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="ImportDeclaration"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="TypeDeclaration"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+</Language>

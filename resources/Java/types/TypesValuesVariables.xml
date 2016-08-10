@@ -7,7 +7,6 @@
 
 	<ComplexType id="Annotation" processor="aggregating">
 		<StartNode sequence="Order">
-			<Node type="Separator" occurrence="ZeroOrOne"/>
 			<Node type="TestAnnotation"/>
 		</StartNode>
 	</ComplexType>
@@ -83,12 +82,14 @@
 			<Node type="keyword_extends"/>
 			<Node type="Separator"/>
 			<GroupNode sequence="Any">
-				<Node type="TypeVariable"/>
 				<GroupNode sequence="Order">
 					<Node type="ClassOrInterfaceType"/>
-					<Node type="Separator"/>
-					<Node type="AdditionalBound" occurrence="ZeroOrMore"/>
+					<GroupNode sequence="Order" occurrence="ZeroOrMore">
+						<Node type="Separator"/>
+						<Node type="AdditionalBound"/>
+					</GroupNode>
 				</GroupNode>
+				<Node type="TypeVariable"/>
 			</GroupNode>
 		</StartNode>
 	</ComplexType>

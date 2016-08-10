@@ -11,6 +11,7 @@ import org.eaSTars.socoan.lang.Language;
 import org.eaSTars.socoan.lang.LanguageObjectFactory;
 import org.eaSTars.socoan.lang.ReferenceNotFoundException;
 import org.eaSTars.socoan.lang.java.lexical.test.JavaLexicalTests;
+import org.eaSTars.socoan.lang.java.packages.test.PackagesTests;
 import org.eaSTars.socoan.lang.java.types.test.JavaTypesTests;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -20,7 +21,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	JavaLexicalTests.class,
-	JavaTypesTests.class
+	JavaTypesTests.class,
+	PackagesTests.class
 })
 public class JavaTests {
 

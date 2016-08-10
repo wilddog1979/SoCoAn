@@ -74,6 +74,6 @@ public class ComplexTypeNode extends ComplexTypeNodeGroup {
 	
 	@Override
 	public String toString() {
-		return String.format("ID: %s, type: %s, occurrence: %s", this.getId(), this.type, this.occurrence.name());
+		return String.format("[Node - ID: %s, type: %s, occurrence: %s]", this.getId(), this.type, this.occurrence.name());
 	}
 }

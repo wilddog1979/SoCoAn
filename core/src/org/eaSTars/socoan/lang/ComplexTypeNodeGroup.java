@@ -101,6 +101,6 @@ public class ComplexTypeNodeGroup extends ComplexTypeInnerNode {
 	
 	@Override
 	public String toString() {
-		return String.format("GroupNode: ID: %s, sequence: %s, occurrence: %s", this.getId(), this.sequence.name(), this.occurrence.name());
+		return String.format("[GroupNode - ID: %s, sequence: %s, occurrence: %s]", this.getId(), this.sequence.name(), this.occurrence.name());
 	}
 }

@@ -1,4 +1,4 @@
-package org.eaSTars.socoan.lang.java.types.test;
+package org.eaSTars.socoan.lang.java.packages.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -18,12 +18,12 @@ import org.eaSTars.socoan.lang.java.test.AbstractJavaLangTest;
 import org.eaSTars.socoan.lang.java.test.JavaTests;
 import org.junit.Test;
 
-public class TypeVariableTest extends AbstractJavaLangTest {
+public class SuperinterfacesTest extends AbstractJavaLangTest {
 
-	private static final String ELEMENT_NAME = "ReferenceType";
+	private static final String ELEMENT_NAME = "Superinterfaces";
 	
 	@Test
-	public void testidentifier() {
+	public void testSingle() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -35,20 +35,20 @@ public class TypeVariableTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("Identifier leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("implements TestIdentifier1 leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "Identifier", "Identifier");
+		testFragment(fragment, "implements TestIdentifier1", "<span class=\"keyword\">implements</span> TestIdentifier1");
 		
 		checkLeftover(sis, 9);
 	}
 	
 	@Test
-	public void testannotationidentifier() {
+	public void testMultiple() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -60,20 +60,20 @@ public class TypeVariableTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("implements TestIdentifier1, TestIdentifier2 leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "@testannotation Identifier", "@testannotation Identifier");
+		testFragment(fragment, "implements TestIdentifier1, TestIdentifier2", "<span class=\"keyword\">implements</span> TestIdentifier1, TestIdentifier2");
 		
 		checkLeftover(sis, 9);
 	}
 	
 	@Test
-	public void testannotationidentifierextended() {
+	public void testMultipleExtended() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -85,14 +85,17 @@ public class TypeVariableTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier<?> leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("implements TestIdentifier1, @testannotation TestIdentifier2 <? extends TestIdentifier3> leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "@testannotation Identifier<?>", "@testannotation Identifier&lt;?&gt;");
+		testFragment(fragment,
+				"implements TestIdentifier1, @testannotation TestIdentifier2 <? extends TestIdentifier3>",
+				"<span class=\"keyword\">implements</span> TestIdentifier1, @testannotation TestIdentifier2 &lt;? <span class=\"keyword\">extends</span> TestIdentifier3&gt;"
+		);
 		
 		checkLeftover(sis, 9);
 	}
