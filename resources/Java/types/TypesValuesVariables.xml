@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Language xmlns="http://eaSTars.com/SoCoAn/lang">
 
-	<!-- FOR TESTS ONLY!!! -->
-
-	<LiteralType id="TestAnnotation" literal="@testannotation"/>
-
-	<ComplexType id="Annotation" processor="aggregating">
-		<StartNode sequence="Order">
-			<Node type="TestAnnotation"/>
-		</StartNode>
-	</ComplexType>
-
+	<Include file="Annotations.xml"/>
+	
 	<!-- 4.2 Primitive Types and Values -->
 
 	<ComplexType id="FloatingPointType" processor="aggregating">

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Language xmlns="http://eaSTars.com/SoCoAn/lang">
+
+	<!-- 9.7.1 Normal Annotations -->
+
+	<ComplexType id="ConditionalExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<!-- TODO: to be declared -->
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="ElementValueList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="ElementValue"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="ElementValue"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="ElementValueArrayInitializer" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="curlybracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ElementValueList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="comma" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="curlybracket_close"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="ElementValue" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="ConditionalExpression"/>
+			<Node type="ElementValueArrayInitializer"/>
+			<Node type="Annotation"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="ElementValuePair" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="equal"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ElementValue"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="ElementValuePairList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="ElementValuePair"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="ElementValuePair"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="NormalAnnotation" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="at"/>
+			<!-- white spaces could be placed here but it is strongly discouraged -->
+			<Node type="TypeName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ElementValuePairList" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 9.7.2 Marker Annotations -->
+	
+	<ComplexType id="MarkerAnnotation" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="at"/>
+			<!-- white spaces could be placed here but it is strongly discouraged -->
+			<Node type="TypeName"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 9.7.3 Single-Element Annotations -->
+	
+	<ComplexType id="SingleElementAnnotation" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="at"/>
+			<!-- white spaces could be placed here but it is strongly discouraged -->
+			<Node type="TypeName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ElementValue"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- FOR TESTS ONLY!!! -->
+	
+	<LiteralType id="TestAnnotation" literal="@testannotation"/>
+
+	<!-- 9.7 Annotations -->
+	
+	<ComplexType id="Annotation" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="TestAnnotation"/>
+		</StartNode>
+		<StartNode sequence="Any">
+			<Node type="NormalAnnotation"/>
+			<Node type="MarkerAnnotation"/>
+			<Node type="SingleElementAnnotation"/>
+		</StartNode>
+	</ComplexType>
+	
+</Language>

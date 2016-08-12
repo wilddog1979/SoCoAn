@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Language xmlns="http://eaSTars.com/SoCoAn/lang">
+
+	<!-- 8.9 Enum Types -->
+
+	<ComplexType id="EnumConstantModifier" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Annotation"/>
+		</StartNode>
+	</ComplexType>
+
+	<!-- 8.9.1 Enum Constants -->
+
+	<ComplexType id="EnumConstant" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="EnumConstantModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="bracket_open"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="ArgumentList" occurrence="ZeroOrOne"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="bracket_close"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="EnumConstantList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="EnumConstant"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma" occurrence="ZeroOrOne"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="EnumConstant"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 8.9.2 Enum Body Declarations -->
+	
+	<ComplexType id="EnumBodyDeclarations" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="semicolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ClassBodyDeclaration"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="EnumBody" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="curlybracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="EnumConstantList" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="comma" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="EnumBodyDeclarations" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="curlybracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="EnumDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="ClassModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="keyword_enum"/>
+			<Node type="Separator"/>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Superinterfaces"/>
+			</GroupNode>
+			<Node type="Separator"/>
+			<Node type="EnumBody"/>
+		</StartNode>
+	</ComplexType>
+
+</Language>

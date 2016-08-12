@@ -10,7 +10,9 @@ import org.junit.runners.Suite.SuiteClasses;
 	ImportDeclarationTest.class,
 	TypeParametersTest.class,
 	SuperclassTest.class,
-	SuperinterfacesTest.class
+	SuperinterfacesTest.class,
+	UnannTypeTest.class,
+	FieldDeclarationTest.class
 })
 public class PackagesTests {
 
