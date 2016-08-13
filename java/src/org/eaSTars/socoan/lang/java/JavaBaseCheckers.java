@@ -24,8 +24,8 @@ public class JavaBaseCheckers extends LangCheckers {
 	}
 	
 	public boolean checkInputCharacter(Language language, Fragment fragment) {
-		AbstractTypeDeclaration CRtype = language.getTypeDeclaration("CR");
-		AbstractTypeDeclaration LFtype = language.getTypeDeclaration("LF");
+		AbstractTypeDeclaration CRtype = language.resolveRecursiveTypeDeclaration("CR");
+		AbstractTypeDeclaration LFtype = language.resolveRecursiveTypeDeclaration("LF");
 		
 		return
 				isMatching(language, CRtype, fragment) ||
@@ -33,9 +33,9 @@ public class JavaBaseCheckers extends LangCheckers {
 	}
 	
 	public boolean checkIdentifierChars(Language language, Fragment fragment) {
-		AbstractTypeDeclaration keywordtype = language.getTypeDeclaration("Keyword");
-		AbstractTypeDeclaration booleanliteraltype = language.getTypeDeclaration("BooleanLiteral");
-		AbstractTypeDeclaration nullliteraltype = language.getTypeDeclaration("NullLiteral");
+		AbstractTypeDeclaration keywordtype = language.resolveRecursiveTypeDeclaration("Keyword");
+		AbstractTypeDeclaration booleanliteraltype = language.resolveRecursiveTypeDeclaration("BooleanLiteral");
+		AbstractTypeDeclaration nullliteraltype = language.resolveRecursiveTypeDeclaration("NullLiteral");
 		
 		return
 				isMatching(language, keywordtype, fragment) ||
@@ -44,8 +44,8 @@ public class JavaBaseCheckers extends LangCheckers {
 	}
 	
 	public boolean checkStringCharacters(Language language, Fragment fragment) {
-		AbstractTypeDeclaration doublequotetype = language.getTypeDeclaration("DoubleQuote");
-		AbstractTypeDeclaration backslashtype = language.getTypeDeclaration("Backslash");
+		AbstractTypeDeclaration doublequotetype = language.resolveRecursiveTypeDeclaration("DoubleQuote");
+		AbstractTypeDeclaration backslashtype = language.resolveRecursiveTypeDeclaration("Backslash");
 		
 		return
 				isMatching(language, doublequotetype, fragment) ||
@@ -53,8 +53,8 @@ public class JavaBaseCheckers extends LangCheckers {
 	}
 	
 	public boolean checkSingleCharacter(Language language, Fragment fragment) {
-		AbstractTypeDeclaration singlequotetype = language.getTypeDeclaration("SingleQuote");
-		AbstractTypeDeclaration backslashtype = language.getTypeDeclaration("Backslash");
+		AbstractTypeDeclaration singlequotetype = language.resolveRecursiveTypeDeclaration("SingleQuote");
+		AbstractTypeDeclaration backslashtype = language.resolveRecursiveTypeDeclaration("Backslash");
 		
 		return
 				isMatching(language, singlequotetype, fragment) ||
