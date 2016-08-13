@@ -12,10 +12,4156 @@
 	
 	<Include file="Java/JavaFormats.xml"/>
 	
-	<Include file="Java/lexical/Lexical.xml"/>
-	<Include file="Java/names/Names.xml"/>
-	<Include file="Java/types/TypesValuesVariables.xml"/>
-	<Include file="Java/packages/Packages.xml"/>
+	<KeywordType id="keyword_abstract" literal="abstract"/>
+	<KeywordType id="keyword_assert" literal="assert"/>
+	<KeywordType id="keyword_boolean" literal="boolean"/>
+	<KeywordType id="keyword_break" literal="break"/>
+	<KeywordType id="keyword_byte" literal="byte"/>
+	<KeywordType id="keyword_case" literal="case"/>
+	<KeywordType id="keyword_catch" literal="catch"/>
+	<KeywordType id="keyword_char" literal="char"/>
+	<KeywordType id="keyword_class" literal="class"/>
+	<KeywordType id="keyword_const" literal="const"/>
+	<KeywordType id="keyword_continue" literal="continue"/>
+	<KeywordType id="keyword_default" literal="default"/>
+	<KeywordType id="keyword_do" literal="do"/>
+	<KeywordType id="keyword_double" literal="double"/>
+	<KeywordType id="keyword_else" literal="else"/>
+	<KeywordType id="keyword_enum" literal="enum"/>
+	<KeywordType id="keyword_extends" literal="extends"/>
+	<KeywordType id="keyword_final" literal="final"/>
+	<KeywordType id="keyword_finally" literal="finally"/>
+	<KeywordType id="keyword_float" literal="float"/>
+	<KeywordType id="keyword_for" literal="for"/>
+	<KeywordType id="keyword_if" literal="if"/>
+	<KeywordType id="keyword_goto" literal="goto"/>
+	<KeywordType id="keyword_implements" literal="implements"/>
+	<KeywordType id="keyword_import" literal="import"/>
+	<KeywordType id="keyword_instanceof" literal="instanceof"/>
+	<KeywordType id="keyword_int" literal="int"/>
+	<KeywordType id="keyword_interface" literal="interface"/>
+	<KeywordType id="keyword_long" literal="long"/>
+	<KeywordType id="keyword_native" literal="native"/>
+	<KeywordType id="keyword_new" literal="new"/>
+	<KeywordType id="keyword_package" literal="package"/>
+	<KeywordType id="keyword_private" literal="private"/>
+	<KeywordType id="keyword_protected" literal="protected"/>
+	<KeywordType id="keyword_public" literal="public"/>
+	<KeywordType id="keyword_return" literal="return"/>
+	<KeywordType id="keyword_short" literal="short"/>
+	<KeywordType id="keyword_static" literal="static"/>
+	<KeywordType id="keyword_strictfp" literal="strictfp"/>
+	<KeywordType id="keyword_super" literal="super"/>
+	<KeywordType id="keyword_switch" literal="switch"/>
+	<KeywordType id="keyword_synchronized" literal="synchronized"/>
+	<KeywordType id="keyword_this" literal="this"/>
+	<KeywordType id="keyword_throw" literal="throw"/>
+	<KeywordType id="keyword_throws" literal="throws"/>
+	<KeywordType id="keyword_transient" literal="transient"/>
+	<KeywordType id="keyword_try" literal="try"/>
+	<KeywordType id="keyword_void" literal="void"/>
+	<KeywordType id="keyword_volatile" literal="volatile"/>
+	<KeywordType id="keyword_while" literal="while"/>
+	
+	<ComplexType id="Keyword" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="keyword_abstract"/>
+			<Node type="keyword_assert"/>
+			<Node type="keyword_boolean"/>
+			<Node type="keyword_break"/>
+			<Node type="keyword_byte"/>
+			<Node type="keyword_case"/>
+			<Node type="keyword_catch"/>
+			<Node type="keyword_char"/>
+			<Node type="keyword_class"/>
+			<Node type="keyword_const"/>
+			<Node type="keyword_continue"/>
+			<Node type="keyword_default"/>
+			<Node type="keyword_do"/>
+			<Node type="keyword_double"/>
+			<Node type="keyword_else"/>
+			<Node type="keyword_enum"/>
+			<Node type="keyword_extends"/>
+			<Node type="keyword_final"/>
+			<Node type="keyword_finally"/>
+			<Node type="keyword_float"/>
+			<Node type="keyword_for"/>
+			<Node type="keyword_if"/>
+			<Node type="keyword_goto"/>
+			<Node type="keyword_implements"/>
+			<Node type="keyword_import"/>
+			<Node type="keyword_instanceof"/>
+			<Node type="keyword_int"/>
+			<Node type="keyword_interface"/>
+			<Node type="keyword_long"/>
+			<Node type="keyword_native"/>
+			<Node type="keyword_new"/>
+			<Node type="keyword_package"/>
+			<Node type="keyword_private"/>
+			<Node type="keyword_protected"/>
+			<Node type="keyword_public"/>
+			<Node type="keyword_return"/>
+			<Node type="keyword_short"/>
+			<Node type="keyword_static"/>
+			<Node type="keyword_strictfp"/>
+			<Node type="keyword_super"/>
+			<Node type="keyword_switch"/>
+			<Node type="keyword_synchronized"/>
+			<Node type="keyword_this"/>
+			<Node type="keyword_throw"/>
+			<Node type="keyword_throws"/>
+			<Node type="keyword_transient"/>
+			<Node type="keyword_try"/>
+			<Node type="keyword_void"/>
+			<Node type="keyword_volatile"/>
+			<Node type="keyword_while"/>
+		</StartNode>
+	</ComplexType>
+
+	<LiteralType id="Digit0" literal="0"/>
+	<LiteralType id="Digit1" literal="1"/>
+	<LiteralType id="Digit2" literal="2"/>
+	<LiteralType id="Digit3" literal="3"/>
+	<LiteralType id="Digit4" literal="4"/>
+	<LiteralType id="Digit5" literal="5"/>
+	<LiteralType id="Digit6" literal="6"/>
+	<LiteralType id="Digit7" literal="7"/>
+	<LiteralType id="Digit8" literal="8"/>
+	<LiteralType id="Digit9" literal="9"/>
+	<LiteralType id="Digita" literal="a"/>
+	<LiteralType id="Digitb" literal="b"/>
+	<LiteralType id="Digitc" literal="c"/>
+	<LiteralType id="Digitd" literal="d"/>
+	<LiteralType id="Digite" literal="e"/>
+	<LiteralType id="Digitf" literal="f"/>
+	<LiteralType id="DigitA" literal="A"/>
+	<LiteralType id="DigitB" literal="B"/>
+	<LiteralType id="DigitC" literal="C"/>
+	<LiteralType id="DigitD" literal="D"/>
+	<LiteralType id="DigitE" literal="E"/>
+	<LiteralType id="DigitF" literal="F"/>
+	
+	<ComplexType id="BinaryDigit" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Digit0"/>
+			<Node type="Digit1"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ZeroToThree" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Digit0"/>
+			<Node type="Digit1"/>
+			<Node type="Digit2"/>
+			<Node type="Digit3"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="OctalDigit" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Digit0"/>
+			<Node type="Digit1"/>
+			<Node type="Digit2"/>
+			<Node type="Digit3"/>
+			<Node type="Digit4"/>
+			<Node type="Digit5"/>
+			<Node type="Digit6"/>
+			<Node type="Digit7"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="NonZeroDigit" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Digit0"/>
+			<Node type="Digit1"/>
+			<Node type="Digit2"/>
+			<Node type="Digit3"/>
+			<Node type="Digit4"/>
+			<Node type="Digit5"/>
+			<Node type="Digit6"/>
+			<Node type="Digit7"/>
+			<Node type="Digit8"/>
+			<Node type="Digit9"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Digit" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Digit0"/>
+			<Node type="NonZeroDigit"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="HexDigit" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Digit0"/>
+			<Node type="Digit1"/>
+			<Node type="Digit2"/>
+			<Node type="Digit3"/>
+			<Node type="Digit4"/>
+			<Node type="Digit5"/>
+			<Node type="Digit6"/>
+			<Node type="Digit7"/>
+			<Node type="Digit8"/>
+			<Node type="Digit9"/>
+			<Node type="Digita"/>
+			<Node type="Digitb"/>
+			<Node type="Digitc"/>
+			<Node type="Digitd"/>
+			<Node type="Digite"/>
+			<Node type="Digitf"/>
+			<Node type="DigitA"/>
+			<Node type="DigitB"/>
+			<Node type="DigitC"/>
+			<Node type="DigitD"/>
+			<Node type="DigitE"/>
+			<Node type="DigitF"/>
+		</StartNode>
+	</ComplexType>
+
+	<LiteralType id="SP" literal=" "/>
+	<LiteralType id="BS" literal="\b"/>
+	<LiteralType id="HT" literal="\t"/>
+	<LiteralType id="LF" literal="\n"/>
+	<LiteralType id="FF" literal="\f"/>
+	<LiteralType id="CR" literal="\r"/>
+	
+	<LiteralType id="DoubleQuote" literal="&quot;"/>
+	<LiteralType id="SingleQuote" literal="'"/>
+	<LiteralType id="Backslash" literal="\"/>
+
+	<!-- 3.3 Unicode Escapes -->
+	
+	<LiteralType id="UnicodeEscapeu" literal="u"/>
+
+	<ComplexType id="UnicodeMarker" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="UnicodeEscapeu"/>
+			<Node type="UnicodeEscapeu" occurrence="ZeroOrMore"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="UnicodeEscape" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Backslash" sequence="Order"/>
+			<Node type="UnicodeMarker"/>
+			<Node type="HexDigit"/>
+			<Node type="HexDigit"/>
+			<Node type="HexDigit"/>
+			<Node type="HexDigit"/>
+		</StartNode>
+	</ComplexType>
+	
+	<CustomType id="RawInputCharacter" recognizer="RawInputCharacter"/>
+
+	<ComplexType id="UnicodeInputCharacter" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="UnicodeEscape"/>
+			<Node type="RawInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+
+	<!-- 3.4 Line Terminators -->
+
+	<ComplexType id="LineTerminator" processor="aggregating">
+		<StartNode sequence="Any">
+			<GroupNode sequence="Order">
+				<Node type="CR" occurrence="ZeroOrOne"/>
+				<Node type="LF"/>
+			</GroupNode>
+			<Node type="CR"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="InputCharacter" processor="aggregating" checker="InputCharacterCheck">
+		<StartNode sequence="Order">
+			<Node type="UnicodeInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+
+	<!-- 3.6 White Space -->
+
+	<ComplexType id="WhiteSpace" processor="aggregating" multiple="true">
+		<StartNode sequence="Any">
+			<Node type="SP"/>
+			<Node type="HT"/>
+			<Node type="FF"/>
+			<Node type="LineTerminator"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!--  Comments -->
+	
+	<LiteralType id="JavaDocStart" literal="/**"/>
+	<LiteralType id="TraditionalCommentStart" literal="/*"/>
+	
+	<TerminatedType id="TraditionalCommentContent">
+		<Terminator>*/</Terminator>
+	</TerminatedType>
+	
+	<LiteralType id="EndOfLineCommentStart" literal="//"/>
+	
+	<TerminatedType id="EndOfLineCommentContent">
+		<Terminator>\r\n</Terminator>
+		<Terminator>\n</Terminator>
+	</TerminatedType>
+	
+	<ComplexType id="Comment" processor="comment">
+		<StartNode sequence="Order">
+			<Node id="JavaDoc" type="JavaDocStart"/>
+			<Node type="TraditionalCommentContent"/>
+		</StartNode>
+		
+		<StartNode sequence="Order">
+			<Node id="TraditionalComment" type="TraditionalCommentStart"/>
+			<Node type="TraditionalCommentContent"/>
+		</StartNode>
+		
+		<StartNode sequence="Order">
+			<Node id="EndOfLineComment" type="EndOfLineCommentStart"/>
+			<Node type="EndOfLineCommentContent"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Separator" processor="separator" multiple="true">
+		<StartNode sequence="Any">
+			<Node type="WhiteSpace"/>
+			<Node type="Comment"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.8 Identifiers -->
+	
+	<CustomType id="JavaLetter" recognizer="JavaLetter"/>
+	
+	<CustomType id="JavaLetterOrDigit" recognizer="JavaLetterOrDigit"/>
+	
+	<ComplexType id="Identifier" processor="aggregating" checker="IdentifierCheck">
+		<StartNode sequence="Order">
+			<Node type="JavaLetter"/>
+			<Node type="JavaLetterOrDigit" occurrence="ZeroOrMore"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.10 Literals -->
+	
+	<!-- 3.10.1 Integer Literals -->
+	
+	<LiteralType id="Suffixl" literal="l"/>
+	<LiteralType id="SuffixL" literal="L"/>
+	<LiteralType id="Underscore" literal="_"/>
+	<LiteralType id="Prefix0x" literal="0x"/>
+	<LiteralType id="Prefix0X" literal="0X"/>
+	<LiteralType id="Prefix0b" literal="0b"/>
+	<LiteralType id="Prefix0B" literal="0B"/>
+	
+	<ComplexType id="IntegerTypeSuffix" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Suffixl"/>
+			<Node type="SuffixL"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="DigitOrUnderscore" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Digit"/>
+			<Node type="Underscore" occurrence="ZeroOrMore"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="DigitsAndUnderscores" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="DigitOrUnderscore"/>
+			<Node type="DigitOrUnderscore" occurrence="ZeroOrMore"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- this definition must be fixed because it allows underscore on the end of the number which is not valid -->
+	<ComplexType id="Digits" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Digit"/>
+			<Node type="DigitsAndUnderscores" occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="DecimalNumeral" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Digit0"/>
+			<GroupNode sequence="Order">
+				<Node type="NonZeroDigit"/>
+				<GroupNode sequence="Any">
+					<Node type="Digits" occurrence="ZeroOrOne"/>
+					<GroupNode sequence="Order">
+						<Node type="Underscore"/>
+						<Node type="Digits"/>
+					</GroupNode>
+				</GroupNode>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="DecimalIntegerLiteral" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="DecimalNumeral"/>
+			<Node type="IntegerTypeSuffix" occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="HexDigitOrUnderscore" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="HexDigit"/>
+			<Node type="Underscore" occurrence="ZeroOrMore"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="HexDigitsAndUnderscores" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="HexDigitOrUnderscore"/>
+			<Node type="HexDigitOrUnderscore" occurrence="ZeroOrMore"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- this definition must be fixed because it allows underscore on the end of the number which is not valid -->
+	<ComplexType id="HexDigits" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="HexDigit"/>
+			<Node type="HexDigitsAndUnderscores"  occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="HexNumeral" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Any">
+				<Node type="Prefix0x"/>
+				<Node type="Prefix0X"/>
+			</GroupNode>
+			<Node type="HexDigits"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="HexIntegerLiteral" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="HexNumeral"/>
+			<Node type="IntegerTypeSuffix" occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="OctalDigitOrUnderscore" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="OctalDigit"/>
+			<Node type="Underscore"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="OctalDigitsAndUnderscores" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="OctalDigitOrUnderscore"/>
+			<Node type="OctalDigitOrUnderscore" occurrence="ZeroOrMore"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- this definition must be fixed because it allows underscore on the end of the number which is not valid -->
+	<ComplexType id="OctalDigits" processor="aggregating">
+		<StartNode  sequence="Order">
+			<Node type="OctalDigit"/>
+			<Node type="OctalDigitsAndUnderscores" occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="OctalNumeral" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Digit0"/>
+			<Node type="Underscore" occurrence="ZeroOrMore"/>
+			<Node type="OctalDigits"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="OctalIntegerLiteral" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="OctalNumeral"/>
+			<Node type="IntegerTypeSuffix" occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="BinaryDigitOrUnderscore" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="BinaryDigit"/>
+			<Node type="Underscore"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="BinaryDigitsAndUnderscores" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="BinaryDigitOrUnderscore"/>
+			<Node type="BinaryDigitOrUnderscore" occurrence="ZeroOrMore"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- this definition must be fixed because it allows underscore on the end of the number which is not valid -->
+	<ComplexType id="BinaryDigits" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="BinaryDigit"/>
+			<Node type="BinaryDigitsAndUnderscores" occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="BinaryNumeral" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Any">
+				<Node type="Prefix0b"/>
+				<Node type="Prefix0B"/>
+			</GroupNode>
+			<Node type="BinaryDigits"/>
+		</StartNode>
+	</ComplexType>	
+	
+	<ComplexType id="BinaryIntegerLiteral" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="BinaryNumeral"/>
+			<Node type="IntegerTypeSuffix" occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.10.1 Integer Literals -->
+	
+	<ComplexType id="IntegerLiteral" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="HexIntegerLiteral"/>
+			<Node type="BinaryIntegerLiteral"/>
+			<Node type="OctalIntegerLiteral"/>
+			<Node type="DecimalIntegerLiteral"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.10.2 Floating-Point Literals -->
+	
+	<LiteralType id="Exponente" literal="e"/>
+	<LiteralType id="ExponentE" literal="E"/>
+	<LiteralType id="Sign+" literal="+"/>
+	<LiteralType id="Sign-" literal="-"/>
+	<LiteralType id="FloatTypef" literal="f"/>
+	<LiteralType id="FloatTypeF" literal="F"/>
+	<LiteralType id="FloatTyped" literal="d"/>
+	<LiteralType id="FloatTypeD" literal="D"/>
+	<LiteralType id="DecimalSeparator" literal="."/>
+	<LiteralType id="BinaryExpp" literal="p"/>
+	<LiteralType id="BinaryExpP" literal="P"/>
+	
+	<ComplexType id="ExponentIndicator" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Exponente"/>
+			<Node type="ExponentE"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Sign" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Sign+"/>
+			<Node type="Sign-"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="SignedInteger" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Sign" occurrence="ZeroOrOne"/>
+			<Node type="Digits"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ExponentPart" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="ExponentIndicator"/>
+			<Node type="SignedInteger"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="FloatTypeSuffix" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="FloatTypef"/>
+			<Node type="FloatTypeF"/>
+			<Node type="FloatTyped"/>
+			<Node type="FloatTypeD"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="DecimalFloatingPointLiteral" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Digits"/>
+			<Node type="DecimalSeparator"/>
+			<Node type="Digits" occurrence="ZeroOrOne"/>
+			<Node type="ExponentPart" occurrence="ZeroOrOne"/>
+			<Node type="FloatTypeSuffix" occurrence="ZeroOrOne"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="DecimalSeparator"/>
+			<Node type="Digits"/>
+			<Node type="ExponentPart" occurrence="ZeroOrOne"/>
+			<Node type="FloatTypeSuffix" occurrence="ZeroOrOne"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="Digits"/>
+			<Node type="ExponentPart"/>
+			<Node type="FloatTypeSuffix" occurrence="ZeroOrOne"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="Digits"/>
+			<Node type="ExponentPart" occurrence="ZeroOrOne"/>
+			<Node type="FloatTypeSuffix"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="BinaryExponentIndicator" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="BinaryExpp"/>
+			<Node type="BinaryExpP"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="BinaryExponent" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="BinaryExponentIndicator"/>
+			<Node type="SignedInteger"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="HexSignificant" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Any">
+				<Node type="Prefix0x"/>
+				<Node type="Prefix0X"/>
+			</GroupNode>
+			<Node type="HexDigits" occurrence="ZeroOrOne"/>
+			<Node type="DecimalSeparator"/>
+			<Node type="HexDigits"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="HexNumeral"/>
+			<Node type="DecimalSeparator" occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="HexadecimalFloatingPointLiteral" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="HexSignificant"/>
+			<Node type="BinaryExponent"/>
+			<Node type="FloatTypeSuffix" occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="FloatingPointLiteral" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="DecimalFloatingPointLiteral"/>
+			<Node type="HexadecimalFloatingPointLiteral"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.10.3 Boolean Literals -->
+	
+	<LiteralType id="True" literal="true"/>
+	
+	<LiteralType id="False" literal="false"/>
+	
+	<ComplexType id="BooleanLiteral" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="True"/>
+			<Node type="False"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.10.6 Escape Sequences for Character and String Literals -->
+	
+	<LiteralType id="Escapeb" literal="b"/>
+	<LiteralType id="Escapet" literal="t"/>
+	<LiteralType id="Escapen" literal="n"/>
+	<LiteralType id="Escapef" literal="f"/>
+	<LiteralType id="Escaper" literal="r"/>
+	
+	<ComplexType id="OctalEscape" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Backslash"/>
+			<Node type="ZeroToThree"/>
+			<Node type="OctalDigit"/>
+			<Node type="OctalDigit"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="Backslash"/>
+			<Node type="OctalDigit"/>
+			<Node type="OctalDigit"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="Backslash"/>
+			<Node type="OctalDigit"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="EscapeSequence" processor="aggregating">
+		<StartNode sequence="Any">
+			<GroupNode sequence="Order">
+				<Node type="Backslash"/>
+				<GroupNode sequence="Any">
+					<Node type="Escapeb"/>
+					<Node type="Escapet"/>
+					<Node type="Escapen"/>
+					<Node type="Escapef"/>
+					<Node type="Escaper"/>
+					<Node type="DoubleQuote"/>
+					<Node type="SingleQuote"/>
+					<Node type="Backslash"/>
+				</GroupNode>
+			</GroupNode>
+			<Node type="OctalEscape"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.10.4 Character Literals -->
+	
+	<ComplexType id="SingleCharacter" processor="aggregating" checker="SingleCharacterCheck">
+		<StartNode sequence="Order">
+			<Node type="InputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="CharacterLiteral" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="SingleQuote"/>
+			<Node type="SingleCharacter"/>
+			<Node type="SingleQuote"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="SingleQuote"/>
+			<Node type="EscapeSequence"/>
+			<Node type="SingleQuote"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.10.5 String Literals -->
+	
+	<ComplexType id="StringCharacters" processor="aggregating" checker="StringCharactersCheck">
+		<StartNode sequence="Order">
+			<Node type="InputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="StringCharacter" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="StringCharacters"/>
+			<Node type="EscapeSequence"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="StringLiteral" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="DoubleQuote"/>
+			<Node type="StringCharacter" occurrence="ZeroOrMore"/>
+			<Node type="DoubleQuote"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.10.7 The Null Literal -->
+	
+	<LiteralType id="NullLiteral" literal="null"/>
+	
+	<!-- 3.10 Literals -->
+	
+	<ComplexType id="Literal" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="IntegerLiteral"/>
+			<Node type="FloatingPointLiteral"/>
+			<Node type="BooleanLiteral"/>
+			<Node type="CharacterLiteral"/>
+			<Node type="StringLiteral"/>
+			<Node type="NullLiteral"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.11 Separators -->
+	
+	<LiteralType id="bracket_open" literal="("/>
+	<LiteralType id="bracket_close" literal=")"/>
+	<LiteralType id="curlybracket_open" literal="{"/>
+	<LiteralType id="curlybracket_close" literal="}"/>
+	<LiteralType id="squarebracket_open" literal="["/>
+	<LiteralType id="squarebracket_close" literal="]"/>
+	<LiteralType id="semicolon" literal=";"/>
+	<LiteralType id="comma" literal=","/>
+	<LiteralType id="dot" literal="."/>
+	<LiteralType id="tripledot" literal="..."/>
+	<LiteralType id="at" literal="@"/>
+	<LiteralType id="doubecolon" literal="::"/>
+	
+	<ComplexType id="Separator" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="bracket_open"/>
+			<Node type="bracket_close"/>
+			<Node type="curlybracket_open"/>
+			<Node type="curlybracket_close"/>
+			<Node type="squarebracket_open"/>
+			<Node type="squarebracket_close"/>
+			<Node type="semicolon"/>
+			<Node type="comma"/>
+			<Node type="dot"/>
+			<Node type="tripledot"/>
+			<Node type="at"/>
+			<Node type="doubecolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.12 Operators -->
+	
+	<LiteralType id="equal" literal="="/>
+	<LiteralType id="greaterthan" literal="&gt;"/>
+	<LiteralType id="lowerthan" literal="&lt;"/>
+	<LiteralType id="exclamationmark" literal="!"/>
+	<LiteralType id="tilde" literal="~"/>
+	<LiteralType id="questionmark" literal="?"/>
+	<LiteralType id="colon" literal=":"/>
+	<LiteralType id="arrowtoken" literal="-&gt;"/>
+	
+	<LiteralType id="doubleequal" literal="=="/>
+	<LiteralType id="greaterthanorequal" literal="&gt;="/>
+	<LiteralType id="lowerthanorequal" literal="&lt;="/>
+	<LiteralType id="notequal" literal="!="/>
+	<LiteralType id="doubleand" literal="&amp;&amp;"/>
+	<LiteralType id="doubleor" literal="||"/>
+	<LiteralType id="doubleplus" literal="++"/>
+	<LiteralType id="doubleminus" literal="--"/>
+	
+	<LiteralType id="plus" literal="+"/>
+	<LiteralType id="minus" literal="-"/>
+	<LiteralType id="multiply" literal="*"/>
+	<LiteralType id="divide" literal="/"/>
+	<LiteralType id="and" literal="&amp;"/>
+	<LiteralType id="or" literal="|"/>
+	<LiteralType id="xor" literal="^"/>
+	<LiteralType id="remainder" literal="%"/>
+	<LiteralType id="shiftleft" literal="&lt;&lt;"/>
+	<LiteralType id="shiftright" literal="&gt;&gt;"/>
+	<LiteralType id="zerofillshiftright" literal="&gt;&gt;&gt;"/>
+	
+	<LiteralType id="plusequal" literal="+="/>
+	<LiteralType id="minusequal" literal="-="/>
+	<LiteralType id="multiplyequal" literal="*="/>
+	<LiteralType id="divideequal" literal="/="/>
+	<LiteralType id="andequal" literal="&amp;="/>
+	<LiteralType id="orequal" literal="|="/>
+	<LiteralType id="xorequal" literal="^="/>
+	<LiteralType id="remainderequal" literal="%="/>
+	<LiteralType id="shiftleftequal" literal="&lt;&lt;="/>
+	<LiteralType id="shiftrightequal" literal="&gt;&gt;="/>
+	<LiteralType id="zerofillshiftrightequal" literal="&gt;&gt;&gt;="/>
+	
+	<ComplexType id="Operator" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="equal"/>
+			<Node type="greaterthan"/>
+			<Node type="lowerthan"/>
+			<Node type="exclamationmark"/>
+			<Node type="tilde"/>
+			<Node type="questionmark"/>
+			<Node type="colon"/>
+			<Node type="arrowtoken"/>
+			
+			<Node type="doubleequal"/>
+			<Node type="greaterthanorequal"/>
+			<Node type="lowerthanorequal"/>
+			<Node type="notequal"/>
+			<Node type="doubleand"/>
+			<Node type="doubleor"/>
+			<Node type="doubleplus"/>
+			<Node type="doubleminus"/>
+			
+			<Node type="plus"/>
+			<Node type="minus"/>
+			<Node type="multiply"/>
+			<Node type="divide"/>
+			<Node type="and"/>
+			<Node type="or"/>
+			<Node type="xor"/>
+			<Node type="remainder"/>
+			<Node type="shiftleft"/>
+			<Node type="shiftright"/>
+			<Node type="zerofillshiftright"/>
+			
+			<Node type="plusequal"/>
+			<Node type="minusequal"/>
+			<Node type="multiplyequal"/>
+			<Node type="divideequal"/>
+			<Node type="andequal"/>
+			<Node type="orequal"/>
+			<Node type="xorequal"/>
+			<Node type="remainderequal"/>
+			<Node type="shiftleftequal"/>
+			<Node type="shiftrightequal"/>
+			<Node type="zerofillshiftrightequal"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 6.5 Determining the Meaning of a Name -->
+
+	<!-- Logic changed to Identifier{.Identifier}
+		 Verification is required -->
+	<ComplexType id="PackageName" processor="aggregating">
+		<StartNode sequence="Order" occurrence="ZeroOrMore">
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="dot"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Identifier"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="PackageOrTypeName" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Identifier"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="dot"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="AmbiguousName" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Identifier"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="dot"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="ExpressionName" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="AmbiguousName"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="dot"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- Logic changed to Identifier{.Identifier}
+		 Verification is required -->
+	<ComplexType id="TypeName" processor="aggregating">
+		<StartNode sequence="Order" occurrence="ZeroOrMore">
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="dot"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Identifier"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="MethodName" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 9.7.1 Normal Annotations -->
+
+	<ComplexType id="ElementValueList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="ElementValue"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="ElementValue"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="ElementValueArrayInitializer" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="curlybracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ElementValueList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="comma" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="curlybracket_close"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="ElementValue" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="ConditionalExpression"/>
+			<Node type="ElementValueArrayInitializer"/>
+			<Node type="Annotation"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="ElementValuePair" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="equal"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ElementValue"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="ElementValuePairList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="ElementValuePair"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="ElementValuePair"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="NormalAnnotation" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="at"/>
+			<!-- white spaces could be placed here but it is strongly discouraged -->
+			<Node type="TypeName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ElementValuePairList" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 9.7.2 Marker Annotations -->
+	
+	<ComplexType id="MarkerAnnotation" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="at"/>
+			<!-- white spaces could be placed here but it is strongly discouraged -->
+			<Node type="TypeName"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 9.7.3 Single-Element Annotations -->
+	
+	<ComplexType id="SingleElementAnnotation" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="at"/>
+			<!-- white spaces could be placed here but it is strongly discouraged -->
+			<Node type="TypeName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ElementValue"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- FOR TESTS ONLY!!! -->
+	
+	<LiteralType id="TestAnnotation" literal="@testannotation"/>
+
+	<!-- 9.7 Annotations -->
+	
+	<ComplexType id="Annotation" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="TestAnnotation"/>
+		</StartNode>
+		<StartNode sequence="Any">
+			<Node type="NormalAnnotation"/>
+			<Node type="MarkerAnnotation"/>
+			<Node type="SingleElementAnnotation"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 4.2 Primitive Types and Values -->
+
+	<ComplexType id="FloatingPointType" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="keyword_float"/>
+			<Node type="keyword_double"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="IntegralType" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="keyword_byte"/>
+			<Node type="keyword_short"/>
+			<Node type="keyword_int"/>
+			<Node type="keyword_long"/>
+			<Node type="keyword_char"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="NumericType" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="IntegralType"/>
+			<Node type="FloatingPointType"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="PrimitiveType" processor="aggregating">
+		<StartNode sequence="Any">
+			<GroupNode sequence="Order">
+				<Node type="Annotation" occurrence="ZeroOrMore"/>
+				<Node type="Separator"/>
+				<GroupNode sequence="Any">
+					<Node type="NumericType"/>
+					<Node type="keyword_boolean"/>
+				</GroupNode>
+			</GroupNode>
+			<Node type="NumericType"/>
+			<Node type="keyword_boolean"/>
+		</StartNode>
+	</ComplexType>
+
+	<!-- 4.3 Reference Types and Values -->
+	
+	<ComplexType id="WildcardBounds" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Any">
+				<Node type="keyword_extends"/>
+				<Node type="keyword_super"/>
+			</GroupNode>
+			<Node id="Separator" type="Separator"/>
+			<Node type="ReferenceType"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="Wildcard" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="questionmark"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="WildcardBounds"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="TypeArgument" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="ReferenceType"/>
+			<Node type="Wildcard"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="TypeArgumentList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="TypeArgument"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="TypeArgument"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="TypeArguments" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="lowerthan"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="TypeArgumentList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="greaterthan"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- NOTE: ClassType declaration should be handled carefully, extraction method should be added later -->
+	<ComplexType id="ClassType" processor="fallthrough">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="TypeArguments"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- NOTE: InterfaceType declaration should be handled carefully, extraction method should be added later -->
+	<ComplexType id="InterfaceType" processor="fallthrough">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="TypeArguments"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ClassOrInterfaceType" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="ClassType"/>
+			<Node type="InterfaceType"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ClassOrInterfaceTypeCommon" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="ClassOrInterfaceType"/>
+				<Node type="dot"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="TypeArguments"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="TypeVariable" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Dims" processor="aggregating" multiple="true">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="squarebracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="squarebracket_close"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<GroupNode sequence="Order" occurrence="ZeroOrMore">
+					<Node type="Annotation"/>
+					<Node type="Separator"/>
+				</GroupNode>
+				<Node type="squarebracket_open"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="squarebracket_close"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ArrayType" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Any">
+				<Node type="PrimitiveType"/>
+				<Node type="ClassOrInterfaceTypeCommon"/>
+				<Node type="TypeVariable"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Dims"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ReferenceType" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="ArrayType"/>
+			<Node type="ClassOrInterfaceTypeCommon"/>
+			<Node type="TypeVariable"/>
+		</StartNode>
+	</ComplexType>
+
+	<!-- 4.1 The Kinds of Types and Values -->
+	
+	<ComplexType id="Type" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="PrimitiveType"/>
+			<Node type="ReferenceType"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 4.4 Type Variables -->
+	
+	<ComplexType id="AdditionalBound" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="and"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="InterfaceType"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="TypeBound" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="keyword_extends"/>
+			<Node type="Separator"/>
+			<GroupNode sequence="Any">
+				<GroupNode sequence="Order">
+					<Node type="ClassOrInterfaceType"/>
+					<GroupNode sequence="Order" occurrence="ZeroOrMore">
+						<Node type="Separator"/>
+						<Node type="AdditionalBound"/>
+					</GroupNode>
+				</GroupNode>
+				<Node type="TypeVariable"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="TypeParameterModifier"  processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Annotation"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="TypeParameter" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="TypeParameterModifier" occurrence="ZeroOrMore"/>
+			<Node type="Identifier"/>
+			<Node type="TypeBound" occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.4.1 Named Packages -->
+	
+	<ComplexType id="PackageModifier" processor="aggregating">
+		 <StartNode sequence="Order">
+		 	<Node type="Annotation"/>
+		 </StartNode>
+	</ComplexType>
+	
+	<ComplexType id="PackageDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="PackageModifier"></Node>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="keyword_package"/>
+			<Node type="Separator"/>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="dot"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Identifier"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.5.1 Single-Type-Import Declarations -->
+	
+	<ComplexType id="SingleTypeImportDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_import"/>
+			<Node type="Separator"/>
+			<Node type="TypeName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.5.2 Type-Import-on-Demand Declarations -->
+	
+	<ComplexType id="TypeImportOnDemandDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_import"/>
+			<Node type="Separator"/>
+			<Node type="PackageName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="multiply"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.5.3 Single-Static-Import Declarations -->
+	
+	<ComplexType id="SingleStaticImportDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_import"/>
+			<Node type="Separator"/>
+			<Node type="keyword_static"/>
+			<Node type="Separator"/>
+			<Node type="TypeName"/>
+			<!-- <Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/> -->
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.5.4 Static-Import-on-Demand Declarations -->
+	
+	<ComplexType id="StaticImportOnDemandDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_import"/>
+			<Node type="Separator"/>
+			<Node type="keyword_static"/>
+			<Node type="Separator"/>
+			<Node type="TypeName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="multiply"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.5 Import Declarations -->
+	
+	<ComplexType id="ImportDeclaration" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="SingleTypeImportDeclaration"/>
+			<Node type="TypeImportOnDemandDeclaration"/>
+			<Node type="SingleStaticImportDeclaration"/>
+			<Node type="StaticImportOnDemandDeclaration"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.6 Top Level Type Declarations -->
+	
+	<ComplexType id="ClassModifier" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Annotation"/>
+			<Node type="keyword_public"/>
+			<Node type="keyword_protected"/>
+			<Node type="keyword_private"/>
+			<Node type="keyword_abstract"/>
+			<Node type="keyword_static"/>
+			<Node type="keyword_final"/>
+			<Node type="keyword_strictfp"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="InterfaceTypeList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="InterfaceType"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="InterfaceType"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Superinterfaces" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_implements"/>
+			<Node type="Separator"/>
+			<Node type="InterfaceTypeList"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="TypeParameterList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="TypeParameter"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="TypeParameter"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="TypeParameters" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="lowerthan"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="TypeParameterList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="greaterthan"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Superclass" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_extends"/>
+			<Node type="Separator"/>
+			<Node type="ClassType"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ClassBody" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="curlybracket_open"/>
+			<GroupNode sequence="Order">
+				<Node type="ClassBodyDeclaration" occurrence="ZeroOrMore"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="curlybracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 10.6 Array Initializers -->
+
+	<ComplexType id="VariableInitializerList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="VariableInitializer"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma" occurrence="ZeroOrOne"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="VariableInitializer"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ArrayInitializer" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="curlybracket_open"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="VariableInitializerList"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="comma" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="curlybracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="UnannType" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="UnannReferenceType"/>
+			<Node type="UnannPrimitiveType"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="VariableDeclaratorId" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Dims"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="VariableDeclaratorList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="VariableDeclarator"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="VariableDeclarator"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="UnannClassType" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="TypeArguments"/>
+			</GroupNode>
+		</StartNode>
+		<StartNode sequence="Order">
+			<!-- This must be revised later because class or interface existence check is missing globally
+			<Node type="UnannClassOrInterfaceType"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/> -->
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Identifier"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="dot"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="TypeArguments"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- content was copied by intention from UnannClassType because
+		 new processor may be required in the future -->
+	<ComplexType id="UnannInterfaceType" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="TypeArguments"/>
+			</GroupNode>
+		</StartNode>
+		<StartNode sequence="Order">
+			<!-- This must be revised later because class or interface existence check is missing globally
+			<Node type="UnannClassOrInterfaceType"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/> -->
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Identifier"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="dot"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="TypeArguments"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="UnannClassOrInterfaceType" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="UnannClassType"/>
+			<Node type="UnannInterfaceType"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 8.4.1 Formal Parameters -->
+	
+	<ComplexType id="ReceiverParameter" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="UnannType"/>
+			<Node type="Separator"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Identifier"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="dot"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="keyword_this"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="VariableModifier" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Annotation"/>
+			<Node type="keyword_final"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="FormalParameter" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="VariableModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="UnannType"/>
+			<Node type="Separator"/>
+			<Node type="VariableDeclaratorId"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="FormalParameters" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="FormalParameter"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="FormalParameter"/>
+			</GroupNode>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ReceiverParameter"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="FormalParameter"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="LastFormalParameter" processor="aggregating">
+		<StartNode sequence="Any">
+			<GroupNode sequence="Order">
+				<GroupNode sequence="Order" occurrence="ZeroOrMore">
+					<Node type="VariableModifier"/>
+					<Node type="Separator"/>
+				</GroupNode>
+				<Node type="UnannType"/>
+				<Node type="Separator"/>
+				<GroupNode sequence="Order" occurrence="ZeroOrMore">
+					<Node type="Annotation"/>
+					<Node type="Separator"/>
+				</GroupNode>
+				<Node type="tripledot"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="VariableDeclaratorId"/>
+			</GroupNode>
+			<Node type="FormalParameter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="FormalParameterList" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="ReceiverParameter"/>
+			<GroupNode sequence="Order">
+				<Node type="FormalParameters"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="LastFormalParameter"/>
+			</GroupNode>
+			<Node type="LastFormalParameter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.26 Assignment Operators -->
+	
+	<ComplexType id="AssignmentOperator" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Any">
+				<Node type="equal"/>
+				<Node type="multiplyequal"/>
+				<Node type="divideequal"/>
+				<Node type="remainderequal"/>
+				<Node type="plusequal"/>
+				<Node type="minusequal"/>
+				<Node type="shiftleftequal"/>
+				<Node type="shiftrightequal"/>
+				<Node type="zerofillshiftrightequal"/>
+				<Node type="andequal"/>
+				<Node type="xorequal"/>
+				<Node type="orequal"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="LeftHandSide" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="ExpressionName"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="FieldAccess"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ArrayAccess"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Assignment" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="LeftHandSide"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="AssignmentOperator"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="AssignmentExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="ConditionalExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="Assignment"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="PreIncrementExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="doubleplus"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="UnaryExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="PreDecrementExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="doubleminus"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="UnaryExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.17 Multiplicative Operators -->
+	
+	<ComplexType id="MutliplicativeExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="UnaryExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="MutliplicativeExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="multiply"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="UnaryExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="MutliplicativeExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="divide"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="UnaryExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="MutliplicativeExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="remainder"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="UnaryExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.18 Additive Operators -->
+	
+	<ComplexType id="AdditiveExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="MutliplicativeExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="AdditiveExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="plus"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="MutliplicativeExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="AdditiveExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="minus"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="MutliplicativeExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.19 Shift Operators -->
+	
+	<ComplexType id="ShiftExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="AdditiveExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ShiftExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="shiftleft"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="AdditiveExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ShiftExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="shiftright"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="AdditiveExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ShiftExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="zerofillshiftright"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="AdditiveExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.20 Relational Operators -->
+	
+	<ComplexType id="RelationalExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="ShiftExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="RelationalExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="lowerthan"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ShiftExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="RelationalExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="greaterthan"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ShiftExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="RelationalExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="lowerthanorequal"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ShiftExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="RelationalExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="greaterthanorequal"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ShiftExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="RelationalExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="keyword_instanceof"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ShiftExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.21 Equality Operators -->
+	
+	<ComplexType id="EqualityExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="RelationalExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="EqualityExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="doubleequal"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="RelationalExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="EqualityExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="notequal"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="RelationalExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.22 Bitwise and Logical Operators -->
+	
+	<ComplexType id="AndExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="EqualityExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="AndExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="and"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="EqualityExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ExclusiveOrExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="AndExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ExclusiveOrExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="xor"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="AndExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="InclusiveOrExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="ExclusiveOrExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="InclusiveOrExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="or"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ExclusiveOrExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.23 Conditional-And Operator && -->
+	
+	<ComplexType id="ConditionalAndExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="InclusiveOrExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ConditionalAndExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="doubleand"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="InclusiveOrExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.24 Conditional-Or Operator || -->
+	
+	<ComplexType id="ConditionalOrExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="ConditionalAndExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ConditionalOrExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="doubleor"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ConditionalAndExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.25 Conditional Operator ? : -->
+	
+	<ComplexType id="ConditionalExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="ConditionalOrExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ConditionalOrExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="questionmark"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="colon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ConditionalExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			
+		</StartNode><Node type="ConditionalOrExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="questionmark"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="colon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="LambdaExpression"/>
+	</ComplexType>
+	
+	<!-- 15.16 Cast Expressions -->
+	
+	<ComplexType id="CastExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="PrimitiveType"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="UnaryExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="PrimitiveType"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="AdditionalBound"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="UnaryExpressionNotPlusMinus"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="PrimitiveType"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="AdditionalBound"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="LambdaExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.15 Unary Operators -->
+	
+	<ComplexType id="UnaryExpressionNotPlusMinus" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="PostfixExpression"/>
+		</StartNode>
+		<StartNode sequence="Any">
+			<Node type="tilde"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="UnaryExpression"/>
+		</StartNode>
+		<StartNode sequence="Any">
+			<Node type="exclamationmark"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="UnaryExpression"/>
+		</StartNode>
+		<StartNode sequence="Any">
+			<Node type="CastExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="UnaryExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="PreIncrementExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="PreDecrementExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="plus"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="UnaryExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="minus"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="UnaryExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="UnaryExpressionNotPlusMinus"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.14.2 Postfix Increment Operator ++ -->
+	
+	<ComplexType id="PostIncrementExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="PostfixExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="doubleplus"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.14.3 Postfix Decrement Operator - - -->
+	
+	<ComplexType id="PostDecrementExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="PostfixExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="doubleminus"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.14 Postfix Expressions -->
+	
+	<ComplexType id="PostfixExpression" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Primary"/>
+			<Node type="ExpressionName"/>
+			<Node type="PostIncrementExpression"/>
+			<Node type="PostDecrementExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.12 Method Invocation Expressions -->
+	
+	<ComplexType id="ArgumentList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Expression"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Expression"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="MethodInvocation" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="MethodName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ArgumentList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="TypeName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ArgumentList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ExpressionName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ArgumentList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="Primary"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ArgumentList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_super"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ArgumentList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="TypeName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="keyword_super"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ArgumentList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.9 Class Instance Creation Expressions -->
+	
+	<ComplexType id="TypeArgumentsOrDiamond" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="TypeArguments"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="lowerthan"/>
+			<Node type="greaterthan"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ClassOrInterfaceTypeToInstanciate" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="dot"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<GroupNode sequence="Order" occurrence="ZeroOrMore">
+					<Node type="Annotation"/>
+					<Node type="Separator"/>
+				</GroupNode>
+				<Node type="Identifier"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="TypeArgumentsOrDiamond"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="UnqualifiedClassInstanceCreationExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_new"/>
+			<Node type="Separator"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="ClassOrInterfaceTypeToInstanciate"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="ArgumentList"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="bracket_close"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="ClassBody"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ClassInstanceCreationExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="UnqualifiedClassInstanceCreationExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ExpressionName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="UnqualifiedClassInstanceCreationExpression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="Primary"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="UnqualifiedClassInstanceCreationExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.27.1 Lambda Parameters -->
+	
+	<ComplexType id="InferredFormalParameterList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Identifier"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="LambdaParameters" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="FormalParameterList" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="InferredFormalParameterList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.2 Forms of Expressions -->
+	
+	<ComplexType id="Expression" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="LambdaExpression"/>
+			<Node type="AssignmentExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.28 Constant Expressions -->
+	
+	<ComplexType id="ConstantExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Expression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.4 Local Variable Declaration Statements -->
+	
+	<ComplexType id="LocalVariableDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="VariableModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="UnannType"/>
+			<Node type="Separator"/>
+			<Node type="VariableDeclaratorList"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="LocalVariableDeclarationStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="LocalVariableDeclaration"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.6 The Empty Statement -->
+	
+	<ComplexType id="EmptyStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.8 Expression Statements -->
+	
+	<ComplexType id="StatementExpression" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Assignment"/>
+			<Node type="PreIncrementExpression"/>
+			<Node type="PreDecrementExpression"/>
+			<Node type="PostIncrementExpression"/>
+			<Node type="PostDecrementExpression"/>
+			<Node type="MethodInvocation"/>
+			<Node type="ClassInstanceCreationExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ExpressionStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="StatementExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.10 The assert Statement -->
+	
+	<ComplexType id="AssertStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_assert"/>
+			<Node type="Separator"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_assert"/>
+			<Node type="Separator"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="colon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.11 The switch Statement -->
+	
+	<ComplexType id="EnumConstantName" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="SwitchLabel" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_case"/>
+			<Node type="Separator"/>
+			<Node type="ConstantExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="colon"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_case"/>
+			<Node type="Separator"/>
+			<Node type="EnumConstantName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="colon"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_default"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="colon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="SwitchLabels" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="SwitchLabel"/>
+			<GroupNode sequence="Order">
+				<Node type="Separator"/>
+				<Node type="SwitchLabel"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="SwitchBlockStatementGroup" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="SwitchLabels"/>
+			<Node type="Separator"/>
+			<Node type="BlockStatements"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="SwitchBlock" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="curlybracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="SwitchBlockStatementGroup"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="SwitchLabel"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="curlybracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="SwitchStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_switch"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="SwitchBlock"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.13 The do Statement -->
+	
+	<ComplexType id="DoStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_do"/>
+			<Node type="Separator"/>
+			<Node type="Statement"/>
+			<Node type="Separator"/>
+			<Node type="keyword_while"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.15 The break Statement -->
+	
+	<ComplexType id="BreakStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_break"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Identifier"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.16 The continue Statement -->
+	
+	<ComplexType id="ContinueStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_continue"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Identifier"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.17 The return Statement -->
+	
+	<ComplexType id="ReturnStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_return"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Expression"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.19 The synchronized Statement -->
+	
+	<ComplexType id="SynchronizedStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_synchronized"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Block"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.18 The throw Statement -->
+	
+	<ComplexType id="ThrowStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_throw"/>
+			<Node type="Separator"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.20.3 try-with-resources -->
+	
+	<ComplexType id="Resource" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="VariableModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="UnannType"/>
+			<Node type="Separator"/>
+			<Node type="VariableDeclaratorId"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="equal"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ResourceList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Resource"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="semicolon" occurrence="ZeroOrOne"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Resource"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ResourceSpecification" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ResourceList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="TryWithResourcesStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_try"/>
+			<Node type="Separator"/>
+			<Node type="ResourceSpecification"/>
+			<Node type="Separator"/>
+			<Node type="Block"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Catches"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Finally"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.20 The try statement -->
+	
+	<ComplexType id="CatchType" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="UnannClassType"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="or"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="ClassType"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="CatchFormalParameter" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="VariableModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="CatchType"/>
+			<Node type="Separator"/>
+			<Node type="VariableDeclaratorId"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="CatchClause" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_finally"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="CatchFormalParameter"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Block"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Catches" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="CatchClause"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator"/>
+				<Node type="CatchClause"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Finally" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_finally"/>
+			<Node type="Separator"/>
+			<Node type="Block"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="TryStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_try"/>
+			<Node type="Separator"/>
+			<Node type="Block"/>
+			<Node type="Separator"/>
+			<Node type="Catches"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_try"/>
+			<Node type="Separator"/>
+			<Node type="Block"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Catches"/>
+			</GroupNode>
+			<Node type="Separator"/>
+			<Node type="Finally"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="TryWithResourcesStatement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.7 Labeled Statements -->
+	
+	<ComplexType id="LabeledStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Statement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="LabeledStatementNoShortIf" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="StatementNoShortIf"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.9 The if Statement -->
+	
+	<ComplexType id="IfThenStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_if"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Statement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="IfThenElseStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_if"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="StatementNoShortIf"/>
+			<Node type="Separator"/>
+			<Node type="keyword_else"/>
+			<Node type="Separator"/>
+			<Node type="Statement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="IfThenElseStatementNoShortIf" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_if"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="StatementNoShortIf"/>
+			<Node type="Separator"/>
+			<Node type="keyword_else"/>
+			<Node type="Separator"/>
+			<Node type="StatementNoShortIf"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.12 The while Statement -->
+	
+	<ComplexType id="WhileStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_while"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Statement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="WhileStatementNoShortIf" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_while"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="StatementNoShortIf"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.14.1 The basic for Statement -->
+	
+	<ComplexType id="StatementExpressionList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="StatementExpression"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="StatementExpression"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ForInit" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="StatementExpressionList"/>
+			<Node type="LocalVariableDeclaration"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ForUpdate" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="StatementExpressionList"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="BasicForStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_for"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ForInit" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ForUpdate" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Statement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="BasicForStatementNoShortIf" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_for"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ForInit" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ForUpdate" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="StatementNoShortIf"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.14.2 The enhanced for statement -->
+	
+	<ComplexType id="EnhancedForStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_for"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="VariableModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="UnannType"/>
+			<Node type="Separator"/>
+			<Node type="VariableDeclaratorId"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="colon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Statement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="EnhancedForStatementNoShortIf" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_for"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="VariableModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="UnannType"/>
+			<Node type="Separator"/>
+			<Node type="VariableDeclaratorId"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="colon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="StatementNoShortIf"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.14 The for Statement -->
+	
+	<ComplexType id="ForStatement" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="BasicForStatement"/>
+			<Node type="EnhancedForStatement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ForStatementNoShortIf" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="BasicForStatementNoShortIf"/>
+			<Node type="EnhancedForStatementNoShortIf"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.5 Statements -->
+	
+	<ComplexType id="StatementWithoutTrailingSubstatement" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Block"/>
+			<Node type="EmptyStatement"/>
+			<Node type="ExpressionStatement"/>
+			<Node type="AssertStatement"/>
+			<Node type="SwitchStatement"/>
+			<Node type="DoStatement"/>
+			<Node type="BreakStatement"/>
+			<Node type="ContinueStatement"/>
+			<Node type="ReturnStatement"/>
+			<Node type="SynchronizedStatement"/>
+			<Node type="ThrowStatement"/>
+			<Node type="TryStatement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Statement" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="StatementWithoutTrailingSubstatement"/>
+			<Node type="LabeledStatement"/>
+			<Node type="IfThenStatement"/>
+			<Node type="IfThenElseStatement"/>
+			<Node type="WhileStatement"/>
+			<Node type="ForStatement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="StatementNoShortIf" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="StatementWithoutTrailingSubstatement"/>
+			<Node type="LabeledStatementNoShortIf"/>
+			<Node type="IfThenElseStatementNoShortIf"/>
+			<Node type="WhileStatementNoShortIf"/>
+			<Node type="ForStatementNoShortIf"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.2 Blocks -->
+	
+	<ComplexType id="BlockStatement" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="LocalVariableDeclarationStatement"/>
+			<Node type="ClassDeclaration"/>
+			<Node type="Statement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="BlockStatements" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="BlockStatement"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="BlockStatement"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Block" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="curlybracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="BlockStatements" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="curlybracket_open"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.27 Lambda Expressions -->
+	
+	<ComplexType id="LambdaBody" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Expression"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="Block"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="LambdaExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="LambdaParameters"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="arrowtoken"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="LambdaBody"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.8 Primary Expressions -->
+	
+	<ComplexType id="ClassLiteral" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="TypeName"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="squarebracket_open"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="squarebracket_close"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="keyword_class"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="NumericType"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="squarebracket_open"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="squarebracket_close"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="keyword_class"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_boolean"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="squarebracket_open"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="squarebracket_close"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="keyword_class"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_void"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="keyword_class"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.11 Field Access Expressions -->
+	
+	<ComplexType id="FieldAccess" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Primary"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Identifier"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_super"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Identifier"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="TypeName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="keyword_super"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Identifier"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.10.3 Array Access Expressions -->
+	
+	<ComplexType id="ArrayAccess" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="ExpressionName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="squarebracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="squarebracket_close"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="PrimaryNoNewArray"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="squarebracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="squarebracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.13 Method Reference Expressions -->
+	
+	<ComplexType id="MethodReference" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="ExpressionName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="doubecolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ReferenceType"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="doubecolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="Primary"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="doubecolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_super"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="doubecolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="TypeName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="keyword_super"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="doubecolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ClassType"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="doubecolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="keyword_new"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ArrayType"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="doubecolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="keyword_new"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="PrimaryNoNewArray" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Literal"/>
+			<Node type="ClassLiteral"/>
+			<Node type="keyword_this"/>
+			<GroupNode sequence="Order">
+				<Node type="TypeName"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="dot"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="keyword_this"/>
+			</GroupNode>
+			<GroupNode sequence="Order">
+				<Node type="bracket_open"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Expression"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="bracket_close"/>
+			</GroupNode>
+			<Node type="ClassInstanceCreationExpression"/>
+			<Node type="FieldAccess"/>
+			<Node type="ArrayAccess"/>
+			<Node type="MethodInvocation"/>
+			<Node type="MethodReference"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 15.10.1 Array Creation Expressions -->
+	
+	<ComplexType id="DimExpr" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Annotation"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="squarebracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="squarebracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="DimExprs" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="DimExpr"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator"/>
+				<Node type="DimExpr"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ArrayCreationExpression" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_new"/>
+			<Node type="Separator"/>
+			<Node type="PrimitiveType"/>
+			<Node type="Separator"/>
+			<Node type="DimExprs"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Dims"/>
+			</GroupNode>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_new"/>
+			<Node type="Separator"/>
+			<Node type="ClassOrInterfaceType"/>
+			<Node type="Separator"/>
+			<Node type="DimExprs"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Dims"/>
+			</GroupNode>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_new"/>
+			<Node type="Separator"/>
+			<Node type="PrimitiveType"/>
+			<Node type="Separator"/>
+			<Node type="Dims"/>
+			<Node type="Separator"/>
+			<Node type="ArrayInitializer"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_new"/>
+			<Node type="Separator"/>
+			<Node type="ClassOrInterfaceType"/>
+			<Node type="Separator"/>
+			<Node type="Dims"/>
+			<Node type="Separator"/>
+			<Node type="ArrayInitializer"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Primary" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="PrimaryNoNewArray"/>
+			<Node type="ArrayCreationExpression"/>
+		</StartNode>
+	</ComplexType>
+
+	<!-- 8.3 Field Declarations -->
+
+	<ComplexType id="FieldModifier" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Annotation"/>
+			<Node type="keyword_public"/>
+			<Node type="keyword_protected"/>
+			<Node type="keyword_private"/>
+			<Node type="keyword_static"/>
+			<Node type="keyword_final"/>
+			<Node type="keyword_transient"/>
+			<Node type="keyword_volatile"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="UnannPrimitiveType" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="NumericType"/>
+			<Node type="keyword_boolean"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="UnannTypeVariable" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="UnannArrayType" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Any">
+				<Node type="UnannPrimitiveType"/>
+				<Node type="UnannClassOrInterfaceType"/>
+				<Node type="UnannTypeVariable"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Dims"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="UnannReferenceType" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="UnannArrayType"/>
+			<Node type="UnannClassOrInterfaceType"/>
+			<Node type="UnannTypeVariable"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="VariableInitializer" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Expression"/>
+			<Node type="ArrayInitializer"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="VariableDeclarator" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="VariableDeclaratorId"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="equal"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="VariableInitializer"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="FieldDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="FieldModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="UnannType"/>
+			<Node type="Separator"/>
+			<Node type="VariableDeclaratorList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 8.4 Method Declarations -->
+	
+	<ComplexType id="MethodModifier" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Annotation"/>
+			<Node type="keyword_public"/>
+			<Node type="keyword_protected"/>
+			<Node type="keyword_private"/>
+			<Node type="keyword_abstract"/>
+			<Node type="keyword_static"/>
+			<Node type="keyword_final"/>
+			<Node type="keyword_synchronized"/>
+			<Node type="keyword_native"/>
+			<Node type="keyword_strictfp"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 8.4.5 Method Result -->
+	
+	<ComplexType id="Result" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="UnannType"/>
+			<Node type="keyword_void"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="MethodDeclarator" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="FormalParameterList" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<!-- This array type returning declaration is kept for compatibility
+				 reasons but strongly encouraged to not use -->
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Dims"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 8.4.6 Method Throws -->
+	
+	<ComplexType id="ExceptionType" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="ClassType"/>
+			<Node type="TypeVariable"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ExceptionTypeList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="ExceptionType"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="ExceptionType"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Throws" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_throws"/>
+			<Node type="Separator"/>
+			<Node type="ExceptionTypeList"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="MethodHeader" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Result"/>
+			<Node type="Separator"/>
+			<Node type="MethodDeclarator"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Throws"/>
+			</GroupNode>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="TypeParameters"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator"/>
+				<Node type="Annotation"/>
+			</GroupNode>
+			<Node type="Result"/>
+			<Node type="Separator"/>
+			<Node type="MethodDeclarator"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Throws"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 8.4.7 Method Body -->
+	
+	<ComplexType id="MethodBody" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Block"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="MethodDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="MethodModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="MethodHeader"/>
+			<Node type="Separator"/>
+			<Node type="MethodBody"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ClassMemberDeclaration" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="FieldDeclaration"/>
+			<Node type="MethodDeclaration"/>
+			<Node type="ClassDeclaration"/>
+			<Node type="InterfaceDeclaration"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 8.6 Instance Initializers -->
+	
+	<ComplexType id="InstanceInitializer" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Block"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 8.7 Static Initializers -->
+	
+	<ComplexType id="StaticInitializer" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_static"/>
+			<Node type="Separator"/>
+			<Node type="Block"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 8.8 Constructor Declarations -->
+	
+	<ComplexType id="ConstructorModifier" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Annotation"/>
+			<Node type="keyword_public"/>
+			<Node type="keyword_protected"/>
+			<Node type="keyword_private"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="SimpleTypeName" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ConstructorDeclarator" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeParameters"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="SimpleTypeName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="FormalParameterList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ExplicitConstructorInvocation" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="keyword_this"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ArgumentList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="keyword_super"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ArgumentList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="ExpressionName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="keyword_super"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ArgumentList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="Primary"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="dot"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="TypeArguments"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="keyword_super"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ArgumentList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ConstructorBody" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="curlybracket_open"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="ExplicitConstructorInvocation"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="BlockStatements"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="curlybracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ConstructorDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="ConstructorModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="ConstructorDeclarator"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Throws"/>
+			</GroupNode>
+			<Node type="Separator"/>
+			<Node type="ConstructorBody"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ClassBodyDeclaration" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="ClassMemberDeclaration"/>
+			<Node type="InstanceInitializer"/>
+			<Node type="StaticInitializer"/>
+			<Node type="ConstructorDeclaration"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="NormalClassDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="ClassModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="keyword_class"/>
+			<Node type="Separator"/>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="TypeParameters"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Superclass"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Superinterfaces"/>
+			</GroupNode>
+			<Node type="Separator"/>
+			<Node type="ClassBody"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 8.9 Enum Types -->
+
+	<ComplexType id="EnumConstantModifier" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Annotation"/>
+		</StartNode>
+	</ComplexType>
+
+	<!-- 8.9.1 Enum Constants -->
+
+	<ComplexType id="EnumConstant" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="EnumConstantModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="bracket_open"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="ArgumentList" occurrence="ZeroOrOne"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="bracket_close"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="EnumConstantList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="EnumConstant"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma" occurrence="ZeroOrOne"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="EnumConstant"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 8.9.2 Enum Body Declarations -->
+	
+	<ComplexType id="EnumBodyDeclarations" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="semicolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ClassBodyDeclaration"/>
+		</StartNode>
+	</ComplexType>
+
+	<ComplexType id="EnumBody" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="curlybracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="EnumConstantList" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="comma" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="EnumBodyDeclarations" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="curlybracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="EnumDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="ClassModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="keyword_enum"/>
+			<Node type="Separator"/>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Superinterfaces"/>
+			</GroupNode>
+			<Node type="Separator"/>
+			<Node type="EnumBody"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ClassDeclaration" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="NormalClassDeclaration"/>
+			<Node type="EnumDeclaration"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 9.1.1 Interface Modifiers -->
+	
+	<ComplexType id="InterfaceModifier" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Annotation"/>
+			<Node type="keyword_public"/>
+			<Node type="keyword_protected"/>
+			<Node type="keyword_private"/>
+			<Node type="keyword_abstract"/>
+			<Node type="keyword_static"/>
+			<Node type="keyword_strictfp"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="InterfaceTypeList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="InterfaceType"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="InterfaceType"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ExtendsInterfaces" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_extends"/>
+			<Node type="Separator"/>
+			<Node type="InterfaceTypeList"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 9.3 Field (Constant) Declarations -->
+	
+	<ComplexType id="ConstantModifier" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Annotation"/>
+			<Node type="keyword_public"/>
+			<Node type="keyword_static"/>
+			<Node type="keyword_final"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ConstantDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="ConstantModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="UnannType"/>
+			<Node type="Separator"/>
+			<Node type="VariableDeclaratorList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 9.4 Method Declarations -->
+	
+	<ComplexType id="InterfaceMethodModifier" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Annotation"/>
+			<Node type="keyword_public"/>
+			<Node type="keyword_abstract"/>
+			<Node type="keyword_default"/>
+			<Node type="keyword_static"/>
+			<Node type="keyword_strictfp"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="InterfaceMethodDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="InterfaceMethodModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="MethodHeader"/>
+			<Node type="Separator"/>
+			<Node type="MethodBody"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 9.1.4 Interface Body and Member Declarations -->
+	
+	<ComplexType id="InterfaceMemberDeclaration" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="ConstantDeclaration"/>
+			<Node type="InterfaceMethodDeclaration"/>
+			<Node type="ClassDeclaration"/>
+			<Node type="InterfaceDeclaration"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="InterfaceBody" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="curlybracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="InterfaceMemberDeclaration" occurrence="ZeroOrMore"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="curlybracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="NormalInterfaceDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="InterfaceModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="keyword_interface"/>
+			<Node type="Separator"/>
+			<Node type="Identifier"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="TypeParameters"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="ExtendsInterfaces"/>
+			</GroupNode>
+			<Node type="Separator"/>
+			<Node type="InterfaceBody"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 9.6.2 Defaults for Annotation Type Elements -->
+	
+	<ComplexType id="DefaultValue" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_default"/>
+			<Node type="Separator"/>
+			<Node type="ElementValue"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 9.6.1 Annotation Type Elements -->
+	
+	<ComplexType id="AnnotationTypeElementModifier" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Annotation"/>
+			<Node type="keyword_public"/>
+			<Node type="keyword_abstract"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="AnnotationTypeElementDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="AnnotationTypeElementModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="UnannType"/>
+			<Node type="Separator"/>
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Dims"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="DefaultValue"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="AnnotationTypeMemberDeclaration" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="AnnotationTypeElementDeclaration"/>
+			<Node type="ConstantDeclaration"/>
+			<Node type="ClassDeclaration"/>
+			<Node type="InterfaceDeclaration"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="AnnotationTypeBody" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="curlybracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="AnnotationTypeMemberDeclaration" occurrence="ZeroOrMore"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="curlybracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 9.6 Annotation Types -->
+	
+	<ComplexType id="AnnotationTypeDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="InterfaceModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="at"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="keyword_interface"/>
+			<Node type="Separator"/>
+			<Node type="Identifier"/>
+			<Node type="Separator"/>
+			<Node type="AnnotationTypeBody"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 9.1 Interface Declarations -->
+	
+	<ComplexType id="InterfaceDeclaration" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="NormalInterfaceDeclaration"/>
+			<Node type="AnnotationTypeDeclaration"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="TypeDeclaration" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="ClassDeclaration"/>
+			<Node type="InterfaceDeclaration"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 7.3 Compilation Units -->
+	
+	<ComplexType id="CompilationUnit" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="PackageDeclaration"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="ImportDeclaration"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="TypeDeclaration"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
 	
 	<Include file="Java/JavaFile.xml"/>
 	
