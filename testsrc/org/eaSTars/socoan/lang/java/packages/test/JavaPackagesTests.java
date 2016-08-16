@@ -7,13 +7,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	PackageDeclarationTest.class,
-	ImportDeclarationTest.class,
-	TypeParametersTest.class,
-	SuperclassTest.class,
-	SuperinterfacesTest.class,
-	UnannTypeTest.class,
-	FieldDeclarationTest.class
+	ImportDeclarationTest.class
 })
-public class PackagesTests {
+public class JavaPackagesTests {
 
 }

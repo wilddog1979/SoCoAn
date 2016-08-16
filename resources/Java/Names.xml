@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Language xmlns="http://eaSTars.com/SoCoAn/lang">
 	
+	<!-- TODO: write tests -->
+	
 	<!-- 6.5 Determining the Meaning of a Name -->
 	
 	<!-- Logic changed to Identifier{.Identifier}

@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Language xmlns="http://eaSTars.com/SoCoAn/lang">
+	
+	<!-- 14.2 Blocks -->
+	
+	<!-- This definition is included in both LavaLang and this definition
+		 file intentionally -->
+	<ComplexType id="BlockStatements" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="BlockStatement"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="BlockStatement"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="BlockStatement" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="LocalVariableDeclarationStatement"/>
+			<Node type="ClassDeclaration"/>
+			<Node type="Statement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.4 Local Variable Declaration Statements -->
+	
+	<ComplexType id="LocalVariableDeclarationStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="LocalVariableDeclaration"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="LocalVariableDeclaration" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="VariableModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="UnannType"/>
+			<Node type="Separator"/>
+			<Node type="VariableDeclaratorList"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.5 Statements -->
+	
+	<ComplexType id="Statement" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="StatementWithoutTrailingSubstatement"/>
+			<Node type="LabeledStatement"/>
+			<Node type="IfThenStatement"/>
+			<Node type="IfThenElseStatement"/>
+			<Node type="WhileStatement"/>
+			<Node type="ForStatement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="StatementNoShortIf" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="StatementWithoutTrailingSubstatement"/>
+			<Node type="LabeledStatementNoShortIf"/>
+			<Node type="IfThenElseStatementNoShortIf"/>
+			<Node type="WhileStatementNoShortIf"/>
+			<Node type="ForStatementNoShortIf"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="StatementWithoutTrailingSubstatement" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Block"/>
+			<Node type="EmptyStatement"/>
+			<Node type="ExpressionStatement"/>
+			<Node type="AssertStatement"/>
+			<Node type="SwitchStatement"/>
+			<Node type="DoStatement"/>
+			<Node type="BreakStatement"/>
+			<Node type="ContinueStatement"/>
+			<Node type="ReturnStatement"/>
+			<Node type="SynchronizedStatement"/>
+			<Node type="ThrowStatement"/>
+			<Node type="TryStatement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.6 The Empty Statement -->
+	
+	<ComplexType id="EmptyStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.7 Labeled Statements -->
+	
+	<ComplexType id="LabeledStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Statement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="LabeledStatementNoShortIf" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="StatementNoShortIf"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.8 Expression Statements -->
+	
+	<ComplexType id="ExpressionStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="StatementExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="StatementExpression" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Assignment"/>
+			<Node type="PreIncrementExpression"/>
+			<Node type="PreDecrementExpression"/>
+			<Node type="PostIncrementExpression"/>
+			<Node type="PostDecrementExpression"/>
+			<Node type="MethodInvocation"/>
+			<Node type="ClassInstanceCreationExpression"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.9 The if Statement -->
+	
+	<ComplexType id="IfThenStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_if"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Statement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="IfThenElseStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_if"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="StatementNoShortIf"/>
+			<Node type="Separator"/>
+			<Node type="keyword_else"/>
+			<Node type="Separator"/>
+			<Node type="Statement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="IfThenElseStatementNoShortIf" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_if"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="StatementNoShortIf"/>
+			<Node type="Separator"/>
+			<Node type="keyword_else"/>
+			<Node type="Separator"/>
+			<Node type="StatementNoShortIf"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.10 The assert Statement -->
+	
+	<ComplexType id="AssertStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_assert"/>
+			<Node type="Separator"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_assert"/>
+			<Node type="Separator"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="colon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.11 The switch Statement -->
+	
+	<ComplexType id="SwitchStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_switch"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="SwitchBlock"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="SwitchBlock" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="curlybracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="SwitchBlockStatementGroup"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="SwitchLabel"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="curlybracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="SwitchBlockStatementGroup" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="SwitchLabels"/>
+			<Node type="Separator"/>
+			<Node type="BlockStatements"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="SwitchLabels" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="SwitchLabel"/>
+			<GroupNode sequence="Order">
+				<Node type="Separator"/>
+				<Node type="SwitchLabel"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="SwitchLabel" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_case"/>
+			<Node type="Separator"/>
+			<Node type="ConstantExpression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="colon"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_case"/>
+			<Node type="Separator"/>
+			<Node type="EnumConstantName"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="colon"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_default"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="colon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="EnumConstantName" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Identifier"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.12 The while Statement -->
+	
+	<ComplexType id="WhileStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_while"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Statement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="WhileStatementNoShortIf" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_while"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="StatementNoShortIf"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.13 The do Statement -->
+	
+	<ComplexType id="DoStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_do"/>
+			<Node type="Separator"/>
+			<Node type="Statement"/>
+			<Node type="Separator"/>
+			<Node type="keyword_while"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.14 The for Statement -->
+	
+	<ComplexType id="ForStatement" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="BasicForStatement"/>
+			<Node type="EnhancedForStatement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ForStatementNoShortIf" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="BasicForStatementNoShortIf"/>
+			<Node type="EnhancedForStatementNoShortIf"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.14.1 The basic for Statement -->
+	
+	<ComplexType id="BasicForStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_for"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ForInit" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ForUpdate" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Statement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="BasicForStatementNoShortIf" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_for"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ForInit" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ForUpdate" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="StatementNoShortIf"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ForInit" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="StatementExpressionList"/>
+			<Node type="LocalVariableDeclaration"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ForUpdate" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="StatementExpressionList"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="StatementExpressionList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="StatementExpression"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="StatementExpression"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.14.2 The enhanced for statement -->
+	
+	<ComplexType id="EnhancedForStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_for"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="VariableModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="UnannType"/>
+			<Node type="Separator"/>
+			<Node type="VariableDeclaratorId"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="colon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Statement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="EnhancedForStatementNoShortIf" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_for"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="VariableModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="UnannType"/>
+			<Node type="Separator"/>
+			<Node type="VariableDeclaratorId"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="colon"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="StatementNoShortIf"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.15 The break Statement -->
+	
+	<ComplexType id="BreakStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_break"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Identifier"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.16 The continue Statement -->
+	
+	<ComplexType id="ContinueStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_continue"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Identifier"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.17 The return Statement -->
+	
+	<ComplexType id="ReturnStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_return"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Expression"/>
+			</GroupNode>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.18 The throw Statement -->
+	
+	<ComplexType id="ThrowStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_throw"/>
+			<Node type="Separator"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.19 The synchronized Statement -->
+	
+	<ComplexType id="SynchronizedStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_synchronized"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Block"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.20 The try statement -->
+	
+	<ComplexType id="TryStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_try"/>
+			<Node type="Separator"/>
+			<Node type="Block"/>
+			<Node type="Separator"/>
+			<Node type="Catches"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="keyword_try"/>
+			<Node type="Separator"/>
+			<Node type="Block"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator"/>
+				<Node type="Catches"/>
+			</GroupNode>
+			<Node type="Separator"/>
+			<Node type="Finally"/>
+		</StartNode>
+		<StartNode sequence="Order">
+			<Node type="TryWithResourcesStatement"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Catches" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="CatchClause"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator"/>
+				<Node type="CatchClause"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="CatchClause" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_finally"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="CatchFormalParameter"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Block"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="CatchFormalParameter" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="VariableModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="CatchType"/>
+			<Node type="Separator"/>
+			<Node type="VariableDeclaratorId"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="CatchType" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="UnannClassType"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="or"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="ClassType"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Finally" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_finally"/>
+			<Node type="Separator"/>
+			<Node type="Block"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 14.20.3 try-with-resources -->
+	
+	<ComplexType id="TryWithResourcesStatement" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="keyword_try"/>
+			<Node type="Separator"/>
+			<Node type="ResourceSpecification"/>
+			<Node type="Separator"/>
+			<Node type="Block"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Catches"/>
+			</GroupNode>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Finally"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ResourceSpecification" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="bracket_open"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="ResourceList"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="semicolon" occurrence="ZeroOrOne"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ResourceList" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Resource"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="semicolon" occurrence="ZeroOrOne"/>
+				<Node type="Separator" occurrence="ZeroOrOne"/>
+				<Node type="Resource"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Resource" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="VariableModifier"/>
+				<Node type="Separator"/>
+			</GroupNode>
+			<Node type="UnannType"/>
+			<Node type="Separator"/>
+			<Node type="VariableDeclaratorId"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="equal"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+			<Node type="Expression"/>
+		</StartNode>
+	</ComplexType>
+	
+</Language>

@@ -1,4 +1,4 @@
-package org.eaSTars.socoan.lang.java.packages.test;
+package org.eaSTars.socoan.lang.java.classes.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

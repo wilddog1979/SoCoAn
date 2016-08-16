@@ -10,8 +10,10 @@ import javax.xml.bind.Unmarshaller;
 import org.eaSTars.socoan.lang.Language;
 import org.eaSTars.socoan.lang.LanguageObjectFactory;
 import org.eaSTars.socoan.lang.ReferenceNotFoundException;
+import org.eaSTars.socoan.lang.java.classes.test.JavaClassesTests;
 import org.eaSTars.socoan.lang.java.lexical.test.JavaLexicalTests;
-import org.eaSTars.socoan.lang.java.packages.test.PackagesTests;
+import org.eaSTars.socoan.lang.java.names.test.JavaNamesTests;
+import org.eaSTars.socoan.lang.java.packages.test.JavaPackagesTests;
 import org.eaSTars.socoan.lang.java.types.test.JavaTypesTests;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -22,7 +24,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	JavaLexicalTests.class,
 	JavaTypesTests.class,
-	PackagesTests.class
+	JavaNamesTests.class,
+	JavaPackagesTests.class,
+	JavaClassesTests.class
 })
 public class JavaTests {
 

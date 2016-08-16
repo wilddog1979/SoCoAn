@@ -1,4 +1,4 @@
-package org.eaSTars.socoan.lang.java.packages.test;
+package org.eaSTars.socoan.lang.java.classes.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -18,12 +18,12 @@ import org.eaSTars.socoan.lang.java.test.AbstractJavaLangTest;
 import org.eaSTars.socoan.lang.java.test.JavaTests;
 import org.junit.Test;
 
-public class UnannTypeTest extends AbstractJavaLangTest {
+public class TypeParametersTest extends AbstractJavaLangTest {
 
-	private static final String ELEMENT_NAME = "UnannType";
+	private static final String ELEMENT_NAME = "TypeParameters";
 	
 	@Test
-	public void testint() {
+	public void testSingle() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -35,20 +35,20 @@ public class UnannTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("int leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("<TestIdentifier1> leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "int", "<span class=\"keyword\">int</span>");
+		testFragment(fragment, "<TestIdentifier1>", "&lt;TestIdentifier1&gt;");
 		
 		checkLeftover(sis, 9);
 	}
 	
 	@Test
-	public void testintarray() {
+	public void testMultiple() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -60,20 +60,20 @@ public class UnannTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("int[] leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("<TestIdentifier1, TestIdentifier2> leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
-		testFragment(fragment, "int[]", "<span class=\"keyword\">int</span>[]");
+		testFragment(fragment, "<TestIdentifier1, TestIdentifier2>", "&lt;TestIdentifier1, TestIdentifier2&gt;");
 		
 		checkLeftover(sis, 9);
 	}
 	
 	@Test
-	public void testintmultiarray() {
+	public void testMultipleComplex() {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -85,57 +85,7 @@ public class UnannTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("int[][][] leftover".getBytes()));
-		
-		boolean testresult = recognizetype(typeDeclaration, context, sis);
-		
-		assertTrue("Sample should be recognized", testresult);
-		assertEquals("Context buffer should contain one entry", 1, context.size());
-		Fragment fragment = context.pop();
-		testFragment(fragment, "int[][][]", "<span class=\"keyword\">int</span>[][][]");
-		
-		checkLeftover(sis, 9);
-	}
-	
-	@Test
-	public void testIdentifier() {
-		AbstractTypeDeclaration typeDeclaration = null;
-		Context context = null;
-		try {
-			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
-			context = new Context(JavaTests.getJavaLang());
-		} catch (JAXBException | ReferenceNotFoundException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-		
-		assertNotNull("element type should be found", typeDeclaration);
-		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("Identifier leftover".getBytes()));
-		
-		boolean testresult = recognizetype(typeDeclaration, context, sis);
-		
-		assertTrue("Sample should be recognized", testresult);
-		assertEquals("Context buffer should contain one entry", 1, context.size());
-		Fragment fragment = context.pop();
-		testFragment(fragment, "Identifier", "Identifier");
-		
-		checkLeftover(sis, 9);
-	}
-	
-	@Test
-	public void testIdentifierArgument() {
-		AbstractTypeDeclaration typeDeclaration = null;
-		Context context = null;
-		try {
-			typeDeclaration = JavaTests.getJavaLang().getTypeDeclaration(ELEMENT_NAME);
-			context = new Context(JavaTests.getJavaLang());
-		} catch (JAXBException | ReferenceNotFoundException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
-		
-		assertNotNull("element type should be found", typeDeclaration);
-		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("Identifier1 <? extends Identifier2> leftover".getBytes()));
+		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("<@testannotation Identifier1, T extends Identifier2, C extends Identifier3 & Identifier4> leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -143,8 +93,8 @@ public class UnannTypeTest extends AbstractJavaLangTest {
 		assertEquals("Context buffer should contain one entry", 1, context.size());
 		Fragment fragment = context.pop();
 		testFragment(fragment,
-				"Identifier1 <? extends Identifier2>",
-				"Identifier1 &lt;? <span class=\"keyword\">extends</span> Identifier2&gt;"
+				"<@testannotation Identifier1, T extends Identifier2, C extends Identifier3 & Identifier4>",
+				"&lt;@testannotation Identifier1, T <span class=\"keyword\">extends</span> Identifier2, C <span class=\"keyword\">extends</span> Identifier3 &amp; Identifier4&gt;"
 		);
 		
 		checkLeftover(sis, 9);
