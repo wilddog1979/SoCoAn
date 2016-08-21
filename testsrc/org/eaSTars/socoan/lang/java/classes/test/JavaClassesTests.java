@@ -10,7 +10,9 @@ import org.junit.runners.Suite.SuiteClasses;
 	SuperinterfacesTest.class,
 	SuperclassTest.class,
 	FieldDeclarationTest.class,
-	UnannTypeTest.class
+	UnannTypeTest.class,
+	MethodDeclarationTest.class,
+	EnumDeclarationTest.class
 })
 public class JavaClassesTests {
 
