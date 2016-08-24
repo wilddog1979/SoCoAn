@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Language xmlns="http://eaSTars.com/SoCoAn/lang">
+
+	<TerminatedType id="JavaTestSimpleCommandEnd">
+		<Terminator>;</Terminator>
+	</TerminatedType>
+
+	<Include file="Package.xml"/>
+	<Include file="Import.xml"/>
+
+	<ComplexType id="JavaTestJavaFile" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="JavaTestPackage" occurrence="ZeroOrOne"/>
+			<Node type="JavaTestImport" occurrence="ZeroOrMore"/>
+			<Node type="Separator" occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+
+</Language>

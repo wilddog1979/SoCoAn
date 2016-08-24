@@ -1,0 +1,70 @@
+<project name="SoCoAn" default="all">
+	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+		<classpath>
+		<fileset dir="lib/JAXB" includes="jaxb-*.jar" />
+		</classpath>
+	</taskdef>
+	
+	<path id="src.path">
+		<pathelement location="src" />
+		<pathelement location="gensrc" />
+		<pathelement location="testsrc" />
+	</path>
+	
+	<path id="class.path">
+		<fileset dir="lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="clean">
+		<delete includeemptydirs="true">
+			<fileset dir="bin">
+				<include name="**/*"/>
+			</fileset>
+			<fileset dir="gensrc">
+				<include name="**/*"/>
+			</fileset>
+			<fileset dir="test">
+				<include name="**/*"/>
+			</fileset>
+		</delete>
+	</target>
+	
+	<target name="gensrc">
+		<xjc schema="resources/config.xsd" destdir="gensrc" removeOldOutput="yes" package="org.eaSTars.socoan.config"/>
+	</target>
+	
+	<target name="compile">
+		<javac destdir="bin" debug="true" includeantruntime="false" classpathref="class.path">
+			<src refid="src.path" />
+		</javac>
+	</target>
+	
+	<target name="runtests" depends="all">
+		<junit fork="true" printsummary="true" dir=".">
+			<classpath>
+				<path refid="class.path"/>
+				<pathelement location="bin"/>
+			</classpath>
+			
+			<formatter type="brief" usefile="false" />
+			<formatter type="xml"/>
+			
+			<batchtest fork="yes" todir="test">
+				<fileset dir="testsrc">
+					<include name="**/*Test.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+		<junitreport todir="test">
+			<fileset dir="test">
+				<include name="TEST-*.xml"/>
+			</fileset>
+			<report format="frames" todir="test/report"/>
+		</junitreport>
+	</target>
+	
+	<target name="all" depends="clean,gensrc,compile">
+	</target>
+</project>
