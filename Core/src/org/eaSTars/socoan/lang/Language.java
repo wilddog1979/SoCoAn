@@ -66,6 +66,16 @@ public class Language extends AbstractBaseElement implements FormatProvider{
 		}
 	}
 	
+	@Override
+	public void resolveFileReferences(
+			Optional<FileReferenceListener> fileReferenceListener,
+			File location)
+					throws JAXBException {
+		for (AbstractBaseElement element : getElements()) {
+			element.resolveFileReferences(fileReferenceListener, location);
+		}
+	}
+	
 	public ProcessorFactory getProcessorFactory() {
 		ProcessorFactory result = processorFactory;
 		
@@ -77,14 +87,19 @@ public class Language extends AbstractBaseElement implements FormatProvider{
 	}
 	
 	@Override
-	public void resolveNodeReferences(Language parent) throws ReferenceNotFoundException {
+	public void resolveNodeReferences(Language parent)
+			throws ReferenceNotFoundException {
 		this.parent = parent;
 		
 		if (processorfactoryname != null) {
 			try {
-				processorFactory = Class.forName(processorfactoryname).asSubclass(ProcessorFactory.class).newInstance();
+				processorFactory = Class.forName(processorfactoryname)
+						.asSubclass(ProcessorFactory.class).newInstance();
 			} catch (Exception e) {
-				throw new ReferenceNotFoundException(parent.getFilename(), "processorfactory", processorfactoryname);
+				throw new ReferenceNotFoundException(
+						parent.getFilename(),
+						"processorfactory",
+						processorfactoryname);
 			}
 		}
 		
@@ -99,11 +114,13 @@ public class Language extends AbstractBaseElement implements FormatProvider{
 		
 		for (AbstractBaseElement element : getElements()) {
 			if (element.isProcessed()) {
-				if (element instanceof AbstractTypeDeclaration && ((AbstractTypeDeclaration)element).getId().equals(id)) {
+				if (element instanceof AbstractTypeDeclaration &&
+						((AbstractTypeDeclaration)element).getId().equals(id)) {
 					result = (AbstractTypeDeclaration) element;
 					break;
 				} else if (element instanceof Include) {
-					result = ((Include)element).getInclude().resolveTypeDeclaration(id, false);
+					result = ((Include)element).getInclude()
+							.resolveTypeDeclaration(id, false);
 					if (result != null) {
 						break;
 					}
@@ -122,7 +139,8 @@ public class Language extends AbstractBaseElement implements FormatProvider{
 		AbstractTypeDeclaration result = null;
 		
 		for (AbstractBaseElement element : getElements()) {
-			if (element instanceof AbstractTypeDeclaration && ((AbstractTypeDeclaration)element).getId().equals(id)) {
+			if (element instanceof AbstractTypeDeclaration &&
+					((AbstractTypeDeclaration)element).getId().equals(id)) {
 				result = (AbstractTypeDeclaration) element;
 				break;
 			}
@@ -131,11 +149,13 @@ public class Language extends AbstractBaseElement implements FormatProvider{
 		return result != null ? result : resolveTypeDeclaration(id, true);
 	}
 	
-	private AbstractTypeDeclaration getTypeDeclaration(Language origin, String id, boolean upward) {
+	private AbstractTypeDeclaration getTypeDeclaration(
+			Language origin, String id, boolean upward) {
 		AbstractTypeDeclaration result = null;
 		
 		for (AbstractBaseElement element : getElements()) {
-			if (element instanceof AbstractTypeDeclaration && ((AbstractTypeDeclaration)element).getId().equals(id)) {
+			if (element instanceof AbstractTypeDeclaration &&
+					((AbstractTypeDeclaration)element).getId().equals(id)) {
 				result = (AbstractTypeDeclaration) element;
 				break;
 			} else if (element instanceof Include) {
@@ -157,11 +177,13 @@ public class Language extends AbstractBaseElement implements FormatProvider{
 		return getTypeDeclaration(null, id, true);
 	}
 	
-	private Optional<String> getFormat(Language origin, String maskid, boolean upward) {
+	private Optional<String> getFormat(
+			Language origin, String maskid, boolean upward) {
 		Optional<String> result = Optional.empty();
 		
 		if (formatmasks != null && formatmasks.containsKey(maskid)) {
-			result = Optional.ofNullable(replaceCharacters(formatmasks.get(maskid)));
+			result = Optional.ofNullable(
+					replaceCharacters(formatmasks.get(maskid)));
 		}
 		
 		if (!result.isPresent()) {
@@ -171,7 +193,8 @@ public class Language extends AbstractBaseElement implements FormatProvider{
 					if (include.getInclude() == origin) {
 						break;
 					}
-					result = include.getInclude().getFormat(null, maskid, false);
+					result = include.getInclude().getFormat(
+							null, maskid, false);
 					if (result.isPresent()) {
 						break;
 					}

@@ -1,6 +1,7 @@
 package org.eaSTars.socoan.lang;
 
 import java.io.File;
+import java.util.Optional;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -32,6 +33,13 @@ public abstract class AbstractBaseElement {
 	private boolean processed = false;
 	
 	public void resolveFileReferences(File location) throws JAXBException {
+		
+	}
+	
+	public void resolveFileReferences(
+			Optional<FileReferenceListener> fileReferenceListener,
+			File location)
+					throws JAXBException {
 		
 	}
 	

@@ -1,6 +1,7 @@
 package org.eaSTars.socoan.lang;
 
 import java.io.File;
+import java.util.Optional;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -20,15 +21,34 @@ public class Include extends AbstractBaseElement {
 
 	@Override
 	public void resolveFileReferences(File location) throws JAXBException {
-		JAXBContext context = JAXBContext.newInstance(LanguageObjectFactory.class);
-		Unmarshaller unmarshaller = context.createUnmarshaller();
 		File includefilelocation = new File(location, file);
+		loadReferredFile(includefilelocation);
+		include.resolveFileReferences(includefilelocation.getParentFile());
+	}
+	
+	@Override
+	public void resolveFileReferences(
+			Optional<FileReferenceListener> fileReferenceListener,
+			File location)
+					throws JAXBException {
+		File includefilelocation = new File(location, file);
+		loadReferredFile(includefilelocation);
+		fileReferenceListener.ifPresent(
+				l -> l.fileLoaded(includefilelocation, include));
+		include.resolveFileReferences(
+				fileReferenceListener, includefilelocation.getParentFile());
+	}
+	
+	private void loadReferredFile(File includefilelocation)
+			throws JAXBException {
+		JAXBContext context =
+				JAXBContext.newInstance(LanguageObjectFactory.class);
+		Unmarshaller unmarshaller = context.createUnmarshaller();
 		@SuppressWarnings("unchecked")
-		JAXBElement<Language> doc = (JAXBElement<Language>) unmarshaller.unmarshal(includefilelocation);
+		JAXBElement<Language> doc =
+			(JAXBElement<Language>) unmarshaller.unmarshal(includefilelocation);
 		include = doc.getValue();
 		include.setFilename(includefilelocation.getAbsolutePath());
-		
-		include.resolveFileReferences(includefilelocation.getParentFile());
 	}
 	
 	public Language getInclude() {
@@ -36,7 +56,8 @@ public class Include extends AbstractBaseElement {
 	}
 	
 	@Override
-	public void resolveNodeReferences(Language parent) throws ReferenceNotFoundException {
+	public void resolveNodeReferences(Language parent)
+			throws ReferenceNotFoundException {
 		include.resolveNodeReferences(parent);
 	}
 
