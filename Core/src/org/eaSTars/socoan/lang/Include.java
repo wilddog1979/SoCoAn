@@ -60,6 +60,14 @@ public class Include extends AbstractBaseElement {
 			throws ReferenceNotFoundException {
 		include.resolveNodeReferences(parent);
 	}
+	
+	@Override
+	public void resolveNodeReferences(
+			Optional<TypeReferenceListener> typeReferenceListener,
+			Language parent)
+					throws ReferenceNotFoundException {
+		include.resolveNodeReferences(typeReferenceListener, parent);
+	}
 
 	public String getFile() {
 		return file;

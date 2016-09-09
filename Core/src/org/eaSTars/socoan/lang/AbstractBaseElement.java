@@ -43,10 +43,17 @@ public abstract class AbstractBaseElement {
 		
 	}
 	
-	public void resolveNodeReferences(Language parent) throws ReferenceNotFoundException {
+	public void resolveNodeReferences(Language parent)
+			throws ReferenceNotFoundException {
 		
 	}
 
+	public void resolveNodeReferences(
+			Optional<TypeReferenceListener> typeReferenceListener, Language parent)
+					throws ReferenceNotFoundException {
+		
+	}
+	
 	public boolean isProcessed() {
 		return processed;
 	}

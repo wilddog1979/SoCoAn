@@ -109,6 +109,35 @@ public class Language extends AbstractBaseElement implements FormatProvider{
 		}
 	}
 	
+	@Override
+	public void resolveNodeReferences(
+			Optional<TypeReferenceListener> typeReferenceListener,
+			Language parent)
+					throws ReferenceNotFoundException {
+		this.parent = parent;
+		
+		if (processorfactoryname != null) {
+			try {
+				processorFactory = Class.forName(processorfactoryname)
+						.asSubclass(ProcessorFactory.class).newInstance();
+			} catch (Exception e) {
+				throw new ReferenceNotFoundException(
+						parent.getFilename(),
+						"processorfactory",
+						processorfactoryname);
+			}
+		}
+		
+		for (AbstractBaseElement element : getElements()) {
+			if (element instanceof AbstractTypeDeclaration) {
+				typeReferenceListener.ifPresent(l ->
+					l.typeAdded(this, (AbstractTypeDeclaration) element));
+			}
+			element.resolveNodeReferences(typeReferenceListener, this);
+			element.setProcessed(true);
+		}
+	};
+	
 	AbstractTypeDeclaration resolveTypeDeclaration(String id, boolean upward) {
 		AbstractTypeDeclaration result = null;
 		
