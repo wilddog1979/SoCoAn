@@ -7,6 +7,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 
 import org.eaSTars.socoan.config.ObjectFactory;
 import org.eaSTars.socoan.config.SoCoAnConfig;
@@ -39,10 +40,9 @@ public class Configuration {
 		boolean result = false;
 		
 		try {
-			JAXBContext context = JAXBContext.newInstance(ObjectFactory.class);
+			JAXBContext context = JAXBContext.newInstance(SoCoAnConfig.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-			@SuppressWarnings("unchecked")
-			JAXBElement<SoCoAnConfig> doc = (JAXBElement<SoCoAnConfig>) unmarshaller.unmarshal(file);
+			JAXBElement<SoCoAnConfig> doc = unmarshaller.unmarshal(new StreamSource(file), SoCoAnConfig.class);
 			config = doc.getValue();
 			
 			result = true;

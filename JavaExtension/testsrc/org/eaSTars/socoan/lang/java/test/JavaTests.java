@@ -6,9 +6,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 
 import org.eaSTars.socoan.lang.Language;
-import org.eaSTars.socoan.lang.LanguageObjectFactory;
 import org.eaSTars.socoan.lang.ReferenceNotFoundException;
 import org.eaSTars.socoan.lang.java.arrays.test.ArraysTests;
 import org.eaSTars.socoan.lang.java.blocksandstatements.test.BlocksAndStatementsTests;
@@ -38,14 +38,14 @@ import org.junit.runners.Suite.SuiteClasses;
 })
 public class JavaTests {
 
-private static Language javalang = null;
+	private static Language javalang = null;
 	
 	@BeforeClass
 	public static void initJavaLang() throws JAXBException, ReferenceNotFoundException {
-		JAXBContext context = JAXBContext.newInstance(LanguageObjectFactory.class);
+		JAXBContext context = JAXBContext.newInstance(Language.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		@SuppressWarnings("unchecked")
-		JAXBElement<Language> doc = (JAXBElement<Language>) unmarshaller.unmarshal(new File("resources/JavaLang.xml"));
+		File javalangfile = new File("resources/JavaLang.xml");
+		JAXBElement<Language> doc = unmarshaller.unmarshal(new StreamSource(javalangfile), Language.class);
 		javalang = doc.getValue();
 		
 		javalang.resolveFileReferences(new File("resources"));

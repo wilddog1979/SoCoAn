@@ -11,13 +11,13 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 
 import org.eaSTars.socoan.Configuration;
 import org.eaSTars.socoan.SourcecodeInputStream;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Language;
-import org.eaSTars.socoan.lang.LanguageObjectFactory;
 import org.eaSTars.socoan.lang.ReferenceNotFoundException;
 
 public class SoCoAn {
@@ -41,10 +41,9 @@ public class SoCoAn {
 		File javalang = new File("resources/JavaLang.xml");
 		
 		try {
-			JAXBContext context = JAXBContext.newInstance(LanguageObjectFactory.class);
+			JAXBContext context = JAXBContext.newInstance(Language.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-			@SuppressWarnings("unchecked")
-			JAXBElement<Language> doc = (JAXBElement<Language>) unmarshaller.unmarshal(javalang);
+			JAXBElement<Language> doc = unmarshaller.unmarshal(new StreamSource(javalang), Language.class);
 			Language language = doc.getValue();
 			
 			language.setFilename(javalang.getAbsolutePath());

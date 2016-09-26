@@ -10,6 +10,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.transform.stream.StreamSource;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Include extends AbstractBaseElement {
@@ -41,12 +42,9 @@ public class Include extends AbstractBaseElement {
 	
 	private void loadReferredFile(File includefilelocation)
 			throws JAXBException {
-		JAXBContext context =
-				JAXBContext.newInstance(LanguageObjectFactory.class);
+		JAXBContext context = JAXBContext.newInstance(Language.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		@SuppressWarnings("unchecked")
-		JAXBElement<Language> doc =
-			(JAXBElement<Language>) unmarshaller.unmarshal(includefilelocation);
+		JAXBElement<Language> doc = unmarshaller.unmarshal(new StreamSource(includefilelocation), Language.class);
 		include = doc.getValue();
 		include.setFilename(includefilelocation.getAbsolutePath());
 	}
