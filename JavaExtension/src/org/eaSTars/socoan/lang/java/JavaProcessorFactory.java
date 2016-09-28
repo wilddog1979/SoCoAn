@@ -30,6 +30,7 @@ public class JavaProcessorFactory extends ProcessorFactory {
 				}
 	};
 	
+	@Override
 	public Function<Context, Fragment> createProcessor(String id) {
 		Function<Context, Fragment> result = FUNCTION_MAP.get(id);
 		return result == null ? super.createProcessor(id) : result;
