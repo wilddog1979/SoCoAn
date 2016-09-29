@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -35,7 +35,7 @@ public class FieldDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("private int testvar; leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("private int testvar; leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -44,7 +44,7 @@ public class FieldDeclarationTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "private int testvar;", "<span class=\"keyword\">private</span> <span class=\"keyword\">int</span> testvar;");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -60,7 +60,7 @@ public class FieldDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("private int[] testvar; leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("private int[] testvar; leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -69,7 +69,7 @@ public class FieldDeclarationTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "private int[] testvar;", "<span class=\"keyword\">private</span> <span class=\"keyword\">int</span>[] testvar;");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -85,7 +85,7 @@ public class FieldDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("private int[][] testvar; leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("private int[][] testvar; leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -94,7 +94,7 @@ public class FieldDeclarationTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "private int[][] testvar;", "<span class=\"keyword\">private</span> <span class=\"keyword\">int</span>[][] testvar;");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -110,7 +110,7 @@ public class FieldDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("private Identifier testvar; leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("private Identifier testvar; leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -119,7 +119,7 @@ public class FieldDeclarationTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "private Identifier testvar;", "<span class=\"keyword\">private</span> Identifier testvar;");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -135,7 +135,7 @@ public class FieldDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation\nprivate Identifier1<? super Identifier2> testvar; leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("@testannotation\nprivate Identifier1<? super Identifier2> testvar; leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -146,6 +146,6 @@ public class FieldDeclarationTest extends AbstractJavaLangTest {
 				"@testannotation\nprivate Identifier1<? super Identifier2> testvar;",
 				"@testannotation\n<span class=\"keyword\">private</span> Identifier1&lt;? <span class=\"keyword\">super</span> Identifier2&gt; testvar;");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 }

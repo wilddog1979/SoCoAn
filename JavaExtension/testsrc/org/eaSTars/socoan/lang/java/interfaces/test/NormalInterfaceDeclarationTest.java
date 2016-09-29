@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -35,7 +35,7 @@ public class NormalInterfaceDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("public interface Identifier{} leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("public interface Identifier{} leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -46,7 +46,7 @@ public class NormalInterfaceDeclarationTest extends AbstractJavaLangTest {
 				"public interface Identifier{}",
 				"<span class=\"keyword\">public</span> <span class=\"keyword\">interface</span> Identifier{}");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ public class NormalInterfaceDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("public interface Identifier1 extends Identifier2{} leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("public interface Identifier1 extends Identifier2{} leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -73,7 +73,7 @@ public class NormalInterfaceDeclarationTest extends AbstractJavaLangTest {
 				"public interface Identifier1 extends Identifier2{}",
 				"<span class=\"keyword\">public</span> <span class=\"keyword\">interface</span> Identifier1 <span class=\"keyword\">extends</span> Identifier2{}");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -89,7 +89,7 @@ public class NormalInterfaceDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("public interface Identifier1<Identifier2> extends Identifier3{} leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("public interface Identifier1<Identifier2> extends Identifier3{} leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -100,6 +100,6 @@ public class NormalInterfaceDeclarationTest extends AbstractJavaLangTest {
 				"public interface Identifier1<Identifier2> extends Identifier3{}",
 				"<span class=\"keyword\">public</span> <span class=\"keyword\">interface</span> Identifier1&lt;Identifier2&gt; <span class=\"keyword\">extends</span> Identifier3{}");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 }

@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -35,7 +35,7 @@ public class AnnotationTypeElementDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("public String identifier(); leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("public String identifier(); leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -46,7 +46,7 @@ public class AnnotationTypeElementDeclarationTest extends AbstractJavaLangTest {
 				"public String identifier();",
 				"<span class=\"keyword\">public</span> String identifier();");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ public class AnnotationTypeElementDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("public String identifier() default \"[unassigned]\"; leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("public String identifier() default \"[unassigned]\"; leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -73,6 +73,6 @@ public class AnnotationTypeElementDeclarationTest extends AbstractJavaLangTest {
 				"public String identifier() default \"[unassigned]\";",
 				"<span class=\"keyword\">public</span> String identifier() <span class=\"keyword\">default</span> \"[unassigned]\";");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 }

@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -35,7 +35,7 @@ public class PackageDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("package org.eaSTars.socoan.lang.java.packages.test; leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("package org.eaSTars.socoan.lang.java.packages.test; leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -44,7 +44,7 @@ public class PackageDeclarationTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "package org.eaSTars.socoan.lang.java.packages.test;", "<span class=\"keyword\">package</span> org.eaSTars.socoan.lang.java.packages.test;");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -60,7 +60,7 @@ public class PackageDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("package org; leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("package org; leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -69,6 +69,6 @@ public class PackageDeclarationTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "package org;", "<span class=\"keyword\">package</span> org;");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 }

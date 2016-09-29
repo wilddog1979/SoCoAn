@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class LiteralType extends AbstractTypeDeclaration {
@@ -15,7 +15,7 @@ public class LiteralType extends AbstractTypeDeclaration {
 	protected String literal;
 	
 	@Override
-	public boolean recognizeType(Context context, SourcecodeInputStream sis) throws IOException {
+	public boolean recognizeType(Context context, SourcecodeInputReader sis) throws IOException {
 		boolean result = false;
 		
 		StringBuffer sb = new StringBuffer();
@@ -36,7 +36,7 @@ public class LiteralType extends AbstractTypeDeclaration {
 		if (result) {
 			context.push(createFragment(context, sb.toString()));
 		} else if (sb.length() > 0) {
-			sis.unread(sb.toString().getBytes());
+			sis.unread(sb.toString());
 		}
 		
 		return result;

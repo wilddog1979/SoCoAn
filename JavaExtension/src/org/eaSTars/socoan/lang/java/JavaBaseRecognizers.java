@@ -2,7 +2,7 @@ package org.eaSTars.socoan.lang.java;
 
 import java.io.IOException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.LangRecognizers;
@@ -10,21 +10,7 @@ import org.eaSTars.socoan.lang.WrappedIOException;
 
 public class JavaBaseRecognizers extends LangRecognizers {
 	
-	public boolean recognizeRawInputCharacter(Context context, SourcecodeInputStream sis) {
-		int c = 0;
-		try {
-			c = sis.read();
-		} catch (IOException e) {
-			throw new WrappedIOException(e);
-		}
-		Fragment fragment = new Fragment(context.getFormatProvider());
-		fragment.setFragment(""+(char)c);
-		fragment.setFormattedFragment(""+(char)c);
-		context.push(fragment);
-		return true;
-	}
-	
-	public boolean recognizeJavaLetter(Context context, SourcecodeInputStream sis) {
+	public boolean recognizeJavaLetter(Context context, SourcecodeInputReader sis) {
 		int c = 0;
 		try {
 			c = sis.read();
@@ -38,13 +24,13 @@ public class JavaBaseRecognizers extends LangRecognizers {
 			fragment.setFormattedFragment(""+(char)c);
 			context.push(fragment);
 		} else {
-			sis.unread(c);
+			sis.unread((char)c);
 		}
 		
 		return result;
 	}
 	
-	public boolean recognizeJavaLetterOrDigit(Context context, SourcecodeInputStream sis) {
+	public boolean recognizeJavaLetterOrDigit(Context context, SourcecodeInputReader sis) {
 		int c = 0;
 		try {
 			c = sis.read();
@@ -58,7 +44,7 @@ public class JavaBaseRecognizers extends LangRecognizers {
 			fragment.setFormattedFragment(""+(char)c);
 			context.push(fragment);
 		} else {
-			sis.unread(c);
+			sis.unread((char)c);
 		}
 		
 		return result;

@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -37,7 +37,7 @@ public class UnicodeInputCharacterTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("\\u00a4 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("\\u00a4 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -51,11 +51,7 @@ public class UnicodeInputCharacterTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "\\u00a4", "\\u00a4");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -71,7 +67,7 @@ public class UnicodeInputCharacterTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("r leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("r leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -85,11 +81,7 @@ public class UnicodeInputCharacterTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "r", "r");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -105,7 +97,7 @@ public class UnicodeInputCharacterTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("\n leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("\n leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -117,10 +109,6 @@ public class UnicodeInputCharacterTest extends AbstractJavaLangTest {
 		assertFalse("Sample should not be recognized", testresult);
 		assertEquals("Context buffer should not contain any entries", 0, context.size());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 10, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "\n leftover");
 	}
 }

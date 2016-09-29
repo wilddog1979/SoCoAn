@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -35,7 +35,7 @@ public class AnnotationTypeDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("public @ interface Identifier{} leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("public @ interface Identifier{} leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -46,6 +46,6 @@ public class AnnotationTypeDeclarationTest extends AbstractJavaLangTest {
 				"public @ interface Identifier{}",
 				"<span class=\"keyword\">public</span> @ <span class=\"keyword\">interface</span> Identifier{}");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 }

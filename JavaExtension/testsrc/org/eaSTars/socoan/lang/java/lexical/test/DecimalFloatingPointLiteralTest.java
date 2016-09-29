@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -36,7 +36,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0. leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("0. leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -50,11 +50,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "0.", "0.");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -70,7 +66,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("10. leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("10. leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -84,11 +80,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "10.", "10.");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -104,7 +96,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("10.05 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("10.05 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -118,11 +110,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "10.05", "10.05");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -138,7 +126,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("10.05e5 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("10.05e5 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -152,11 +140,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "10.05e5", "10.05e5");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -172,7 +156,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("10.05e5f leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("10.05e5f leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -186,11 +170,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "10.05e5f", "10.05e5f");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -206,7 +186,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("10.05e-5f leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("10.05e-5f leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -220,11 +200,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "10.05e-5f", "10.05e-5f");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -240,7 +216,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("10.05e+50F leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("10.05e+50F leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -254,11 +230,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "10.05e+50F", "10.05e+50F");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -274,7 +246,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(".05 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream(".05 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -288,11 +260,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, ".05", ".05");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -308,7 +276,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(".05e5 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream(".05e5 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -322,11 +290,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, ".05e5", ".05e5");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -342,7 +306,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(".05e5f leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream(".05e5f leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -356,11 +320,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, ".05e5f", ".05e5f");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -376,7 +336,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(".05e-5f leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream(".05e-5f leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -390,11 +350,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, ".05e-5f", ".05e-5f");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -410,7 +366,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(".05e+50d leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream(".05e+50d leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -424,11 +380,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, ".05e+50d", ".05e+50d");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -444,7 +396,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("05e+50D leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("05e+50D leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -458,11 +410,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "05e+50D", "05e+50D");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -478,7 +426,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("05e+50 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("05e+50 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -492,11 +440,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "05e+50", "05e+50");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -512,7 +456,7 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("05d leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("05d leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -526,10 +470,6 @@ public class DecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "05d", "05d");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 }

@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -36,7 +36,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0x0.p+1 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("0x0.p+1 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -50,11 +50,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "0x0.p+1", "0x0.p+1");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -70,7 +66,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0x0.p+1F leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("0x0.p+1F leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -84,11 +80,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "0x0.p+1F", "0x0.p+1F");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -104,7 +96,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0x.12p+1F leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("0x.12p+1F leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -118,11 +110,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "0x.12p+1F", "0x.12p+1F");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -138,7 +126,7 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0X15.12p+1F leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("0X15.12p+1F leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -152,10 +140,6 @@ public class HexadecimalFloatingPointLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "0X15.12p+1F", "0X15.12p+1F");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 }

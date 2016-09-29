@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 
 public class CustomType extends AbstractTypeDeclaration {
 
@@ -26,7 +26,7 @@ public class CustomType extends AbstractTypeDeclaration {
 	}
 	
 	@Override
-	public boolean recognizeType(Context context, SourcecodeInputStream sis) throws IOException {
+	public boolean recognizeType(Context context, SourcecodeInputReader sis) throws IOException {
 		boolean result = false;
 		try {
 			result = parent.getProcessorFactory().createRecognizer(recognizer).apply(context, sis);

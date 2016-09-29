@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ComplexTypeNextNode extends ComplexTypeInnerNode {
@@ -30,7 +30,7 @@ public class ComplexTypeNextNode extends ComplexTypeInnerNode {
 	}
 	
 	@Override
-	public boolean recognizeNode(Context context, SourcecodeInputStream sis) throws IOException {
+	public boolean recognizeNode(Context context, SourcecodeInputReader sis) throws IOException {
 		return node.recognizeNode(context, sis);
 	}
 }

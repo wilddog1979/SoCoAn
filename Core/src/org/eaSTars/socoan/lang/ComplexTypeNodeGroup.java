@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 
 public class ComplexTypeNodeGroup extends ComplexTypeInnerNode {
 
@@ -47,7 +47,7 @@ public class ComplexTypeNodeGroup extends ComplexTypeInnerNode {
 	}
 	
 	@Override
-	public boolean recognizeNode(Context context, SourcecodeInputStream sis) throws IOException {
+	public boolean recognizeNode(Context context, SourcecodeInputReader sis) throws IOException {
 		int contextsize = context.size();
 		boolean result = false;
 		
@@ -58,7 +58,7 @@ public class ComplexTypeNodeGroup extends ComplexTypeInnerNode {
 				result = recognizeInnerNodes(context, sis);
 				if (!result) {
 					while (context.size() > contextsize) {
-						context.pop().getFragment().ifPresent(s -> sis.unread(s.getBytes()));
+						context.pop().getFragment().ifPresent(sis::unread);
 					}
 				}
 			} while(result);
@@ -68,7 +68,7 @@ public class ComplexTypeNodeGroup extends ComplexTypeInnerNode {
 		case ZeroOrOne: // []
 			if (!recognizeInnerNodes(context, sis)) {
 				while (context.size() > contextsize) {
-					context.pop().getFragment().ifPresent(s -> sis.unread(s.getBytes()));
+					context.pop().getFragment().ifPresent(sis::unread);
 				}
 			}
 			result = true;
@@ -77,7 +77,7 @@ public class ComplexTypeNodeGroup extends ComplexTypeInnerNode {
 			result = recognizeInnerNodes(context, sis);
 			if (!result) {
 				while (context.size() > contextsize) {
-					context.pop().getFragment().ifPresent(s -> sis.unread(s.getBytes()));
+					context.pop().getFragment().ifPresent(sis::unread);
 				}
 			}
 			break;
@@ -86,7 +86,7 @@ public class ComplexTypeNodeGroup extends ComplexTypeInnerNode {
 		return result;
 	}
 	
-	public boolean recognizeInnerNodes(Context context, SourcecodeInputStream sis) throws IOException {
+	public boolean recognizeInnerNodes(Context context, SourcecodeInputReader sis) throws IOException {
 		boolean result = true;
 		for (ComplexTypeInnerNode nextnode : getInnerNodes()) {
 			result = nextnode.recognizeNode(context, sis);

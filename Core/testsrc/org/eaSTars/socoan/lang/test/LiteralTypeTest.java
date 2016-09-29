@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.Language;
@@ -17,7 +17,7 @@ public class LiteralTypeTest extends AbstractLangTest {
 	public void testRecognizeSimple() {
 		LiteralTypeHelper literal = new LiteralTypeHelper("test");
 
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("testcontent".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("testcontent".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -34,18 +34,14 @@ public class LiteralTypeTest extends AbstractLangTest {
 		testOptionalString("Fragment", "test", fragment.getFragment());
 		testOptionalString("Formatted fragment", "test", fragment.getFormattedFragment());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 7, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "content");
 	}
 
 	@Test
 	public void testNotRecognizePartial() {
 		LiteralTypeHelper literal = new LiteralTypeHelper("test");
 
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("te".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("te".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -59,10 +55,6 @@ public class LiteralTypeTest extends AbstractLangTest {
 		assertFalse("Sample should not be recognized", testresult);
 		assertEquals("Context buffer should not contain any entries", 0, context.size());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 2, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "te");
 	}
 }

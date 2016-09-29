@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -36,7 +36,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("00 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("00 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -50,11 +50,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "00", "00");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -70,7 +66,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("008 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("008 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -84,11 +80,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "00", "00");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 10, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "8 leftover");
 	}
 	
 	@Test
@@ -104,7 +96,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("00L leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("00L leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -118,11 +110,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "00L", "00L");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -138,7 +126,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("01 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("01 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -152,11 +140,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "01", "01");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -172,7 +156,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("012 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("012 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -186,11 +170,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "012", "012");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -206,7 +186,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0123 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("0123 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -220,11 +200,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "0123", "0123");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -240,7 +216,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0123_45 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("0123_45 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -254,11 +230,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "0123_45", "0123_45");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -274,7 +246,7 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("0214743647 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("0214743647 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -288,10 +260,6 @@ public class OctalIntegerLiteralTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "0214743647", "0214743647");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 }

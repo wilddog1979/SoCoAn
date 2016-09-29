@@ -1,10 +1,11 @@
 package org.eaSTars.socoan.lang;
 
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 
 public abstract class ProcessorFactory {
 
@@ -37,15 +38,18 @@ public abstract class ProcessorFactory {
 		return CHECKERS_MAP.get(id);
 	}
 	
-	private static final Map<String , RecognizingFunction<Context, SourcecodeInputStream, Boolean>> RECOGNIZER_MAP =
-			new HashMap<String, RecognizingFunction<Context, SourcecodeInputStream, Boolean>>() {
+	private static final String RAWINPUTCHARACTER_RECOGNIZER = "RawInputCharacter";
+	
+	private static final Map<String , RecognizingFunction<Context, SourcecodeInputReader, Boolean>> RECOGNIZER_MAP =
+			new HashMap<String, RecognizingFunction<Context, SourcecodeInputReader, Boolean>>() {
 				private static final long serialVersionUID = 5082635489425605921L;
 				{
-					//LangRecognizers recognizers = new LangRecognizers();
+					LangRecognizers recognizers = new LangRecognizers();
+					put(RAWINPUTCHARACTER_RECOGNIZER, (context, sis) -> recognizers.recognizeRawInputCharacter(context, sis));
 				}
 	};
 	
-	public RecognizingFunction<Context, SourcecodeInputStream, Boolean> createRecognizer(String id) {
+	public RecognizingFunction<Context, SourcecodeInputReader, Boolean> createRecognizer(String id) {
 		return RECOGNIZER_MAP.get(id);
 	}
 }

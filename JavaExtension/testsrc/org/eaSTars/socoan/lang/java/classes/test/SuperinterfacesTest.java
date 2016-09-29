@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -35,7 +35,7 @@ public class SuperinterfacesTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("implements TestIdentifier1 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("implements TestIdentifier1 leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -44,7 +44,7 @@ public class SuperinterfacesTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "implements TestIdentifier1", "<span class=\"keyword\">implements</span> TestIdentifier1");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -60,7 +60,7 @@ public class SuperinterfacesTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("implements TestIdentifier1, TestIdentifier2 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("implements TestIdentifier1, TestIdentifier2 leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -69,7 +69,7 @@ public class SuperinterfacesTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "implements TestIdentifier1, TestIdentifier2", "<span class=\"keyword\">implements</span> TestIdentifier1, TestIdentifier2");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -85,7 +85,7 @@ public class SuperinterfacesTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("implements TestIdentifier1, @testannotation TestIdentifier2 <? extends TestIdentifier3> leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("implements TestIdentifier1, @testannotation TestIdentifier2 <? extends TestIdentifier3> leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -97,6 +97,6 @@ public class SuperinterfacesTest extends AbstractJavaLangTest {
 				"<span class=\"keyword\">implements</span> TestIdentifier1, @testannotation TestIdentifier2 &lt;? <span class=\"keyword\">extends</span> TestIdentifier3&gt;"
 		);
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 }

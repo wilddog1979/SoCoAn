@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso({
@@ -97,7 +97,7 @@ public class ComplexType extends AbstractTypeDeclaration {
 	}
 	
 	@Override
-	public boolean recognizeType(Context context, SourcecodeInputStream sis) throws IOException {
+	public boolean recognizeType(Context context, SourcecodeInputReader sis) throws IOException {
 		Context subcontext = new Context(context);
 		
 		boolean result = false;
@@ -114,11 +114,11 @@ public class ComplexType extends AbstractTypeDeclaration {
 			Fragment fragment = parent.getProcessorFactory().createProcessor(processorName).apply(subcontext);
 			if (fragment != null) {
 				fragment.setId(this.getId());
-				if (checkerName == null || (checkerName != null && !parent.getProcessorFactory().createChecker(checkerName).apply(parent, fragment))) {
+				if (checkerName == null || (checkerName != null && parent.getProcessorFactory().createChecker(checkerName).apply(parent, fragment))) {
 					context.push(fragment);
 				} else if (checkerName != null) {
 					while (subcontext.size() != 0) {
-						subcontext.pop().getFragment().ifPresent(s -> sis.unread(s.getBytes()));
+						subcontext.pop().getFragment().ifPresent(sis::unread);
 					}
 				}
 			}

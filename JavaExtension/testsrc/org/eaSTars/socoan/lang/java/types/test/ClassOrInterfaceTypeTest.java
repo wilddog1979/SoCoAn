@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -36,7 +36,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("Identifier leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("Identifier leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -50,11 +50,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "Identifier", "Identifier");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -70,7 +66,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("@testannotation Identifier leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -84,11 +80,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "@testannotation Identifier", "@testannotation Identifier");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -104,7 +96,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier1.@testannotation Identifier2 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("@testannotation Identifier1.@testannotation Identifier2 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -121,11 +113,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 				"@testannotation Identifier1.@testannotation Identifier2"
 				);
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -141,7 +129,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier1 <Identifier2> leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("@testannotation Identifier1 <Identifier2> leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -158,11 +146,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 				"@testannotation Identifier1 &lt;Identifier2&gt;"
 				);
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -178,7 +162,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier1 <@testannotation Identifier2> leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("@testannotation Identifier1 <@testannotation Identifier2> leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -195,11 +179,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 				"@testannotation Identifier1 &lt;@testannotation Identifier2&gt;"
 				);
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -215,7 +195,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier1 <@testannotation Identifier2, Identifier3, Identifier4> leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("@testannotation Identifier1 <@testannotation Identifier2, Identifier3, Identifier4> leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -232,11 +212,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 				"@testannotation Identifier1 &lt;@testannotation Identifier2, Identifier3, Identifier4&gt;"
 				);
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -252,7 +228,7 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("@testannotation Identifier1 <@testannotation Identifier2, ? extends Identifier3, ? super Identifier4, ?> leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("@testannotation Identifier1 <@testannotation Identifier2, ? extends Identifier3, ? super Identifier4, ?> leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -264,6 +240,6 @@ public class ClassOrInterfaceTypeTest extends AbstractJavaLangTest {
 				"@testannotation Identifier1 &lt;@testannotation Identifier2, ? <span class=\"keyword\">extends</span> Identifier3, ? <span class=\"keyword\">super</span> Identifier4, ?&gt;"
 				);
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 }

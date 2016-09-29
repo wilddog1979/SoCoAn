@@ -6,7 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.Language;
@@ -22,7 +22,7 @@ public class TerminatedTypeTest extends AbstractLangTest {
 		terminators.add("term1");
 		terminators.add("term2");
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("contentterm1other".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("contentterm1other".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -38,11 +38,7 @@ public class TerminatedTypeTest extends AbstractLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "contentterm1", "content");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 5, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "other");
 	}
 
 	@Test
@@ -52,7 +48,7 @@ public class TerminatedTypeTest extends AbstractLangTest {
 		terminators.add("term1");
 		terminators.add("term2");
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("contentterm2other".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("contentterm2other".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -68,11 +64,7 @@ public class TerminatedTypeTest extends AbstractLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "contentterm2", "content");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 5, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "other");
 	}
 	
 	@Test
@@ -82,7 +74,7 @@ public class TerminatedTypeTest extends AbstractLangTest {
 		terminators.add("term1");
 		terminators.add("term2");
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("contentterm3other".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("contentterm3other".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -96,10 +88,6 @@ public class TerminatedTypeTest extends AbstractLangTest {
 		assertFalse("Sample should be recognized", testresult);
 		assertEquals("Context buffer should not contain any entries", 0, context.size());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 17, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "contentterm3other");
 	}
 }

@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ComplexTypeNode extends ComplexTypeNodeGroup {
@@ -36,7 +36,7 @@ public class ComplexTypeNode extends ComplexTypeNodeGroup {
 	}
 	
 	@Override
-	public boolean recognizeNode(Context context, SourcecodeInputStream sis) throws IOException {
+	public boolean recognizeNode(Context context, SourcecodeInputReader sis) throws IOException {
 		int contextsize = context.size();
 		boolean result = false;
 		switch(occurrence) {
@@ -64,7 +64,7 @@ public class ComplexTypeNode extends ComplexTypeNodeGroup {
 			result = recognizeInnerNodes(context, sis);
 			if (!result) {
 				while (context.size() > contextsize) {
-					context.pop().getFragment().ifPresent(s -> sis.unread(s.getBytes()));
+					context.pop().getFragment().ifPresent(sis::unread);
 				}
 			}
 		}

@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -37,7 +37,7 @@ public class LocalVariableDeclarationStatementTest extends AbstractJavaLangTest 
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("AbstractTypeDeclaration typeDeclaration = null; leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("AbstractTypeDeclaration typeDeclaration = null; leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -48,7 +48,7 @@ public class LocalVariableDeclarationStatementTest extends AbstractJavaLangTest 
 				"AbstractTypeDeclaration typeDeclaration = null;",
 				"AbstractTypeDeclaration typeDeclaration = null;");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -64,7 +64,7 @@ public class LocalVariableDeclarationStatementTest extends AbstractJavaLangTest 
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("int identifier = 0; leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("int identifier = 0; leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -75,7 +75,7 @@ public class LocalVariableDeclarationStatementTest extends AbstractJavaLangTest 
 				"int identifier = 0;",
 				"<span class=\"keyword\">int</span> identifier = 0;");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -91,7 +91,7 @@ public class LocalVariableDeclarationStatementTest extends AbstractJavaLangTest 
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("boolean identifier = true; leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("boolean identifier = true; leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -102,7 +102,7 @@ public class LocalVariableDeclarationStatementTest extends AbstractJavaLangTest 
 				"boolean identifier = true;",
 				"<span class=\"keyword\">boolean</span> identifier = true;");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -118,7 +118,7 @@ public class LocalVariableDeclarationStatementTest extends AbstractJavaLangTest 
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("String[] identifier = {, }; leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("String[] identifier = {, }; leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -129,6 +129,6 @@ public class LocalVariableDeclarationStatementTest extends AbstractJavaLangTest 
 				"String[] identifier = {, };",
 				"String[] identifier = {, };");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 }

@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -40,7 +40,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", comments);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream(" leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -58,11 +58,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		testFragment(separatorfragment, " ", " ");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -78,7 +74,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", comments);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("\tleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("\tleftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -96,11 +92,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		testFragment(separatorfragment, "\t", "\t");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -116,7 +108,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", comments);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("\nleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("\nleftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -134,11 +126,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		testFragment(separatorfragment, "\n", "\n");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -154,7 +142,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", comments);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -166,11 +154,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		assertFalse("Sample should not be recognized", testresult);
 		assertEquals("Context buffer should not contain any entries", 0, context.size());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -186,7 +170,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", comments);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" \t\nleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream(" \t\nleftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -204,11 +188,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		testFragment(separatorfragment, " \t\n", " \t\n");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -224,7 +204,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", comments);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" \t//linecomment\n\nleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream(" \t//linecomment\n\nleftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -242,11 +222,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		testFragment(separatorfragment, " \t//linecomment\n\n", " \t<span class=\"linecomment\">//linecomment\n</span>\n");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -262,7 +238,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", comments);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" \t/*blockcomment*/\nleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream(" \t/*blockcomment*/\nleftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -280,11 +256,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		testFragment(separatorfragment, " \t/*blockcomment*/\n", " \t<span class=\"blockcomment\">/*blockcomment*/</span>\n");
 		assertNull("SeparatorFragment should not contain any javadoc elements", separatorfragment.getJavadoc());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -300,7 +272,7 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", comments);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream(" \t/**javadoc*/\nleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream(" \t/**javadoc*/\nleftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -326,10 +298,6 @@ public class SeparatorTypeTest extends AbstractJavaLangTest {
 				"javadoc"
 		);
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 }

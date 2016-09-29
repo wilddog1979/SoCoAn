@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class TerminatedType extends AbstractTypeDeclaration {
@@ -24,7 +24,7 @@ public class TerminatedType extends AbstractTypeDeclaration {
 	}
 	
 	@Override
-	public boolean recognizeType(Context context, SourcecodeInputStream sis) throws IOException {
+	public boolean recognizeType(Context context, SourcecodeInputReader sis) throws IOException {
 		boolean result = false;
 		
 		StringBuffer content = new StringBuffer();
@@ -34,7 +34,7 @@ public class TerminatedType extends AbstractTypeDeclaration {
 				String fixedterminator = replaceCharacters(terminator);
 				StringBuffer sb = new StringBuffer();
 				if (fixedterminator.charAt(0) == (char)ch) {
-					sis.unread(ch);
+					sis.unread((char)ch);
 					for (char c : fixedterminator.toCharArray()) {
 						int chr = sis.read();
 						sb.append((char)chr);
@@ -55,7 +55,7 @@ public class TerminatedType extends AbstractTypeDeclaration {
 						context.push(fragment);
 						break;
 					} else if (sb.length() != 0) {
-						sis.unread(sb.toString().getBytes());
+						sis.unread(sb.toString());
 						ch = sis.read();
 					}
 				}
@@ -67,7 +67,7 @@ public class TerminatedType extends AbstractTypeDeclaration {
 			}
 		}
 		if (!result && content.length() != 0) {
-			sis.unread(content.toString().getBytes());
+			sis.unread(content.toString());
 		}
 		
 		return result;

@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -37,7 +37,7 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 		
 		assertNotNull("comments type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("//some comment\nleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("//some comment\nleftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -60,11 +60,7 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 				"some comment"
 		);
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 
 	@Test
@@ -80,7 +76,7 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 		
 		assertNotNull("comments type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("/*\n\tsome\n\tcomment\n*/leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("/*\n\tsome\n\tcomment\n*/leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -103,11 +99,7 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 				"\n\tsome\n\tcomment\n"
 		);
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -123,7 +115,7 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 		
 		assertNotNull("comments type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("/**\n\tsome\n\tjavadoc\n*/leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("/**\n\tsome\n\tjavadoc\n*/leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -146,10 +138,6 @@ public class CommentTypeTest extends AbstractJavaLangTest{
 				"\n\tsome\n\tjavadoc\n"
 		);
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 }

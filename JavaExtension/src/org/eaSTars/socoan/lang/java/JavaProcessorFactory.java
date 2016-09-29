@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.Language;
@@ -62,26 +62,23 @@ public class JavaProcessorFactory extends ProcessorFactory {
 		return result == null ? super.createChecker(id) : result;
 	}
 	
-	private static final String RAWINPUTCHARACTER_RECOGNIZER = "RawInputCharacter";
-	
 	private static final String JAVALETTER_RECOGNIZER = "JavaLetter";
 	
 	private static final String JAVALETTERORDIGIT_RECOGNIZER = "JavaLetterOrDigit";
 	
-	private static final Map<String , RecognizingFunction<Context, SourcecodeInputStream, Boolean>> RECOGNIZER_MAP =
-			new HashMap<String, RecognizingFunction<Context, SourcecodeInputStream, Boolean>>() {
+	private static final Map<String , RecognizingFunction<Context, SourcecodeInputReader, Boolean>> RECOGNIZER_MAP =
+			new HashMap<String, RecognizingFunction<Context, SourcecodeInputReader, Boolean>>() {
 				private static final long serialVersionUID = 5082635489425605921L;
 				{
 					JavaBaseRecognizers recognizers = new JavaBaseRecognizers();
-					put(RAWINPUTCHARACTER_RECOGNIZER, (context, sis) -> recognizers.recognizeRawInputCharacter(context, sis));
 					put(JAVALETTER_RECOGNIZER, (context, sis) -> recognizers.recognizeJavaLetter(context, sis));
 					put(JAVALETTERORDIGIT_RECOGNIZER, (context, sis) -> recognizers.recognizeJavaLetterOrDigit(context, sis));
 				}
 	};
 	
 	@Override
-	public RecognizingFunction<Context, SourcecodeInputStream, Boolean> createRecognizer(String id) {
-		RecognizingFunction<Context, SourcecodeInputStream, Boolean> result = RECOGNIZER_MAP.get(id);
+	public RecognizingFunction<Context, SourcecodeInputReader, Boolean> createRecognizer(String id) {
+		RecognizingFunction<Context, SourcecodeInputReader, Boolean> result = RECOGNIZER_MAP.get(id);
 		return result == null ? super.createRecognizer(id) : result;
 	}
 }

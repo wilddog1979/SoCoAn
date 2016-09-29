@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.Optional;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -27,7 +27,7 @@ public abstract class AbstractLangTest {
 		testOptionalString("Formatted fragment", formattedcontent, fragment.getFormattedFragment());
 	}
 
-	protected boolean recognizetype(AbstractTypeDeclaration typeDeclaration, Context context, SourcecodeInputStream sis) {
+	protected boolean recognizetype(AbstractTypeDeclaration typeDeclaration, Context context, SourcecodeInputReader sis) {
 		boolean testresult = false;
 		try {
 			testresult = typeDeclaration.recognizeType(context, sis);
@@ -37,13 +37,19 @@ public abstract class AbstractLangTest {
 		return testresult;
 	}
 
-	protected void checkLeftover(SourcecodeInputStream sis, int leftover) {
+	protected void checkLeftover(SourcecodeInputReader sis, String content) {
 		try {
-			if (leftover == 0) {
-				assertEquals("The input stream should not contain any leftover characters", leftover, sis.available());
-			} else {
-				assertEquals("The input stream should contain the leftover characters", leftover, sis.available());
+			StringBuffer buffer = new StringBuffer();
+			int c = -1;
+			while((c = sis.read()) != -1) {
+				buffer.append((char)c);
 			}
+			if (content.length() == 0) {
+				assertEquals("The input stream should not contain any leftover characters", content, buffer.toString());
+			} else {
+				assertEquals("The input stream should contain the leftover characters", content, buffer.toString());
+			}
+			sis.unread(buffer.toString());
 		} catch (IOException e) {
 			fail("Unexpected exception occured: "+e.getMessage());
 		}

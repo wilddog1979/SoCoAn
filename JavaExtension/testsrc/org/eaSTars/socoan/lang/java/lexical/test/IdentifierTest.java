@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -37,7 +37,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("_test123 leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("_test123 leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -51,11 +51,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "_test123", "_test123");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -71,7 +67,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("class leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("class leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -83,11 +79,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		assertFalse("Sample should not be recognized", testresult);
 		assertEquals("Context buffer should not contain any entries", 0, context.size());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 14, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "class leftover");
 	}
 	
 	@Test
@@ -103,7 +95,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("classes leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("classes leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -117,11 +109,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "classes", "classes");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -137,7 +125,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("true leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("true leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -149,11 +137,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		assertFalse("Sample should not be recognized", testresult);
 		assertEquals("Context buffer should not contain any entries", 0, context.size());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 13, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "true leftover");
 	}
 	
 	@Test
@@ -169,7 +153,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("false leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("false leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -181,11 +165,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		assertFalse("Sample should not be recognized", testresult);
 		assertEquals("Context buffer should not contain any entries", 0, context.size());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 14, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "false leftover");
 	}
 	
 	@Test
@@ -201,7 +181,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("null leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("null leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -213,11 +193,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		assertFalse("Sample should not be recognized", testresult);
 		assertEquals("Context buffer should not contain any entries", 0, context.size());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 13, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "null leftover");
 	}
 	
 	@Test
@@ -233,7 +209,7 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("nullable leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("nullable leftover".getBytes()));
 		
 		boolean testresult = false;
 		try {
@@ -247,10 +223,6 @@ public class IdentifierTest extends AbstractJavaLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "nullable", "nullable");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 9, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, " leftover");
 	}
 }

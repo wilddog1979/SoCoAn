@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -35,7 +35,7 @@ public class BlockTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("{  } leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("{  } leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -46,7 +46,7 @@ public class BlockTest extends AbstractJavaLangTest {
 				"{  }",
 				"{  }");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	//TODO cyclic reference in Assignment declaration (LefrHandSide - FieldAccess - Primary - PrimaryNoNewArray - FieldAccess...)
@@ -64,7 +64,7 @@ public class BlockTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("{\n\tAbstractTypeDeclaration typeDeclaration = null;\n} leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("{\n\tAbstractTypeDeclaration typeDeclaration = null;\n} leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -75,7 +75,7 @@ public class BlockTest extends AbstractJavaLangTest {
 				"{\n\tAbstractTypeDeclaration typeDeclaration = null;\n}",
 				"{\n\tAbstractTypeDeclaration typeDeclaration = null;\n}");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -91,7 +91,7 @@ public class BlockTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("{ public class Identifier {}  } leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("{ public class Identifier {}  } leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -102,6 +102,6 @@ public class BlockTest extends AbstractJavaLangTest {
 				"{ public class Identifier {}  }",
 				"{ <span class=\"keyword\">public</span> <span class=\"keyword\">class</span> Identifier {}  }");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 }

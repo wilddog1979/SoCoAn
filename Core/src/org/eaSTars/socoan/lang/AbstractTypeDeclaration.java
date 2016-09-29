@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso({
@@ -25,5 +25,5 @@ public abstract class AbstractTypeDeclaration extends AbstractBaseElement {
 		return id;
 	}
 	
-	public abstract boolean recognizeType(Context context, SourcecodeInputStream sis) throws IOException;
+	public abstract boolean recognizeType(Context context, SourcecodeInputReader sis) throws IOException;
 }

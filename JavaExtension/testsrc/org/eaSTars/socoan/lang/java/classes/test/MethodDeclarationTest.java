@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -35,7 +35,7 @@ public class MethodDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("void Identifier() leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("void Identifier() leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -46,7 +46,7 @@ public class MethodDeclarationTest extends AbstractJavaLangTest {
 				"void Identifier()",
 				"<span class=\"keyword\">void</span> Identifier()");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ public class MethodDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("void Identifier(Object[] obj) leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("void Identifier(Object[] obj) leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -73,7 +73,7 @@ public class MethodDeclarationTest extends AbstractJavaLangTest {
 				"void Identifier(Object[] obj)",
 				"<span class=\"keyword\">void</span> Identifier(Object[] obj)");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -89,7 +89,7 @@ public class MethodDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("void Identifier(boolean b) leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("void Identifier(boolean b) leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -100,7 +100,7 @@ public class MethodDeclarationTest extends AbstractJavaLangTest {
 				"void Identifier(boolean b)",
 				"<span class=\"keyword\">void</span> Identifier(<span class=\"keyword\">boolean</span> b)");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -116,7 +116,7 @@ public class MethodDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("void Identifier(boolean b1, boolean b2) leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("void Identifier(boolean b1, boolean b2) leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -127,7 +127,7 @@ public class MethodDeclarationTest extends AbstractJavaLangTest {
 				"void Identifier(boolean b1, boolean b2)",
 				"<span class=\"keyword\">void</span> Identifier(<span class=\"keyword\">boolean</span> b1, <span class=\"keyword\">boolean</span> b2)");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -143,7 +143,7 @@ public class MethodDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("void Identifier(boolean ... b) leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("void Identifier(boolean ... b) leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -154,6 +154,6 @@ public class MethodDeclarationTest extends AbstractJavaLangTest {
 				"void Identifier(boolean ... b)",
 				"<span class=\"keyword\">void</span> Identifier(<span class=\"keyword\">boolean</span> ... b)");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 }

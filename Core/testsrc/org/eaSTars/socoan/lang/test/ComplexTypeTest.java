@@ -8,7 +8,7 @@ import static org.junit.Assert.fail;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.LangProcessors;
@@ -25,7 +25,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("aleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("aleftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -42,11 +42,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		testOptionalString("Fragment", "a", fragment.getFragment());
 		testOptionalString("Formatted fragment", "a", fragment.getFormattedFragment());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -72,7 +68,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_b.getInnerNodes().add(new NextNodeHelper(node_d));
 		node_c.getInnerNodes().add(new NextNodeHelper(node_d));
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("abdleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("abdleftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -88,11 +84,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "abd", "abd");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -118,7 +110,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_b.getInnerNodes().add(new NextNodeHelper(node_d));
 		node_c.getInnerNodes().add(new NextNodeHelper(node_d));
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("acdleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("acdleftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -134,11 +126,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "acd", "acd");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 
 	@Test
@@ -173,7 +161,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_x.getInnerNodes().add(new NextNodeHelper(node_e));
 		node_d.getInnerNodes().add(new NextNodeHelper(node_e));
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("cabeleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("cabeleftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -189,11 +177,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "cabe", "cabe");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -202,7 +186,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		ComplexTypeNodeHelper node_a = new ComplexTypeNodeHelper(new LiteralTypeHelper("a"));
 		complextype.getStartnodes().add(node_a);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("leftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -216,11 +200,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		assertFalse("Sample not should be recognized", testresult);
 		assertEquals("Context buffer should not contain any entries", 0, context.size());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -246,7 +226,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_b.getInnerNodes().add(new NextNodeHelper(node_d));
 		node_c.getInnerNodes().add(new NextNodeHelper(node_d));
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("ableftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("ableftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -260,11 +240,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		assertFalse("Sample not should be recognized", testresult);
 		assertEquals("Context buffer should not contain any entries", 0, context.size());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 10, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "ableftover");
 	}
 	
 	@Test
@@ -290,7 +266,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_b.getInnerNodes().add(new NextNodeHelper(node_d));
 		node_c.getInnerNodes().add(new NextNodeHelper(node_d));
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("acleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("acleftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -304,11 +280,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		assertFalse("Sample not should be recognized", testresult);
 		assertEquals("Context buffer should not contain any entries", 0, context.size());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 10, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "acleftover");
 	}
 	
 	@Test
@@ -343,7 +315,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_x.getInnerNodes().add(new NextNodeHelper(node_e));
 		node_d.getInnerNodes().add(new NextNodeHelper(node_e));
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("cableftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("cableftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -357,11 +329,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		assertFalse("Sample not should be recognized", testresult);
 		assertEquals("Context buffer should not contain any entries", 0, context.size());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 11, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "cableftover");
 	}
 	
 	@Test
@@ -383,7 +351,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("aleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("aleftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -399,11 +367,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "a", "a");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -425,7 +389,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("abbbbleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("abbbbleftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -441,11 +405,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "abbbb", "abbbb");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -467,7 +427,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("aaaableftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("aaaableftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -483,11 +443,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "aaaab", "aaaab");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -509,7 +465,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("cbleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("cbleftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -525,11 +481,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "cb", "cb");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -551,7 +503,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("aleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("aleftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -567,11 +519,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "a", "a");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -593,7 +541,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("abbbbleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("abbbbleftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -609,11 +557,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "ab", "ab");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 11, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "bbbleftover");
 	}
 	
 	@Test
@@ -635,7 +579,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("bleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("bleftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -651,11 +595,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "b", "b");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -677,7 +617,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("ableftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("ableftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -693,11 +633,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "ab", "ab");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -719,7 +655,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		node_c.getInnerNodes().add(new NextNodeHelper(node_b));
 		complextype.getStartnodes().add(node_c);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("cbleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("cbleftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -735,11 +671,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		Fragment fragment = context.pop();
 		testFragment(fragment, "cb", "cb");
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -755,7 +687,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
 		node_a.getInnerNodes().add(node_c);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("abcleftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("abcleftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -772,11 +704,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		testOptionalString("Fragment", "abc", fragment.getFragment());
 		testOptionalString("Formatted fragment", "abc", fragment.getFormattedFragment());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 8, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "leftover");
 	}
 	
 	@Test
@@ -792,7 +720,7 @@ public class ComplexTypeTest extends AbstractLangTest {
 		ComplexTypeNodeHelper node_c = new ComplexTypeNodeHelper(new LiteralTypeHelper("c"));
 		node_a.getInnerNodes().add(node_c);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("ableftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("ableftover".getBytes()));
 		
 		Context context = new Context((Language)null);
 		
@@ -806,10 +734,6 @@ public class ComplexTypeTest extends AbstractLangTest {
 		assertFalse("Sample should not be recognized", testresult);
 		assertEquals("Context buffer should not contain any entries", 0, context.size());
 		
-		try {
-			assertEquals("The input stream should contain the leftover characters", 10, sis.available());
-		} catch (IOException e) {
-			fail("Unexpected exception occured: "+e.getMessage());
-		}
+		checkLeftover(sis, "ableftover");
 	}
 }

@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 
 import javax.xml.bind.JAXBException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Fragment;
@@ -35,7 +35,7 @@ public class InterfaceMethodDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("public void Identifier1(); leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("public void Identifier1(); leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -46,7 +46,7 @@ public class InterfaceMethodDeclarationTest extends AbstractJavaLangTest {
 				"public void Identifier1();",
 				"<span class=\"keyword\">public</span> <span class=\"keyword\">void</span> Identifier1();");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ public class InterfaceMethodDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("public default void Identifier1(){} leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("public default void Identifier1(){} leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -73,7 +73,7 @@ public class InterfaceMethodDeclarationTest extends AbstractJavaLangTest {
 				"public default void Identifier1(){}",
 				"<span class=\"keyword\">public</span> <span class=\"keyword\">default</span> <span class=\"keyword\">void</span> Identifier1(){}");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 	
 	@Test
@@ -89,7 +89,7 @@ public class InterfaceMethodDeclarationTest extends AbstractJavaLangTest {
 		
 		assertNotNull("element type should be found", typeDeclaration);
 		
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("public void Identifier1() throws Identifier2, Identifier3; leftover".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("public void Identifier1() throws Identifier2, Identifier3; leftover".getBytes()));
 		
 		boolean testresult = recognizetype(typeDeclaration, context, sis);
 		
@@ -100,6 +100,6 @@ public class InterfaceMethodDeclarationTest extends AbstractJavaLangTest {
 				"public void Identifier1() throws Identifier2, Identifier3;",
 				"<span class=\"keyword\">public</span> <span class=\"keyword\">void</span> Identifier1() <span class=\"keyword\">throws</span> Identifier2, Identifier3;");
 		
-		checkLeftover(sis, 9);
+		checkLeftover(sis, " leftover");
 	}
 }

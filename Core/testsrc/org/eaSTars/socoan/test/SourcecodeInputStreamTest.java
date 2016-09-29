@@ -5,14 +5,15 @@ import static org.junit.Assert.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
+import org.eaSTars.socoan.lang.test.AbstractLangTest;
 import org.junit.Test;
 
-public class SourcecodeInputStreamTest {
+public class SourcecodeInputStreamTest extends AbstractLangTest {
 
 	@Test
 	public void testSingleByteRead() {
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("SingleByteRead".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("SingleByteRead".getBytes()));
 		
 		assertNotNull("Test object is null", sis);
 		
@@ -24,20 +25,16 @@ public class SourcecodeInputStreamTest {
 		}
 		assertEquals("Checking the read value", 'S', value);
 		
-		try {
-			assertEquals("Checking amount of available bytes", 13, sis.available());
-		} catch (IOException e) {
-			fail("Available method invocation failed " + e.getMessage());
-		}
+		checkLeftover(sis, "ingleByteRead");
 	}
 	
 	@Test
 	public void testMultiByteRead() {
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("MultiByteRead".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("MultiByteRead".getBytes()));
 		
 		assertNotNull("Test object is null", sis);
 		
-		byte[] buffer = new byte[5];
+		char[] buffer = new char[5];
 		
 		try {
 			sis.read(buffer);
@@ -51,16 +48,12 @@ public class SourcecodeInputStreamTest {
 		assertEquals("Checking 4th byte", 't', buffer[3]);
 		assertEquals("Checking 5th byte", 'i', buffer[4]);
 		
-		try {
-			assertEquals("Checking amount of available bytes", 8, sis.available());
-		} catch (IOException e) {
-			fail("Available method invocation failed " + e.getMessage());
-		}
+		checkLeftover(sis, "ByteRead");
 	}
 
 	@Test
 	public void testUnreadOneByte() {
-		SourcecodeInputStream sis = new SourcecodeInputStream(new ByteArrayInputStream("UnreadOneByteRead".getBytes()));
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream("UnreadOneByteRead".getBytes()));
 		
 		assertNotNull("Test object is null", sis);
 		
@@ -72,11 +65,7 @@ public class SourcecodeInputStreamTest {
 		}
 		assertEquals("Checking the 1st read value", 'U', value);
 		
-		try {
-			assertEquals("Checking amount of available bytes", 16, sis.available());
-		} catch (IOException e) {
-			fail("Available method invocation failed " + e.getMessage());
-		}
+		checkLeftover(sis, "nreadOneByteRead");
 		
 		try {
 			value = sis.read();
@@ -85,19 +74,11 @@ public class SourcecodeInputStreamTest {
 		}
 		assertEquals("Checking the 2nd read value", 'n', value);
 		
-		try {
-			assertEquals("Checking amount of available bytes", 15, sis.available());
-		} catch (IOException e) {
-			fail("Available method invocation failed " + e.getMessage());
-		}
+		checkLeftover(sis, "readOneByteRead");
 		
-		sis.unread(value);
+		sis.unread((char)value);
 		
-		try {
-			assertEquals("Checking amount of available bytes", 16, sis.available());
-		} catch (IOException e) {
-			fail("Available method invocation failed " + e.getMessage());
-		}
+		checkLeftover(sis, "nreadOneByteRead");
 		
 		try {
 			value = sis.read();
@@ -116,11 +97,11 @@ public class SourcecodeInputStreamTest {
 	
 	@Test
 	public void testUnreadMultiByte() {
-		SourcecodeInputStream uis = new SourcecodeInputStream(new ByteArrayInputStream("UnreadMultiByteRead".getBytes()));
+		SourcecodeInputReader uis = new SourcecodeInputReader(new ByteArrayInputStream("UnreadMultiByteRead".getBytes()));
 		
 		assertNotNull("Test object is null", uis);
 		
-		byte[] buffer = new byte[6];
+		char[] buffer = new char[6];
 		
 		try {
 			uis.read(buffer);
@@ -135,27 +116,13 @@ public class SourcecodeInputStreamTest {
 		assertEquals("Checking 5th byte", 'a', buffer[4]);
 		assertEquals("Checking 6th byte", 'd', buffer[5]);
 		
-		try {
-			assertEquals("Checking amount of available bytes", 13, uis.available());
-		} catch (IOException e) {
-			fail("Available method invocation failed " + e.getMessage());
-		}
+		checkLeftover(uis, "MultiByteRead");
 		
-		buffer = new byte[4];
-		buffer[0] = 'r';
-		buffer[1] = 'e';
-		buffer[2] = 'a';
-		buffer[3] = 'd';
+		uis.unread("read");
 		
-		uis.unread(buffer);
+		checkLeftover(uis, "readMultiByteRead");
 		
-		try {
-			assertEquals("Checking amount of available bytes", 17, uis.available());
-		} catch (IOException e) {
-			fail("Available method invocation failed " + e.getMessage());
-		}
-		
-		buffer = new byte[4];
+		buffer = new char[4];
 		
 		try {
 			uis.read(buffer);
@@ -168,13 +135,9 @@ public class SourcecodeInputStreamTest {
 		assertEquals("Checking 9th byte", 'a', buffer[2]);
 		assertEquals("Checking 10th byte", 'd', buffer[3]);
 		
-		try {
-			assertEquals("Checking amount of available bytes", 13, uis.available());
-		} catch (IOException e) {
-			fail("Available method invocation failed " + e.getMessage());
-		}
+		checkLeftover(uis, "MultiByteRead");
 		
-		buffer = new byte[5];
+		buffer = new char[5];
 		
 		try {
 			uis.read(buffer);
@@ -188,10 +151,54 @@ public class SourcecodeInputStreamTest {
 		assertEquals("Checking 14th byte", 't', buffer[3]);
 		assertEquals("Checking 15th byte", 'i', buffer[4]);
 		
+		checkLeftover(uis, "ByteRead");
+	}
+	
+	@Test
+	public void testPartialUnreaded() {
+		SourcecodeInputReader uis = new SourcecodeInputReader(new ByteArrayInputStream("PartialUnreadByteRead".getBytes()));
+		
+		assertNotNull("Test object is null", uis);
+		
+		char[] buffer = new char[7];
+		
 		try {
-			assertEquals("Checking amount of available bytes", 8, uis.available());
+			uis.read(buffer);
 		} catch (IOException e) {
-			fail("Available method invocation failed " + e.getMessage());
+			fail("Reading failed " + e.getMessage());
 		}
+		
+		assertEquals("Checking 1st byte", 'P', buffer[0]);
+		assertEquals("Checking 2nd byte", 'a', buffer[1]);
+		assertEquals("Checking 3rd byte", 'r', buffer[2]);
+		assertEquals("Checking 4th byte", 't', buffer[3]);
+		assertEquals("Checking 5th byte", 'i', buffer[4]);
+		assertEquals("Checking 6th byte", 'a', buffer[5]);
+		assertEquals("Checking 7th byte", 'l', buffer[6]);
+		
+		uis.unread("Partial");
+		
+		buffer = new char[13];
+		
+		try {
+			uis.read(buffer);
+		} catch (IOException e) {
+			fail("Reading failed " + e.getMessage());
+		}
+		
+		assertEquals("Checking 1st byte", 'P', buffer[0]);
+		assertEquals("Checking 2nd byte", 'a', buffer[1]);
+		assertEquals("Checking 3rd byte", 'r', buffer[2]);
+		assertEquals("Checking 4th byte", 't', buffer[3]);
+		assertEquals("Checking 5th byte", 'i', buffer[4]);
+		assertEquals("Checking 6th byte", 'a', buffer[5]);
+		assertEquals("Checking 7th byte", 'l', buffer[6]);
+		
+		assertEquals("Checking 8th byte", 'U', buffer[7]);
+		assertEquals("Checking 9th byte", 'n', buffer[8]);
+		assertEquals("Checking 10th byte", 'r', buffer[9]);
+		assertEquals("Checking 11th byte", 'e', buffer[10]);
+		assertEquals("Checking 12th byte", 'a', buffer[11]);
+		assertEquals("Checking 13th byte", 'd', buffer[12]);
 	}
 }

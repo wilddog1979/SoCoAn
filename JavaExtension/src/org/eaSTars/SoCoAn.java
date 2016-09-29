@@ -14,7 +14,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 
 import org.eaSTars.socoan.Configuration;
-import org.eaSTars.socoan.SourcecodeInputStream;
+import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
 import org.eaSTars.socoan.lang.Language;
@@ -54,7 +54,7 @@ public class SoCoAn {
 			
 			try {
 				String filename = "samplesrc/org/eaSTars/testsrc/SampleClass.java";
-				SourcecodeInputStream sis = new SourcecodeInputStream(new FileInputStream(filename));
+				SourcecodeInputReader sis = new SourcecodeInputReader(new FileInputStream(filename));
 				
 				AbstractTypeDeclaration javafile = language.getTypeDeclaration("JavaTestJavaFile");
 				
