@@ -1,0 +1,1261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Language file was created according to the Extensible Markup Language
+(XML) 1.0 (Fifth Edition) - https://www.w3.org/TR/2008/REC-xml-20081126/
+-->
+<Language
+		xmlns="http://eaSTars.com/SoCoAn/lang"
+		languageprocessorfactory="org.eaSTars.socoan.lang.xml.XMLProcessorFactory">
+	
+	<!--
+	?	zero or one
+	*	zero or more
+	+	one or more 
+	 -->
+	
+	<LiteralType id="SpaceCharacter" literal=" "/>
+	<LiteralType id="TabCharacter" literal="\t"/>
+	<LiteralType id="CarriageReturnCharacter" literal="\r"/>
+	<LiteralType id="LineFeedCharacter" literal="\n"/>
+	<LiteralType id="SingleQuote" literal="'"/>
+	<LiteralType id="DoubleQuote" literal="&quot;"/>
+	<LiteralType id="PercentageCharacter" literal="%"/>
+	<LiteralType id="SemicolonCharacter" literal=";"/>
+	<LiteralType id="AndCharacter" literal="&amp;"/>
+	<LiteralType id="HashmarkCharacter" literal="#"/>
+	<LiteralType id="xCharacter" literal="x"/>
+	<LiteralType id="EqualCharacter" literal="="/>
+	<LiteralType id="bracket_open" literal="("/>
+	<LiteralType id="bracket_close" literal=")"/>
+	<LiteralType id="squarebracket_open" literal="["/>
+	<LiteralType id="squarebracket_close" literal="]"/>
+	<LiteralType id="questionmark" literal="?"/>
+	<LiteralType id="asterisk" literal="*"/>
+	<LiteralType id="plus" literal="+"/>
+	<LiteralType id="percentsign" literal="%"/>
+	<LiteralType id="pipe" literal="|"/>
+	<LiteralType id="comma" literal=","/>
+	<LiteralType id="slash" literal="/"/>
+
+	<LiteralType id="CommentStart" literal="&lt;!--"/>
+	<LiteralType id="CommentEnd" literal="--&gt;"/>
+	
+	<LiteralType id="PIStart" literal="&lt;?"/>
+	<LiteralType id="PIEnd" literal="?&gt;"/>
+	
+	<LiteralType id="DashCharacter" literal="-"/>
+	
+	<LiteralType id="Digit0" literal="0"/>
+	<LiteralType id="Digit1" literal="1"/>
+	<LiteralType id="Digit2" literal="2"/>
+	<LiteralType id="Digit3" literal="3"/>
+	<LiteralType id="Digit4" literal="4"/>
+	<LiteralType id="Digit5" literal="5"/>
+	<LiteralType id="Digit6" literal="6"/>
+	<LiteralType id="Digit7" literal="7"/>
+	<LiteralType id="Digit8" literal="8"/>
+	<LiteralType id="Digit9" literal="9"/>
+	<LiteralType id="Digita" literal="a"/>
+	<LiteralType id="Digitb" literal="b"/>
+	<LiteralType id="Digitc" literal="c"/>
+	<LiteralType id="Digitd" literal="d"/>
+	<LiteralType id="Digite" literal="e"/>
+	<LiteralType id="Digitf" literal="f"/>
+	<LiteralType id="DigitA" literal="A"/>
+	<LiteralType id="DigitB" literal="B"/>
+	<LiteralType id="DigitC" literal="C"/>
+	<LiteralType id="DigitD" literal="D"/>
+	<LiteralType id="DigitE" literal="E"/>
+	<LiteralType id="DigitF" literal="F"/>
+	
+	<ComplexType id="DecimalNumbers" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Digit0"/>
+			<Node type="Digit1"/>
+			<Node type="Digit2"/>
+			<Node type="Digit3"/>
+			<Node type="Digit4"/>
+			<Node type="Digit5"/>
+			<Node type="Digit6"/>
+			<Node type="Digit7"/>
+			<Node type="Digit8"/>
+			<Node type="Digit9"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="DecimalNumber" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="DecimalNumbers"/>
+			<GroupNode sequence="Any" occurrence="ZeroOrMore">
+				<Node type="DecimalNumbers"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="HexadecimalNumbers" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Digit0"/>
+			<Node type="Digit1"/>
+			<Node type="Digit2"/>
+			<Node type="Digit3"/>
+			<Node type="Digit4"/>
+			<Node type="Digit5"/>
+			<Node type="Digit6"/>
+			<Node type="Digit7"/>
+			<Node type="Digit8"/>
+			<Node type="Digit9"/>
+			<Node type="Digita"/>
+			<Node type="Digitb"/>
+			<Node type="Digitc"/>
+			<Node type="Digitd"/>
+			<Node type="Digite"/>
+			<Node type="Digitf"/>
+			<Node type="DigitA"/>
+			<Node type="DigitB"/>
+			<Node type="DigitC"/>
+			<Node type="DigitD"/>
+			<Node type="DigitE"/>
+			<Node type="DigitF"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="HexadecimalNumber" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="HexadecimalNumbers"/>
+			<GroupNode sequence="Any" occurrence="ZeroOrMore">
+				<Node type="HexadecimalNumbers"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 2.1 Well-Formed XML Documents -->
+	
+	<ComplexType id="document" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="prolog"/>
+			<Node type="element"/>
+			<Node type="Misc" occurrence="ZeroOrMore"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 2.2 Characters -->
+	
+	<CustomType id="RawInputCharacter" recognizer="RawInputCharacter"/>
+	
+	<ComplexType id="Char" processor="aggregating" checker="CharChecker">
+		<!-- #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF] -->
+		<StartNode sequence="Any">
+			<Node type="RawInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 2.3 Common Syntactic Constructs -->
+	
+	<!-- White Space -->
+	
+	<ComplexType id="S" processor="aggregating">
+		<StartNode sequence="Order">
+			<NextNode ref="characters"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<NextNode ref="characters"/>
+			</GroupNode>
+		</StartNode>
+		<GroupNode id="characters" sequence="Any">
+			<Node type="SpaceCharacter"/>
+			<Node type="TabCharacter"/>
+			<Node type="CarriageReturnCharacter"/>
+			<Node type="LineFeedCharacter"/>
+		</GroupNode>
+	</ComplexType>
+	
+	<!-- Names and Tokens -->
+	
+	<ComplexType id="NameStartChar" processor="aggregating" checker="NameStartCharChecker">
+		<StartNode sequence="Any">
+			<Node type="RawInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="NameCharSingle" processor="aggregating" checker="NameCharChecker">
+		<StartNode sequence="Any">
+			<Node type="RawInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="NameChar" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="NameStartChar"/>
+			<Node type="NameCharSingle"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Name" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="NameStartChar"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="NameChar"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Names" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Name"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="SpaceCharacter"/>
+				<Node type="Name"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Nmtoken" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="NameChar"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="NameChar"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Nmtokens" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Nmtoken"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="SpaceCharacter"/>
+				<Node type="Nmtoken"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- Literals -->
+	
+	<ComplexType id="NotPercentAndSingleQuote" processor="aggregating" checker="NotPercentAndSingleQuoteChecker">
+		<StartNode sequence="Any">
+			<Node type="RawInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="NotPercentAndDoubleQuote" processor="aggregating" checker="NotPercentAndDoubleQuoteChecker">
+		<StartNode sequence="Any">
+			<Node type="RawInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="EntityValue" processor="aggregating">
+		<StartNode sequence="Any">
+			<GroupNode sequence="Order">
+				<Node type="DoubleQuote"/>
+				<GroupNode sequence="Any" occurrence="ZeroOrMore">
+					<Node type="NotPercentAndDoubleQuote"/>
+					<Node type="PEReference"/>
+					<Node type="Reference"/>
+				</GroupNode>
+				<Node type="DoubleQuote"/>
+			</GroupNode>
+			<GroupNode sequence="Order">
+				<Node type="SingleQuote"/>
+				<GroupNode sequence="Any" occurrence="ZeroOrMore">
+					<Node type="NotPercentAndSingleQuote"/>
+					<Node type="PEReference"/>
+					<Node type="Reference"/>
+				</GroupNode>
+				<Node type="SingleQuote"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="NotLowerAndSingleQuote" processor="aggregating" checker="NotLowerAndSingleQuoteChecker">
+		<StartNode sequence="Any">
+			<Node type="RawInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="NotLowerAndDoubleQuote" processor="aggregating" checker="NotLowerAndDoubleQuoteChecker">
+		<StartNode sequence="Any">
+			<Node type="RawInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="AttValue" processor="aggregating">
+		<StartNode sequence="Any">
+			<GroupNode sequence="Order">
+				<Node type="DoubleQuote"/>
+				<GroupNode sequence="Any" occurrence="ZeroOrMore">
+					<Node type="NotLowerAndDoubleQuote"/>
+					<Node type="Reference"/>
+				</GroupNode>
+				<Node type="DoubleQuote"/>
+			</GroupNode>
+			<GroupNode sequence="Order">
+				<Node type="SingleQuote"/>
+				<GroupNode sequence="Any" occurrence="ZeroOrMore">
+					<Node type="NotLowerAndSingleQuote"/>
+					<Node type="Reference"/>
+				</GroupNode>
+				<Node type="SingleQuote"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="NotSingleQuote" processor="aggregating" checker="NotSingleQuoteChecker">
+		<StartNode sequence="Any">
+			<Node type="RawInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="NotDoubleQuote" processor="aggregating" checker="NotDoubleQuoteChecker">
+		<StartNode sequence="Any">
+			<Node type="RawInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="SystemLiteral" processor="aggregating">
+		<StartNode sequence="Any">
+			<GroupNode sequence="Order">
+				<Node type="DoubleQuote"/>
+				<Node type="NotDoubleQuote" occurrence="ZeroOrMore"/>
+				<Node type="DoubleQuote"/>
+			</GroupNode>
+			<GroupNode sequence="Order">
+				<Node type="SingleQuote"/>
+				<Node type="NotSingleQuote" occurrence="ZeroOrMore"/>
+				<Node type="SingleQuote"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="PubidLiteral" processor="aggregating">
+		<StartNode sequence="Any">
+			<GroupNode sequence="Order">
+				<Node type="DoubleQuote"/>
+				<GroupNode sequence="Any" occurrence="ZeroOrMore">
+					<Node type="PubidChar"/>
+					<Node type="SingleQuote"/>
+				</GroupNode>
+				<Node type="DoubleQuote"/>
+			</GroupNode>
+			<GroupNode sequence="Order">
+				<Node type="SingleQuote"/>
+				<Node type="PubidChar" occurrence="ZeroOrMore"/>
+				<Node type="SingleQuote"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="PubidChar" processor="aggregating" checker="PubidCharChecker">
+		<StartNode sequence="Any">
+			<Node type="RawInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 2.4 Character Data and Markup -->
+	
+	<!-- Character Data -->
+	
+	<ComplexType id="NotLowerAndChecker" processor="aggregating" checker="NotLowerAndChecker">
+		<StartNode sequence="Any">
+			<Node type="RawInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="CharData" processor="aggregating" checker="CharDataChecker">
+		<StartNode sequence="Any" occurrence="ZeroOrMore">
+			<Node type="NotLowerAndChecker"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 2.5 Comments -->
+	
+	<!-- Comments -->
+	
+	<ComplexType id="CharWithoutDash" processor="aggregating" checker="CharWithoutDashChecker">
+		<StartNode sequence="Any">
+			<Node type="Char"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Comment" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="CommentStart"/>
+			<GroupNode sequence="Any" occurrence="ZeroOrMore">
+				<Node type="CharWithoutDash"/>
+				<GroupNode sequence="Order">
+					<Node type="DashCharacter"/>
+					<Node type="CharWithoutDash"/>
+				</GroupNode>
+			</GroupNode>
+			<Node type="CommentEnd"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 2.6 Processing Instructions -->
+	
+	<!-- Processing Instructions -->
+	
+	<CustomType id="CharWithoutPIEnd" recognizer="PICharsRecognizer"/>
+	
+	<ComplexType id="PI" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="PIStart"/>
+			<Node type="PITarget"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="S"/>
+				<Node type="CharWithoutPIEnd"/>
+			</GroupNode>
+			<Node type="PIEnd"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="PITarget" processor="aggregating" checker="PITargetChecker">
+		<StartNode sequence="Any">
+			<Node type="Name"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 2.7 CDATA Sections -->
+	
+	<!-- CDATA Sections -->
+	
+	<ComplexType id="CDSect" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="CDStart"/>
+			<Node type="CData"/>
+			<Node type="CDEnd"/>
+		</StartNode>
+	</ComplexType>
+	
+	<LiteralType id="CDStart" literal="&lt;![CDATA["/>
+	
+	<CustomType id="CData" recognizer="CDataRecognizer"/>
+	
+	<LiteralType id="CDEnd" literal="]]&gt;"/>
+	
+	<!-- 2.8 Prolog and Document Type Declaration -->
+	
+	<!-- Prolog -->
+	
+	<ComplexType id="prolog" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="XMLDecl" occurrence="ZeroOrOne"/>
+			<Node type="Misc" occurrence="ZeroOrMore"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="doctypedecl"/>
+				<Node type="Misc" occurrence="ZeroOrMore"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<LiteralType id="XMLDeclStart" literal="&lt;?xml"/>
+	<LiteralType id="XMLDeclEnd" literal="?&gt;"/>
+	
+	<ComplexType id="XMLDecl" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="XMLDeclStart"/>
+			<Node type="VersionInfo"/>
+			<Node type="EncodingDecl" occurrence="ZeroOrOne"/>
+			<Node type="SDDecl" occurrence="ZeroOrOne"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="XMLDeclEnd"/>
+		</StartNode>
+	</ComplexType>
+	
+	<LiteralType id="VersionInfoVersion" literal="version"/>
+	
+	<ComplexType id="VersionInfo" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="S"/>
+			<Node type="VersionInfoVersion"/>
+			<Node type="Eq"/>
+			<GroupNode sequence="Any">
+				<GroupNode sequence="Order">
+					<Node type="SingleQuote"/>
+					<Node type="VersionNum"/>
+					<Node type="SingleQuote"/>
+				</GroupNode>
+				<GroupNode sequence="Order">
+					<Node type="DoubleQuote"/>
+					<Node type="VersionNum"/>
+					<Node type="DoubleQuote"/>
+				</GroupNode>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Eq" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="EqualCharacter"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+		</StartNode>
+	</ComplexType>
+	
+	<LiteralType id="VersionNumStart" literal="1."/>
+	
+	<ComplexType id="VersionNum" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="VersionNumStart"/>
+			<Node type="DecimalNumbers"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Misc" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="Comment"/>
+			<Node type="PI"/>
+			<Node type="S"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- Document Type Definition -->
+	
+	<LiteralType id="doctypedeclstart" literal="&lt;!DOCTYPE"/>
+	<LiteralType id="doctypedeclend" literal="&gt;"/>
+	
+	<ComplexType id="doctypedecl" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="doctypedeclstart"/>
+			<Node type="S"/>
+			<Node type="Name"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="S"/>
+				<Node type="ExternalID"/>
+			</GroupNode>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrOne">
+				<Node type="squarebracket_open"/>
+				<Node type="intSubset"/>
+				<Node type="squarebracket_close"/>
+				<Node type="S" occurrence="ZeroOrOne"/>
+			</GroupNode>
+			<Node type="doctypedeclend"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="DeclSep" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="PEReference"/>
+			<Node type="S"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="intSubset" processor="aggregating">
+		<StartNode sequence="Any" occurrence="ZeroOrMore">
+			<Node type="markupdecl"/>
+			<Node type="DeclSep"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="markupdecl" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="elementdecl"/>
+			<Node type="AttlistDecl"/>
+			<Node type="EntityDecl"/>
+			<Node type="NotationDecl"/>
+			<Node type="PI"/>
+			<Node type="Comment"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- External Subset -->
+	
+	<ComplexType id="extSubset" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="TextDecl" occurrence="ZeroOrOne"/>
+			<Node type="extSubsetDecl"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="extSubsetDecl" processor="aggregating">
+		<StartNode sequence="Any" occurrence="ZeroOrMore">
+			<Node type="markupdecl"/>
+			<Node type="conditionalSect"/>
+			<Node type="DeclSep"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 2.9 Standalone Document Declaration -->
+	
+	<!-- Standalone Document Declaration -->
+	
+	<LiteralType id="SDDeclStandalone" literal="standalone"/>
+	
+	<LiteralType id="YesLiteral" literal="yes"/>
+	<LiteralType id="NoLiteral" literal="no"/>
+	
+	<ComplexType id="SDDecl" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="S"/>
+			<Node type="SDDeclStandalone"/>
+			<Node type="Eq"/>
+			<GroupNode sequence="Any">
+				<GroupNode sequence="Order">
+					<Node type="SingleQuote"/>
+					<GroupNode sequence="Any">
+						<Node type="YesLiteral"/>
+						<Node type="NoLiteral"/>
+					</GroupNode>
+					<Node type="SingleQuote"/>
+				</GroupNode>
+				<GroupNode sequence="Order">
+					<Node type="DoubleQuote"/>
+					<GroupNode sequence="Any">
+						<Node type="YesLiteral"/>
+						<Node type="NoLiteral"/>
+					</GroupNode>
+					<Node type="DoubleQuote"/>
+				</GroupNode>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!--  3 Logical Structures -->
+	
+	<!-- Element -->
+	
+	<ComplexType id="element" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="EmptyElementTag"/>
+			<GroupNode sequence="Order">
+				<Node type="STag"/>
+				<Node type="content"/>
+				<Node type="ETag"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.1 Start-Tags, End-Tags, and Empty-Element Tags -->
+	
+	<!-- Start-tag -->
+	
+	<LiteralType id="tag_open" literal="&lt;"/>
+	<LiteralType id="tag_close" literal="&gt;"/>
+	
+	<ComplexType id="STag" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="tag_open"/>
+			<Node type="Name"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="S"/>
+				<Node type="Attribute"/>
+			</GroupNode>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="tag_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Attribute" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Name"/>
+			<Node type="Eq"/>
+			<Node type="AttValue"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- End-tag -->
+	
+	<ComplexType id="ETag" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="tag_open"/>
+			<Node type="slash"/>
+			<Node type="Name"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="tag_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- Content of Elements -->
+	
+	<ComplexType id="content" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="CharData" occurrence="ZeroOrOne"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<GroupNode sequence="Any">
+					<Node type="element"/>
+					<Node type="Reference"/>
+					<Node type="CDSect"/>
+					<Node type="PI"/>
+					<Node type="Comment"/>
+				</GroupNode>
+				<Node type="CharData" occurrence="ZeroOrOne"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- Tags for Empty Elements -->
+	
+	<ComplexType id="EmptyElementTag" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="tag_open"/>
+			<Node type="Name"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="S"/>
+				<Node type="Attribute"/>
+			</GroupNode>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="slash"/>
+			<Node type="tag_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.2 Element Type Declarations -->
+	
+	<!-- Element Type Declaration -->
+	
+	<LiteralType id="elementdeclstart" literal="&lt;!ELEMENT"/>
+	<LiteralType id="elementdeclend" literal="&gt;"/>
+	
+	<ComplexType id="elementdecl" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="elementdeclstart"/>
+			<Node type="S"/>
+			<Node type="Name"/>
+			<Node type="S"/>
+			<Node type="contentspec"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="elementdeclend"/>
+		</StartNode>
+	</ComplexType>
+	
+	<LiteralType id="contentspecEMPTY" literal="EMPTY"/>
+	<LiteralType id="contentspecANY" literal="ANY"/>
+	
+	<ComplexType id="contentspec" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="contentspecEMPTY"/>
+			<Node type="contentspecANY"/>
+			<Node type="Mixed"/>
+			<Node type="children"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.2.1 Element Content -->
+	
+	<!-- Element-content Models -->
+	
+	<ComplexType id="children" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Any">
+				<Node type="choice"/>
+				<Node type="seq"/>
+			</GroupNode>
+			<GroupNode sequence="Any" occurrence="ZeroOrOne">
+				<Node type="questionmark"/>
+				<Node type="asterisk"/>
+				<Node type="plus"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="cp" processor="aggregating">
+		<StartNode sequence="Order">
+			<GroupNode sequence="Any">
+				<Node type="Name"/>
+				<Node type="choice"/>
+				<Node type="seq"/>
+			</GroupNode>
+			<GroupNode sequence="Any" occurrence="ZeroOrOne">
+				<Node type="questionmark"/>
+				<Node type="asterisk"/>
+				<Node type="plus"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="choiceitem" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="pipe"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="cp"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="choice" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="bracket_open"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="cp"/>
+			<Node type="choiceitem"/>
+			<Node type="choiceitem" occurrence="ZeroOrMore"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="seq" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="bracket_open"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="cp"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="S" occurrence="ZeroOrOne"/>
+				<Node type="comma"/>
+				<Node type="S" occurrence="ZeroOrOne"/>
+				<Node type="cp"/>
+			</GroupNode>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.2.2 Mixed Content -->
+	
+	<!-- Mixed-content Declaration -->
+	
+	<LiteralType id="MixedPCDATA" literal="#PCDATA"/>
+	
+	<ComplexType id="Mixed" processor="aggregating">
+		<StartNode sequence="Any">
+			<GroupNode sequence="Order">
+				<Node type="bracket_open"/>
+				<Node type="S" occurrence="ZeroOrOne"/>
+				<Node type="MixedPCDATA"/>
+				<GroupNode sequence="Order" occurrence="ZeroOrMore">
+					<Node type="S" occurrence="ZeroOrOne"/>
+					<Node type="pipe"/>
+					<Node type="S" occurrence="ZeroOrOne"/>
+					<Node type="Name"/>
+				</GroupNode>
+				<Node type="S" occurrence="ZeroOrOne"/>
+				<Node type="bracket_close"/>
+				<Node type="asterisk"/>
+			</GroupNode>
+			<GroupNode sequence="Order">
+				<Node type="bracket_open"/>
+				<Node type="S" occurrence="ZeroOrOne"/>
+				<Node type="MixedPCDATA"/>
+				<Node type="S" occurrence="ZeroOrOne"/>
+				<Node type="bracket_close"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.3 Attribute-List Declarations -->
+	
+	<!-- Attribute-list Declaration -->
+	
+	<LiteralType id="AttlistDeclStart" literal="&lt;!ATTLIST"/>
+	<LiteralType id="AttlistDeclEnd" literal="&gt;"/>
+	
+	<ComplexType id="AttlistDecl" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="AttlistDeclStart"/>
+			<Node type="S"/>
+			<Node type="Name"/>
+			<Node type="AttDef" occurrence="ZeroOrMore"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="AttlistDeclEnd"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="AttDef" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="S"/>
+			<Node type="Name"/>
+			<Node type="S"/>
+			<Node type="AttType"/>
+			<Node type="S"/>
+			<Node type="DefaultDecl"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.3.1 Attribute Types -->
+	
+	<!-- Attribute Types -->
+	
+	<ComplexType id="AttType" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="StringType"/>
+			<Node type="TokenizedType"/>
+			<Node type="EnumeratedType"/>
+		</StartNode>
+	</ComplexType>
+	
+	<LiteralType id="StringType" literal="CDATA"/>
+	
+	<LiteralType id="TokenizedTypeID" literal="ID"/>
+	<LiteralType id="TokenizedTypeIDREF" literal="IDREF"/>
+	<LiteralType id="TokenizedTypeIDREFS" literal="IDREFS"/>
+	<LiteralType id="TokenizedTypeENTITY" literal="ENTITY"/>
+	<LiteralType id="TokenizedTypeENTITIES" literal="ENTITIES"/>
+	<LiteralType id="TokenizedTypeNTOKEN" literal="NTOKEN"/>
+	<LiteralType id="TokenizedTypeNTOKENS" literal="NTOKENS"/>
+	
+	<ComplexType id="TokenizedType" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="TokenizedTypeID"/>
+			<Node type="TokenizedTypeIDREF"/>
+			<Node type="TokenizedTypeIDREFS"/>
+			<Node type="TokenizedTypeENTITY"/>
+			<Node type="TokenizedTypeENTITIES"/>
+			<Node type="TokenizedTypeNTOKEN"/>
+			<Node type="TokenizedTypeNTOKENS"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- Enumerated Attribute Types -->
+	
+	<ComplexType id="EnumeratedType" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="NotationType"/>
+			<Node type="Enumeration"/>
+		</StartNode>
+	</ComplexType>
+	
+	<LiteralType id="NotationTypeNOTATION" literal="NOTATION"/>
+	
+	<ComplexType id="NotationType" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="NotationTypeNOTATION"/>
+			<Node type="S"/>
+			<Node type="bracket_open"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="Name"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="S" occurrence="ZeroOrOne"/>
+				<Node type="pipe"/>
+				<Node type="S" occurrence="ZeroOrOne"/>
+				<Node type="Name"/>
+			</GroupNode>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="Enumeration" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="bracket_open"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="Nmtoken"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="S" occurrence="ZeroOrOne"/>
+				<Node type="pipe"/>
+				<Node type="S" occurrence="ZeroOrOne"/>
+				<Node type="Nmtoken"/>
+			</GroupNode>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="bracket_close"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.3.2 Attribute Defaults -->
+	
+	<!-- Attribute Defaults -->
+	
+	<LiteralType id="DefaultDeclREQUIRED" literal="#REQUIRED"/>
+	<LiteralType id="DefaultDeclIMPLIED" literal="#IMPLIED"/>
+	<LiteralType id="DefaultDeclFIXED" literal="#FIXED"/>
+	
+	<ComplexType id="DefaultDecl" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="DefaultDeclREQUIRED"/>
+			<Node type="DefaultDeclIMPLIED"/>
+			<GroupNode sequence="Order">
+				<GroupNode sequence="Order" occurrence="ZeroOrOne">
+					<Node type="DefaultDeclFIXED"/>
+					<Node type="S"/>
+				</GroupNode>
+				<Node type="AttValue"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 3.4 Conditional Sections -->
+	
+	<!-- Conditional Section -->
+	
+	<ComplexType id="conditionalSect" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="includeSect"/>
+			<Node type="ignoreSect"/>
+		</StartNode>
+	</ComplexType>
+	
+	<LiteralType id="SectStart" literal="&lt;!["/>
+	<LiteralType id="SectEnd" literal="]]&gt;"/>
+	<LiteralType id="includeSectINCLUDE" literal="INCLUDE"/>
+	
+	<ComplexType id="includeSect" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="SectStart"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="includeSectINCLUDE"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="extSubsetDecl"/>
+			<Node type="SectEnd"/>
+		</StartNode>
+	</ComplexType>
+	
+	<LiteralType id="includeSectIGNORE" literal="IGNORE"/>
+	
+	<ComplexType id="ignoreSect" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="SectStart"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="includeSectIGNORE"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="ignoreSectContents" occurrence="ZeroOrMore"/>
+			<Node type="SectEnd"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="ignoreSectContents" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="Ignore"/>
+			<GroupNode sequence="Order" occurrence="ZeroOrMore">
+				<Node type="SectStart"/>
+				<Node type="ignoreSectContents" occurrence="ZeroOrMore"/>
+				<Node type="SectEnd"/>
+				<Node type="Ignore"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<CustomType id="Ignore" recognizer="IgnoreRecognizer"/>
+	
+	<!-- 4 Physical Structures -->
+	
+	<!-- 4.1 Character and Entity References -->
+	
+	<!-- Character Reference -->
+	
+	<ComplexType id="CharRef" processor="aggregating">
+		<StartNode sequence="Any">
+			<GroupNode sequence="Order">
+				<Node type="AndCharacter"/>
+				<Node type="HashmarkCharacter"/>
+				<Node type="DecimalNumber"/>
+				<Node type="SemicolonCharacter"/>
+			</GroupNode>
+			<GroupNode sequence="Order">
+				<Node type="AndCharacter"/>
+				<Node type="HashmarkCharacter"/>
+				<Node type="xCharacter"/>
+				<Node type="HexadecimalNumber"/>
+				<Node type="SemicolonCharacter"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- Entity Reference -->
+	
+	<ComplexType id="Reference" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="CharRef"/>
+			<Node type="EntityRef"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="EntityRef" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="AndCharacter"/>
+			<Node type="Name"/>
+			<Node type="SemicolonCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="PEReference" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="PercentageCharacter"/>
+			<Node type="Name"/>
+			<Node type="SemicolonCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 4.2 Entity Declarations -->
+	
+	<!-- Entity Declaration -->
+	
+	<ComplexType id="EntityDecl" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="GEDecl"/>
+			<Node type="PEDecl"/>
+		</StartNode>
+	</ComplexType>
+	
+	<LiteralType id="EntityStart" literal="&lt;!ENTITY"/>
+	<LiteralType id="EntityEnd" literal="&gt;"/>
+	
+	<ComplexType id="GEDecl" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="EntityStart"/>
+			<Node type="S"/>
+			<Node type="Name"/>
+			<Node type="S"/>
+			<Node type="EntityDef"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="EntityEnd"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="PEDecl" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="EntityStart"/>
+			<Node type="S"/>
+			<Node type="percentsign"/>
+			<Node type="S"/>
+			<Node type="Name"/>
+			<Node type="S"/>
+			<Node type="PEDef"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="EntityEnd"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="EntityDef" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="EntityValue"/>
+			<GroupNode sequence="Order">
+				<Node type="ExternalID"/>
+				<Node type="NDataDecl" occurrence="ZeroOrOne"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="PEDef" processor="aggregating">
+		<StartNode sequence="Any">
+			<Node type="EntityValue"/>
+			<Node type="ExternalID"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 4.2.2 External Entities -->
+	
+	<!-- External Entity Declaration -->
+	
+	<LiteralType id="ExternalIDSystem" literal="SYSTEM"/>
+	
+	<LiteralType id="ExternalIDPublic" literal="PUBLIC"/>
+	
+	<ComplexType id="ExternalID" processor="aggregating">
+		<StartNode sequence="Any">
+			<GroupNode sequence="Order">
+				<Node type="ExternalIDSystem"/>
+				<Node type="S"/>
+				<Node type="SystemLiteral"/>
+			</GroupNode>
+			<GroupNode sequence="Order">
+				<Node type="ExternalIDPublic"/>
+				<Node type="S"/>
+				<Node type="PubidLiteral"/>
+				<Node type="S"/>
+				<Node type="SystemLiteral"/>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<LiteralType id="NDataDeclNDATA" literal="NDATA"/>
+	
+	<ComplexType id="NDataDecl" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="S"/>
+			<Node type="NDataDeclNDATA"/>
+			<Node type="S"/>
+			<Node type="Name"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 4.3 Parsed Entities -->
+	
+	<!-- 4.3.1 The Text Declaration -->
+	
+	<!-- Text Declaration -->
+	
+	<ComplexType id="TextDecl" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="XMLDeclStart"/>
+			<Node type="VersionInfo" occurrence="ZeroOrOne"/>
+			<Node type="EncodingDecl"/>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="XMLDeclEnd"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 4.3.2 Well-Formed Parsed Entities -->
+	
+	<!-- Well-Formed External Parsed Entity -->
+	
+	<ComplexType id="extParsedEnt" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="TextDecl" occurrence="ZeroOrOne"/>
+			<Node type="content"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 4.3.3 Character Encoding in Entities -->
+	
+	<!-- Encoding Declaration -->
+	
+	<LiteralType id="EncodingDeclEncoding" literal="encoding"/>
+	
+	<ComplexType id="EncodingDecl" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="S"/>
+			<Node type="EncodingDeclEncoding"/>
+			<Node type="Eq"/>
+			<GroupNode sequence="Any">
+				<GroupNode sequence="Order">
+					<Node type="DoubleQuote"/>
+					<Node type="EncName"/>
+					<Node type="DoubleQuote"/>
+				</GroupNode>
+				<GroupNode sequence="Order">
+					<Node type="SingleQuote"/>
+					<Node type="EncName"/>
+					<Node type="SingleQuote"/>
+				</GroupNode>
+			</GroupNode>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="EncNameFirstChar" processor="aggregating" checker="EncNameFirstCharChecker">
+		<StartNode sequence="Any">
+			<Node type="RawInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="EncNameChar" processor="aggregating" checker="EncNameCharChecker">
+		<StartNode sequence="Any">
+			<Node type="RawInputCharacter"/>
+		</StartNode>
+	</ComplexType>
+	
+	<ComplexType id="EncName" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="EncNameFirstChar"/>
+			<Node type="EncNameChar" occurrence="ZeroOrMore"/>
+		</StartNode>
+	</ComplexType>
+	
+	<!-- 4.7 Notation Declarations -->
+	
+	<!-- Notation Declarations -->
+	
+	<LiteralType id="NotationDeclStart" literal="&lt;!NOTATION"/>
+	<LiteralType id="NotationDeclEnd" literal="&gt;"/>
+	
+	<ComplexType id="NotationDecl" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="NotationDeclStart"/>
+			<Node type="S"/>
+			<Node type="Name"/>
+			<Node type="S"/>
+			<GroupNode sequence="Any">
+				<Node type="ExternalID"/>
+				<Node type="PublicID"/>
+			</GroupNode>
+			<Node type="S" occurrence="ZeroOrOne"/>
+			<Node type="NotationDeclEnd"/>
+		</StartNode>
+	</ComplexType>
+	
+	<LiteralType id="PublicIDPUBLIC" literal="PUBLIC"/>
+	
+	<ComplexType id="PublicID" processor="aggregating">
+		<StartNode sequence="Order">
+			<Node type="PublicIDPUBLIC"/>
+			<Node type="S"/>
+			<Node type="PubidLiteral"/>
+		</StartNode>
+	</ComplexType>
+</Language>
