@@ -169,7 +169,8 @@ public class Language extends AbstractBaseElement implements FormatProvider{
 		
 		for (AbstractBaseElement element : getElements()) {
 			if (element instanceof AbstractTypeDeclaration &&
-					((AbstractTypeDeclaration)element).getId().equals(id)) {
+					id.equals(((AbstractTypeDeclaration)element).getId()))
+			{
 				result = (AbstractTypeDeclaration) element;
 				break;
 			}
