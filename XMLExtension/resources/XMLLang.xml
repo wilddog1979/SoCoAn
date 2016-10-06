@@ -130,7 +130,7 @@ This Language file was created according to the Extensible Markup Language
 	
 	<!-- 2.1 Well-Formed XML Documents -->
 	
-	<ComplexType id="document" processor="aggregating">
+	<ComplexType id="document" processor="DocumentProcessor">
 		<StartNode sequence="Order">
 			<Node type="prolog"/>
 			<Node type="element"/>
@@ -374,7 +374,7 @@ This Language file was created according to the Extensible Markup Language
 		</StartNode>
 	</ComplexType>
 	
-	<ComplexType id="Comment" processor="aggregating">
+	<ComplexType id="Comment" processor="CommentProcessor">
 		<StartNode sequence="Order">
 			<Node type="CommentStart"/>
 			<GroupNode sequence="Any" occurrence="ZeroOrMore">
@@ -394,7 +394,7 @@ This Language file was created according to the Extensible Markup Language
 	
 	<CustomType id="CharWithoutPIEnd" recognizer="PICharsRecognizer"/>
 	
-	<ComplexType id="PI" processor="aggregating">
+	<ComplexType id="PI" processor="PIProcessor">
 		<StartNode sequence="Order">
 			<Node type="PIStart"/>
 			<Node type="PITarget"/>
@@ -416,7 +416,7 @@ This Language file was created according to the Extensible Markup Language
 	
 	<!-- CDATA Sections -->
 	
-	<ComplexType id="CDSect" processor="aggregating">
+	<ComplexType id="CDSect" processor="CDSectProcessor">
 		<StartNode sequence="Order">
 			<Node type="CDStart"/>
 			<Node type="CData"/>
@@ -434,7 +434,7 @@ This Language file was created according to the Extensible Markup Language
 	
 	<!-- Prolog -->
 	
-	<ComplexType id="prolog" processor="aggregating">
+	<ComplexType id="prolog" processor="prologProcessor">
 		<StartNode sequence="Order">
 			<Node type="XMLDecl" occurrence="ZeroOrOne"/>
 			<Node type="Misc" occurrence="ZeroOrMore"/>
@@ -448,7 +448,7 @@ This Language file was created according to the Extensible Markup Language
 	<LiteralType id="XMLDeclStart" literal="&lt;?xml"/>
 	<LiteralType id="XMLDeclEnd" literal="?&gt;"/>
 	
-	<ComplexType id="XMLDecl" processor="aggregating">
+	<ComplexType id="XMLDecl" processor="XmlDeclProcessor">
 		<StartNode sequence="Order">
 			<Node type="XMLDeclStart"/>
 			<Node type="VersionInfo"/>
@@ -498,7 +498,7 @@ This Language file was created according to the Extensible Markup Language
 		</StartNode>
 	</ComplexType>
 	
-	<ComplexType id="Misc" processor="aggregating">
+	<ComplexType id="Misc" processor="fallthrough">
 		<StartNode sequence="Any">
 			<Node type="Comment"/>
 			<Node type="PI"/>
@@ -538,14 +538,14 @@ This Language file was created according to the Extensible Markup Language
 		</StartNode>
 	</ComplexType>
 	
-	<ComplexType id="intSubset" processor="aggregating">
+	<ComplexType id="intSubset" processor="fallthrough">
 		<StartNode sequence="Any" occurrence="ZeroOrMore">
 			<Node type="markupdecl"/>
 			<Node type="DeclSep"/>
 		</StartNode>
 	</ComplexType>
 	
-	<ComplexType id="markupdecl" processor="aggregating">
+	<ComplexType id="markupdecl" processor="fallthrough">
 		<StartNode sequence="Any">
 			<Node type="elementdecl"/>
 			<Node type="AttlistDecl"/>
@@ -612,7 +612,7 @@ This Language file was created according to the Extensible Markup Language
 	
 	<!-- Element -->
 	
-	<ComplexType id="element" processor="aggregating">
+	<ComplexType id="element" processor="fallthrough">
 		<StartNode sequence="Any">
 			<Node type="EmptyElementTag"/>
 			<GroupNode sequence="Order">
@@ -630,7 +630,7 @@ This Language file was created according to the Extensible Markup Language
 	<LiteralType id="tag_open" literal="&lt;"/>
 	<LiteralType id="tag_close" literal="&gt;"/>
 	
-	<ComplexType id="STag" processor="aggregating">
+	<ComplexType id="STag" processor="STagProcessor">
 		<StartNode sequence="Order">
 			<Node type="tag_open"/>
 			<Node type="Name"/>
@@ -653,7 +653,7 @@ This Language file was created according to the Extensible Markup Language
 	
 	<!-- End-tag -->
 	
-	<ComplexType id="ETag" processor="aggregating">
+	<ComplexType id="ETag" processor="ETagProcessor">
 		<StartNode sequence="Order">
 			<Node type="tag_open"/>
 			<Node type="slash"/>
@@ -665,7 +665,7 @@ This Language file was created according to the Extensible Markup Language
 	
 	<!-- Content of Elements -->
 	
-	<ComplexType id="content" processor="aggregating">
+	<ComplexType id="content" processor="fallthrough">
 		<StartNode sequence="Order">
 			<Node type="CharData" occurrence="ZeroOrOne"/>
 			<GroupNode sequence="Order" occurrence="ZeroOrMore">
@@ -683,7 +683,7 @@ This Language file was created according to the Extensible Markup Language
 	
 	<!-- Tags for Empty Elements -->
 	
-	<ComplexType id="EmptyElementTag" processor="aggregating">
+	<ComplexType id="EmptyElementTag" processor="EmptyElementTagProcessor">
 		<StartNode sequence="Order">
 			<Node type="tag_open"/>
 			<Node type="Name"/>
@@ -704,7 +704,7 @@ This Language file was created according to the Extensible Markup Language
 	<LiteralType id="elementdeclstart" literal="&lt;!ELEMENT"/>
 	<LiteralType id="elementdeclend" literal="&gt;"/>
 	
-	<ComplexType id="elementdecl" processor="aggregating">
+	<ComplexType id="elementdecl" processor="ElementDeclProcessor">
 		<StartNode sequence="Order">
 			<Node type="elementdeclstart"/>
 			<Node type="S"/>
@@ -837,7 +837,7 @@ This Language file was created according to the Extensible Markup Language
 	<LiteralType id="AttlistDeclStart" literal="&lt;!ATTLIST"/>
 	<LiteralType id="AttlistDeclEnd" literal="&gt;"/>
 	
-	<ComplexType id="AttlistDecl" processor="aggregating">
+	<ComplexType id="AttlistDecl" processor="AttlistDeclProcessor">
 		<StartNode sequence="Order">
 			<Node type="AttlistDeclStart"/>
 			<Node type="S"/>
@@ -1066,7 +1066,7 @@ This Language file was created according to the Extensible Markup Language
 	
 	<!-- Entity Declaration -->
 	
-	<ComplexType id="EntityDecl" processor="aggregating">
+	<ComplexType id="EntityDecl" processor="fallthrough">
 		<StartNode sequence="Any">
 			<Node type="GEDecl"/>
 			<Node type="PEDecl"/>
@@ -1076,7 +1076,7 @@ This Language file was created according to the Extensible Markup Language
 	<LiteralType id="EntityStart" literal="&lt;!ENTITY"/>
 	<LiteralType id="EntityEnd" literal="&gt;"/>
 	
-	<ComplexType id="GEDecl" processor="aggregating">
+	<ComplexType id="GEDecl" processor="GEDeclProcessor">
 		<StartNode sequence="Order">
 			<Node type="EntityStart"/>
 			<Node type="S"/>
@@ -1088,7 +1088,7 @@ This Language file was created according to the Extensible Markup Language
 		</StartNode>
 	</ComplexType>
 	
-	<ComplexType id="PEDecl" processor="aggregating">
+	<ComplexType id="PEDecl" processor="PEDeclProcessor">
 		<StartNode sequence="Order">
 			<Node type="EntityStart"/>
 			<Node type="S"/>
@@ -1234,7 +1234,7 @@ This Language file was created according to the Extensible Markup Language
 	<LiteralType id="NotationDeclStart" literal="&lt;!NOTATION"/>
 	<LiteralType id="NotationDeclEnd" literal="&gt;"/>
 	
-	<ComplexType id="NotationDecl" processor="aggregating">
+	<ComplexType id="NotationDecl" processor="NotationDeclProcessor">
 		<StartNode sequence="Order">
 			<Node type="NotationDeclStart"/>
 			<Node type="S"/>

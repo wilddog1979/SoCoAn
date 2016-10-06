@@ -13,9 +13,47 @@ import org.eaSTars.socoan.lang.RecognizingFunction;
 
 public class XMLProcessorFactory extends ProcessorFactory {
 
+	private static final String XMLDECL_PROCESSOR = "XmlDeclProcessor";
+	private static final String COMMENT_PROCESSOR = "CommentProcessor";
+	private static final String PI_PROCESSOR = "PIProcessor";
+	private static final String PROLOG_PROCESSOR = "prologProcessor";
+	private static final String ELEMENTDECL_PROCESSOR = "ElementDeclProcessor";
+	private static final String ATTLISTDECL_PROCESSOR = "AttlistDeclProcessor";
+	private static final String GEDECL_PROCESSOR = "GEDeclProcessor";
+	private static final String PEDECL_PROCESSOR = "PEDeclProcessor";
+	private static final String NOTATIONDECL_PROCESSOR = "NotationDeclProcessor";
+	private static final String EMPTYELEMENTTAG_PROCESSOR = "EmptyElementTagProcessor";
+	private static final String STAG_PROCESSOR = "STagProcessor";
+	private static final String ETAG_PROCESSOR = "ETagProcessor";
+	private static final String CDSECT_PROCESSOR = "CDSectProcessor";
+	private static final String DOCUMENT_PROCESSOR = "DocumentProcessor";
+	
+	private static final Map<String, Function<Context, Fragment>> FUNCTION_MAP =
+			new HashMap<String, Function<Context, Fragment>>() {
+				private static final long serialVersionUID = -7867236509077047915L;
+		{
+			XmlBaseProcessors processors = new XmlBaseProcessors();
+			put(XMLDECL_PROCESSOR, (context) -> processors.processXmlDecl(context));
+			put(COMMENT_PROCESSOR, (context) -> processors.processComment(context));
+			put(PI_PROCESSOR, (context) -> processors.processPI(context));
+			put(PROLOG_PROCESSOR, (context) -> processors.processProlog(context));
+			put(ELEMENTDECL_PROCESSOR, (context) -> processors.processElementDecl(context));
+			put(ATTLISTDECL_PROCESSOR, (context) -> processors.processAttlistDecl(context));
+			put(GEDECL_PROCESSOR, (context) -> processors.processGEDecl(context));
+			put(PEDECL_PROCESSOR, (context) -> processors.processPEDecl(context));
+			put(NOTATIONDECL_PROCESSOR, (context) -> processors.processNotationDecl(context));
+			put(EMPTYELEMENTTAG_PROCESSOR, (context) -> processors.processEmptyElementTag(context));
+			put(STAG_PROCESSOR, (context) -> processors.processSTag(context));
+			put(ETAG_PROCESSOR, (context) -> processors.processETag(context));
+			put(CDSECT_PROCESSOR, (context) -> processors.processCDSect(context));
+			put(DOCUMENT_PROCESSOR, (context) -> processors.processDocument(context));
+		}
+	};
+	
 	@Override
 	public Function<Context, Fragment> createProcessor(String id) {
-		return super.createProcessor(id);
+		Function<Context, Fragment> result = FUNCTION_MAP.get(id);
+		return result == null ? super.createProcessor(id) : result;
 	}
 	
 	private static final String CHAR_CHECKER = "CharChecker";
