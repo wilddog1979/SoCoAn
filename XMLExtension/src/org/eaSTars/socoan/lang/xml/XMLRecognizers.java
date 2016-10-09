@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.Context;
-import org.eaSTars.socoan.lang.Fragment;
+import org.eaSTars.socoan.lang.DefaultFragmentImpl;
 import org.eaSTars.socoan.lang.LangRecognizers;
 
 public class XMLRecognizers extends LangRecognizers {
@@ -30,7 +30,7 @@ public class XMLRecognizers extends LangRecognizers {
 		boolean result = false;
 		if (match.isPresent()) {
 			String closing = match.get();
-			Fragment fragment = new Fragment(context.getFormatProvider());
+			DefaultFragmentImpl fragment = new DefaultFragmentImpl(context.getFormatProvider());
 			fragment.setFragment(sb.substring(0, sb.length() - closing.length()));
 			fragment.setFormattedFragment(sb.substring(0, sb.length() - closing.length()));
 			context.push(fragment);

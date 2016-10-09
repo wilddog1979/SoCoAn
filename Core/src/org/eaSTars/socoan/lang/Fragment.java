@@ -2,46 +2,17 @@ package org.eaSTars.socoan.lang;
 
 import java.util.Optional;
 
-public class Fragment {
+public interface Fragment {
 
-	protected FormatProvider formatProvider;
+	public String getId();
 	
-	private String id;
+	public void setId(String id);
 	
-	private Optional<String> formattedFragment;
+	public Optional<String> getFormattedFragment();
 	
-	private Optional<String> fragment;
-
-	public Fragment(FormatProvider formatProvider) {
-		this.formatProvider = formatProvider;
-	}
+	public void setFormattedFragment(String formattedFragment);
 	
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Optional<String> getFormattedFragment() {
-		return formattedFragment;
-	}
-
-	public void setFormattedFragment(String formattedFragment) {
-		this.formattedFragment = Optional.ofNullable(formattedFragment);
-	}
-
-	public Optional<String> getFragment() {
-		return fragment;
-	}
-
-	public void setFragment(String fragment) {
-		this.fragment = Optional.ofNullable(fragment);
-	}
+	public Optional<String> getFragment();
 	
-	@Override
-	public String toString() {
-		return String.format("[ID: %s, fragment: %s]", this.getId(), this.getFragment());
-	}
+	public void setFragment(String fragment);
 }

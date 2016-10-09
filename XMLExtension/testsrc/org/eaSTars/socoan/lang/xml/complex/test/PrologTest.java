@@ -16,8 +16,12 @@ public class PrologTest extends AbstractXmlLangTest {
 	public void testXMLDeclWithDoctypedecl() {
 		testRecognized(
 				"<?xml version=\"1.0\"?>\n<!DOCTYPE greeting SYSTEM \"hello.dtd\"> leftover",
-				"<?xml version=\"1.0\"?>\n<!DOCTYPE greeting SYSTEM \"hello.dtd\"> ",
-				"&lt;?xml version=\"1.0\"?&gt;\n&lt;!DOCTYPE greeting SYSTEM \"hello.dtd\"&gt; ",
+				new String[][]{
+					{"<?xml version=\"1.0\"?>", "&lt;?xml version=\"1.0\"?&gt;"},
+					{"\n", "\n"},
+					{"<!DOCTYPE greeting SYSTEM \"hello.dtd\">", "&lt;!DOCTYPE greeting SYSTEM \"hello.dtd\"&gt;"},
+					{" ", " "}
+				},
 				"leftover");
 	}
 	
@@ -25,8 +29,12 @@ public class PrologTest extends AbstractXmlLangTest {
 	public void testXMLDeclWithDoctypedeclAndElement() {
 		testRecognized(
 				"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<!DOCTYPE greeting [\n  <!ELEMENT greeting (#PCDATA)>\n]> leftover",
-				"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<!DOCTYPE greeting [\n  <!ELEMENT greeting (#PCDATA)>\n]> ",
-				"&lt;?xml version=\"1.0\" encoding=\"UTF-8\" ?&gt;\n&lt;!DOCTYPE greeting [\n  &lt;!ELEMENT greeting (#PCDATA)&gt;\n]&gt; ",
+				new String[][]{
+					{"<?xml version=\"1.0\" encoding=\"UTF-8\" ?>", "&lt;?xml version=\"1.0\" encoding=\"UTF-8\" ?&gt;"},
+					{"\n", "\n"},
+					{"<!DOCTYPE greeting [\n  <!ELEMENT greeting (#PCDATA)>\n]>", "&lt;!DOCTYPE greeting [\n  &lt;!ELEMENT greeting (#PCDATA)&gt;\n]&gt;"},
+					{" ", " "}
+				},
 				"leftover");
 	}
 }

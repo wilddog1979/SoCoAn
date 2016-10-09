@@ -2,7 +2,7 @@ package org.eaSTars.socoan.lang;
 
 import java.util.Optional;
 
-public class KeywordFragment extends Fragment {
+public class KeywordFragment extends DefaultFragmentImpl {
 
 	private final static String FORMAT_KEY = "KEYWORD_FORMAT";
 	

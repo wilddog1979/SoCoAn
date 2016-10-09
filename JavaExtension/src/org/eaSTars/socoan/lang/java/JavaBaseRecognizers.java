@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.eaSTars.socoan.SourcecodeInputReader;
 import org.eaSTars.socoan.lang.Context;
-import org.eaSTars.socoan.lang.Fragment;
+import org.eaSTars.socoan.lang.DefaultFragmentImpl;
 import org.eaSTars.socoan.lang.LangRecognizers;
 import org.eaSTars.socoan.lang.WrappedIOException;
 
@@ -19,7 +19,7 @@ public class JavaBaseRecognizers extends LangRecognizers {
 		}
 		boolean result = Character.isJavaIdentifierStart(c);
 		if (result) {
-			Fragment fragment = new Fragment(context.getFormatProvider());
+			DefaultFragmentImpl fragment = new DefaultFragmentImpl(context.getFormatProvider());
 			fragment.setFragment(""+(char)c);
 			fragment.setFormattedFragment(""+(char)c);
 			context.push(fragment);
@@ -39,7 +39,7 @@ public class JavaBaseRecognizers extends LangRecognizers {
 		}
 		boolean result = Character.isJavaIdentifierPart(c);
 		if (result) {
-			Fragment fragment = new Fragment(context.getFormatProvider());
+			DefaultFragmentImpl fragment = new DefaultFragmentImpl(context.getFormatProvider());
 			fragment.setFragment(""+(char)c);
 			fragment.setFormattedFragment(""+(char)c);
 			context.push(fragment);

@@ -13,7 +13,7 @@ public class LangRecognizers {
 		} catch (IOException e) {
 			throw new WrappedIOException(e);
 		}
-		Fragment fragment = new Fragment(context.getFormatProvider());
+		DefaultFragmentImpl fragment = new DefaultFragmentImpl(context.getFormatProvider());
 		fragment.setFragment(""+(char)c);
 		fragment.setFormattedFragment(""+(char)c);
 		context.push(fragment);

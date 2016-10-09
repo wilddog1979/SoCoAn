@@ -309,34 +309,34 @@ This Language file was created according to the Extensible Markup Language
 		</StartNode>
 	</ComplexType>
 	
-	<ComplexType id="SystemLiteral" processor="aggregating">
+	<ComplexType id="SystemLiteral" processor="ContentValueProcessor">
 		<StartNode sequence="Any">
 			<GroupNode sequence="Order">
 				<Node type="DoubleQuote"/>
-				<Node type="NotDoubleQuote" occurrence="ZeroOrMore"/>
+				<Node id="Content" type="NotDoubleQuote" occurrence="ZeroOrMore"/>
 				<Node type="DoubleQuote"/>
 			</GroupNode>
 			<GroupNode sequence="Order">
 				<Node type="SingleQuote"/>
-				<Node type="NotSingleQuote" occurrence="ZeroOrMore"/>
+				<Node id="Content" type="NotSingleQuote" occurrence="ZeroOrMore"/>
 				<Node type="SingleQuote"/>
 			</GroupNode>
 		</StartNode>
 	</ComplexType>
 	
-	<ComplexType id="PubidLiteral" processor="aggregating">
+	<ComplexType id="PubidLiteral" processor="ContentValueProcessor">
 		<StartNode sequence="Any">
 			<GroupNode sequence="Order">
 				<Node type="DoubleQuote"/>
 				<GroupNode sequence="Any" occurrence="ZeroOrMore">
-					<Node type="PubidChar"/>
-					<Node type="SingleQuote"/>
+					<Node id="Content" type="PubidChar"/>
+					<Node id="Content" type="SingleQuote"/>
 				</GroupNode>
 				<Node type="DoubleQuote"/>
 			</GroupNode>
 			<GroupNode sequence="Order">
 				<Node type="SingleQuote"/>
-				<Node type="PubidChar" occurrence="ZeroOrMore"/>
+				<Node id="Content" type="PubidChar" occurrence="ZeroOrMore"/>
 				<Node type="SingleQuote"/>
 			</GroupNode>
 		</StartNode>
@@ -376,7 +376,7 @@ This Language file was created according to the Extensible Markup Language
 	
 	<ComplexType id="Comment" processor="CommentProcessor">
 		<StartNode sequence="Order">
-			<Node type="CommentStart"/>
+			<Node id="CommentStart" type="CommentStart"/>
 			<GroupNode sequence="Any" occurrence="ZeroOrMore">
 				<Node type="CharWithoutDash"/>
 				<GroupNode sequence="Order">
@@ -384,7 +384,7 @@ This Language file was created according to the Extensible Markup Language
 					<Node type="CharWithoutDash"/>
 				</GroupNode>
 			</GroupNode>
-			<Node type="CommentEnd"/>
+			<Node id="CommentEnd" type="CommentEnd"/>
 		</StartNode>
 	</ComplexType>
 	
@@ -396,13 +396,13 @@ This Language file was created according to the Extensible Markup Language
 	
 	<ComplexType id="PI" processor="PIProcessor">
 		<StartNode sequence="Order">
-			<Node type="PIStart"/>
-			<Node type="PITarget"/>
+			<Node id="PIStart" type="PIStart"/>
+			<Node id="PITarget" type="PITarget"/>
 			<GroupNode sequence="Order" occurrence="ZeroOrOne">
 				<Node type="S"/>
-				<Node type="CharWithoutPIEnd"/>
+				<Node id="CharWithoutPIEnd" type="CharWithoutPIEnd"/>
 			</GroupNode>
-			<Node type="PIEnd"/>
+			<Node id="PIEnd" type="PIEnd"/>
 		</StartNode>
 	</ComplexType>
 	
@@ -434,12 +434,12 @@ This Language file was created according to the Extensible Markup Language
 	
 	<!-- Prolog -->
 	
-	<ComplexType id="prolog" processor="prologProcessor">
+	<ComplexType id="prolog" processor="fallthrough">
 		<StartNode sequence="Order">
-			<Node type="XMLDecl" occurrence="ZeroOrOne"/>
+			<Node id="XMLDecl" type="XMLDecl" occurrence="ZeroOrOne"/>
 			<Node type="Misc" occurrence="ZeroOrMore"/>
 			<GroupNode sequence="Order" occurrence="ZeroOrOne">
-				<Node type="doctypedecl"/>
+				<Node id="doctypedecl" type="doctypedecl"/>
 				<Node type="Misc" occurrence="ZeroOrMore"/>
 			</GroupNode>
 		</StartNode>
@@ -450,18 +450,18 @@ This Language file was created according to the Extensible Markup Language
 	
 	<ComplexType id="XMLDecl" processor="XmlDeclProcessor">
 		<StartNode sequence="Order">
-			<Node type="XMLDeclStart"/>
+			<Node id="XMLDeclStart" type="XMLDeclStart"/>
 			<Node type="VersionInfo"/>
 			<Node type="EncodingDecl" occurrence="ZeroOrOne"/>
 			<Node type="SDDecl" occurrence="ZeroOrOne"/>
 			<Node type="S" occurrence="ZeroOrOne"/>
-			<Node type="XMLDeclEnd"/>
+			<Node id="XMLDeclEnd" type="XMLDeclEnd"/>
 		</StartNode>
 	</ComplexType>
 	
 	<LiteralType id="VersionInfoVersion" literal="version"/>
 	
-	<ComplexType id="VersionInfo" processor="aggregating">
+	<ComplexType id="VersionInfo" processor="fallthrough">
 		<StartNode sequence="Order">
 			<Node type="S"/>
 			<Node type="VersionInfoVersion"/>
@@ -469,12 +469,12 @@ This Language file was created according to the Extensible Markup Language
 			<GroupNode sequence="Any">
 				<GroupNode sequence="Order">
 					<Node type="SingleQuote"/>
-					<Node type="VersionNum"/>
+					<Node id="VersionNum" type="VersionNum"/>
 					<Node type="SingleQuote"/>
 				</GroupNode>
 				<GroupNode sequence="Order">
 					<Node type="DoubleQuote"/>
-					<Node type="VersionNum"/>
+					<Node id="VersionNum" type="VersionNum"/>
 					<Node type="DoubleQuote"/>
 				</GroupNode>
 			</GroupNode>
@@ -500,8 +500,8 @@ This Language file was created according to the Extensible Markup Language
 	
 	<ComplexType id="Misc" processor="fallthrough">
 		<StartNode sequence="Any">
-			<Node type="Comment"/>
-			<Node type="PI"/>
+			<Node id="Comment" type="Comment"/>
+			<Node id="PI" type="PI"/>
 			<Node type="S"/>
 		</StartNode>
 	</ComplexType>
@@ -511,14 +511,14 @@ This Language file was created according to the Extensible Markup Language
 	<LiteralType id="doctypedeclstart" literal="&lt;!DOCTYPE"/>
 	<LiteralType id="doctypedeclend" literal="&gt;"/>
 	
-	<ComplexType id="doctypedecl" processor="aggregating">
+	<ComplexType id="doctypedecl" processor="doctypedeclProcessor">
 		<StartNode sequence="Order">
 			<Node type="doctypedeclstart"/>
 			<Node type="S"/>
-			<Node type="Name"/>
+			<Node id="Name" type="Name"/>
 			<GroupNode sequence="Order" occurrence="ZeroOrOne">
 				<Node type="S"/>
-				<Node type="ExternalID"/>
+				<Node id="ExternalID" type="ExternalID"/>
 			</GroupNode>
 			<Node type="S" occurrence="ZeroOrOne"/>
 			<GroupNode sequence="Order" occurrence="ZeroOrOne">
@@ -531,7 +531,7 @@ This Language file was created according to the Extensible Markup Language
 		</StartNode>
 	</ComplexType>
 	
-	<ComplexType id="DeclSep" processor="aggregating">
+	<ComplexType id="DeclSep" processor="fallthrough">
 		<StartNode sequence="Any">
 			<Node type="PEReference"/>
 			<Node type="S"/>
@@ -547,12 +547,12 @@ This Language file was created according to the Extensible Markup Language
 	
 	<ComplexType id="markupdecl" processor="fallthrough">
 		<StartNode sequence="Any">
-			<Node type="elementdecl"/>
-			<Node type="AttlistDecl"/>
+			<Node id="elementdecl" type="elementdecl"/>
+			<Node id="AttlistDecl" type="AttlistDecl"/>
 			<Node type="EntityDecl"/>
-			<Node type="NotationDecl"/>
-			<Node type="PI"/>
-			<Node type="Comment"/>
+			<Node id="NotationDecl" type="NotationDecl"/>
+			<Node id="PI" type="PI"/>
+			<Node id="Comment" type="Comment"/>
 		</StartNode>
 	</ComplexType>
 	
@@ -582,7 +582,7 @@ This Language file was created according to the Extensible Markup Language
 	<LiteralType id="YesLiteral" literal="yes"/>
 	<LiteralType id="NoLiteral" literal="no"/>
 	
-	<ComplexType id="SDDecl" processor="aggregating">
+	<ComplexType id="SDDecl" processor="fallthrough">
 		<StartNode sequence="Order">
 			<Node type="S"/>
 			<Node type="SDDeclStandalone"/>
@@ -591,16 +591,16 @@ This Language file was created according to the Extensible Markup Language
 				<GroupNode sequence="Order">
 					<Node type="SingleQuote"/>
 					<GroupNode sequence="Any">
-						<Node type="YesLiteral"/>
-						<Node type="NoLiteral"/>
+						<Node id="SDFlag" type="YesLiteral"/>
+						<Node id="SDFlag" type="NoLiteral"/>
 					</GroupNode>
 					<Node type="SingleQuote"/>
 				</GroupNode>
 				<GroupNode sequence="Order">
 					<Node type="DoubleQuote"/>
 					<GroupNode sequence="Any">
-						<Node type="YesLiteral"/>
-						<Node type="NoLiteral"/>
+						<Node id="SDFlag" type="YesLiteral"/>
+						<Node id="SDFlag" type="NoLiteral"/>
 					</GroupNode>
 					<Node type="DoubleQuote"/>
 				</GroupNode>
@@ -1068,8 +1068,8 @@ This Language file was created according to the Extensible Markup Language
 	
 	<ComplexType id="EntityDecl" processor="fallthrough">
 		<StartNode sequence="Any">
-			<Node type="GEDecl"/>
-			<Node type="PEDecl"/>
+			<Node id="GEDecl" type="GEDecl"/>
+			<Node id="PEDecl" type="PEDecl"/>
 		</StartNode>
 	</ComplexType>
 	
@@ -1127,19 +1127,19 @@ This Language file was created according to the Extensible Markup Language
 	
 	<LiteralType id="ExternalIDPublic" literal="PUBLIC"/>
 	
-	<ComplexType id="ExternalID" processor="aggregating">
+	<ComplexType id="ExternalID" processor="ExternalIDProcessor">
 		<StartNode sequence="Any">
 			<GroupNode sequence="Order">
-				<Node type="ExternalIDSystem"/>
+				<Node id="ExternalIDType" type="ExternalIDSystem"/>
 				<Node type="S"/>
-				<Node type="SystemLiteral"/>
+				<Node id="SystemLiteral" type="SystemLiteral"/>
 			</GroupNode>
 			<GroupNode sequence="Order">
-				<Node type="ExternalIDPublic"/>
+				<Node id="ExternalIDType" type="ExternalIDPublic"/>
 				<Node type="S"/>
-				<Node type="PubidLiteral"/>
+				<Node id="PubidLiteral" type="PubidLiteral"/>
 				<Node type="S"/>
-				<Node type="SystemLiteral"/>
+				<Node id="SystemLiteral" type="SystemLiteral"/>
 			</GroupNode>
 		</StartNode>
 	</ComplexType>
@@ -1188,7 +1188,7 @@ This Language file was created according to the Extensible Markup Language
 	
 	<LiteralType id="EncodingDeclEncoding" literal="encoding"/>
 	
-	<ComplexType id="EncodingDecl" processor="aggregating">
+	<ComplexType id="EncodingDecl" processor="fallthrough">
 		<StartNode sequence="Order">
 			<Node type="S"/>
 			<Node type="EncodingDeclEncoding"/>
@@ -1196,12 +1196,12 @@ This Language file was created according to the Extensible Markup Language
 			<GroupNode sequence="Any">
 				<GroupNode sequence="Order">
 					<Node type="DoubleQuote"/>
-					<Node type="EncName"/>
+					<Node id="EncName" type="EncName"/>
 					<Node type="DoubleQuote"/>
 				</GroupNode>
 				<GroupNode sequence="Order">
 					<Node type="SingleQuote"/>
-					<Node type="EncName"/>
+					<Node id="EncName" type="EncName"/>
 					<Node type="SingleQuote"/>
 				</GroupNode>
 			</GroupNode>
@@ -1238,11 +1238,11 @@ This Language file was created according to the Extensible Markup Language
 		<StartNode sequence="Order">
 			<Node type="NotationDeclStart"/>
 			<Node type="S"/>
-			<Node type="Name"/>
+			<Node id="Name" type="Name"/>
 			<Node type="S"/>
 			<GroupNode sequence="Any">
-				<Node type="ExternalID"/>
-				<Node type="PublicID"/>
+				<Node id="ExtID" type="ExternalID"/>
+				<Node id="ExtID" type="PublicID"/>
 			</GroupNode>
 			<Node type="S" occurrence="ZeroOrOne"/>
 			<Node type="NotationDeclEnd"/>
@@ -1251,11 +1251,11 @@ This Language file was created according to the Extensible Markup Language
 	
 	<LiteralType id="PublicIDPUBLIC" literal="PUBLIC"/>
 	
-	<ComplexType id="PublicID" processor="aggregating">
+	<ComplexType id="PublicID" processor="ExternalIDProcessor">
 		<StartNode sequence="Order">
-			<Node type="PublicIDPUBLIC"/>
+			<Node id="ExternalIDType" type="PublicIDPUBLIC"/>
 			<Node type="S"/>
-			<Node type="PubidLiteral"/>
+			<Node id="PubidLiteral" type="PubidLiteral"/>
 		</StartNode>
 	</ComplexType>
 </Language>

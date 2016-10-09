@@ -42,19 +42,23 @@ public class ComplexTypeNode extends ComplexTypeNodeGroup {
 		switch(occurrence) {
 		case ZeroOrMore: // {}
 			while(getTypeDeclaration().recognizeType(context, sis)){
-				context.peek().setId(getId());
+				if (getId() != null) {
+					context.peek().setId(getId());
+				}
 			}
 			result = true;
 			break;
 		case ZeroOrOne: // []
 			if (getTypeDeclaration().recognizeType(context, sis)) {
-				context.peek().setId(getId());
+				if (getId() != null) {
+					context.peek().setId(getId());
+				}
 			}
 			result = true;
 			break;
 		default:
 			result = getTypeDeclaration().recognizeType(context, sis);
-			if (result) {
+			if (result && getId() != null) {
 				context.peek().setId(getId());
 			}
 			break;

@@ -46,6 +46,36 @@ public abstract class AbstractXmlLangTest extends AbstractLangTest {
 		checkLeftover(sis, leftover);
 	}
 	
+	protected void testRecognized(String rawinput, String[][] content, String leftover) {
+		AbstractTypeDeclaration typeDeclaration = null;
+		Context context = null;
+		try {
+			typeDeclaration = XMLTests.getXmlLang().getTypeDeclaration(getElementName());
+			context = new Context(XMLTests.getXmlLang());
+		} catch (JAXBException | ReferenceNotFoundException e) {
+			fail("Unexpected exception occured: "+e.getMessage());
+		}
+		
+		assertNotNull("element type should be found", typeDeclaration);
+		
+		SourcecodeInputReader sis = new SourcecodeInputReader(new ByteArrayInputStream(rawinput.getBytes()));
+		
+		boolean testresult = recognizetype(typeDeclaration, context, sis);
+		
+		assertTrue("Sample should be recognized", testresult);
+		assertEquals("Context buffer should contain entries", content.length, context.size());
+		
+		int index = 0;
+		for (String[] entry : content) {
+			assertEquals("Sample array should contain raw content and formatted content to check", 2, entry.length);
+			
+			Fragment fragment = context.get(index++);
+			testFragment(fragment, entry[0], entry[1]);
+		}
+		
+		checkLeftover(sis, leftover);
+	}
+	
 	protected void testNotRecognized(String rawinput, String leftover) {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;

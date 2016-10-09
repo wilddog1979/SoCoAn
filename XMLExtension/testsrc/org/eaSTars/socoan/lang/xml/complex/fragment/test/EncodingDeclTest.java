@@ -16,8 +16,14 @@ public class EncodingDeclTest extends AbstractXmlLangTest {
 	public void testSimpleValueDoubleQuote() {
 		testRecognized(
 				" encoding=\"utf-8\" leftover",
-				" encoding=\"utf-8\"",
-				" encoding=\"utf-8\"",
+				new String[][]{
+					{" ", " "},
+					{"encoding", "encoding"},
+					{"=", "="},
+					{"\"", "\""},
+					{"utf-8", "utf-8"},
+					{"\"", "\""}
+				},
 				" leftover");
 	}
 	
@@ -25,8 +31,14 @@ public class EncodingDeclTest extends AbstractXmlLangTest {
 	public void testSimpleValueSingleQuote() {
 		testRecognized(
 				" encoding='utf-8' leftover",
-				" encoding='utf-8'",
-				" encoding='utf-8'",
+				new String[][]{
+					{" ", " "},
+					{"encoding", "encoding"},
+					{"=", "="},
+					{"'", "'"},
+					{"utf-8", "utf-8"},
+					{"'", "'"}
+				},
 				" leftover");
 	}
 }

@@ -48,7 +48,7 @@ public class TerminatedType extends AbstractTypeDeclaration {
 						}
 					}
 					if (result) {
-						Fragment fragment = new Fragment(context.getFormatProvider());
+						Fragment fragment = new DefaultFragmentImpl(context.getFormatProvider());
 						fragment.setId(this.getId());
 						fragment.setFormattedFragment(content.toString());
 						fragment.setFragment(content.toString() + fixedterminator);

@@ -16,8 +16,14 @@ public class SDDeclTest extends AbstractXmlLangTest {
 	public void testSimpleValueDoubleQuote() {
 		testRecognized(
 				" standalone=\"yes\" leftover",
-				" standalone=\"yes\"",
-				" standalone=\"yes\"",
+				new String[][]{
+					{" ", " "},
+					{"standalone", "standalone"},
+					{"=", "="},
+					{"\"", "\""},
+					{"yes", "yes"},
+					{"\"", "\""}
+				},
 				" leftover");
 	}
 	
@@ -25,8 +31,14 @@ public class SDDeclTest extends AbstractXmlLangTest {
 	public void testSimpleValueSingleQuote() {
 		testRecognized(
 				" standalone='no' leftover",
-				" standalone='no'",
-				" standalone='no'",
+				new String[][]{
+					{" ", " "},
+					{"standalone", "standalone"},
+					{"=", "="},
+					{"'", "'"},
+					{"no", "no"},
+					{"'", "'"}
+				},
 				" leftover");
 	}
 }

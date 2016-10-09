@@ -16,8 +16,14 @@ public class VersionInfoTest extends AbstractXmlLangTest {
 	public void testSimpleValueDoubleQuote() {
 		testRecognized(
 				" version=\"1.0\" leftover",
-				" version=\"1.0\"",
-				" version=\"1.0\"",
+				new String[][] {
+					{" " , " "},
+					{"version", "version"},
+					{"=", "="},
+					{"\"", "\""},
+					{"1.0", "1.0"},
+					{"\"", "\""}
+				},
 				" leftover");
 	}
 	
@@ -25,8 +31,14 @@ public class VersionInfoTest extends AbstractXmlLangTest {
 	public void testSimpleValueSingleQuote() {
 		testRecognized(
 				" version='1.0' leftover",
-				" version='1.0'",
-				" version='1.0'",
+				new String[][] {
+					{" " , " "},
+					{"version", "version"},
+					{"=", "="},
+					{"'", "'"},
+					{"1.0", "1.0"},
+					{"'", "'"}
+				},
 				" leftover");
 	}
 }

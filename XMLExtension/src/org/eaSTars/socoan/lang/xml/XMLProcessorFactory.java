@@ -16,7 +16,7 @@ public class XMLProcessorFactory extends ProcessorFactory {
 	private static final String XMLDECL_PROCESSOR = "XmlDeclProcessor";
 	private static final String COMMENT_PROCESSOR = "CommentProcessor";
 	private static final String PI_PROCESSOR = "PIProcessor";
-	private static final String PROLOG_PROCESSOR = "prologProcessor";
+	private static final String DOCTYPEDECL_PROCESSOR = "doctypedeclProcessor";
 	private static final String ELEMENTDECL_PROCESSOR = "ElementDeclProcessor";
 	private static final String ATTLISTDECL_PROCESSOR = "AttlistDeclProcessor";
 	private static final String GEDECL_PROCESSOR = "GEDeclProcessor";
@@ -28,25 +28,34 @@ public class XMLProcessorFactory extends ProcessorFactory {
 	private static final String CDSECT_PROCESSOR = "CDSectProcessor";
 	private static final String DOCUMENT_PROCESSOR = "DocumentProcessor";
 	
+	private static final String CONTENTVALUE_PROCESSOR = "ContentValueProcessor";
+	private static final String EXTERNALID_PROCESSOR = "ExternalIDProcessor";
+	
 	private static final Map<String, Function<Context, Fragment>> FUNCTION_MAP =
 			new HashMap<String, Function<Context, Fragment>>() {
 				private static final long serialVersionUID = -7867236509077047915L;
 		{
-			XmlBaseProcessors processors = new XmlBaseProcessors();
-			put(XMLDECL_PROCESSOR, (context) -> processors.processXmlDecl(context));
-			put(COMMENT_PROCESSOR, (context) -> processors.processComment(context));
-			put(PI_PROCESSOR, (context) -> processors.processPI(context));
-			put(PROLOG_PROCESSOR, (context) -> processors.processProlog(context));
-			put(ELEMENTDECL_PROCESSOR, (context) -> processors.processElementDecl(context));
-			put(ATTLISTDECL_PROCESSOR, (context) -> processors.processAttlistDecl(context));
-			put(GEDECL_PROCESSOR, (context) -> processors.processGEDecl(context));
-			put(PEDECL_PROCESSOR, (context) -> processors.processPEDecl(context));
-			put(NOTATIONDECL_PROCESSOR, (context) -> processors.processNotationDecl(context));
-			put(EMPTYELEMENTTAG_PROCESSOR, (context) -> processors.processEmptyElementTag(context));
-			put(STAG_PROCESSOR, (context) -> processors.processSTag(context));
-			put(ETAG_PROCESSOR, (context) -> processors.processETag(context));
-			put(CDSECT_PROCESSOR, (context) -> processors.processCDSect(context));
-			put(DOCUMENT_PROCESSOR, (context) -> processors.processDocument(context));
+			XmlElementProcessors elementProcessors = new XmlElementProcessors();
+			
+			put(XMLDECL_PROCESSOR, (context) -> elementProcessors.processXmlDecl(context));
+			put(COMMENT_PROCESSOR, (context) -> elementProcessors.processComment(context));
+			put(PI_PROCESSOR, (context) -> elementProcessors.processPI(context));
+			put(DOCTYPEDECL_PROCESSOR, (context) -> elementProcessors.processDoctypedecl(context));
+			put(ELEMENTDECL_PROCESSOR, (context) -> elementProcessors.processElementDecl(context));
+			put(ATTLISTDECL_PROCESSOR, (context) -> elementProcessors.processAttlistDecl(context));
+			put(GEDECL_PROCESSOR, (context) -> elementProcessors.processGEDecl(context));
+			put(PEDECL_PROCESSOR, (context) -> elementProcessors.processPEDecl(context));
+			put(NOTATIONDECL_PROCESSOR, (context) -> elementProcessors.processNotationDecl(context));
+			put(EMPTYELEMENTTAG_PROCESSOR, (context) -> elementProcessors.processEmptyElementTag(context));
+			put(STAG_PROCESSOR, (context) -> elementProcessors.processSTag(context));
+			put(ETAG_PROCESSOR, (context) -> elementProcessors.processETag(context));
+			put(CDSECT_PROCESSOR, (context) -> elementProcessors.processCDSect(context));
+			put(DOCUMENT_PROCESSOR, (context) -> elementProcessors.processDocument(context));
+			
+			XmlComponentProcessors componentProcessors = new XmlComponentProcessors();
+			
+			put(CONTENTVALUE_PROCESSOR, (context) -> componentProcessors.processContentValue(context));
+			put(EXTERNALID_PROCESSOR, (context) -> componentProcessors.processExternalID(context));
 		}
 	};
 	

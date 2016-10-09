@@ -1,12 +1,31 @@
 package org.eaSTars.socoan.lang.xml.element;
 
 import org.eaSTars.socoan.lang.FormatProvider;
-import org.eaSTars.socoan.lang.Fragment;
 
-public class PI extends Fragment {
+public class PI extends XmlElementFragment implements IntSubset {
 
+	private String target;
+	
+	private String content;
+	
 	public PI(FormatProvider formatProvider) {
 		super(formatProvider);
+	}
+
+	public String getTarget() {
+		return target;
+	}
+
+	public void setTarget(String target) {
+		this.target = target;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 }

@@ -3,9 +3,9 @@ package org.eaSTars.socoan.lang.java;
 import java.util.Optional;
 
 import org.eaSTars.socoan.lang.FormatProvider;
-import org.eaSTars.socoan.lang.Fragment;
+import org.eaSTars.socoan.lang.DefaultFragmentImpl;
 
-public class CommentFragment extends Fragment {
+public class CommentFragment extends DefaultFragmentImpl {
 
 	private static final String JAVADOC_FORMAT_KEY = "JAVADOC_FORMAT";
 	

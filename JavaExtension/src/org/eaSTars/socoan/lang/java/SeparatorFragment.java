@@ -1,9 +1,9 @@
 package org.eaSTars.socoan.lang.java;
 
 import org.eaSTars.socoan.lang.FormatProvider;
-import org.eaSTars.socoan.lang.Fragment;
+import org.eaSTars.socoan.lang.DefaultFragmentImpl;
 
-public class SeparatorFragment extends Fragment {
+public class SeparatorFragment extends DefaultFragmentImpl {
 
 	private CommentFragment javadoc;
 
