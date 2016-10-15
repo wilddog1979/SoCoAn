@@ -41,16 +41,18 @@ public class ComplexTypeNode extends ComplexTypeNodeGroup {
 		boolean result = false;
 		switch(occurrence) {
 		case ZeroOrMore: // {}
+			int contextsize2 = contextsize;
 			while(getTypeDeclaration().recognizeType(context, sis)){
-				if (getId() != null) {
+				if (getId() != null && contextsize2 + 1 == context.size()) {
 					context.peek().setId(getId());
 				}
+				contextsize2 = context.size();
 			}
 			result = true;
 			break;
 		case ZeroOrOne: // []
 			if (getTypeDeclaration().recognizeType(context, sis)) {
-				if (getId() != null) {
+				if (getId() != null && contextsize + 1 == context.size()) {
 					context.peek().setId(getId());
 				}
 			}
@@ -58,7 +60,7 @@ public class ComplexTypeNode extends ComplexTypeNodeGroup {
 			break;
 		default:
 			result = getTypeDeclaration().recognizeType(context, sis);
-			if (result && getId() != null) {
+			if (result && getId() != null && contextsize + 1 == context.size()) {
 				context.peek().setId(getId());
 			}
 			break;

@@ -8,9 +8,9 @@ public class DefaultFragmentImpl implements Fragment {
 	
 	private String id;
 	
-	private Optional<String> formattedFragment;
+	private Optional<String> formattedFragment = Optional.empty();
 	
-	private Optional<String> fragment;
+	private Optional<String> fragment = Optional.empty();
 
 	public DefaultFragmentImpl(FormatProvider formatProvider) {
 		this.formatProvider = formatProvider;
