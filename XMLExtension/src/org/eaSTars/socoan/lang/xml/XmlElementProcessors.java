@@ -10,13 +10,13 @@ import org.eaSTars.socoan.lang.xml.element.Comment;
 import org.eaSTars.socoan.lang.xml.element.Doctypedecl;
 import org.eaSTars.socoan.lang.xml.element.ETag;
 import org.eaSTars.socoan.lang.xml.element.ElementDecl;
-import org.eaSTars.socoan.lang.xml.element.EmptyElementTag;
 import org.eaSTars.socoan.lang.xml.element.GEDecl;
 import org.eaSTars.socoan.lang.xml.element.IntSubset;
 import org.eaSTars.socoan.lang.xml.element.NotationDecl;
 import org.eaSTars.socoan.lang.xml.element.PEDecl;
 import org.eaSTars.socoan.lang.xml.element.PI;
 import org.eaSTars.socoan.lang.xml.element.STag;
+import org.eaSTars.socoan.lang.xml.element.Tag;
 import org.eaSTars.socoan.lang.xml.element.XMLDocument;
 import org.eaSTars.socoan.lang.xml.element.XmlDecl;
 import org.eaSTars.socoan.lang.xml.element.XmlElementFragment;
@@ -31,10 +31,10 @@ public class XmlElementProcessors extends LangProcessors {
 			if (fragment.getId() != null) {
 				switch(fragment.getId()) {
 				case "VersionNum":
-					fragment.getFragment().ifPresent(s -> xmldecl.setVersionNum(s));
+					fragment.getFragment().ifPresent(xmldecl::setVersionNum);
 					break;
 				case "EncName":
-					fragment.getFragment().ifPresent(s -> xmldecl.setEncodingName(s));
+					fragment.getFragment().ifPresent(xmldecl::setEncodingName);
 					break;
 				case "SDFlag":
 					fragment.getFragment().ifPresent(s -> xmldecl.setStandalone("yes".equalsIgnoreCase(s)));
@@ -53,7 +53,7 @@ public class XmlElementProcessors extends LangProcessors {
 		StringBuffer content = new StringBuffer();
 		for (Fragment fragment : context) {
 			if (!"CommentStart".equals(fragment.getId()) && !"CommentEnd".equals(fragment.getId())) {
-				fragment.getFragment().ifPresent(s -> content.append(s));
+				fragment.getFragment().ifPresent(content::append);
 			}
 		}
 		if (content.length() != 0) {
@@ -71,10 +71,10 @@ public class XmlElementProcessors extends LangProcessors {
 			if (fragment.getId() != null) {
 				switch(fragment.getId()) {
 				case "CharWithoutPIEnd":
-					fragment.getFragment().ifPresent(s -> pi.setContent(s));
+					fragment.getFragment().ifPresent(pi::setContent);
 					break;
 				case "PITarget":
-					fragment.getFragment().ifPresent(s -> pi.setTarget(s));
+					fragment.getFragment().ifPresent(pi::setTarget);
 					break;
 				}
 			}
@@ -92,7 +92,7 @@ public class XmlElementProcessors extends LangProcessors {
 			if (fragment.getId() != null) {
 				switch(fragment.getId()) {
 				case "Name":
-					fragment.getFragment().ifPresent(s -> doctypeDecl.setName(s));
+					fragment.getFragment().ifPresent(doctypeDecl::setName);
 					break;
 				case "ExternalID":
 					doctypeDecl.setExternelId((ExtID) fragment);
@@ -100,7 +100,7 @@ public class XmlElementProcessors extends LangProcessors {
 				case "Comment":
 					comment = (Comment) fragment;
 					break;
-					//TODO add PEReference also - component declaration is required
+				case "PEReference":
 				case "elementdecl":
 				case "AttlistDecl":
 				case "GEDecl":
@@ -148,7 +148,7 @@ public class XmlElementProcessors extends LangProcessors {
 		
 		for(Fragment fragment : context) {
 			if ("Name".equals(fragment.getId())) {
-				fragment.getFragment().ifPresent(s -> notationDecl.setName(s));
+				fragment.getFragment().ifPresent(notationDecl::setName);
 			} else if ("ExtID".equals(fragment.getId()) && fragment instanceof ExtID) {
 				notationDecl.setExternalId((ExtID) fragment);
 			}
@@ -157,36 +157,120 @@ public class XmlElementProcessors extends LangProcessors {
 		return notationDecl;
 	}
 	
-	public EmptyElementTag processEmptyElementTag(Context context) {
-		EmptyElementTag emptyElementTag = new EmptyElementTag(context.getFormatProvider());
+	public STag processEmptyElementTag(Context context) {
+		STag emptyElementTag = new STag(context.getFormatProvider());
 		aggregateContext(emptyElementTag, context);
+		
+		String attributename[] = {null};
+		for (Fragment fragment : context) {
+			if (fragment.getId() != null) {
+				switch(fragment.getId()) {
+				case "Name":
+					fragment.getFragment().ifPresent(emptyElementTag::setName);
+					break;
+				case "AttributeName":
+					fragment.getFragment().ifPresent(s -> attributename[0] = s);
+					break;
+				case "AttributeValue":
+					if (attributename[0] != null) {
+						fragment.getFragment().ifPresent(s -> emptyElementTag.getAttributes().put(attributename[0], s.substring(1, s.length() - 1)));
+						attributename[0] = null;
+					}
+					break;
+				}
+			}
+			
+		}
+		
 		return emptyElementTag;
 	}
 	
 	public STag processSTag(Context context) {
 		STag stag = new STag(context.getFormatProvider());
 		aggregateContext(stag, context);
+		
+		String attributename[] = {null};
+		for (Fragment fragment : context) {
+			if (fragment.getId() != null) {
+				switch(fragment.getId()) {
+				case "Name":
+					fragment.getFragment().ifPresent(stag::setName);
+					break;
+				case "AttributeName":
+					fragment.getFragment().ifPresent(s -> attributename[0] = s);
+					break;
+				case "AttributeValue":
+					if (attributename[0] != null) {
+						fragment.getFragment().ifPresent(s -> stag.getAttributes().put(attributename[0], s.substring(1, s.length() - 1)));
+						attributename[0] = null;
+					}
+					break;
+				}
+			}
+			
+		}
+		
 		return stag;
 	}
 	
 	public ETag processETag(Context context) {
 		ETag etag = new ETag(context.getFormatProvider());
 		aggregateContext(etag, context);
+		
+		for (Fragment fragment : context) {
+			if ("Name".equals(fragment.getId())) {
+				fragment.getFragment().ifPresent(etag::setName);
+			}
+		}
+		
 		return etag;
+	}
+	
+	public Tag processElement(Context context) {
+		Tag tag = new Tag(context.getFormatProvider());
+		aggregateContext(tag, context);
+		
+		Comment comment = null;
+		for (Fragment fragment : context) {
+			if ("EmptyElementTag".equals(fragment.getId())) {
+				tag.setStartingComponent(fragment);
+			} else if ("STag".equals(fragment.getId())) {
+				tag.setStartingComponent(fragment);
+			} else if ("ETag".equals(fragment.getId())) {
+				tag.setEndingComponent(fragment);
+			} else {
+				tag.getComponents().add(fragment);
+				if (fragment instanceof Comment) {
+					comment = (Comment) fragment;
+				} else if (fragment instanceof XmlElementFragment && comment != null) {
+					((XmlElementFragment)fragment).setComment(comment);
+					comment = null;
+				}
+			}
+		}
+		
+		return tag;
 	}
 	
 	public CDSect processCDSect(Context context) {
 		CDSect cdSect = new CDSect(context.getFormatProvider());
 		aggregateContext(cdSect, context);
+		
+		for(Fragment fragment : context) {
+			if ("CData".equals(fragment.getId())) {
+				fragment.getFragment().ifPresent(cdSect::setData);
+			}
+		}
+		
 		return cdSect;
 	}
 	
 	public XMLDocument processDocument(Context context) {
 		XMLDocument xmlDocument = new XMLDocument(context.getFormatProvider());
-		aggregateContext(xmlDocument, context);
 		
 		Comment comment = null;
 		for(Fragment fragment : context) {
+			xmlDocument.addComponent(fragment);
 			if (fragment.getId() != null) {
 				switch(fragment.getId()) {
 				case "Comment":

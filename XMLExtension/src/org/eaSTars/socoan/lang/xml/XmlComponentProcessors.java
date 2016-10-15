@@ -5,6 +5,7 @@ import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.LangProcessors;
 import org.eaSTars.socoan.lang.xml.component.ExtID;
 import org.eaSTars.socoan.lang.xml.component.ExtID.Type;
+import org.eaSTars.socoan.lang.xml.component.PEReference;
 import org.eaSTars.socoan.lang.xml.component.Value;
 
 public class XmlComponentProcessors extends LangProcessors {
@@ -16,7 +17,7 @@ public class XmlComponentProcessors extends LangProcessors {
 		StringBuffer content = new StringBuffer();
 		for(Fragment fragment : context) {
 			if ("Content".equals(fragment.getId())) {
-				fragment.getFragment().ifPresent(s -> content.append(s));
+				fragment.getFragment().ifPresent(content::append);
 			}
 		}
 		if (content.length() != 0) {
@@ -42,5 +43,18 @@ public class XmlComponentProcessors extends LangProcessors {
 		}
 		
 		return externalID;
+	}
+	
+	public PEReference processPEReference(Context context) {
+		PEReference peReference = new PEReference(context.getFormatProvider());
+		aggregateContext(peReference, context);
+		
+		for(Fragment fragment : context) {
+			if ("Name".equals(fragment.getId())) {
+				fragment.getFragment().ifPresent(peReference::setName);
+			}
+		}
+		
+		return peReference;
 	}
 }

@@ -69,9 +69,11 @@ This Language file was created according to the Extensible Markup Language
 	<LiteralType id="DigitF" literal="F"/>
 	
 	<ComplexType id="DecimalNumbers" processor="aggregating">
+		<!-- test comment 1 -->
 		<StartNode sequence="Any">
 			<Node type="Digit0"/>
 			<Node type="Digit1"/>
+			<!-- test comment 2 -->
 			<Node type="Digit2"/>
 			<Node type="Digit3"/>
 			<Node type="Digit4"/>
@@ -419,7 +421,7 @@ This Language file was created according to the Extensible Markup Language
 	<ComplexType id="CDSect" processor="CDSectProcessor">
 		<StartNode sequence="Order">
 			<Node type="CDStart"/>
-			<Node type="CData"/>
+			<Node id="CData" type="CData"/>
 			<Node type="CDEnd"/>
 		</StartNode>
 	</ComplexType>
@@ -533,7 +535,7 @@ This Language file was created according to the Extensible Markup Language
 	
 	<ComplexType id="DeclSep" processor="fallthrough">
 		<StartNode sequence="Any">
-			<Node type="PEReference"/>
+			<Node id="PEReference" type="PEReference"/>
 			<Node type="S"/>
 		</StartNode>
 	</ComplexType>
@@ -612,13 +614,13 @@ This Language file was created according to the Extensible Markup Language
 	
 	<!-- Element -->
 	
-	<ComplexType id="element" processor="fallthrough">
+	<ComplexType id="element" processor="elementProcessor">
 		<StartNode sequence="Any">
 			<Node type="EmptyElementTag"/>
 			<GroupNode sequence="Order">
-				<Node type="STag"/>
+				<Node id="STag" type="STag"/>
 				<Node type="content"/>
-				<Node type="ETag"/>
+				<Node id="ETag" type="ETag"/>
 			</GroupNode>
 		</StartNode>
 	</ComplexType>
@@ -633,7 +635,7 @@ This Language file was created according to the Extensible Markup Language
 	<ComplexType id="STag" processor="STagProcessor">
 		<StartNode sequence="Order">
 			<Node type="tag_open"/>
-			<Node type="Name"/>
+			<Node id="STagName" type="Name"/>
 			<GroupNode sequence="Order" occurrence="ZeroOrMore">
 				<Node type="S"/>
 				<Node type="Attribute"/>
@@ -643,11 +645,11 @@ This Language file was created according to the Extensible Markup Language
 		</StartNode>
 	</ComplexType>
 	
-	<ComplexType id="Attribute" processor="aggregating">
+	<ComplexType id="Attribute" processor="fallthrough">
 		<StartNode sequence="Order">
-			<Node type="Name"/>
+			<Node id="AttributeName" type="Name"/>
 			<Node type="Eq"/>
-			<Node type="AttValue"/>
+			<Node id="AttributeValue" type="AttValue"/>
 		</StartNode>
 	</ComplexType>
 	
@@ -657,7 +659,7 @@ This Language file was created according to the Extensible Markup Language
 		<StartNode sequence="Order">
 			<Node type="tag_open"/>
 			<Node type="slash"/>
-			<Node type="Name"/>
+			<Node id="ETagName" type="Name"/>
 			<Node type="S" occurrence="ZeroOrOne"/>
 			<Node type="tag_close"/>
 		</StartNode>
@@ -686,10 +688,10 @@ This Language file was created according to the Extensible Markup Language
 	<ComplexType id="EmptyElementTag" processor="EmptyElementTagProcessor">
 		<StartNode sequence="Order">
 			<Node type="tag_open"/>
-			<Node type="Name"/>
+			<Node id="TagName" type="Name"/>
 			<GroupNode sequence="Order" occurrence="ZeroOrMore">
 				<Node type="S"/>
-				<Node type="Attribute"/>
+				<Node id="Attribute" type="Attribute"/>
 			</GroupNode>
 			<Node type="S" occurrence="ZeroOrOne"/>
 			<Node type="slash"/>
@@ -1054,10 +1056,10 @@ This Language file was created according to the Extensible Markup Language
 		</StartNode>
 	</ComplexType>
 	
-	<ComplexType id="PEReference" processor="aggregating">
+	<ComplexType id="PEReference" processor="PEReferenceProcessor">
 		<StartNode sequence="Order">
 			<Node type="PercentageCharacter"/>
-			<Node type="Name"/>
+			<Node id="Name" type="Name"/>
 			<Node type="SemicolonCharacter"/>
 		</StartNode>
 	</ComplexType>

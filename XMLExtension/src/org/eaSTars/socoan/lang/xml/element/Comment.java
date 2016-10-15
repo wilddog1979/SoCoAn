@@ -3,7 +3,7 @@ package org.eaSTars.socoan.lang.xml.element;
 import org.eaSTars.socoan.lang.FormatProvider;
 import org.eaSTars.socoan.lang.DefaultFragmentImpl;
 
-public class Comment extends DefaultFragmentImpl {
+public class Comment extends DefaultFragmentImpl implements Content {
 
 	private String comment = "";
 	

@@ -2,9 +2,9 @@ package org.eaSTars.socoan.lang.xml.element;
 
 import org.eaSTars.socoan.lang.FormatProvider;
 
-public class EmptyElementTag extends XmlElementFragment {
+public class Tag extends Composed implements Content {
 
-	public EmptyElementTag(FormatProvider formatProvider) {
+	public Tag(FormatProvider formatProvider) {
 		super(formatProvider);
 	}
 

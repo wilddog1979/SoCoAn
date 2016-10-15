@@ -12,14 +12,15 @@ import org.junit.runners.Suite.SuiteClasses;
 	PITest.class,
 	CDSectTest.class,
 	XMLDeclTest.class,
+	EmptyElementTagTest.class,
+	STagTest.class,
+	ETagTest.class,
 	ElementdeclTest.class,
 	NotationDeclTest.class,
 	EntityDeclTest.class,
 	AttlistDeclTest.class,
 	PrologTest.class,
-	STagTest.class,
-	ETagTest.class,
-	EmptyElementTagTest.class
+	ElementTagTest.class
 })
 public class ComplexTests {
 

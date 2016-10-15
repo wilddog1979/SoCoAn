@@ -2,7 +2,7 @@ package org.eaSTars.socoan.lang.xml.element;
 
 import org.eaSTars.socoan.lang.FormatProvider;
 
-public class PI extends XmlElementFragment implements IntSubset {
+public class PI extends XmlElementFragment implements IntSubset, Content {
 
 	private String target;
 	

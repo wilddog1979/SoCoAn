@@ -1,13 +1,11 @@
 package org.eaSTars.socoan.lang.xml.element;
 
-import org.eaSTars.socoan.lang.FormatProvider;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eaSTars.socoan.lang.DefaultFragmentImpl;
+import org.eaSTars.socoan.lang.FormatProvider;
 
-public class XMLDocument extends DefaultFragmentImpl {
+public class XMLDocument extends Composed {
 
 	private XmlDecl xmlDecl;
 	

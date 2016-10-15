@@ -25,11 +25,13 @@ public class XMLProcessorFactory extends ProcessorFactory {
 	private static final String EMPTYELEMENTTAG_PROCESSOR = "EmptyElementTagProcessor";
 	private static final String STAG_PROCESSOR = "STagProcessor";
 	private static final String ETAG_PROCESSOR = "ETagProcessor";
+	private static final String ELEMENT_PROCESSOR = "elementProcessor";
 	private static final String CDSECT_PROCESSOR = "CDSectProcessor";
 	private static final String DOCUMENT_PROCESSOR = "DocumentProcessor";
 	
 	private static final String CONTENTVALUE_PROCESSOR = "ContentValueProcessor";
 	private static final String EXTERNALID_PROCESSOR = "ExternalIDProcessor";
+	private static final String PEREFERENCE_PROCESSOR = "PEReferenceProcessor";
 	
 	private static final Map<String, Function<Context, Fragment>> FUNCTION_MAP =
 			new HashMap<String, Function<Context, Fragment>>() {
@@ -37,25 +39,27 @@ public class XMLProcessorFactory extends ProcessorFactory {
 		{
 			XmlElementProcessors elementProcessors = new XmlElementProcessors();
 			
-			put(XMLDECL_PROCESSOR, (context) -> elementProcessors.processXmlDecl(context));
-			put(COMMENT_PROCESSOR, (context) -> elementProcessors.processComment(context));
-			put(PI_PROCESSOR, (context) -> elementProcessors.processPI(context));
-			put(DOCTYPEDECL_PROCESSOR, (context) -> elementProcessors.processDoctypedecl(context));
-			put(ELEMENTDECL_PROCESSOR, (context) -> elementProcessors.processElementDecl(context));
-			put(ATTLISTDECL_PROCESSOR, (context) -> elementProcessors.processAttlistDecl(context));
-			put(GEDECL_PROCESSOR, (context) -> elementProcessors.processGEDecl(context));
-			put(PEDECL_PROCESSOR, (context) -> elementProcessors.processPEDecl(context));
-			put(NOTATIONDECL_PROCESSOR, (context) -> elementProcessors.processNotationDecl(context));
-			put(EMPTYELEMENTTAG_PROCESSOR, (context) -> elementProcessors.processEmptyElementTag(context));
-			put(STAG_PROCESSOR, (context) -> elementProcessors.processSTag(context));
-			put(ETAG_PROCESSOR, (context) -> elementProcessors.processETag(context));
-			put(CDSECT_PROCESSOR, (context) -> elementProcessors.processCDSect(context));
-			put(DOCUMENT_PROCESSOR, (context) -> elementProcessors.processDocument(context));
+			put(XMLDECL_PROCESSOR, elementProcessors::processXmlDecl);
+			put(COMMENT_PROCESSOR, elementProcessors::processComment);
+			put(PI_PROCESSOR, elementProcessors::processPI);
+			put(DOCTYPEDECL_PROCESSOR, elementProcessors::processDoctypedecl);
+			put(ELEMENTDECL_PROCESSOR, elementProcessors::processElementDecl);
+			put(ATTLISTDECL_PROCESSOR, elementProcessors::processAttlistDecl);
+			put(GEDECL_PROCESSOR, elementProcessors::processGEDecl);
+			put(PEDECL_PROCESSOR, elementProcessors::processPEDecl);
+			put(NOTATIONDECL_PROCESSOR, elementProcessors::processNotationDecl);
+			put(EMPTYELEMENTTAG_PROCESSOR, elementProcessors::processEmptyElementTag);
+			put(STAG_PROCESSOR, elementProcessors::processSTag);
+			put(ETAG_PROCESSOR, elementProcessors::processETag);
+			put(ELEMENT_PROCESSOR, elementProcessors::processElement);
+			put(CDSECT_PROCESSOR, elementProcessors::processCDSect);
+			put(DOCUMENT_PROCESSOR, elementProcessors::processDocument);
 			
 			XmlComponentProcessors componentProcessors = new XmlComponentProcessors();
 			
-			put(CONTENTVALUE_PROCESSOR, (context) -> componentProcessors.processContentValue(context));
-			put(EXTERNALID_PROCESSOR, (context) -> componentProcessors.processExternalID(context));
+			put(CONTENTVALUE_PROCESSOR, componentProcessors::processContentValue);
+			put(EXTERNALID_PROCESSOR, componentProcessors::processExternalID);
+			put(PEREFERENCE_PROCESSOR, componentProcessors::processPEReference);
 		}
 	};
 	
@@ -88,23 +92,23 @@ public class XMLProcessorFactory extends ProcessorFactory {
 				private static final long serialVersionUID = -7867236509077047915L;
 				{
 					XMLCheckers checkers = new XMLCheckers();
-					put(CHAR_CHECKER, (language, fragment) -> checkers.checkChar(language, fragment));
-					put(NAMESTARTCHAR_CHECKER, (language, fragment) -> checkers.checkNameStartChar(language, fragment));
-					put(NAMECHAR_CHECKER, (language, fragment) ->checkers.checkNameChar(language, fragment));
-					put(NOTPERCENTANDSINGLEQUOTE_CHECKER, (language, fragment) -> checkers.checkNotPercentAndSingleQuote(language, fragment));
-					put(NOTPERCENTANDDOUBLEQUOTE_CHECKER, (language, fragment) -> checkers.checkNotPercentAndDoubleQuote(language, fragment));
-					put(NOTLOWERANDSINGLEQUOTE_CHECKER, (language, fragment) -> checkers.checkNotLowerAndSingleQuote(language, fragment));
-					put(NOTLOWERANDDOUBLEQUOTE_CHECKER, (language, fragment) -> checkers.checkNotLowerAndDoubleQuote(language, fragment));
-					put(NOTSINGLEQUOTE_CHECKER, (language, fragment) -> checkers.checkNotSingleQuote(language, fragment));
-					put(NOTDOUBLEQUOTE_CHECKER, (language, fragment) -> checkers.checkNotDoubleQuote(language, fragment));
-					put(PUBIDCHAR_CHECKER, (language, fragment) -> checkers.checkPubidChar(language, fragment));
-					put(NOTLOWERAND_CHECKER, (language, fragment) -> checkers.checkNotLowerAnd(language, fragment));
-					put(CHARDATA_CHECKER, (language, fragment) -> checkers.checkCharData(language, fragment));
-					put(CHARWITHOUTDASH_CHECKER, (language, fragment) -> checkers.checkCharWithoutDash(language, fragment));
-					put(PITARGET_CHECKER, (language, fragment) -> checkers.checkPITarget(language, fragment));
-					put(CHARWITHOUTPIEND_CHECKER, (language, fragment) -> checkers.checkCharWithoutPIEnd(language, fragment));
-					put(ENCNAMEFIRSTCHAR_CHECKER, (language, fragment) -> checkers.checkEncNameFirstChar(language, fragment));
-					put(ENCNAMECHAR_CHECKER, (language, fragment) -> checkers.checkEncNameChar(language, fragment));
+					put(CHAR_CHECKER, checkers::checkChar);
+					put(NAMESTARTCHAR_CHECKER, checkers::checkNameStartChar);
+					put(NAMECHAR_CHECKER, checkers::checkNameChar);
+					put(NOTPERCENTANDSINGLEQUOTE_CHECKER, checkers::checkNotPercentAndSingleQuote);
+					put(NOTPERCENTANDDOUBLEQUOTE_CHECKER, checkers::checkNotPercentAndDoubleQuote);
+					put(NOTLOWERANDSINGLEQUOTE_CHECKER, checkers::checkNotLowerAndSingleQuote);
+					put(NOTLOWERANDDOUBLEQUOTE_CHECKER, checkers::checkNotLowerAndDoubleQuote);
+					put(NOTSINGLEQUOTE_CHECKER, checkers::checkNotSingleQuote);
+					put(NOTDOUBLEQUOTE_CHECKER, checkers::checkNotDoubleQuote);
+					put(PUBIDCHAR_CHECKER, checkers::checkPubidChar);
+					put(NOTLOWERAND_CHECKER, checkers::checkNotLowerAnd);
+					put(CHARDATA_CHECKER, checkers::checkCharData);
+					put(CHARWITHOUTDASH_CHECKER, checkers::checkCharWithoutDash);
+					put(PITARGET_CHECKER, checkers::checkPITarget);
+					put(CHARWITHOUTPIEND_CHECKER, checkers::checkCharWithoutPIEnd);
+					put(ENCNAMEFIRSTCHAR_CHECKER, checkers::checkEncNameFirstChar);
+					put(ENCNAMECHAR_CHECKER, checkers::checkEncNameChar);
 				}
 	};
 	
@@ -123,9 +127,9 @@ public class XMLProcessorFactory extends ProcessorFactory {
 				private static final long serialVersionUID = 477409754677152662L;
 				{
 					XMLRecognizers recognizers = new XMLRecognizers();
-					put(PICHARS_RECOGNIZER, (context, sis) -> recognizers.recognizePIChars(context, sis));
-					put(CDATA_RECOGNIZER, (context, sis) -> recognizers.recognizeCData(context, sis));
-					put(IGNORE_RECOGNIZER, (context, sis) -> recognizers.recognizeIgnore(context, sis));
+					put(PICHARS_RECOGNIZER, recognizers::recognizePIChars);
+					put(CDATA_RECOGNIZER, recognizers::recognizeCData);
+					put(IGNORE_RECOGNIZER, recognizers::recognizeIgnore);
 				}
 	};
 	

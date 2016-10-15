@@ -21,7 +21,7 @@ public abstract class AbstractXmlLangTest extends AbstractLangTest {
 	
 	public abstract String getElementName();
 	
-	protected void testRecognized(String rawinput, String fragmentcontent, String formattedcontent, String leftover) {
+	protected Fragment testRecognized(String rawinput, String fragmentcontent, String formattedcontent, String leftover) {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -44,9 +44,11 @@ public abstract class AbstractXmlLangTest extends AbstractLangTest {
 		testFragment(fragment, fragmentcontent, formattedcontent);
 		
 		checkLeftover(sis, leftover);
+		
+		return fragment;
 	}
 	
-	protected void testRecognized(String rawinput, String[][] content, String leftover) {
+	protected Fragment[] testRecognized(String rawinput, String[][] content, String leftover) {
 		AbstractTypeDeclaration typeDeclaration = null;
 		Context context = null;
 		try {
@@ -65,15 +67,18 @@ public abstract class AbstractXmlLangTest extends AbstractLangTest {
 		assertTrue("Sample should be recognized", testresult);
 		assertEquals("Context buffer should contain entries", content.length, context.size());
 		
+		Fragment[] fragments = new Fragment[content.length];
 		int index = 0;
 		for (String[] entry : content) {
 			assertEquals("Sample array should contain raw content and formatted content to check", 2, entry.length);
 			
-			Fragment fragment = context.get(index++);
-			testFragment(fragment, entry[0], entry[1]);
+			fragments[index] = context.get(index);
+			testFragment(fragments[index++], entry[0], entry[1]);
 		}
 		
 		checkLeftover(sis, leftover);
+		
+		return fragments;
 	}
 	
 	protected void testNotRecognized(String rawinput, String leftover) {

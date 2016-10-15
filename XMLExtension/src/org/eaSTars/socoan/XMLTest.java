@@ -13,8 +13,10 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.eaSTars.socoan.lang.AbstractTypeDeclaration;
 import org.eaSTars.socoan.lang.Context;
+import org.eaSTars.socoan.lang.Fragment;
 import org.eaSTars.socoan.lang.Language;
 import org.eaSTars.socoan.lang.ReferenceNotFoundException;
+import org.eaSTars.socoan.lang.xml.element.Composed;
 
 public class XMLTest {
 
@@ -41,7 +43,7 @@ public class XMLTest {
 				System.out.println(result);
 				
 				System.out.println(ctx.size());
-				ctx.forEach(fragment -> fragment.getFragment().ifPresent(content -> System.out.println(content)));
+				ctx.forEach(fragment -> dumpFragment(fragment));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -55,4 +57,14 @@ public class XMLTest {
 		}
 	}
 
+	private static void dumpFragment(Fragment fragment) {
+		if (fragment instanceof Composed) {
+			Composed composed = (Composed) fragment;
+			composed.getStartingComponent().ifPresent(starting -> starting.getFragment().ifPresent(System.out::print));
+			composed.forEach(component -> dumpFragment(component));
+			composed.getEndingComponent().ifPresent(ending -> ending.getFragment().ifPresent(System.out::print));
+		} else {
+			fragment.getFragment().ifPresent(System.out::print);
+		}
+	}
 }

@@ -10,7 +10,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	EncodingDeclTest.class,
 	SDDeclTest.class,
 	ChildrenTest.class,
-	MixedTest.class
+	MixedTest.class,
+	IntSubsetTest.class
 })
 public class FragmentTests {
 
