@@ -69,11 +69,9 @@ This Language file was created according to the Extensible Markup Language
 	<LiteralType id="DigitF" literal="F"/>
 	
 	<ComplexType id="DecimalNumbers" processor="aggregating">
-		<!-- test comment 1 -->
 		<StartNode sequence="Any">
 			<Node type="Digit0"/>
 			<Node type="Digit1"/>
-			<!-- test comment 2 -->
 			<Node type="Digit2"/>
 			<Node type="Digit3"/>
 			<Node type="Digit4"/>
